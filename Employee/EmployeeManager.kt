@@ -7,20 +7,18 @@ enum class Depart { DEVELOPMENT, CLIENT_SERVICE, OFFICE_SERVICE, SALES }
 
 //RAGULAR (정규직, condition= 0), PART_TIME (파트타임, condition=시간), SALESMAN (영업직, condition=영업실적)
 class Employee (var grade: Grade, depart: Department, var condition: Int) {
-
     companion object {
         const val BASIC_ANNUAL_SALARY = 120_000_000     //연봉
         const val HOURLY_WAGE = 25000                   //시급
         fun getId () = UUID.randomUUID().toString()
-        fun getSalary(grade: Grade, condition: Int)= when(grade) {
+        fun getSalary(grade: Grade, condition: Int) = when(grade) {
             Grade.RAGULAR -> BASIC_ANNUAL_SALARY /12
             Grade.PART_TIME -> condition * HOURLY_WAGE
             Grade.SALESMAN -> BASIC_ANNUAL_SALARY /12 + condition * 0.05
         }.toInt()
     }
     val id: String = getId()
-    var department by Delegates.observable(
-        depart.depart, { props, old, new -> Unit })
+    var department by Delegates.observable( depart.depart, { props, old, new -> Unit })
     var salary = getSalary(this.grade, this.condition)
 }
 
@@ -37,26 +35,21 @@ class Department(grade: Grade) {
 class EmployeeManager {
     val memberList = arrayListOf<Employee>()
     var total = 0
-
     fun employeeAdd(e:Employee) = memberList.add(e)
-
     fun getTotalSalary() {
         total = 0
         for (i in 0 until memberList.size) { total += memberList[i].salary }
         println("천체 사원들의 총월급 : $total 원")
     }
-
     fun getAverageSalary () {
         getTotalSalary()
         println("천체 사원들의 평균월급 : ${total.div(memberList.size)} 원")
     }
-
     fun getTotalDepartSalary (depart: Depart) {
         total = 0
         for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) total += memberList[i].salary }
         println("$depart 부서 총월급 : $total 원")
     }
-
     fun getAverageDepartSalary (depart: Depart) {
         var count = 0
         for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) count++ }
@@ -87,7 +80,8 @@ fun main() {
         employeeManager.employeeAdd(salesMan)
     }
     for (i in 0 until 15) {
-        println("${employeeManager.memberList[i].grade}, ${employeeManager.memberList[i].department}, ${employeeManager.memberList[i].salary}, ${employeeManager.memberList[i].id}")
+        println("${employeeManager.memberList[i].grade}, ${employeeManager.memberList[i].department}," +
+                "${employeeManager.memberList[i].salary}, ${employeeManager.memberList[i].id}")
     }
 
     employeeManager.getTotalSalary()
