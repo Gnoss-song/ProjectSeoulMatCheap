@@ -10,21 +10,20 @@ class Employee (var grade: Grade, depart: Department, var condition: Int) {
     companion object {
         const val BASIC_ANNUAL_SALARY = 120_000_000     //연봉
         const val HOURLY_WAGE = 25000                   //시급
-        fun getId () = UUID.randomUUID().toString()
-        fun getSalary(grade: Grade, condition: Int) = when(grade) {
-            Grade.RAGULAR -> BASIC_ANNUAL_SALARY /12
-            Grade.PART_TIME -> condition * HOURLY_WAGE
-            Grade.SALESMAN -> BASIC_ANNUAL_SALARY /12 + condition * 0.05
-        }.toInt()
+        fun getId () = UUID.randomUUID()
     }
-    val id: String = getId()
-    var department by Delegates.observable( depart.depart, { props, old, new -> Unit })
+    val id = getId()
+    var department by Delegates.observable(depart.depart, { props, old, new -> Unit })
     var salary = getSalary(this.grade, this.condition)
+    fun getSalary(grade: Grade, condition: Int) = when(grade) {
+        Grade.RAGULAR -> BASIC_ANNUAL_SALARY /12
+        Grade.PART_TIME -> condition * HOURLY_WAGE
+        Grade.SALESMAN -> BASIC_ANNUAL_SALARY /12 + condition * 0.05
+    }.toInt()
 }
 
 class Department(grade: Grade) {
-    var depart: Depart = getDepartment(grade)
-    fun getDepartment(grade: Grade) = when(grade) {
+    var depart: Depart = when(grade) {  //랜덤부서배정
         Grade.SALESMAN -> Depart.SALES
         Grade.RAGULAR -> Depart.values()[Random.nextInt(0, 4)]
         Grade.PART_TIME -> Depart.values()[Random.nextInt(0, 3)]
@@ -34,28 +33,23 @@ class Department(grade: Grade) {
 //사원들을 관리하는 employee manager
 class EmployeeManager {
     val memberList = arrayListOf<Employee>()
-    var total = 0
-    fun employeeAdd(e:Employee) = memberList.add(e)
-    fun getTotalSalary() {
-        total = 0
+    fun employeeAdd(e:Employee) = memberList.add(e) //사원추가
+    fun getTotalSalary() : Int {    //모든사원 월급 총합을 계산
+        var total = 0
         for (i in 0 until memberList.size) { total += memberList[i].salary }
-        println("천체 사원들의 총월급 : $total 원")
+        return total
     }
-    fun getAverageSalary () {
-        getTotalSalary()
-        println("천체 사원들의 평균월급 : ${total.div(memberList.size)} 원")
-    }
-    fun getTotalDepartSalary (depart: Depart) {
-        total = 0
+    fun getAverageSalary () = getTotalSalary().div(memberList.size) //모든사원 월급 평균을 계산
+    fun getTotalDepartSalary (depart: Depart) : Int { //부서(depart) 월급 총합을 계산
+        var total = 0
         for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) total += memberList[i].salary }
-        println("$depart 부서 총월급 : $total 원")
+        return total
     }
-    fun getAverageDepartSalary (depart: Depart) {
+    fun getAverageDepartSalary (depart: Depart) : Int { //부서(depart) 월급 평균을 계산
         var count = 0
         for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) count++ }
-        if (count == 0) return
-        getTotalDepartSalary(depart)
-        println("$depart 부서 평균월급 : ${total.div(count)} 원")
+        if (count == 0) return 0
+        else return getTotalDepartSalary(depart).div(count)
     }
 }
 
@@ -84,14 +78,14 @@ fun main() {
                 "${employeeManager.memberList[i].salary}, ${employeeManager.memberList[i].id}")
     }
 
-    employeeManager.getTotalSalary()
-    employeeManager.getAverageSalary()
-    employeeManager.getTotalDepartSalary(Depart.OFFICE_SERVICE)
-    employeeManager.getAverageDepartSalary(Depart.OFFICE_SERVICE)
-    employeeManager.getTotalDepartSalary(Depart.SALES)
-    employeeManager.getAverageDepartSalary(Depart.SALES)
-    employeeManager.getTotalDepartSalary(Depart.CLIENT_SERVICE)
-    employeeManager.getAverageDepartSalary(Depart.CLIENT_SERVICE)
-    employeeManager.getTotalDepartSalary(Depart.DEVELOPMENT)
-    employeeManager.getAverageDepartSalary(Depart.DEVELOPMENT)
+    println("모든사원 월급 총합 : ${employeeManager.getTotalSalary()}")
+    println("모든사원 월급 평균 : ${employeeManager.getAverageSalary()}")
+    println("사무팀 월급 총합 : ${employeeManager.getTotalDepartSalary(Depart.OFFICE_SERVICE)}")
+    println("사무팀 월급 평균 : ${employeeManager.getAverageDepartSalary(Depart.OFFICE_SERVICE)}")
+    println("영업팀 월급 총합 : ${employeeManager.getTotalDepartSalary(Depart.SALES)}")
+    println("엽업팀 월급 평균 : ${employeeManager.getAverageDepartSalary(Depart.SALES)}")
+    println("고객팀 월급 총합 : ${employeeManager.getTotalDepartSalary(Depart.CLIENT_SERVICE)}")
+    println("고객팀 월급 평균 : ${employeeManager.getAverageDepartSalary(Depart.CLIENT_SERVICE)}")
+    println("개발팀 월급 총합 : ${employeeManager.getTotalDepartSalary(Depart.DEVELOPMENT)}")
+    println("개발팀 월급 평균 : ${employeeManager.getAverageDepartSalary(Depart.DEVELOPMENT)}")
 }
