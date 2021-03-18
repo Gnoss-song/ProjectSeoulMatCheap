@@ -1,5 +1,3 @@
-package Employee
-
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.random.Random
