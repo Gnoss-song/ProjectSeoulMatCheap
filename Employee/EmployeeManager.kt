@@ -1,3 +1,5 @@
+package Employee
+
 import java.util.*
 import kotlin.properties.Delegates
 import kotlin.random.Random
@@ -13,7 +15,9 @@ class Employee (var grade: Grade, depart: Department, var condition: Int) {
         fun getId () = UUID.randomUUID()
     }
     val id = getId()
-    var department by Delegates.observable(depart.depart, { props, old, new -> Unit })
+    var department by Delegates.observable(depart.depart) { props, old, new ->
+             println("옮긴 부서 : $new")
+    }
     var salary = getSalary(this.grade, this.condition)
     fun getSalary(grade: Grade, condition: Int) = when(grade) {
         Grade.RAGULAR -> BASIC_ANNUAL_SALARY /12
@@ -33,7 +37,7 @@ class Department(grade: Grade) {
 //사원들을 관리하는 employee manager
 class EmployeeManager {
     val memberList = arrayListOf<Employee>()
-    fun employeeAdd(e:Employee) = memberList.add(e) //사원추가
+    fun addEmployee(e:Employee) = memberList.add(e) //사원추가
     fun getTotalSalary() : Int {    //모든사원 월급 총합을 계산
         var total = 0
         for (i in 0 until memberList.size) { total += memberList[i].salary }
@@ -51,6 +55,9 @@ class EmployeeManager {
         if (count == 0) return 0
         else return getTotalDepartSalary(depart).div(count)
     }
+    fun changeDepart (employee: Employee, newDepart: Depart) {  //부서(depart)이동
+        employee.department = newDepart
+    }
 }
 
 //실행
@@ -61,23 +68,30 @@ fun main() {
     //정규직 직원 추가
     for (i in 0 until 5) {
         var regular = Employee(Grade.RAGULAR, Department(Grade.RAGULAR), 0)
-        employeeManager.employeeAdd(regular)
+        employeeManager.addEmployee(regular)
     }
     //파트타임 직원 5명 추가 (140시간 근무)
     for (i in 0 until 5) {
         var partTime = Employee(Grade.PART_TIME, Department(Grade.PART_TIME), 140)
-        employeeManager.employeeAdd(partTime)
+        employeeManager.addEmployee(partTime)
     }
     //영업직 직원 5명 추가 (영업이익 1억)
     for (i in 0 until 5) {
         var salesMan = Employee(Grade.SALESMAN, Department(Grade.SALESMAN), 100_000_000)
-        employeeManager.employeeAdd(salesMan)
+        employeeManager.addEmployee(salesMan)
     }
     for (i in 0 until 15) {
         println("${employeeManager.memberList[i].grade}, ${employeeManager.memberList[i].department}," +
                 "${employeeManager.memberList[i].salary}, ${employeeManager.memberList[i].id}")
     }
 
+    //정규직 사원 1명(sally) 생성
+    var sally = Employee(Grade.RAGULAR, Department(Grade.RAGULAR), 0)
+    employeeManager.addEmployee(sally)
+    //sally 사원(개발팀으로) 부서이동
+    employeeManager.changeDepart(sally, Depart.DEVELOPMENT)
+
+    println("------------------------------------------------")
     println("모든사원 월급 총합 : ${employeeManager.getTotalSalary()}")
     println("모든사원 월급 평균 : ${employeeManager.getAverageSalary()}")
     println("사무팀 월급 총합 : ${employeeManager.getTotalDepartSalary(Depart.OFFICE_SERVICE)}")
