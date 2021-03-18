@@ -44,12 +44,12 @@ class EmployeeManager {
     fun getAverageSalary () = getTotalSalary().div(memberList.size) //모든사원 월급 평균을 계산
     fun getTotalDepartSalary (depart: Dep) : Int { //부서(depart) 월급 총합을 계산
         var total = 0
-        for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) total += memberList[i].salary }
+        for (i in 0 until memberList.size) { if(memberList[i].department == depart) total += memberList[i].salary }
         return total
     }
     fun getAverageDepartSalary (depart: Dep) : Int { //부서(depart) 월급 평균을 계산
         var count = 0
-        for (i in 0 until memberList.size) { if(memberList[i].department.toString() == depart.name) count++ }
+        for (i in 0 until memberList.size) { if(memberList[i].department == depart) count++ }
         if (count == 0) return 0
         else return getTotalDepartSalary(depart).div(count)
     }
