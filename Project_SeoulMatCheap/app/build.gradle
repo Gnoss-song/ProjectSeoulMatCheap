@@ -56,4 +56,7 @@ dependencies {
     //네비게이션
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.3.3"
+
+    //도움말
+    implementation "com.github.skydoves:balloon:1.3.4"
 }
