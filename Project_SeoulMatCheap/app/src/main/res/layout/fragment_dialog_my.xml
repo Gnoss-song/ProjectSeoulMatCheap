@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/popup_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/popup_mainString"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="15dp"/>
+
+        <Button
+            android:id="@+id/popup_ok"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="확인" />
+
+    </LinearLayout>
+</ScrollView>
