@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--여백-->
+    <dimen name="margin_basic">16dp</dimen>
+    <dimen name="margin_basic2">24dp</dimen>
+    <dimen name="margin_basic3">20dp</dimen>
+    <dimen name="margin_basic4">10dp</dimen>
+    <dimen name="margin_height">5dp</dimen>
+
+    <!--텍스트메뉴버튼-->
+    <dimen name="text_menu">20sp</dimen>
+
+    <!--아이콘 크기-->
+    <dimen name="icon_width">50dp</dimen>
+    <dimen name="icon_height">50dp</dimen>
+
+    <!--텍스트 사이즈-->
+    <dimen name="text_filter_title">25sp</dimen>
+    <dimen name="text_icon">15sp</dimen>
+
+
+</resources>

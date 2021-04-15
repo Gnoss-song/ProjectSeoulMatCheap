@@ -1,12 +1,9 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.MenuItem
-import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
@@ -33,7 +30,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
 
     private fun setView() {
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
+        with(binding.bottomNavigationView) {
+            setOnNavigationItemSelectedListener(this@MainActivity)
+            
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
