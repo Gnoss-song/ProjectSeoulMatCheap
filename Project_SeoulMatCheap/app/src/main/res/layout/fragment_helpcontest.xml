@@ -10,15 +10,25 @@
         android:id="@+id/help_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:elevation="1dp"
         tools:layout_editor_absoluteX="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/helptext"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/help_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_help_ok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+
+            android:text="확인" />
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

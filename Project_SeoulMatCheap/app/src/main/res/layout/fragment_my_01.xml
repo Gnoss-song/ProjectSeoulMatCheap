@@ -7,6 +7,37 @@
     android:gravity="center"
     android:orientation="vertical"
     >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#b61827"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="마이페이지"
+            android:textColor="@color/white_93"
+            android:textSize="20dp">
+
+        </TextView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginTop="55dp"
+        android:id="@+id/space1"/>
+    <View
+        android:id="@+id/myPageLine"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#E1E1E1"
+        android:layout_below="@+id/space1"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +45,9 @@
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:paddingRight="16dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="10dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
@@ -85,7 +118,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_help"
             android:layout_toEndOf="@+id/img_rank"
-            android:text="@string/logoutstring" />
+            android:text="@string/logoutstring"
+            android:textSize="10dp"/>
         <View
             android:id="@+id/myPageLine2"
             android:layout_width="match_parent"
@@ -99,7 +133,7 @@
         android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="170dp"
         />
     <Button
         android:id="@+id/btn_favorite"
@@ -112,7 +146,9 @@
         android:layout_below="@id/space"
 
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/btn_myreview"
@@ -125,7 +161,8 @@
         android:layout_below="@+id/btn_favorite"
 
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/btn_myreport"
@@ -138,7 +175,8 @@
         android:layout_below="@+id/btn_myreview"
 
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/btn_notice"
@@ -151,7 +189,8 @@
         android:layout_below="@+id/btn_myreport"
 
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/btn_report"
@@ -164,7 +203,8 @@
         android:layout_below="@+id/btn_notice"
 
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:stateListAnimator="@null"/>
 
     <Button
         android:id="@+id/btn_version"
@@ -179,9 +219,8 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"/>
 
-    <include
+    <FrameLayout
         android:id="@+id/help_Container"
-        layout="@layout/helpcontent"
         android:layout_width="250dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
@@ -191,7 +230,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp">
+
         <Button
             android:id="@+id/btn_dialog"
             android:layout_width="match_parent"
@@ -202,13 +243,22 @@
             android:textAlignment="center"
             android:textColor="@color/white_93"
             android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
         </Button>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/my_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 
 </RelativeLayout>
 
