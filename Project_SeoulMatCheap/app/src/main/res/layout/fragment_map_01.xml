@@ -1,13 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.MAP_01">
+    >
+    <data>
+        <variable
+            name="fragment"
+            type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01" />
+    </data>
 
-    <fragment android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        android:name="com.naver.maps.map.MapFragment" />
+        android:elevation="5dp"
+        tools:context=".ui.fragment.MAP_01">
 
-</FrameLayout>
+        <fragment
+            android:id="@+id/map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
+            android:background="@drawable/round_button"
+            android:elevation="@dimen/elevation1"
+            android:padding="@dimen/margin_basic4"
+            android:scaleType="fitCenter"
+            android:src="@drawable/map_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
+            android:background="@drawable/round_button"
+            android:elevation="@dimen/elevation1"
+            android:onClick="@{fragment.go}"
+            android:padding="@dimen/margin_basic4"
+            android:scaleType="fitCenter"
+            android:src="@drawable/map_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="@android:dimen/app_icon_size"
+            android:layout_height="@android:dimen/app_icon_size"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
+            android:background="@drawable/round_button"
+            android:elevation="@dimen/elevation1"
+            android:padding="@dimen/margin_basic4"
+            android:scaleType="fitCenter"
+            android:src="@drawable/map_gps"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
