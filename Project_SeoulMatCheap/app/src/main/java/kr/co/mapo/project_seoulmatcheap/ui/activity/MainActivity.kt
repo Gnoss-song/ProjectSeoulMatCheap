@@ -15,6 +15,10 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var mapFragmet : MAP_01
+    private lateinit var categoryFragment : CATEGORY_01
+    private lateinit var matFragment : MATCHEAP_01
+    private lateinit var myFragment : MY_01
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +26,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         if(savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(binding.container.id, CATEGORY_01()).commit()
         }
+        init()
         setView()
+    }
+
+    private fun init() {
+        mapFragmet = MAP_01()
+        categoryFragment = CATEGORY_01()
+        matFragment = MATCHEAP_01()
+        myFragment = MY_01()
     }
 
     private fun setView() {
@@ -34,7 +46,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.map -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MAP_01()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.container.id, mapFragmet).commit()
                 return true
             }
             R.id.search -> {
@@ -44,15 +56,15 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.main -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, CATEGORY_01()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.container.id, categoryFragment).commit()
                 return true
             }
             R.id.mat -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MATCHEAP_01()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.container.id, matFragment).commit()
                 return true
             }
             R.id.my -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MY_01()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.container.id, myFragment).commit()
                 return true
             }
         }
