@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private fun setView() {
         with(binding.bottomNavigationView) {
             setOnNavigationItemSelectedListener(this@MainActivity)
-            
         }
     }
 
