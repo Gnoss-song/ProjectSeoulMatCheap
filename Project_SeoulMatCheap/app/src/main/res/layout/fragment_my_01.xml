@@ -93,7 +93,7 @@
             android:layout_width="45dp"
             android:layout_height="90dp"
             android:layout_toEndOf="@id/linenarlayout"
-            android:src="@drawable/rank" />
+            android:src="@drawable/ic_rank" />
 
         <TextView
             android:id="@+id/level"
@@ -109,7 +109,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_toEndOf="@id/level"
-            android:src="@drawable/rank" />
+            android:src="@drawable/ic_baseline_help_24" />
 
 
         <Button
@@ -234,7 +234,7 @@
         android:layout_marginTop="2dp">
 
         <Button
-            android:id="@+id/btn_dialog"
+            android:id="@+id/btn_service"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

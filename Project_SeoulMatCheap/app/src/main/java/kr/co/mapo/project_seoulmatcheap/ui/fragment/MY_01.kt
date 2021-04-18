@@ -1,42 +1,19 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
-import android.app.ActionBar
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.text.Layout
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Button
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat.hasOnClickListeners
-import androidx.core.view.ViewCompat.setAlpha
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.naver.maps.map.a.f
-import com.skydoves.balloon.*
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
-import kr.co.mapo.project_seoulmatcheap.ui.activity.MainActivity
+import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
 class MY_01(val activity : AppCompatActivity): Fragment() {
-    lateinit var my01fragment:MY_01
-    lateinit var my0101fragment: MY_01_01
-    lateinit var matcheap0102fragment: MATCHEAP_01_02
-    lateinit var my0102fragment: MY_01_02
-    lateinit var my0103fragment: MY_01_03
 
     private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
     override fun onCreateView(
@@ -51,17 +28,12 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
 
 
         super.onViewCreated(view, savedInstanceState)
-        my01fragment = MY_01(activity)
-        my0101fragment = MY_01_01()
-        my0102fragment = MY_01_02()
-        my0103fragment = MY_01_03()
-        matcheap0102fragment = MATCHEAP_01_02()
 
 
         //다이얼로그//
-        binding.btnDialog.setOnClickListener {
+        binding.btnService.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my, null)
+                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_service, null)
             val mBuilder =
                 androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mDialogView)
                     .setTitle(R.string.dialog_title)
@@ -76,7 +48,7 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
         // 도움말//
         binding.btnHelp.setOnClickListener {
             val mHelpView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_helpcontest, null)
+                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_help, null)
             val mBuilder =
                 androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mHelpView)
             val mAlertDialog = mBuilder.show()
@@ -86,41 +58,73 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
             }
         }
 
+        //로그아웃 //
+        binding.btnLogout.setOnClickListener {
+            val mLogoutView =
+                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_logout, null)
+            val mBuilder =
+                androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mLogoutView)
+            val mAlertDialog = mBuilder.show()
+            val okButton = mLogoutView.findViewById<Button>(R.id.btn_logout_ok)
+            val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_logout_no)
+
+            okButton.setOnClickListener {
+                Dialog
+                mAlertDialog.dismiss()
+            }
+        }
+
+
+
         //프래그먼트 이동하기
 
 
         val ft: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
         binding.btnFavorite.setOnClickListener {
-            ft.add(R.id.my_container, my0101fragment)
-            ft.addToBackStack(null)
-            ft.commit()
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
+//            ft.add(R.id.my_container, my0101fragment)
+//            ft.addToBackStack(null)
+//            ft.commit()
+//            activity.supportFragmentManager.beginTransaction().remove(this).commit()
+//            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
+            val intent01 = Intent(getActivity(),MY_01_01::class.java)
+            startActivity(intent01)
         }
 
         binding.btnMyreview.setOnClickListener {
-            ft.add(R.id.my_container, my0102fragment)
-            ft.addToBackStack(null)
-            ft.commit()
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
+            val intent02 = Intent(getActivity(), MY_01_02::class.java)
+            startActivity(intent02)
 
         }
         binding.btnMyreport.setOnClickListener {
-            ft.add(R.id.my_container, matcheap0102fragment)
-            ft.addToBackStack(null)
-            ft.commit()
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
+            val intent = Intent(getActivity(), MATCHEAP_01_02::class.java)
+            startActivity(intent)
 
         }
         binding.btnNotice.setOnClickListener {
-            ft.add(R.id.my_container, my0103fragment)
-            ft.addToBackStack(null)
-            ft.commit()
-            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
+            val intent03 = Intent(getActivity(), MY_01_03::class.java)
+            startActivity(intent03)
+        }
+
+        //건의사항 메일보내기
+
+        binding.btnReport.setOnClickListener {
+            val sendEmail = Intent(Intent.ACTION_SEND)
+            sendEmail.type = "plain/Text"
+            sendEmail.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(getString(R.string.email)))
+            sendEmail.putExtra(
+                Intent.EXTRA_SUBJECT,
+                "<" + getString(R.string.app_name) + " " + getString(R.string.report) + ">"
+            )
+            sendEmail.putExtra(
+                Intent.EXTRA_TEXT,
+                "기기명 (Device):\n안드로이드 OS (Android OS):\n내용 (Content):\n"
+            )
+            sendEmail.type = "message/rfc822"
+            startActivity(sendEmail)
+        }
+        fun onBackPressed() {
+            return
         }
     }
 }

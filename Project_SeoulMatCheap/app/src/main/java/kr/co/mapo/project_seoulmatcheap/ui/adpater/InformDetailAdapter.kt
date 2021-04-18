@@ -12,13 +12,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.Item
+import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_01
 
 class InformDetailAdapter (
-    private val itemList: MutableList<Item>,
+    private val itemList: MutableList<MY_01_01.Item>,
     private val owner : Activity,
 
-) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>(){
+    ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>(){
 
 
 

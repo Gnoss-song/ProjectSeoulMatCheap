@@ -7,14 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import kr.co.mapo.project_seoulmatcheap.R
 
-class MY_01_02 : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+class DIALOG_MY_LOGOUT: Fragment() {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_01_02, container, false)
+        return inflater.inflate(R.layout.fragment_dialog_my_logout, container, false)
     }
-
 }

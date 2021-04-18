@@ -62,4 +62,5 @@ dependencies {
 
     //도움말
     implementation "com.github.skydoves:balloon:1.3.4"
+    compileOnly 'com.google.android.wearable:wearable:2.8.1'
 }

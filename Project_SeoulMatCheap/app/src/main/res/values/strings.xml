@@ -18,7 +18,6 @@
     <string name="category8">기타</string>
 
 
-
     <!--
     Mypage 관련 스트링 입니다.
     @Gnoss
@@ -43,5 +42,9 @@
     <string name="myreview_title">마이리뷰(0)</string>
     <string name="myfavorite_title">찜 목록(10)</string>
     <string name="myfavorite_title_modify">찜 목록(10)</string>
+    <string name="title_activity_m_y_02">MY_02</string>
+    <string name="title_activity_m_y_01_02">MY_01_02</string>
+    <string name="title_activity_m_y_01_01_01">MY_01_01_01</string>
+    <string name="logout_contest">로그아웃 하시겠습니까?</string>
 
 </resources>
