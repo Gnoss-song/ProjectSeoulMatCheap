@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat.hasOnClickListeners
@@ -23,13 +24,14 @@ import androidx.core.view.ViewCompat.setAlpha
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.naver.maps.map.a.f
 import com.skydoves.balloon.*
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MainActivity
 
-class MY_01: Fragment() {
+class MY_01(val activity : AppCompatActivity): Fragment() {
     lateinit var my01fragment:MY_01
     lateinit var my0101fragment: MY_01_01
     lateinit var matcheap0102fragment: MATCHEAP_01_02
@@ -49,7 +51,7 @@ class MY_01: Fragment() {
 
 
         super.onViewCreated(view, savedInstanceState)
-        my01fragment = MY_01()
+        my01fragment = MY_01(activity)
         my0101fragment = MY_01_01()
         my0102fragment = MY_01_02()
         my0103fragment = MY_01_03()
@@ -87,30 +89,38 @@ class MY_01: Fragment() {
         //프래그먼트 이동하기
 
 
-        val ft: FragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        val ft: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
         binding.btnFavorite.setOnClickListener {
             ft.add(R.id.my_container, my0101fragment)
             ft.addToBackStack(null)
             ft.commit()
+            activity.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
         }
 
         binding.btnMyreview.setOnClickListener {
-                ft.add(R.id.my_container, my0102fragment)
-                ft.addToBackStack(null)
-                ft.commit()
+            ft.add(R.id.my_container, my0102fragment)
+            ft.addToBackStack(null)
+            ft.commit()
+            activity.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
 
         }
         binding.btnMyreport.setOnClickListener {
-                ft.add(R.id.my_container, matcheap0102fragment)
-                ft.addToBackStack(null)
-                ft.commit()
+            ft.add(R.id.my_container, matcheap0102fragment)
+            ft.addToBackStack(null)
+            ft.commit()
+            activity.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
 
         }
         binding.btnNotice.setOnClickListener {
-                ft.add(R.id.my_container, my0103fragment)
-                ft.addToBackStack(null)
-                ft.commit()
+            ft.add(R.id.my_container, my0103fragment)
+            ft.addToBackStack(null)
+            ft.commit()
+            activity.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
         }
     }
 }

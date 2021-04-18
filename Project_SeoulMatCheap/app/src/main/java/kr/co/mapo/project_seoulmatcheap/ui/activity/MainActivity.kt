@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 return true
             }
             R.id.my -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MY_01()).commit()
+                supportFragmentManager.beginTransaction().replace(binding.container.id, MY_01(this)).commit()
                 return true
             }
         }
