@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
     private val location by lazy { SeoulMatCheap().getLocation(this) }
     private lateinit var tabLayout : TabLayout
 
+    lateinit var my01fragment: MY_01
+
+
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
