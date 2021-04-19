@@ -3,28 +3,33 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import androidx.core.view.get
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MATCHEAP_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    //private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var mapFragmet : MAP_01
+    private lateinit var searchFragmet : SEARCH_01
     private lateinit var categoryFragment : CATEGORY_01
     private lateinit var matFragment : MATCHEAP_01
     private lateinit var myFragment : MY_01
+    private lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
         if(savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(binding.container.id, CATEGORY_01()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01()).commit()
         }
         init()
         setView()
@@ -32,43 +37,54 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun init() {
         mapFragmet = MAP_01()
+        searchFragmet = SEARCH_01()
         categoryFragment = CATEGORY_01()
         matFragment = MATCHEAP_01()
         myFragment = MY_01()
+        tabLayout = findViewById(R.id.tabLayout)
     }
 
     private fun setView() {
-        with(binding.bottomNavigationView) {
-            setOnNavigationItemSelectedListener(this@MainActivity)
-        }
-    }
+        with(tabLayout) {
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.map -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, mapFragmet).commit()
-                return true
-            }
-            R.id.search -> {
-                val intent = Intent(this, SEARCH_01::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intent)
-                return true
-            }
-            R.id.main -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, categoryFragment).commit()
-                return true
-            }
-            R.id.mat -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, matFragment).commit()
-                return true
-            }
-            R.id.my -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, myFragment).commit()
-                return true
-            }
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                //선택할 때
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    when(tab!!.position) {
+                        0 ->  {
+                            tab.text = getString(R.string.app_meun1)
+                            supportFragmentManager.beginTransaction().replace(R.id.container, mapFragmet).commit()
+                        }
+                        1 -> {
+                            tab.text = getString(R.string.app_meun2)
+                            supportFragmentManager.beginTransaction().replace(R.id.container, searchFragmet).commit()
+                        }
+                        2 -> {
+                            tab.text = getString(R.string.app_meun3)
+                            supportFragmentManager.beginTransaction().replace(R.id.container, categoryFragment).commit()
+                        }
+                        3 -> {
+                            tab.text = getString(R.string.app_meun4)
+                            supportFragmentManager.beginTransaction().replace(R.id.container, matFragment).commit()
+                        }
+                        4 -> {
+                            tab.text = getString(R.string.app_meun5)
+                            supportFragmentManager.beginTransaction().replace(R.id.container, myFragment).commit()
+                        }
+                    }
+                    Toast.makeText(this@MainActivity, tab!!.position.toString(), Toast.LENGTH_SHORT).show()
+                }
+
+                //선택이 풀릴 때
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    tab!!.text = null
+                }
+
+                //선택된 상태에서 다시 선택될 때
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+            })
         }
-        return false
     }
 
 

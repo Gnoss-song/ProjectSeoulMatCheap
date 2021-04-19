@@ -12,6 +12,10 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 
 class MAP_01 : Fragment() {
 
+    companion object {
+
+    }
+
     private lateinit var binding : FragmentMap01Binding
 
     override fun onCreateView(
@@ -25,12 +29,13 @@ class MAP_01 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.toolbar.title = "현재위치가 들어감"
     }
 
     fun go(v:View) {
-        requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01_02())
-            .addToBackStack(null).commit()
+        requireActivity().supportFragmentManager.beginTransaction().add(R.id.filter, MAP_01_02())
+            .addToBackStack(null)
+            .commit()
     }
 
 
