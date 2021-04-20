@@ -1,5 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
-
+/**
+ * @author Gnoss
+ * @email silmxmail@naver.com
+ * @created 2021-04-20
+ * @desc
+ */
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding

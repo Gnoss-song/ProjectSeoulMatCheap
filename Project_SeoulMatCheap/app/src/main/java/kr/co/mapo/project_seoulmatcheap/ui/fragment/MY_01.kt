@@ -1,5 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
-
+/**
+ * @author Gnoss
+ * @email silmxmail@naver.com
+ * @created 2021-04-20
+ * @desc
+ */
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kr.co.mapo.project_seoulmatcheap.R
@@ -65,28 +72,50 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
             val mBuilder =
                 androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mLogoutView)
             val mAlertDialog = mBuilder.show()
+            mAlertDialog.window?.setLayout(700,280)
             val okButton = mLogoutView.findViewById<Button>(R.id.btn_logout_ok)
             val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_logout_no)
 
             okButton.setOnClickListener {
-                Dialog
+                Toast.makeText(requireContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show()
+                mAlertDialog.dismiss()
+            }
+            cancelButton.setOnClickListener{
+
+                Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
+                mAlertDialog.dismiss()
+            }
+        }
+
+        //회원탈퇴
+        binding.btnWithdrawal.setOnClickListener{
+            val mWithdrawalView =
+                    LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_withdrawal, null)
+            val mBuilder =
+                    androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mWithdrawalView)
+            val mAlertDialog = mBuilder.show()
+            mAlertDialog.window?.setLayout(700,280)
+
+            val okButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_ok)
+            val cancelButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_no)
+
+            okButton.setOnClickListener {
+                Toast.makeText(requireContext(),"탈퇴 되었습니다.",Toast.LENGTH_SHORT).show()
+                mAlertDialog.dismiss()
+            }
+            cancelButton.setOnClickListener{
+
+                Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
         }
 
 
 
-        //프래그먼트 이동하기
+        //화면이동하기.
 
-
-        val ft: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
         binding.btnFavorite.setOnClickListener {
-//            ft.add(R.id.my_container, my0101fragment)
-//            ft.addToBackStack(null)
-//            ft.commit()
-//            activity.supportFragmentManager.beginTransaction().remove(this).commit()
-//            activity.findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.GONE
             val intent01 = Intent(getActivity(),MY_01_01::class.java)
             startActivity(intent01)
         }

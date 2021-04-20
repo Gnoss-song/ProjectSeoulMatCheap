@@ -24,11 +24,23 @@
             android:textColor="@color/white_93"
             android:drawableStart="@drawable/ic_button"
 
-            android:textSize="20dp">
+
+            android:textSize="24dp">
 
         </TextView>
 
     </androidx.appcompat.widget.Toolbar>
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="0dp"
+        android:background="#00ff0000"
+        android:text="편집"
+        android:textSize="16dp"
+        android:textColor="@color/white" />
 
     <Space
         android:id="@+id/space"

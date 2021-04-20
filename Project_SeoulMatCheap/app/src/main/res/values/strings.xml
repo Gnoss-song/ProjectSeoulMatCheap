@@ -46,5 +46,6 @@
     <string name="title_activity_m_y_01_02">MY_01_02</string>
     <string name="title_activity_m_y_01_01_01">MY_01_01_01</string>
     <string name="logout_contest">로그아웃 하시겠습니까?</string>
+    <string name="withdrawl_contest"> &#160;&#160;&#160;탈퇴하시겠습니까?\n(정보는 복구되지 않습니다.)</string>
 
 </resources>

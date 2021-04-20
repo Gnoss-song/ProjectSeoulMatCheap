@@ -11,7 +11,6 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.databinding.FragmentDialogMyBinding
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentDialogMyServiceBinding
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
 

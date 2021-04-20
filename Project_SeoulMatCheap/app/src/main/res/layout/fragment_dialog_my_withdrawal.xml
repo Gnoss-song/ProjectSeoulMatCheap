@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/logout_layout"
+        android:id="@+id/withdrawl_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
@@ -21,42 +21,39 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/logoutcontext"
+                android:id="@+id/withdrawlcontext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginStart="10dp"
                 android:gravity="center"
-                android:text="@string/logout_contest"
+                android:text="@string/withdrawl_contest"
                 android:textAlignment="center"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_logout_ok"
+                android:id="@+id/btn_withdrawl_ok"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
 
 
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="예"
-                app:layout_constraintEnd_toStartOf="@+id/btn_logout_no"
+                app:layout_constraintEnd_toStartOf="@+id/btn_withdrawl_no"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/withdrawlcontext" />
 
             <Button
-                android:id="@+id/btn_logout_no"
+                android:id="@+id/btn_withdrawl_no"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
 
-                android:layout_marginTop="20dp"
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_logout_ok"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/btn_withdrawl_ok"
+                app:layout_constraintTop_toBottomOf="@+id/withdrawlcontext" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

@@ -21,11 +21,12 @@
             android:layout_gravity="center"
             android:text="마이페이지"
             android:textColor="@color/white_93"
-            android:textSize="20dp">
+            android:textSize="24dp">
 
         </TextView>
 
     </androidx.appcompat.widget.Toolbar>
+
 
     <Space
         android:layout_width="match_parent"
@@ -34,9 +35,11 @@
         android:id="@+id/space1"/>
     <View
         android:id="@+id/myPageLine"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="3dp"
         android:background="#E1E1E1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:layout_below="@+id/space1"/>
 
     <RelativeLayout
@@ -48,6 +51,7 @@
         android:paddingBottom="10dp"
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp">
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
@@ -77,6 +81,7 @@
                 android:layout_marginBottom="3dp"
                 android:layout_weight="1"
                 android:text="@string/nickname"
+                android:textSize="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -85,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
+                android:textSize="16dp"
                 android:text="@string/email" />
         </LinearLayout>
 
@@ -102,7 +108,8 @@
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@id/img_rank"
             android:gravity="center"
-            android:text="@string/level" />
+            android:text="@string/level"
+            android:textSize="11dp"/>
 
         <ImageView
             android:id="@+id/btn_help"
@@ -118,8 +125,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/btn_help"
             android:layout_toEndOf="@+id/img_rank"
+            android:background="#00ff0000"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="@string/logoutstring"
-            android:textSize="10dp"/>
+            android:textSize="11dp"/>
+
         <View
             android:id="@+id/myPageLine2"
             android:layout_width="match_parent"
@@ -140,6 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="찜 목록"
+        android:textSize="16dp"
         android:textAlignment="textStart"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
@@ -155,6 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="마이리뷰"
+        android:textSize="16dp"
         android:textAlignment="textStart"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
@@ -169,6 +182,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="내 제보 글 관리"
+        android:textSize="16dp"
         android:textAlignment="textStart"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
@@ -177,26 +191,35 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:stateListAnimator="@null"/>
+    <View
+        android:id="@+id/myPageLine3"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#E1E1E1"
+        android:layout_below="@+id/btn_myreport"
+        />
 
     <Button
         android:id="@+id/btn_notice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="공지사항"
-        android:textAlignment="textStart"
+        android:layout_below="@+id/myPageLine3"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_myreport"
 
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
-        android:stateListAnimator="@null"/>
+        android:stateListAnimator="@null"
+        android:text="공지사항"
+        android:textSize="16dp"
+        android:textAlignment="textStart" />
 
     <Button
         android:id="@+id/btn_report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="건의하기"
+        android:textSize="16dp"
         android:textAlignment="textStart"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
@@ -211,6 +234,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="앱 버전"
+        android:textSize="16dp"
         android:textAlignment="textStart"
         android:drawableStart="@drawable/ic_button"
         android:drawableEnd="@drawable/ic_arrow"
@@ -218,6 +242,17 @@
 
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"/>
+
+    <Button
+        android:id="@+id/btn_withdrawal"
+        android:layout_width="78dp"
+        android:layout_height="33dp"
+        android:layout_above="@+id/constraintlayout"
+        android:layout_marginStart="330dp"
+        android:background="#00ff0000"
+        android:text="회원탈퇴"
+        android:textColor="@color/black"
+        android:textSize="11dp"/>
 
     <FrameLayout
         android:id="@+id/help_Container"
@@ -228,10 +263,12 @@
         android:visibility="gone" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="2dp">
+
 
         <Button
             android:id="@+id/btn_service"
@@ -243,11 +280,10 @@
             android:textAlignment="center"
             android:textColor="@color/white_93"
             android:textSize="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent" />
 
-        </Button>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
