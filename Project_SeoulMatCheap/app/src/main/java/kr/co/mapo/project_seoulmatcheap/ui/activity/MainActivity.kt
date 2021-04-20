@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
