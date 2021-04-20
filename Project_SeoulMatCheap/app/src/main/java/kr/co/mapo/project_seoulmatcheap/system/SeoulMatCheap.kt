@@ -47,14 +47,13 @@ class SeoulMatCheap : Application() {
      * 두 좌표의 거리를 계산한다.
      * @param x 위도
      * @param y 경도
-     * @return 두 좌표의 거리(km) - String
+     * @return 두 좌표의 거리(km) - Double
      */
-    fun getDistance(x: Double, y: Double) : String {
+    fun getDistance(x: Double, y: Double) : Double {
         val a = 2 * asin(sqrt(sin(Math.toRadians(x - this.latX) / 2).pow(2.0)
                 + sin(Math.toRadians(y - this.lngY) / 2).pow(2.0) * cos(Math.toRadians(this.latX)) * cos(Math.toRadians(x))))
         Log.e("[거리계산]", "${(R * a) / 1000}")
-        Log.e("[거리결과]", String.format("%.1fkm", (R * a) / 1000))
-        return String.format("%.1fkm", (R * a) / 1000)
+        return (R * a) / 1000
     }
 
     //GPS로부터 위치정보를 얻어오는 함수

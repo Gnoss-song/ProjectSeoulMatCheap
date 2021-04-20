@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/include"
         layout="@layout/list_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
@@ -17,8 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var my01fragment: MY_01
 
-
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
