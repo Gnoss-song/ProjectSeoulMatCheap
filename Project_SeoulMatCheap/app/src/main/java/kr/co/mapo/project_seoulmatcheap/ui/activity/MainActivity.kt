@@ -12,8 +12,6 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
 class MainActivity : AppCompatActivity() {
 
-    //private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val location by lazy { SeoulMatCheap().getLocation(this) }
     private lateinit var tabLayout : TabLayout
 
     lateinit var my01fragment: MY_01
@@ -30,18 +28,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         tabLayout = findViewById(R.id.tabLayout)
-        setView()
+        val seoulMatCheap = SeoulMatCheap.getInstance()
+        seoulMatCheap.setLocation(this)
+        setView(seoulMatCheap.x, seoulMatCheap.y)
     }
 
-    private fun setView() {
+    private fun setView(x:Double, y:Double) {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position) {
                     0 ->  {
                         tab.text = getString(R.string.app_meun1)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.getInstance(this@MainActivity, location)).commit()
-                        Log.e("[TEST]", "${location?.latitude}, ${location?.longitude}")
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.getInstance(this@MainActivity, x, y)).commit()
                     }
                     1 -> {
                         tab.text = getString(R.string.app_meun2)

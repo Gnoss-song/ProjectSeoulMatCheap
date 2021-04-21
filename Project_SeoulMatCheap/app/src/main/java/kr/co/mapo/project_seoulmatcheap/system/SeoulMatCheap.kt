@@ -26,8 +26,15 @@ private const val R = 6372.8 * 1000
 
 class SeoulMatCheap : Application() {
 
-    var latX : Double = 0.0      //현재 위치 위도
-    var lngY : Double = 0.0      //현재 위치 경도
+    companion object {
+        fun getInstance() : SeoulMatCheap {
+            return SeoulMatCheap()
+        }
+
+    }
+
+    var x : Double = 0.0      //현재 위치 위도
+    var y : Double = 0.0      //현재 위치 경도
     var adress : String = "현재위치"     //현재 위치 주소
 
     /* onCreate()
@@ -50,33 +57,33 @@ class SeoulMatCheap : Application() {
      * @return 두 좌표의 거리(km) - Double
      */
     fun getDistance(x: Double, y: Double) : Double {
-        val a = 2 * asin(sqrt(sin(Math.toRadians(x - this.latX) / 2).pow(2.0)
-                + sin(Math.toRadians(y - this.lngY) / 2).pow(2.0) * cos(Math.toRadians(this.latX)) * cos(Math.toRadians(x))))
+        val a = 2 * asin(sqrt(sin(Math.toRadians(x - this.x) / 2).pow(2.0)
+                + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(Math.toRadians(x))))
         Log.e("[거리계산]", "${(R * a) / 1000}")
         return (R * a) / 1000
     }
 
     //GPS로부터 위치정보를 얻어오는 함수
-    fun getLocation(context: Context): Location? {
+    fun setLocation(context: Context) {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
         val provider = locationManager.getBestProvider(Criteria(), true)
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
-            return null
+            return
         }
         if (provider == null) {
             Toast.makeText(context, "위치 정보를 사용할 수 있는 상태가 아닙니다, GPS를 확인해주세요.", Toast.LENGTH_SHORT).show()
-            return null
+            return
         }
         // 해당 장치가 마지막으로 수신한 위치 얻기
         val location = locationManager.getLastKnownLocation(provider)
         if(location != null) {
-            latX = location.latitude
-            lngY = location.longitude
+            x = location.latitude
+            y = location.longitude
         }
-        return location
+        Log.e("[GPS]", "${x}, ${y}")
     }
 
     //위도, 경도로부터 주소를 계산하는 함수

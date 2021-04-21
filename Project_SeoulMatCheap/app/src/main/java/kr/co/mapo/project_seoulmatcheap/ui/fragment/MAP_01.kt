@@ -29,12 +29,13 @@ const val ADDRESS = "address"
 
 class MAP_01(
     val owner : AppCompatActivity,
-    var location : Location?
+    var x : Double,
+    var y : Double
     ) : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun getInstance(owner: AppCompatActivity, location: Location?) : Fragment {
-            return MAP_01(owner, location)
+        fun getInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
+            return MAP_01(owner, x, y)
         }
     }
 
@@ -59,7 +60,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        address = SeoulMatCheap().getAddress(location!!.latitude, location!!.longitude, owner).toString()
+        address = SeoulMatCheap().getAddress(x, y, owner).toString()
         if(address != null) {
             binding.toolbar.title = address
         } else {
@@ -72,9 +73,9 @@ class MAP_01(
     override fun onMapReady(p0: NaverMap) {
         naverMap = p0
         naverMap.apply {
-            cameraPosition = setMapCamera(location!!.latitude, location!!.longitude)
+            cameraPosition = setMapCamera(x, y)
         }
-        createInfoWindow("테스트1", createMaker(location!!.latitude, location!!.longitude, R.drawable.icon_hansik))
+        createInfoWindow("테스트1", createMaker(x, y, R.drawable.icon_hansik))
         createInfoWindow("테스트2", createMaker(37.564338, 126.910794, R.drawable.icon_china))
         createInfoWindow("테스트3", createMaker(37.564110, 126.911041, R.drawable.icon_japan))
     }
@@ -121,9 +122,8 @@ class MAP_01(
     }
 
     fun resetLocation(v : View) {
-        location = SeoulMatCheap().getLocation(owner)
         naverMap.apply {
-            cameraPosition = setMapCamera(location!!.latitude, location!!.longitude)
+            cameraPosition = setMapCamera(x, y)
         }
     }
 
