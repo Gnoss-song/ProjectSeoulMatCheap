@@ -82,12 +82,13 @@ class SeoulMatCheap : Application() {
         if(location != null) {
             x = location.latitude
             y = location.longitude
+            adress = getAddress(x, y, context)
         }
         Log.e("[GPS]", "${x}, ${y}")
     }
 
     //위도, 경도로부터 주소를 계산하는 함수
-    fun getAddress(lat: Double, lng: Double, context: Context): String? {
+    fun getAddress(lat: Double, lng: Double, context: Context): String {
         val geocoder = Geocoder(context, Locale.getDefault()) //주소 구하기 객체
         val address : String = geocoder.getFromLocation(lat, lng, 1)[0].getAddressLine(0) // 현재 주소
         Log.e("[address]", address)

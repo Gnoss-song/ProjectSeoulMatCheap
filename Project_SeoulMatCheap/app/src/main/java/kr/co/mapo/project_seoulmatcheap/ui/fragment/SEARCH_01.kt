@@ -1,6 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch01Binding
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.ui.activity.MainActivity
 
 
 class SEARCH_01(val owner: AppCompatActivity) : Fragment(){
@@ -33,6 +36,12 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("[TEST]", SeoulMatCheap().toString())
+        Log.e("[TEST]", SeoulMatCheap().toString())
+        Log.e("[TEST]", SeoulMatCheap.getInstance().toString())
+        Log.e("[TEST]", SeoulMatCheap.getInstance().toString())
+        Log.e("[TEST]", MainActivity().toString())
+        Log.e("[TEST]", MainActivity().toString())
         init(view)
     }
 
