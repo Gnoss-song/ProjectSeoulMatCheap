@@ -34,7 +34,7 @@ class MAP_01(
     ) : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun getInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
+        fun newInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
             return MAP_01(owner, x, y)
         }
     }

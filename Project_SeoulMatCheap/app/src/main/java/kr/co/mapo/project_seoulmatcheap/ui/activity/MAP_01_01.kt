@@ -14,6 +14,7 @@ data class Test(val image : String, val name : String, val address : String, val
 
 class MAP_01_01 : AppCompatActivity() {
 
+
     private val binding by lazy { ActivityMap0101Binding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

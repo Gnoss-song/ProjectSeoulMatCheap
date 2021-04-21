@@ -28,23 +28,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         tabLayout = findViewById(R.id.tabLayout)
-        val seoulMatCheap = SeoulMatCheap.getInstance()
+        val seoulMatCheap = SeoulMatCheap.newInstance()
         seoulMatCheap.setLocation(this)
         setView(seoulMatCheap.x, seoulMatCheap.y)
     }
 
     private fun setView(x:Double, y:Double) {
+        val map = MAP_01.newInstance(this@MainActivity, x, y)
+        val search = SEARCH_01.newInstance(this@MainActivity)
+        val my = MY_01()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position) {
                     0 ->  {
                         tab.text = getString(R.string.app_meun1)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.getInstance(this@MainActivity, x, y)).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, map).commit()
                     }
                     1 -> {
                         tab.text = getString(R.string.app_meun2)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.getInstance(this@MainActivity)).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, search).commit()
                     }
                     2 -> {
                         tab.text = getString(R.string.app_meun3)
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     4 -> {
                         tab.text = getString(R.string.app_meun5)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, my).commit()
                     }
                 }
             }

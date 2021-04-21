@@ -19,7 +19,7 @@ import kotlin.math.*
  * @author SANDY
  * @email nnal0256@naver.com
  * @created 2021-04-06
- * @desc 어플리케이션 클래스(싱글톤)-공통변수, 공통함수, 로케이션, rest 등 설정
+ * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
  */
 
 private const val R = 6372.8 * 1000
@@ -27,10 +27,9 @@ private const val R = 6372.8 * 1000
 class SeoulMatCheap : Application() {
 
     companion object {
-        fun getInstance() : SeoulMatCheap {
+        fun newInstance() : SeoulMatCheap {
             return SeoulMatCheap()
         }
-
     }
 
     var x : Double = 0.0      //현재 위치 위도
