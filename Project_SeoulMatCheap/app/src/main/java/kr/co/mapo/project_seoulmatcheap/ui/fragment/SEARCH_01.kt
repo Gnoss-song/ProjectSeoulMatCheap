@@ -15,7 +15,7 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch01Binding
 
 
-class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextView.OnEditorActionListener {
+class SEARCH_01(val owner: AppCompatActivity) : Fragment(){
 
     companion object {
         fun getInstance(owner: AppCompatActivity) : Fragment {
@@ -53,16 +53,6 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextView.OnEditorAct
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
             }
-            searchEditText.apply {
-                setOnEditorActionListener(this@SEARCH_01)
-            }
         }
     }
-
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) Toast.makeText(owner, "검색요청", Toast.LENGTH_SHORT).show()
-        else Toast.makeText(owner, "검색요청", Toast.LENGTH_SHORT).show() //그냥 엔터 쳤을 때
-        return false
-    }
-
 }
