@@ -72,6 +72,10 @@ class SeoulMatCheap : Application() {
         }
         // 해당 장치가 마지막으로 수신한 위치 얻기
         val location = locationManager.getLastKnownLocation(provider)
+        if(location != null) {
+            latX = location.latitude
+            lngY = location.longitude
+        }
         return location
     }
 

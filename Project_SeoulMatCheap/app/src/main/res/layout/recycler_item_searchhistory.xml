@@ -30,8 +30,8 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:text="저장된 검색어"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:text="텍스트가 왜 안보여"
+            android:textSize="@dimen/text_filter_title" />
 
         <ImageButton
             android:id="@+id/remove_btn"
