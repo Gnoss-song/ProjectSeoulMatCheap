@@ -15,8 +15,8 @@
         tools:layout_editor_absoluteX="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+                android:layout_marginTop="36dp"
                 android:gravity="center"
                 android:text="@string/logout_contest"
                 android:textAlignment="center"
@@ -39,10 +40,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="84dp"
                 android:layout_marginEnd="20dp"
                 android:text="예"
+                android:background="@null"
                 app:layout_constraintEnd_toStartOf="@+id/btn_logout_no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="84dp"
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_logout_ok"
