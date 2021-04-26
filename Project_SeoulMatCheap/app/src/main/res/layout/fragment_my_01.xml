@@ -142,8 +142,12 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="15dp"
-                android:drawableStart="@drawable/ic_button"
-                android:drawableEnd="@drawable/ic_arrow"
+
+
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
+
+
                 android:stateListAnimator="@null"
 
                 android:text="찜 목록"
@@ -160,8 +164,10 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:drawableStart="@drawable/ic_button"
-                android:drawableEnd="@drawable/ic_arrow"
+
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
+
                 android:stateListAnimator="@null"
 
                 android:text="마이리뷰"
@@ -177,8 +183,12 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:drawableStart="@drawable/ic_button"
-                android:drawableEnd="@drawable/ic_arrow"
+
+
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
+
+
                 android:stateListAnimator="@null"
 
                 android:text="내 제보 글 관리"
@@ -194,8 +204,11 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:drawableStart="@drawable/ic_button"
-                android:drawableEnd="@drawable/ic_arrow"
+
+
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
+
 
                 android:stateListAnimator="@null"
                 android:text="공지사항"
@@ -214,8 +227,8 @@
                 android:layout_marginRight="15dp"
 
 
-                android:drawableStart="@drawable/btn_bg"
-                android:drawableEnd="@drawable/ic_arrow"
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
 
                 android:text="앱 버전"
 
@@ -231,6 +244,9 @@
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_my_01"
                 app:backgroundTint="@null"
+
+                android:drawableLeft="@drawable/btn_homeaddress"
+                android:drawableRight="@drawable/btn_nexticon"
 
                 android:stateListAnimator="@null"
 
