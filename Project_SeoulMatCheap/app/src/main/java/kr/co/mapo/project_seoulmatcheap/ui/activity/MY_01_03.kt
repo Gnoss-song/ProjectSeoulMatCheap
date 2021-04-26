@@ -34,13 +34,21 @@ class MY_01_03 : AppCompatActivity() {
         setContentView(binding.root)
 
         val itemData = mutableListOf<MY0103Item>()
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
-        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km"))
+        itemData.add(MY0103Item("솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent"))
+        itemData.add(MY0103Item("솔잎식당2", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent2"))
+        itemData.add(MY0103Item("솔잎식당3", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent3"))
+        itemData.add(MY0103Item("솔잎식당4", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent4"))
+        itemData.add(MY0103Item("솔잎식당5", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent5"))
+        itemData.add(MY0103Item("솔잎식당6", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent6"))
+        itemData.add(MY0103Item("솔잎식당7", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent7"))
+        itemData.add(MY0103Item("솔잎식당8", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent8"))
+        itemData.add(MY0103Item("솔잎식당9", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent9"))
+        itemData.add(MY0103Item("솔잎식당10", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent10"))
+        itemData.add(MY0103Item("솔잎식당11", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent11"))
+        itemData.add(MY0103Item("솔잎식당12", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent12"))
+        itemData.add(MY0103Item("솔잎식당13", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent13"))
+        itemData.add(MY0103Item("솔잎식당14", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1kmcontent14"))
+
 
 
         //리사이클러뷰 어댑터 연결
@@ -50,11 +58,7 @@ class MY_01_03 : AppCompatActivity() {
 
         binding.recycler2.layoutManager = LinearLayoutManager(this)
 
-        //화면 이동 MY_01_01_01
 
-//        binding.btnEdit.setOnClickListener {
-//            val intent = Intent(this, MY_01_01_01::class.java)
-//            startActivity(intent)
-//        }
+
     }
 }
