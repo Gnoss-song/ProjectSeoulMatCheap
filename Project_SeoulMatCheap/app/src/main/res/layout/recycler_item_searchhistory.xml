@@ -30,7 +30,6 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:text="텍스트가 왜 안보여"
             android:textSize="@dimen/text_filter_title" />
 
         <ImageButton
@@ -46,9 +45,4 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E1E1E1" />
 </LinearLayout>

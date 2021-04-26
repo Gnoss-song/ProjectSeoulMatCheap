@@ -1,52 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="5dp">
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:singleLine="true"
-        android:text="식당이름"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/distance"
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="0"
-            android:paddingRight="16dp"
-            android:text="거리" />
+            android:paddingLeft="16dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            app:srcCompat="@drawable/ic_icons8_search" />
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:singleLine="true"
-            android:text="주소" />
-    </LinearLayout>
+            android:bufferType="spannable"
+            android:text="텍스트가 왜 안보여"
+            android:textSize="@dimen/text_filter_title" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="7dp"
-        android:background="#E1E1E1" />
+    </LinearLayout>
 
 </LinearLayout>

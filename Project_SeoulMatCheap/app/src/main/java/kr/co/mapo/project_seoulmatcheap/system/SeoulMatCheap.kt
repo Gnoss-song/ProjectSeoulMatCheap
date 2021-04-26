@@ -3,17 +3,18 @@ package kr.co.mapo.project_seoulmatcheap.system
 import android.Manifest
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Criteria
 import android.location.Geocoder
-import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
 import kotlin.math.*
+
 
 /**
  * @author SANDY
@@ -22,7 +23,8 @@ import kotlin.math.*
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
  */
 
-private const val R = 6372.8 * 1000
+private const val R = 6372.8 * 100
+const val SEARCH_HISTROY = "search_history_pref"
 
 class SeoulMatCheap : Application() {
 
@@ -35,6 +37,7 @@ class SeoulMatCheap : Application() {
     var x : Double = 0.0      //현재 위치 위도
     var y : Double = 0.0      //현재 위치 경도
     var adress : String = "현재위치"     //현재 위치 주소
+    lateinit var sharedPreferences : SharedPreferences
 
     /* onCreate()
      * Activity, Service, Receiver가 생성되기전 어플리케이션이 시작중일때
@@ -42,10 +45,12 @@ class SeoulMatCheap : Application() {
      * */
     override fun onCreate() {
         super.onCreate()
+        sharedPreferences = getSharedPreferences(SEARCH_HISTROY, MODE_PRIVATE)
+        Log.e("[프리퍼런스]", "${sharedPreferences.all.size}")
     }
 
     //토스트메세지 출력
-    fun showToast(message : String) {
+    fun showToast(message: String) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -56,8 +61,16 @@ class SeoulMatCheap : Application() {
      * @return 두 좌표의 거리(km) - Double
      */
     fun getDistance(x: Double, y: Double) : Double {
-        val a = 2 * asin(sqrt(sin(Math.toRadians(x - this.x) / 2).pow(2.0)
-                + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(Math.toRadians(x))))
+        val a = 2 * asin(
+            sqrt(
+                sin(Math.toRadians(x - this.x) / 2).pow(2.0)
+                        + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(
+                    Math.toRadians(
+                        x
+                    )
+                )
+            )
+        )
         Log.e("[거리계산]", "${(R * a) / 1000}")
         return (R * a) / 1000
     }
@@ -78,7 +91,9 @@ class SeoulMatCheap : Application() {
         }
         // 해당 장치가 마지막으로 수신한 위치 얻기
         val location = locationManager.getLastKnownLocation(provider)
+        Log.e("[TEST]", provider.toString())
         if(location != null) {
+            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {  })
             x = location.latitude
             y = location.longitude
             adress = getAddress(x, y, context)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.fragment.SEARCH_01">
 
     <androidx.appcompat.widget.Toolbar
@@ -25,8 +25,8 @@
             android:background="@null"
             android:ems="10"
             android:hint="@string/search_hint"
-            android:inputType="textPersonName"
             android:imeOptions="actionSearch"
+            android:inputType="textPersonName"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="5dp" />
 
@@ -40,4 +40,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

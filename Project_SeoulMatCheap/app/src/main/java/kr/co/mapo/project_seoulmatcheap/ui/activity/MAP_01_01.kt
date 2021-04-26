@@ -14,7 +14,6 @@ data class Test(val image : String, val name : String, val address : String, val
 
 class MAP_01_01 : AppCompatActivity() {
 
-
     private val binding by lazy { ActivityMap0101Binding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +41,7 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     private fun addData(list: ArrayList<Test>) : ArrayList<Test> {
-        list.add(Test("https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
+        list.add(Test("https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200720_213%2F1595187108144mKFsY_JPEG%2FadS9aicq3pwvOVuInoxj9dlR.jpg",
         "테스트1", "서울특별시 성동구 뚝섬로3길 16", "꽃", 0.4, 4.1))
         list.add(Test("https://images.unsplash.com/photo-1555655364-2ee07ae4284d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80",
             "테스트2", "서울특별시 성동구 뚝섬로3길 16", "꽃", 0.6, 3.1))

@@ -60,7 +60,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        address = SeoulMatCheap().getAddress(x, y, owner).toString()
+        address = SeoulMatCheap().getAddress(x, y, owner)
         if(address != null) {
             binding.toolbar.title = address
         } else {
