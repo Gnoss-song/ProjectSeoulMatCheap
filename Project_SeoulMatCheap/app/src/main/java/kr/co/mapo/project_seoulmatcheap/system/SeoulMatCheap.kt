@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.kakao.sdk.common.KakaoSdk
+import com.nhn.android.naverlogin.OAuthLogin
 import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
 import kotlin.math.*
@@ -27,6 +28,7 @@ import kotlin.math.*
 
 private const val r = 6372.8 * 100
 const val SEARCH_HISTROY = "search_history_pref"
+const val ACCESS_PREF = "access_token_pref"
 
 class SeoulMatCheap : Application() {
 
@@ -39,16 +41,6 @@ class SeoulMatCheap : Application() {
             }
             return application
         }
-
-//        private var _application : SeoulMatCheap? = null
-//        private val application get() = _application!!
-//        fun getInstance() : SeoulMatCheap {
-//            if(_application != null) return application
-//            else {
-//                _application = SeoulMatCheap()
-//            }
-//            return application
-//        }
     }
 
     var x : Double = 0.0      //현재 위치 위도
@@ -66,7 +58,6 @@ class SeoulMatCheap : Application() {
         Log.e("[프리퍼런스]", "${sharedPreferences.all.size}")
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
-        //네이버 아이디 로그인 초기화
     }
 
     //토스트메세지 출력
@@ -113,7 +104,7 @@ class SeoulMatCheap : Application() {
         val location = locationManager.getLastKnownLocation(provider)
         Log.e("[TEST]", provider.toString())
         if(location != null) {
-            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {  })
+            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
             x = location.latitude
             y = location.longitude
             adress = getAddress(x, y, context)

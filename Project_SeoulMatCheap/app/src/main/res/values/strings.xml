@@ -4,6 +4,10 @@
     
     <!--카카오 네이티브앱키-->
     <string name="KAKAO_NATIVE_APP_KEY">430d044860ced838669f30b366d0ae30</string>
+    <!--네이버 서비스키-->
+    <string name="OAUTH_CLIENT_ID">Vwuh6NagdklKrwm5BxSA</string>
+    <string name="OAUTH_CLIENT_SECRET">BrJOLJRbpw</string>
+    <string name="OAUTH_CLIENT_NAME">@string/app_name</string>
 
     <!--앱하단메뉴-->
     <string name="app_meun1">지도</string>

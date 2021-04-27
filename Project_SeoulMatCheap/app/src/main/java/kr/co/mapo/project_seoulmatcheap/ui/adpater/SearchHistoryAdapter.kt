@@ -52,6 +52,8 @@ class SearchHistoryAdapter(
                 notifyDataSetChanged()
             }
             itemView.setOnClickListener {
+                val edit = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE).edit()
+                edit.putString("word.text", serchword.text.toString().trim())
                 owner.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, SEARCH_01_01.newInstance(owner, serchword.text.toString()))

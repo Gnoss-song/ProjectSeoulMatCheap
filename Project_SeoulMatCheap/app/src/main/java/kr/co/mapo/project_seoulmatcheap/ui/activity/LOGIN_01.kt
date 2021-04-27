@@ -3,9 +3,13 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import com.nhn.android.naverlogin.OAuthLogin
+import com.nhn.android.naverlogin.OAuthLoginHandler
+import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityLogin01Binding
 
 const val TAG = "[TEST]"
@@ -17,7 +21,27 @@ class LOGIN_01 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        init()
+    }
+
+    private fun init() {
+        //네이버 아이디 로그인 초기화
+        val mOAuthLoginModule = OAuthLogin.getInstance()
+        mOAuthLoginModule.init(
+            this,
+            getString(R.string.OAUTH_CLIENT_ID),
+            getString(R.string.OAUTH_CLIENT_SECRET),
+            getString(R.string.OAUTH_CLIENT_NAME)
+        )
+        setView(mOAuthLoginModule)
+    }
+
+    private fun setView(mOAuthLoginModule: OAuthLogin) {
         with(binding) {
+            loginTest.setOnClickListener {
+                Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+            }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인
                 // 로그인 공통 callback 구성
@@ -32,9 +56,11 @@ class LOGIN_01 : AppCompatActivity() {
                                 Log.e(TAG, "토큰 정보 보기 실패", error)
                             }
                             else if (tokenInfo != null) {
-                                Log.e(TAG, "토큰 정보 보기 성공" +
-                                        "\n회원번호: ${tokenInfo.id}" +
-                                        "\n만료시간: ${tokenInfo.expiresIn} 초")
+                                Log.e(
+                                    TAG, "토큰 정보 보기 성공" +
+                                            "\n회원번호: ${tokenInfo.id}" +
+                                            "\n만료시간: ${tokenInfo.expiresIn} 초"
+                                )
                             }
                         }
                         // 사용자 정보 요청 (기본)
@@ -43,11 +69,13 @@ class LOGIN_01 : AppCompatActivity() {
                                 Log.e(TAG, "사용자 정보 요청 실패", error)
                             }
                             else if (user != null) {
-                                Log.e(TAG, "사용자 정보 요청 성공" +
-                                        "\n회원번호: ${user.id}" +
-                                        "\n이메일: ${user.kakaoAccount?.email}" +
-                                        "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                        "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+                                Log.e(
+                                    TAG, "사용자 정보 요청 성공" +
+                                            "\n회원번호: ${user.id}" +
+                                            "\n이메일: ${user.kakaoAccount?.email}" +
+                                            "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+                                            "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}"
+                                )
                             }
                         }
                         startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
@@ -59,6 +87,26 @@ class LOGIN_01 : AppCompatActivity() {
                 } else {
                     UserApiClient.instance.loginWithKakaoAccount(this@LOGIN_01, callback = callback)
                 }
+            }
+            naverLogin.setOnClickListener {
+                /**
+                 * OAuthLoginHandler를 startOAuthLoginActivity() 메서드 호출 시 파라미터로 전달하거나 OAuthLoginButton
+                객체에 등록하면 인증이 종료되는 것을 확인할 수 있습니다.
+                 */
+                val mOAuthLoginHandler = object : OAuthLoginHandler(){
+                    override fun run(p0: Boolean) {
+                        if(p0) { //로그인 성공
+                            val accessToken: String = mOAuthLoginModule.getAccessToken(this@LOGIN_01)
+                            val refreshToken: String = mOAuthLoginModule.getRefreshToken(this@LOGIN_01)
+                            val expiresAt: Long = mOAuthLoginModule.getExpiresAt(this@LOGIN_01)
+                            val tokenType: String = mOAuthLoginModule.getTokenType(this@LOGIN_01)
+                            Log.e(TAG, "${accessToken}\n${refreshToken}\n${expiresAt}" +
+                                    "\n${tokenType}\n${mOAuthLoginModule.getState(this@LOGIN_01)}")
+                            startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+                        }
+                    }
+                }
+                mOAuthLoginModule.startOauthLoginActivity(this@LOGIN_01, mOAuthLoginHandler)
             }
         }
     }
