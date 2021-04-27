@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
@@ -13,8 +14,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tabLayout : TabLayout
-
-    lateinit var my01fragment: MY_01
+    private lateinit var my01fragment: MY_01
+    private var pressedTime : Long = 0
 
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,26 +29,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         tabLayout = findViewById(R.id.tabLayout)
-        val seoulMatCheap = SeoulMatCheap.newInstance()
+        val seoulMatCheap = SeoulMatCheap.getInstance()
         seoulMatCheap.setLocation(this)
         setView(seoulMatCheap.x, seoulMatCheap.y)
     }
 
     private fun setView(x:Double, y:Double) {
-        val map = MAP_01.newInstance(this@MainActivity, x, y)
-        val search = SEARCH_01.getInstance(this@MainActivity)
-        val my = MY_01()
+        my01fragment = MY_01()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position) {
                     0 ->  {
                         tab.text = getString(R.string.app_meun1)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, map).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.newInstance(this@MainActivity, x, y)).commit()
                     }
                     1 -> {
                         tab.text = getString(R.string.app_meun2)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, search).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.newInstance(this@MainActivity)).commit()
                     }
                     2 -> {
                         tab.text = getString(R.string.app_meun3)
@@ -59,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     4 -> {
                         tab.text = getString(R.string.app_meun5)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, my).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, my01fragment).commit()
                     }
                 }
             }
@@ -75,5 +74,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() > pressedTime + 2000) {
+            pressedTime = System.currentTimeMillis()
+            SeoulMatCheap.getInstance().showToast(this, "한 번 더 누르면 종료됩니다.")
+            return
+        }
+        if (System.currentTimeMillis() <= pressedTime + 2000) {
+            finish()
+        }
+    }
 
 }

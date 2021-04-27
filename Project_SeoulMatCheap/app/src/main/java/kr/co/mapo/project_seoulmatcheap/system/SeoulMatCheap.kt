@@ -29,9 +29,24 @@ const val SEARCH_HISTROY = "search_history_pref"
 class SeoulMatCheap : Application() {
 
     companion object {
-        fun newInstance() : SeoulMatCheap {
-            return SeoulMatCheap()
+        private lateinit var application: SeoulMatCheap
+        fun getInstance() : SeoulMatCheap {
+            if(this::application.isInitialized) return application
+            else {
+                application = SeoulMatCheap()
+            }
+            return application
         }
+
+//        private var _application : SeoulMatCheap? = null
+//        private val application get() = _application!!
+//        fun getInstance() : SeoulMatCheap {
+//            if(_application != null) return application
+//            else {
+//                _application = SeoulMatCheap()
+//            }
+//            return application
+//        }
     }
 
     var x : Double = 0.0      //현재 위치 위도
@@ -50,8 +65,8 @@ class SeoulMatCheap : Application() {
     }
 
     //토스트메세지 출력
-    fun showToast(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     /**

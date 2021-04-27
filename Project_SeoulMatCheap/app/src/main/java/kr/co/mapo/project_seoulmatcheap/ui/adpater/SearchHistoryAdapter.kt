@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
 
 /**
  * @author SANDY
@@ -21,7 +22,7 @@ import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
  */
 class SearchHistoryAdapter(
     val list : MutableList<*>,
-    val context: Context
+    val owner: AppCompatActivity
     ) : RecyclerView.Adapter<SearchHistoryAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -43,12 +44,18 @@ class SearchHistoryAdapter(
         with(holder) {
             serchword.text = item
             remove_btr.setOnClickListener {
-                context.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
+                owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
                     .edit()
                     .remove(item)
                     .apply()
                 list.removeAt(position)
                 notifyDataSetChanged()
+            }
+            itemView.setOnClickListener {
+                owner.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SEARCH_01_01.newInstance(owner, serchword.text.toString()))
+                    .commit()
             }
         }
     }

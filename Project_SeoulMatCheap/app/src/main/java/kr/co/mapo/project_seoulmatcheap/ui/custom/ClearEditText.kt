@@ -25,7 +25,7 @@ import kr.co.mapo.project_seoulmatcheap.R
  * @desc
  */
 class ClearEditText :
-    AppCompatEditText, TextWatcher, View.OnTouchListener, View.OnFocusChangeListener, TextView.OnEditorActionListener{
+    AppCompatEditText, TextWatcher, View.OnTouchListener, View.OnFocusChangeListener{
 
     private lateinit var clearDrawable : Drawable
 
@@ -51,8 +51,6 @@ class ClearEditText :
         super.setOnTouchListener(this)
         //EditText에 포커스가 있을때에만 X버튼을 보이기
         super.setOnFocusChangeListener(this)
-        //키보드엔터키이벤트
-        super.setOnEditorActionListener(this)
     }
 
     // 'X'버튼 보이기 설정
@@ -103,13 +101,6 @@ class ClearEditText :
         } else {
             setClearIconVisible(false)
         }
-    }
-
-    //엔터키 처리
-    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH) Toast.makeText(context, "검색요청", Toast.LENGTH_SHORT).show()
-        else Toast.makeText(context, "검색요청", Toast.LENGTH_SHORT).show() //그냥 엔터 쳤을 때
-        return false
     }
 
 }

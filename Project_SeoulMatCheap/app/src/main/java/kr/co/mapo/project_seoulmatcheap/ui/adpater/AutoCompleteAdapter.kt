@@ -16,9 +16,11 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.naver.maps.map.a.f
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
 
 /**
  * @author SANDY
@@ -28,7 +30,7 @@ import kr.co.mapo.project_seoulmatcheap.R
  */
 class AutoCompleteAdapter(
     val unfilteredlist: ArrayList<String>,
-    val context: Context
+    private val owner : AppCompatActivity
 ) : RecyclerView.Adapter<AutoCompleteAdapter.ViewHolder>(), Filterable {
 
     private var filteredList : ArrayList<String> = unfilteredlist
@@ -40,7 +42,7 @@ class AutoCompleteAdapter(
             val start = word.text.indexOf(constraint)
             val end = if (constraint.isNotEmpty()) start + constraint.length else 0
             (word.text as Spannable).apply {
-                setSpan(ForegroundColorSpan(context.getColor(R.color.main)), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+                setSpan(ForegroundColorSpan(owner.getColor(R.color.main)), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
                 setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
             }
         }
@@ -62,6 +64,12 @@ class AutoCompleteAdapter(
         with(holder) {
             word.text = filteredList[position]
             changeTextColor(constraint)
+            itemView.setOnClickListener {
+                owner.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SEARCH_01_01.newInstance(owner, word.text.toString()))
+                    .commit()
+            }
         }
     }
 
