@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
@@ -12,14 +13,11 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
 class MainActivity : AppCompatActivity() {
 
-    //private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val location by lazy { SeoulMatCheap().getLocation(this) }
     private lateinit var tabLayout : TabLayout
+    private lateinit var my01fragment: MY_01
+    private var pressedTime : Long = 0
 
-    lateinit var my01fragment: MY_01
-
-
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,22 +29,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         tabLayout = findViewById(R.id.tabLayout)
-        setView()
+        val seoulMatCheap = SeoulMatCheap.getInstance()
+        seoulMatCheap.setLocation(this)
+        setView(seoulMatCheap.x, seoulMatCheap.y)
     }
 
-    private fun setView() {
+    private fun setView(x:Double, y:Double) {
+        my01fragment = MY_01()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position) {
                     0 ->  {
                         tab.text = getString(R.string.app_meun1)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.getInstance(this@MainActivity, location)).commit()
-                        Log.e("[TEST]", "${location?.latitude}, ${location?.longitude}")
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.newInstance(this@MainActivity, x, y)).commit()
                     }
                     1 -> {
                         tab.text = getString(R.string.app_meun2)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.getInstance(this@MainActivity)).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.newInstance(this@MainActivity)).commit()
                     }
                     2 -> {
                         tab.text = getString(R.string.app_meun3)
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     4 -> {
                         tab.text = getString(R.string.app_meun5)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, my01fragment).commit()
                     }
                 }
             }
@@ -74,5 +74,15 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() > pressedTime + 2000) {
+            pressedTime = System.currentTimeMillis()
+            SeoulMatCheap.getInstance().showToast(this, "한 번 더 누르면 종료됩니다.")
+            return
+        }
+        if (System.currentTimeMillis() <= pressedTime + 2000) {
+            finish()
+        }
+    }
 
 }

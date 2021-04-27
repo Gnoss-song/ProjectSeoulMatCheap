@@ -30,8 +30,7 @@
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:text="저장된 검색어"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            android:textSize="@dimen/text_filter_title" />
 
         <ImageButton
             android:id="@+id/remove_btn"
@@ -46,9 +45,4 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E1E1E1" />
 </LinearLayout>

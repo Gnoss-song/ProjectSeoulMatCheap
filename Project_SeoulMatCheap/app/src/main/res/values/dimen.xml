@@ -12,6 +12,8 @@
 
     <!--지도메뉴버튼-->
     <dimen name="map_button">30dp</dimen>
+    <dimen name="map_item_width">40dp</dimen>
+    <dimen name="map_item_height">5dp</dimen>
 
     <!--텍스트메뉴버튼-->
     <dimen name="text_menu">20sp</dimen>
