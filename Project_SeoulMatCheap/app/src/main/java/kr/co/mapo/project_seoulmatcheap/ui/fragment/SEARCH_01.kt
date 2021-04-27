@@ -1,14 +1,17 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,17 +22,23 @@ import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.AutoCompleteAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.SearchHistoryAdapter
 
-class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
+open class SEARCH_01(
+    private val owner: AppCompatActivity
+    ) : Fragment(), TextWatcher {
 
     companion object {
-        fun newInstance(owner: AppCompatActivity) : Fragment {
-            return SEARCH_01(owner)
+        private var _search01 : SEARCH_01? = null
+        private val search01 : SEARCH_01 get() = _search01!!
+
+        fun getInstance(owner: AppCompatActivity) : Fragment {
+            if(_search01 != null) return search01
+            else _search01 = SEARCH_01(owner)
+            return search01
         }
     }
 
     private lateinit var binding : FragmentSearch01Binding
     private lateinit var preferences : SharedPreferences
-    private lateinit var list : MutableList<*>
     private lateinit var filterAdapter : AutoCompleteAdapter
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
@@ -41,18 +50,17 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
     }
 
-    private fun init(view: View) {
+    private fun init() {
         preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
-        list = preferences.all.values.toMutableList()
         val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
         filterAdapter = AutoCompleteAdapter(test, owner)
         Log.e("[자동완성]", "${test.size}")
-        searchHistoryAdapter = SearchHistoryAdapter(list, owner)
 
-        Log.e("[히스토리]", "${list.size}")
+        searchHistoryAdapter = SearchHistoryAdapter(preferences.all.values.toMutableList(), owner)
+        Log.e("[히스토리]", "${preferences.all.values.toMutableList().size}")
         setView()
     }
 
@@ -63,6 +71,10 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
                     if(it.itemId == R.id.search) {
                         Toast.makeText(owner, "검색 버튼 누름", Toast.LENGTH_SHORT).show()
                         savePreference(searchEditText.text.toString())
+                        owner.supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, SEARCH_01_01.newInstance(owner, searchEditText.text.toString()))
+                            .commit()
                     }
                     return@setOnMenuItemClickListener true
                 }
@@ -70,6 +82,10 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
                 adapter = searchHistoryAdapter
+                setOnTouchListener { v, event ->
+                    val imm = owner.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(owner.currentFocus?.windowToken, 0)
+                }
             }
             searchEditText.apply {
                 addTextChangedListener(this@SEARCH_01)
@@ -77,9 +93,9 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
         }
     }
 
-    fun savePreference(word : String) {
+    private fun savePreference(word : String) {
         val edit = preferences.edit()
-        preferences.edit().putString(word, word).apply()
+        edit.putString(word, word).apply()
     }
 
     override fun onPause() {
@@ -93,11 +109,8 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         if(!s.isNullOrEmpty()) {
             filterAdapter.filter.filter(s)
-            with(binding.recyclerView) {
-                layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
-                adapter = filterAdapter
-                Log.e("[TEST]", "${filterAdapter.itemCount}")
-            }
+            binding.recyclerView.adapter = filterAdapter
+                Log.e("[자동완성 어댑터]", "${filterAdapter.itemCount}")
         } else {
             binding.recyclerView.adapter = searchHistoryAdapter
         }
@@ -105,4 +118,5 @@ class SEARCH_01(val owner: AppCompatActivity) : Fragment(), TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {
     }
+
 }

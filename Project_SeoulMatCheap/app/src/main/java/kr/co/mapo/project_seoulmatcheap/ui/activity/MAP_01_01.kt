@@ -22,8 +22,8 @@ class MAP_01_01 : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
-            this!!.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            this!!.title = intent.getStringExtra(ADDRESS)
+            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            this.title = intent.getStringExtra(ADDRESS)
         }
         init()
     }

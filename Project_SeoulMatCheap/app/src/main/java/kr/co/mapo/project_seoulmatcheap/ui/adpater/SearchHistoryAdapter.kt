@@ -14,7 +14,10 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
 
 /**
- * Created by SANDY on 2021-04-20
+ * @author SANDY
+ * @email nnal0256@naver.com
+ * @created 2021-04-20
+ * @desc 검색어히스토리 관리 리사이클러뷰 어댑터
  */
 class SearchHistoryAdapter(
     val list : MutableList<*>,

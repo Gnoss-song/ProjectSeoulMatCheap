@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setView(x:Double, y:Double) {
         val map = MAP_01.newInstance(this@MainActivity, x, y)
-        val search = SEARCH_01.newInstance(this@MainActivity)
+        val search = SEARCH_01.getInstance(this@MainActivity)
         val my = MY_01()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때

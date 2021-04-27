@@ -27,10 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:bufferType="spannable"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:singleLine="true"
-            android:bufferType="spannable"
             android:text="텍스트가 왜 안보여"
             android:textSize="@dimen/text_filter_title" />
 

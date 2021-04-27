@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.naver.maps.map.a.f
@@ -22,8 +23,8 @@ import kr.co.mapo.project_seoulmatcheap.R
 /**
  * @author SANDY
  * @email nnal0256@naver.com
- * @created 2021-04-06
- * @desc
+ * @created 2021-04-20
+ * @desc 자동완성 리사이클러뷰 어댑터
  */
 class AutoCompleteAdapter(
     val unfilteredlist: ArrayList<String>,
@@ -31,16 +32,17 @@ class AutoCompleteAdapter(
 ) : RecyclerView.Adapter<AutoCompleteAdapter.ViewHolder>(), Filterable {
 
     private var filteredList : ArrayList<String> = unfilteredlist
-    private lateinit var holderView : ViewHolder
+    private var constraint: String = ""
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val word : TextView = itemView.findViewById(R.id.word)
         fun changeTextColor(constraint : String) {
             val start = word.text.indexOf(constraint)
-            val end = if (start > 0) constraint.length-1 else 0
-            val span = word.text as Spannable
-            span.setSpan(ForegroundColorSpan(context.getColor(R.color.colorPrimary)), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
-            span.setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+            val end = if (constraint.isNotEmpty()) start + constraint.length else 0
+            (word.text as Spannable).apply {
+                setSpan(ForegroundColorSpan(context.getColor(R.color.main)), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+                setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+            }
         }
     }
 
@@ -53,13 +55,14 @@ class AutoCompleteAdapter(
             parent,
             false
         )
-        Log.e("[흠]", "1")
-        holderView = ViewHolder(view)
-        return holderView
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AutoCompleteAdapter.ViewHolder, position: Int) {
-        holder.word.text = filteredList[position]
+        with(holder) {
+            word.text = filteredList[position]
+            changeTextColor(constraint)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -69,8 +72,8 @@ class AutoCompleteAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                Log.e("[흠]", "2")
                 val word = constraint.toString()
+                this@AutoCompleteAdapter.constraint = word
                 if(word.isEmpty()) {
                     filteredList = unfilteredlist
                 } else {
@@ -86,7 +89,6 @@ class AutoCompleteAdapter(
                 return filterResults
             }
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                Log.e("[흠]", "3")
                 filteredList = results?.values as ArrayList<String>
                 notifyDataSetChanged()
             }
