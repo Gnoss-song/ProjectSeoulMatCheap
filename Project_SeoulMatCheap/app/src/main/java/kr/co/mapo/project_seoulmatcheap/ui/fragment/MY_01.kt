@@ -81,6 +81,7 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
                 Toast.makeText(requireContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
+
             cancelButton.setOnClickListener{
 
                 Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()

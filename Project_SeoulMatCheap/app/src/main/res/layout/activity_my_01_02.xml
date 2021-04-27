@@ -29,26 +29,17 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <Space
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_below="@id/toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-    </LinearLayout>
-
+        android:layout_below="@+id/space"/>
 
 </RelativeLayout>
 

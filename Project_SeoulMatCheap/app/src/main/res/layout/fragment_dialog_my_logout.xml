@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/helpcontent"
+    android:id="@+id/logoutcontent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,8 +16,8 @@
         tools:layout_editor_absoluteX="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="300dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
@@ -24,8 +25,6 @@
                 android:id="@+id/logoutcontext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginTop="36dp"
                 android:gravity="center"
                 android:text="@string/logout_contest"
                 android:textAlignment="center"
@@ -40,24 +39,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="84dp"
+
                 android:layout_marginEnd="20dp"
                 android:text="예"
-                android:background="@null"
                 app:layout_constraintEnd_toStartOf="@+id/btn_logout_no"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/logoutcontext" />
 
             <Button
                 android:id="@+id/btn_logout_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="84dp"
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_logout_ok"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/logoutcontext" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

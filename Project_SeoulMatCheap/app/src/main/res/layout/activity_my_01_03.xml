@@ -32,7 +32,7 @@
     <Space
         android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="2dp"
         android:layout_below="@id/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView

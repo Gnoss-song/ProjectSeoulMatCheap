@@ -6,9 +6,11 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  * @desc
  */
 import android.os.Bundle
+import android.widget.Adapter
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0102Binding
+//import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0102Adapter
 
 class MY_01_02 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0102Binding
@@ -21,4 +23,9 @@ class MY_01_02 : AppCompatActivity() {
 
 
     }
+
+//    val adapter3 = My0102Adapter(itemData)
+//    binding.recycler3.adapter = adapter3
+//    binding.recycler3.layoutManager = LinearLayoutManager(this)
+
 }
