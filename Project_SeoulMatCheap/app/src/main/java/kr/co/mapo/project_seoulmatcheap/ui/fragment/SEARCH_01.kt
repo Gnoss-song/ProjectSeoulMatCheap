@@ -42,13 +42,11 @@ open class SEARCH_01(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentSearch01Binding.inflate(inflater, container, false)
-        Log.e("[확인]", "실행확인0")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("[확인]", "실행확인1")
         init()
     }
 
@@ -56,7 +54,6 @@ open class SEARCH_01(
         preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
         val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
         filterAdapter = AutoCompleteAdapter(test, owner)
-        Log.e("[자동완성]", "${test.size}")
 
         searchHistoryAdapter = SearchHistoryAdapter(preferences.all.values.toMutableList(), owner)
         Log.e("[히스토리]", "${preferences.all.values.toMutableList().size}")
@@ -144,7 +141,6 @@ open class SEARCH_01(
 
     override fun onResume() {
         super.onResume()
-        Log.e("[확인]", "실행확인2")
     }
 
 }
