@@ -18,10 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
-            url 'https://naver.jfrog.io/artifactory/maven/'
-        }
-
+        maven { url 'https://naver.jfrog.io/artifactory/maven/'}
+        //카카오 SDK 레포지토리
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 

@@ -12,6 +12,8 @@ import android.location.LocationManager
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.kakao.sdk.common.KakaoSdk
+import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
 import kotlin.math.*
 
@@ -23,7 +25,7 @@ import kotlin.math.*
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
  */
 
-private const val R = 6372.8 * 100
+private const val r = 6372.8 * 100
 const val SEARCH_HISTROY = "search_history_pref"
 
 class SeoulMatCheap : Application() {
@@ -62,6 +64,9 @@ class SeoulMatCheap : Application() {
         super.onCreate()
         sharedPreferences = getSharedPreferences(SEARCH_HISTROY, MODE_PRIVATE)
         Log.e("[프리퍼런스]", "${sharedPreferences.all.size}")
+        //Kakao SDK 초기화
+        KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
+        //네이버 아이디 로그인 초기화
     }
 
     //토스트메세지 출력
@@ -86,8 +91,8 @@ class SeoulMatCheap : Application() {
                 )
             )
         )
-        Log.e("[거리계산]", "${(R * a) / 1000}")
-        return (R * a) / 1000
+        Log.e("[거리계산]", "${(r * a) / 1000}")
+        return (r * a) / 1000
     }
 
     //GPS로부터 위치정보를 얻어오는 함수

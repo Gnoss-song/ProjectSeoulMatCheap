@@ -67,4 +67,11 @@ dependencies {
 
     //글라이드
     implementation "com.github.bumptech.glide:glide:4.11.0"
+
+    //카카오 로그인 SDK
+    implementation "com.kakao.sdk:v2-user:2.4.2"
+
+    //네이버로그인
+    compile files('libs/naveridlogin_android_sdk_4.2.6.aar')
+
 }

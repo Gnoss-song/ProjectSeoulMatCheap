@@ -15,11 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap">
         <activity android:name=".ui.activity.SPLASH_01">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MAP_01_01" />
         <activity android:name=".ui.activity.INFORM_02_02_01" />
@@ -27,7 +22,13 @@
         <activity android:name=".ui.activity.MATCHEAP_01_03_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_03" />
         <activity android:name=".ui.activity.MATCHEAP_01_02_01" />
-        <activity android:name=".ui.activity.LOGIN_01" />
+        <activity android:name=".ui.activity.LOGIN_01" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing">
