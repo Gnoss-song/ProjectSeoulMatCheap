@@ -27,8 +27,7 @@ import kotlin.math.*
  */
 
 private const val r = 6372.8 * 100
-const val SEARCH_HISTROY = "search_history_pref"
-const val ACCESS_PREF = "access_token_pref"
+const val SEARCH_HISTROY = "search_history_prefs"
 
 class SeoulMatCheap : Application() {
 
@@ -75,10 +74,7 @@ class SeoulMatCheap : Application() {
         val a = 2 * asin(
             sqrt(
                 sin(Math.toRadians(x - this.x) / 2).pow(2.0)
-                        + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(
-                    Math.toRadians(
-                        x
-                    )
+                        + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(Math.toRadians(x)
                 )
             )
         )

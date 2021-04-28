@@ -8,6 +8,10 @@
     <string name="OAUTH_CLIENT_ID">Vwuh6NagdklKrwm5BxSA</string>
     <string name="OAUTH_CLIENT_SECRET">BrJOLJRbpw</string>
     <string name="OAUTH_CLIENT_NAME">@string/app_name</string>
+    <!--로그인 메세지-->
+    <string name="login">님 환영합니다.</string>
+    <string name="kakao_error">카카오톡이 설치되어 있지 않습니다\n카카오 계정 로그인을 해주세요.</string>
+    <string name="logout">로그아웃 되었습니다.</string>
 
     <!--앱하단메뉴-->
     <string name="app_meun1">지도</string>
@@ -56,6 +60,6 @@
     <string name="filter_distance3">2km</string>
 
     <!--SEARCH -->
-    <string name="search_hint">가게명/메뉴명</string>
+    <string name="search_hint">가게명/메뉴명 검색</string>
 
 </resources>
