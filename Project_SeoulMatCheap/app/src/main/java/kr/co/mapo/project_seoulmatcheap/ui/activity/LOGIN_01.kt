@@ -56,6 +56,7 @@ class LOGIN_01 : AppCompatActivity() {
         with(binding) {
             loginTest.setOnClickListener {
                 Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
+                UserPrefs.saveUserEmail(this@LOGIN_01, "이메일 주소 저장")
                 startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
                 finish()
             }
