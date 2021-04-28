@@ -27,12 +27,13 @@ object UserPrefs {
 
     fun getUserEmail(context: Context) : String {
         return context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
-            .getString(USER_EMAIL, null).toString()
+            .getString(USER_EMAIL, "").toString()
     }
 
     fun logout(context: Context) {
         val prefs = context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
         val editor = prefs.edit()
+        editor.clear().apply()
         //카카오 로그아웃
         UserApiClient.instance.logout { error ->
             if (error != null) {

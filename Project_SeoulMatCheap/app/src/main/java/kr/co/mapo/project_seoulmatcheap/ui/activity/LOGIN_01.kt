@@ -32,8 +32,7 @@ class LOGIN_01 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         //SharedPreferences 안에 이메일 값이 저장되어 있을 때 -> SPLASH_01로 이동
-        if(UserPrefs.getUserEmail(this) != null) {
-            Log.e("[자동로그인]", "${UserPrefs.getUserEmail(this)}")
+        if(UserPrefs.getUserEmail(this).isNotBlank()) {
             startActivity(Intent(this, SPLASH_01::class.java))
             finish()
         }
@@ -58,6 +57,7 @@ class LOGIN_01 : AppCompatActivity() {
             loginTest.setOnClickListener {
                 Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+                finish()
             }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인
@@ -137,8 +137,9 @@ class LOGIN_01 : AppCompatActivity() {
                                 "\n이메일: ${user.kakaoAccount?.email}" +
                                 "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                                 "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                        startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
                         Log.e(TAG, "로그인 성공2 ${user.kakaoAccount?.profile?.nickname}")
+                        startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+                        finish()
                     } else {
                         Log.e(TAG, "로그인 실패2")
                     }
@@ -162,6 +163,7 @@ class LOGIN_01 : AppCompatActivity() {
                     Log.e(TAG, "${result.email}\n${result.nickname}\n${result.profileImage}")
                     UserPrefs.saveUserEmail(this@LOGIN_01, result.email)
                     startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+                    finish()
                 }
             }
             override fun onFailure(call: Call<NaverLoginResponse>, t: Throwable) {
