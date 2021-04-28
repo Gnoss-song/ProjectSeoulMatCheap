@@ -99,6 +99,10 @@ class MY_01_01_01 : AppCompatActivity() {
         binding.recycler4.layoutManager = LinearLayoutManager(this)
 
 
+
+
+
+        //버튼 클릭
         binding.btnDelete.setOnClickListener{
             val mDeleteView =
                     LayoutInflater.from(this).inflate(R.layout.fragment_dialog_my_delete, null)

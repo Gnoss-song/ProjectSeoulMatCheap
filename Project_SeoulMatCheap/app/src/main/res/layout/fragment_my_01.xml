@@ -36,7 +36,11 @@
         android:layout_below="@+id/toolbar"
         android:backgroundTint="#DCD6D6"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -136,105 +140,105 @@
                 android:id="@+id/btn_favorite"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="15dp"
-
-
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
                 android:drawableLeft="@drawable/btn_homeaddress"
+
+
                 android:drawableRight="@drawable/btn_nexticon"
-
-
                 android:stateListAnimator="@null"
 
-                android:text="찜 목록"
-                android:textAlignment="textStart"
 
-                android:textSize="16dp" />
+                android:text="찜 목록"
+
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_myreview"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
                 android:drawableLeft="@drawable/btn_homeaddress"
-                android:drawableRight="@drawable/btn_nexticon"
 
+                android:drawableRight="@drawable/btn_nexticon"
                 android:stateListAnimator="@null"
 
                 android:text="마이리뷰"
+
                 android:textAlignment="textStart"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_myreport"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-
-
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
                 android:drawableLeft="@drawable/btn_homeaddress"
+
+
                 android:drawableRight="@drawable/btn_nexticon"
-
-
                 android:stateListAnimator="@null"
 
+
                 android:text="내 제보 글 관리"
+
                 android:textAlignment="textStart"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_notice"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-
-
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
                 android:drawableLeft="@drawable/btn_homeaddress"
+
+
                 android:drawableRight="@drawable/btn_nexticon"
-
-
                 android:stateListAnimator="@null"
+
+
                 android:text="공지사항"
                 android:textAlignment="textStart"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_version"
                 android:layout_width="350dp"
                 android:layout_height="40dp"
-                android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-                android:layout_marginBottom="5dp"
-
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
 
-
+                android:background="@drawable/custom_button_my_01"
                 android:drawableLeft="@drawable/btn_homeaddress"
-                android:drawableRight="@drawable/btn_nexticon"
 
+
+                android:drawableRight="@drawable/btn_nexticon"
                 android:text="앱 버전"
 
-
                 android:textAlignment="textStart"
-                android:textSize="16dp" />
+
+
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_report"
@@ -243,17 +247,16 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_my_01"
-                app:backgroundTint="@null"
-
                 android:drawableLeft="@drawable/btn_homeaddress"
-                android:drawableRight="@drawable/btn_nexticon"
 
+                android:drawableRight="@drawable/btn_nexticon"
                 android:stateListAnimator="@null"
 
                 android:text="건의하기"
+
                 android:textAlignment="textStart"
                 android:textSize="16dp"
-                />
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/btn_withdrawal"
@@ -269,7 +272,7 @@
                 android:id="@+id/constraintlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="20dp"
                 android:background="#00ff0000">
 
 

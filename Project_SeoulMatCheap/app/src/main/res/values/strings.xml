@@ -50,6 +50,9 @@
     <string name="withdrawl_contest"> &#160;&#160;&#160;탈퇴하시겠습니까?\n(정보는 복구되지 않습니다.)</string>
     <string name="notice">안내</string>
     <string name="update">업데이트</string>
+    <string name="modify">수정하기</string>
+    <string name="delete">삭제하기</string>
+
 
 
 
