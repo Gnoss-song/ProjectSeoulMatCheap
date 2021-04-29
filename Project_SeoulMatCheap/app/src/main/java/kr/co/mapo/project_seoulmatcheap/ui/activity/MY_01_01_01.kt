@@ -109,7 +109,7 @@ class MY_01_01_01 : AppCompatActivity() {
             val mBuilder =
                     androidx.appcompat.app.AlertDialog.Builder(this).setView(mDeleteView)
             val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setLayout(700,280)
+            mAlertDialog.window?.setBackgroundDrawable(null)
 
             val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
             val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)

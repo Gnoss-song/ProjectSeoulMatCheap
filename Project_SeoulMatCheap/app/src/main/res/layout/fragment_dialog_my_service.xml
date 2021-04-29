@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="400dp"
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/round_button2"
+        android:elevation="@dimen/elevation1"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_basic">
 
 
         <TextView
             android:id="@+id/popup_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/popup_mainString"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="11dp"/>
+            android:textColor="@color/black"
+            android:textSize="11dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/popup_ok"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="60dp"
-            android:text="확인" />
+            android:text="확인"
+            android:layout_marginTop="@dimen/margin_basic4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/popup_main" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

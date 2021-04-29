@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/helpcontent"
@@ -9,27 +10,46 @@
     <FrameLayout
         android:id="@+id/help_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:elevation="1dp"
-        tools:layout_editor_absoluteX="10dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/helptext"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/help_content"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_button2"
+            android:elevation="@dimen/elevation1"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_basic" >
 
-        <Button
-            android:id="@+id/btn_help_ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
+            <TextView
+                android:id="@+id/helptext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/help_content"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            android:text="확인" />
+            <Button
+                android:id="@+id/btn_help_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+
+                android:gravity="center"
+                android:text="확인"
+                android:layout_marginTop="@dimen/margin_basic4"
+                app:layout_constraintEnd_toEndOf="@+id/helptext"
+                app:layout_constraintStart_toStartOf="@+id/helptext"
+                app:layout_constraintTop_toBottomOf="@+id/helptext" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

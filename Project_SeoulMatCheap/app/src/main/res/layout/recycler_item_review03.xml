@@ -119,8 +119,9 @@
         <TextView
             android:id="@+id/recycler_item_review_content"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:text="너무 맛있어요 다음에 또 올것같아요~ 잘먹고 갑니다."
+            android:paddingTop="@dimen/margin_basic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_cardview" />

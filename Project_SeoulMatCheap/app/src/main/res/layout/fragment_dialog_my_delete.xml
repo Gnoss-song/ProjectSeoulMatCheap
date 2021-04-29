@@ -10,11 +10,10 @@
     <FrameLayout
         android:id="@+id/delete_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:elevation="1dp"
-        tools:layout_editor_absoluteX="10dp">
-
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +22,6 @@
             android:elevation="@dimen/elevation1"
             android:orientation="horizontal"
             android:padding="@dimen/margin_basic">
-
             <TextView
                 android:id="@+id/deletecontext"
                 android:layout_width="wrap_content"
@@ -38,30 +36,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <Button
                 android:id="@+id/btn_delete_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-
-
                 android:layout_marginTop="@dimen/margin_basic4"
                 android:layout_marginEnd="20dp"
                 android:text="예"
                 app:layout_constraintEnd_toStartOf="@+id/btn_delete_no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/deletecontext" />
-
             <Button
                 android:id="@+id/btn_delete_no"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_delete_ok"
                 app:layout_constraintTop_toTopOf="@+id/btn_delete_ok" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

@@ -65,10 +65,12 @@ class MY_01(val owner : AppCompatActivity): Fragment() {
             val mBuilder =
                 androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mHelpView)
             val mAlertDialog = mBuilder.show()
+            mAlertDialog.window?.setBackgroundDrawable(null)
             val okButton = mHelpView.findViewById<Button>(R.id.btn_help_ok)
             okButton.setOnClickListener {
                 mAlertDialog.dismiss()
             }
+
         }
 
         //로그아웃 //

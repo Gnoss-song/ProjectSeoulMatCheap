@@ -27,7 +27,7 @@ class My0102Adapter(
 
 
     private fun removeItem (position: Int){
-        if(position>0) {
+        if(position>=0) {
             list.removeAt(position)
             notifyDataSetChanged()
         }
@@ -108,7 +108,8 @@ class My0102Adapter(
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
-                    mAlertDialog.window?.setLayout(850, 320)
+                    mAlertDialog.window?.setBackgroundDrawable(null)
+                    //mAlertDialog.window?.setLayout(850, 320)
 
                     val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
@@ -149,7 +150,7 @@ class My0102Adapter(
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
-                    mAlertDialog.window?.setLayout(850, 320)
+                    mAlertDialog.window?.setBackgroundDrawable(null)
 
                     val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
@@ -189,7 +190,7 @@ class My0102Adapter(
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
-                    mAlertDialog.window?.setLayout(850, 320)
+                    mAlertDialog.window?.setBackgroundDrawable(null)
 
                     val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
