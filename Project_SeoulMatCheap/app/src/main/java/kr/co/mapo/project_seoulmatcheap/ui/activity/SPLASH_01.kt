@@ -29,35 +29,7 @@ class SPLASH_01 : AppCompatActivity() {
     }
 
     private fun init() {
-        getHashKey()
         setView()
-    }
-
-    private fun getHashKey() {
-        var packageInfo: PackageInfo? = null
-        try {
-            packageInfo =
-                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-        if (packageInfo == null) Log.e("KeyHash", "KeyHash:null")
-        for (signature in packageInfo!!.signatures) {
-            try {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                Log.d(
-                    "KeyHash",
-                    Base64.encodeToString(md.digest(), Base64.DEFAULT)
-                )
-            } catch (e: NoSuchAlgorithmException) {
-                Log.e(
-                    "KeyHash",
-                    "Unable to get MessageDigest. signature=$signature",
-                    e
-                )
-            }
-        }
     }
 
     private fun setView() {
