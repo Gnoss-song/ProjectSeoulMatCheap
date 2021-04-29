@@ -1,13 +1,26 @@
 <resources>
     <string name="app_name">서울맛칩</string>
-    <string name="title_activity_s_p_l_a_s_h_01">SPLASH_01</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--카카오 네이티브앱키-->
+    <string name="KAKAO_NATIVE_APP_KEY">430d044860ced838669f30b366d0ae30</string>
+    <!--네이버 서비스키-->
+    <string name="OAUTH_CLIENT_ID">Vwuh6NagdklKrwm5BxSA</string>
+    <string name="OAUTH_CLIENT_SECRET">BrJOLJRbpw</string>
+    <string name="OAUTH_CLIENT_NAME">@string/app_name</string>
+    <!--로그인 메세지-->
+    <string name="login">님 환영합니다.</string>
+    <string name="kakao_error">카카오톡이 설치되어 있지 않습니다\n카카오 계정 로그인을 해주세요.</string>
+    <string name="logout">로그아웃 되었습니다.</string>
+
+    <!--앱하단메뉴-->
+    <string name="app_meun1">지도</string>
+    <string name="app_meun2">검색</string>
+    <string name="app_meun3">카테고리</string>
+    <string name="app_meun4">맛칩평가단</string>
+    <string name="app_meun5">마이페이지</string>
+
+    <!--아이콘 이름-->
     <string name="category1">한식</string>
     <string name="category2">일식·경양식</string>
     <string name="category3">중식</string>
@@ -16,7 +29,6 @@
     <string name="category6">미용</string>
     <string name="category7">숙박</string>
     <string name="category8">기타</string>
-
 
     <!--
     Mypage 관련 스트링 입니다.
@@ -711,6 +723,16 @@
                 "\n" +
                 "게임 이용에 불편을 드려 대단히 죄송합니다.\n"</string>
 
+<!-- MAP_01_02 -->
+<string name="filter_menu0">적용</string>
+<string name="filter_menu1">종류</string>
+<string name="filter_menu2">거리</string>
+<string name="filter_distance1">100m</string>
+<string name="filter_distance2">500m</string>
+<string name="filter_distance3">2km</string>
+
+<!--SEARCH -->
+<string name="search_hint">가게명/메뉴명 검색</string>
 
 
 

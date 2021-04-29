@@ -1,68 +1,88 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Base64
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.Toast
+import androidx.core.view.GravityCompat
+import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MATCHEAP_01
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var tabLayout : TabLayout
+    private var pressedTime : Long = 0
+
+    private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+        setContentView(R.layout.activity_main)
         if(savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(binding.container.id, CATEGORY_01()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01()).commit()
         }
-        setView()
+        init()
     }
 
-    private fun setView() {
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
+    private fun init() {
+        tabLayout = findViewById(R.id.tabLayout)
+        val seoulMatCheap = SeoulMatCheap.getInstance()
+        seoulMatCheap.setLocation(this)
+        setView(seoulMatCheap.x, seoulMatCheap.y)
     }
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.map -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MAP_01()).commit()
-                return true
+
+    private fun setView(x:Double, y:Double) {
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            //선택할 때
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab!!.position) {
+                    0 ->  {
+                        tab.text = getString(R.string.app_meun1)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.newInstance(this@MainActivity, x, y)).commit()
+                    }
+                    1 -> {
+                        tab.text = getString(R.string.app_meun2)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.newInstance(this@MainActivity)).commit()
+                    }
+                    2 -> {
+                        tab.text = getString(R.string.app_meun3)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, CATEGORY_01()).commit()
+                    }
+                    3 -> {
+                        tab.text = getString(R.string.app_meun4)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MATCHEAP_01()).commit()
+                    }
+                    4 -> {
+                        tab.text = getString(R.string.app_meun5)
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01(this@MainActivity)).commit()
+                    }
+                }
             }
-            R.id.search -> {
-                val intent = Intent(this, SEARCH_01::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                startActivity(intent)
-                return true
+
+            //선택이 풀릴 때
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                tab!!.text = null
             }
-            R.id.main -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, CATEGORY_01()).commit()
-                return true
+
+            //선택된 상태에서 다시 선택될 때
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-            R.id.mat -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MATCHEAP_01()).commit()
-                return true
-            }
-            R.id.my -> {
-                supportFragmentManager.beginTransaction().replace(binding.container.id, MY_01(this)).commit()
-                return true
-            }
+        })
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() > pressedTime + 2000) {
+            pressedTime = System.currentTimeMillis()
+            SeoulMatCheap.getInstance().showToast(this, "한 번 더 누르면 종료됩니다.")
+            return
+        }
+        if (System.currentTimeMillis() <= pressedTime + 2000) {
+            finish()
         }
         return false
     }
+
 }

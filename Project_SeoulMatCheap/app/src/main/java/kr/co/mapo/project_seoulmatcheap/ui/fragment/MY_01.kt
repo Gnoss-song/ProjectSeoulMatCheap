@@ -24,6 +24,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 class MY_01(val activity : AppCompatActivity): Fragment() {
 
     private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -87,6 +88,7 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
                 Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
+            R.id.btn_logout -> UserPrefs.logout(owner)
         }
 
         //회원탈퇴
