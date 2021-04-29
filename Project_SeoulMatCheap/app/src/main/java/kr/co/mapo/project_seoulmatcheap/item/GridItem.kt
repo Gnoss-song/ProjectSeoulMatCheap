@@ -1,0 +1,4 @@
+package kr.co.mapo.project_seoulmatcheap.item
+
+data class GridItem(val gridimage:Int,
+                    val gridtitle:String = "")

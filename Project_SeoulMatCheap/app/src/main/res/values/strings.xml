@@ -719,16 +719,33 @@
                 "\n" +
                 "게임 이용에 불편을 드려 대단히 죄송합니다.\n"</string>
 
-<!-- MAP_01_02 -->
-<string name="filter_menu0">적용</string>
-<string name="filter_menu1">종류</string>
-<string name="filter_menu2">거리</string>
-<string name="filter_distance1">100m</string>
-<string name="filter_distance2">500m</string>
-<string name="filter_distance3">2km</string>
+    <!-- MAP_01_02 -->
+    <string name="filter_menu0">적용</string>
+    <string name="filter_menu1">종류</string>
+    <string name="filter_menu2">거리</string>
+    <string name="filter_distance1">100m</string>
+    <string name="filter_distance2">500m</string>
+    <string name="filter_distance3">2km</string>
 
-<!--SEARCH -->
-<string name="search_hint">가게명/메뉴명 검색</string>
+    <!--SEARCH -->
+    <string name="search_hint">가게명/메뉴명 검색</string>
 
+    <!--CATEGORY_01_01-->
+    <string name="category_all">전체보기</string>
+    <string name="category_list">목록으로 보기</string>
+    <string name="category_map">지도로 보기</string>
+
+    <!--CATEGORY_01-->
+    <string name="categort_text">서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개
+        서울시 인증 착한가격업소 926개</string> <!--임시-->
+
+    <!--CATEGORY_01_02-->
+    <string name="transparent_text">앱 시작시 다시보지않기</string>
 
 </resources>
