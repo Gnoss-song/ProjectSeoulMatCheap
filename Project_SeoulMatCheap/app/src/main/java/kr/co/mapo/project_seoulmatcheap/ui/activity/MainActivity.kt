@@ -2,9 +2,12 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +19,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.MATCHEAP_01
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -29,6 +34,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         setView()
     }
+
     private fun setView() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
     }
@@ -59,7 +65,4 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
-
-
-
 }

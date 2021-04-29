@@ -9,14 +9,14 @@ import android.widget.RatingBar
  * @desc
  */
 data class Model(
-        val type: Int, val title: String, val date: String, var ratingBar: Float, val IV: Int, var IV2: Int?, var IV3: Int?, val review: String)
+        val type: Int, val title: String,val date : String, var ratingBar: Float, val IV : Int,val IV2 : Int? ,val IV3 : Int?, val review: String)
 {
 
     companion object {
-        const val IMAGE_TYPE = 0
-        const val IMAGE_TYPE2 = 1
-        const val IMAGE_TYPE3 = 2
-
+        const val IMAGE_TYPE = 1
+        const val IMAGE_TYPE2 = 2
+        const val IMAGE_TYPE3 = 3
     }
+
 
 }

@@ -1,20 +1,18 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.ContentProvider
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02_02_01
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_02
-import kr.co.mapo.project_seoulmatcheap.ui.activity.MainActivity
 
 /**
  * @author Gnoss
@@ -22,9 +20,19 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.MainActivity
  * @created 2021-04-27
  * @desc
  */
-class My0102Adapter(private val list: List<Model>) :
-        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class My0102Adapter(
+        private val list: MutableList<Model>,
+        private val owner : Activity
+//        private val context : Context
+        ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+
+    fun removeItem (position: Int){
+        if(position>0) {
+            list.removeAt(position)
+            notifyDataSetChanged()
+        }
+    }
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
         val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)
@@ -32,7 +40,7 @@ class My0102Adapter(private val list: List<Model>) :
         val image : ImageView = itemView.findViewById(R.id.recycler_item_review_IV)
         val review : TextView = itemView.findViewById(R.id.recycler_item_review_content)
         val delete : Button = itemView.findViewById(R.id.btn_delete)
-
+        val modify : Button = itemView.findViewById(R.id.btn_modify)
     }
 
     inner class ImageType2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,8 +49,9 @@ class My0102Adapter(private val list: List<Model>) :
         var rate : RatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
         val image : ImageView = itemView.findViewById(R.id.recycler_item_review_IV)
         var image2 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV2)
-
         val review : TextView = itemView.findViewById(R.id.recycler_item_review_content)
+        val delete : Button = itemView.findViewById(R.id.btn_delete)
+        val modify : Button = itemView.findViewById(R.id.btn_modify)
     }
 
     inner class ImageType3ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -53,8 +62,9 @@ class My0102Adapter(private val list: List<Model>) :
         var image2 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV2)
         var image3 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV3)
         val review : TextView = itemView.findViewById(R.id.recycler_item_review_content)
+        val delete : Button = itemView.findViewById(R.id.btn_delete)
+        val modify : Button = itemView.findViewById(R.id.btn_modify)
     }
-
     // getItemViewType의 리턴값 Int가 viewType으로 넘어온다.
     // viewType으로 넘어오는 값에 따라 viewHolder를 알맞게 처리해주면 된다.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -80,6 +90,8 @@ class My0102Adapter(private val list: List<Model>) :
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int){
         val obj = list[position]
+//        val objsize = obj.IVlist.size
+
 
         when (obj.type) {
             Model.IMAGE_TYPE -> {
@@ -88,34 +100,39 @@ class My0102Adapter(private val list: List<Model>) :
                 holder.rate.rating = obj.ratingBar
                 holder.image.setImageResource(obj.IV)
                 holder.review.text = obj.review
-//                holder.delete.setOnClickListener() {
-//
-//                    Log.e("여기인가?","여기가에러")
-//                    //삭제하기 버튼 클릭시
-//                    val mDeleteView =
-//                            LayoutInflater.from(MY_01_02()).inflate(R.layout.fragment_dialog_my_delete, null)
-//                    Log.e("여기인가?","여기가에러22")
-//                    val mBuilder =
-//                            androidx.appcompat.app.AlertDialog.Builder(MY_01_02()).setView(mDeleteView)
-//                    Log.e("여기인가?","여기가에러33")
-//                    val mAlertDialog = mBuilder.show()
-//                    mAlertDialog.window?.setLayout(700, 280)
-//                    Log.e("여기인가?","여기가에러44")
-//
-//                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
-//                    val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
-//
-//                    okButton.setOnClickListener {
-//                        Toast.makeText(MY_01_02(), "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
-//                        mAlertDialog.dismiss()
-//                    }
-//                    cancelButton.setOnClickListener {
-//                        Toast.makeText(MY_01_02(), "취소되었습니다.", Toast.LENGTH_SHORT).show()
-//                        mAlertDialog.dismiss()
-//                    }
-//            }
-            }
+                holder.delete.setOnClickListener {
+                    //삭제하기 버튼 클릭시
+                    val mDeleteView =
+                            LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
+                    val mBuilder =
+                            androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
+                    val mAlertDialog = mBuilder.show()
+                    mAlertDialog.window?.setLayout(850, 320)
 
+                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
+                    val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
+
+                    okButton.setOnClickListener {
+                        Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                        removeItem(position)
+                    }
+                    cancelButton.setOnClickListener {
+                        Toast.makeText(owner, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                    }
+                }
+                holder.modify.setOnClickListener {
+                    val target= Intent(owner,INFORM_02_02_01::class.java)
+                    target.putExtra("title",obj.title)
+                    target.putExtra("date",obj.date)
+                    target.putExtra("rate",obj.ratingBar)
+                    target.putExtra("image",obj.IV)
+                    target.putExtra("review",obj.review)
+                    owner.startActivity(target)
+                }
+
+            }
             Model.IMAGE_TYPE2 -> {
 
                 (holder as ImageType2ViewHolder).title.text = obj.title
@@ -124,6 +141,37 @@ class My0102Adapter(private val list: List<Model>) :
                 holder.image.setImageResource(obj.IV)
                 holder.image2.setImageResource(obj.IV2!!)
                 holder.review.text = obj.review
+                holder.delete.setOnClickListener {
+                    //삭제하기 버튼 클릭시
+                    val mDeleteView =
+                            LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
+                    val mBuilder =
+                            androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
+                    val mAlertDialog = mBuilder.show()
+                    mAlertDialog.window?.setLayout(850, 320)
+
+                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
+                    val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
+
+                    okButton.setOnClickListener {
+                        Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                    }
+                    cancelButton.setOnClickListener {
+                        Toast.makeText(owner, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                    }
+                }
+                holder.modify.setOnClickListener {
+                    val target= Intent(owner,INFORM_02_02_01::class.java)
+                    target.putExtra("title",obj.title)
+                    target.putExtra("date",obj.date)
+                    target.putExtra("rate",obj.ratingBar)
+                    target.putExtra("image",obj.IV)
+                    target.putExtra("image2",obj.IV2)
+                    target.putExtra("review",obj.review)
+                    owner.startActivity(target)
+                }
             }
             Model.IMAGE_TYPE3 -> {
                 (holder as ImageType3ViewHolder).title.text = obj.title
@@ -133,12 +181,45 @@ class My0102Adapter(private val list: List<Model>) :
                 holder.image2.setImageResource(obj.IV2!!)
                 holder.image3.setImageResource(obj.IV3!!)
                 holder.review.text = obj.review
+                holder.delete.setOnClickListener() {
+                    //삭제하기 버튼 클릭시
+                    val mDeleteView =
+                            LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
+                    val mBuilder =
+                            androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
+                    val mAlertDialog = mBuilder.show()
+                    mAlertDialog.window?.setLayout(850, 320)
+
+                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
+                    val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
+
+                    okButton.setOnClickListener {
+                        Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                    }
+                    cancelButton.setOnClickListener {
+                        Toast.makeText(owner, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+                        mAlertDialog.dismiss()
+                    }
+                }
+                holder.modify.setOnClickListener {
+                    val target= Intent(owner,INFORM_02_02_01::class.java)
+                    target.putExtra("title",obj.title)
+                    target.putExtra("date",obj.date)
+                    target.putExtra("rate",obj.ratingBar)
+                    target.putExtra("image",obj.IV)
+                    target.putExtra("image2",obj.IV2)
+                    target.putExtra("image3",obj.IV3)
+                    target.putExtra("review",obj.review)
+                    owner.startActivity(target)
+                }
             }
         }
     }
     // 여기서 받는 position은 데이터의 index다.
     override fun getItemViewType(position: Int): Int {
         Log.d("MultiViewTypeAdapter", "Hi, getItemViewType")
+
         return list[position].type
     }
 

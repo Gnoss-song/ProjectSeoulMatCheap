@@ -6,7 +6,6 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  * @desc
  */
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +28,7 @@ class MY_01_02 : AppCompatActivity() {
         binding = ActivityMy0102Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val list = listOf(
+        val list = mutableListOf(
                 Model(Model.IMAGE_TYPE, "성수칼국수", "2021.04.03", 3.5f,R.drawable.halbum,null,null,"만나서 반갑습니다"),
                 Model(Model.IMAGE_TYPE2, "모르겠어집", "2021.03.15", 4.5f,R.drawable.solip,R.drawable.btn_homeaddress,null,"만나서 반갑습니다"),
                 Model(Model.IMAGE_TYPE3, "맛있어요집", "2021.03.10", 4.0f,R.drawable.poonyeon,R.drawable.custom_checkbox,R.drawable.map_menu,"만나서 반갑습니다"),
@@ -50,7 +49,7 @@ class MY_01_02 : AppCompatActivity() {
 
         binding.recycler3.addItemDecoration(dividerItemDecoration)
 
-        val adpater = My0102Adapter(list)
+        val adpater = My0102Adapter(list ,this)
         binding.recycler3.layoutManager = LinearLayoutManager(this)
         binding.recycler3.adapter = adpater
 
