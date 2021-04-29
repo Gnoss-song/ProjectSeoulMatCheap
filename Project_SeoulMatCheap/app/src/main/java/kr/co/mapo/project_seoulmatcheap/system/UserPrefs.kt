@@ -34,7 +34,7 @@ object UserPrefs {
             .getString(USER_EMAIL, "").toString()
     }
 
-    fun logout(context: Context) {
+    fun logout(context: Context) : Boolean {
         val prefs = context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
         val editor = prefs.edit()
         val login_code = prefs.getInt(OAUTH_CODE, -1)
@@ -66,5 +66,6 @@ object UserPrefs {
             }
         }
         editor.clear().apply()
+        return true
     }
 }

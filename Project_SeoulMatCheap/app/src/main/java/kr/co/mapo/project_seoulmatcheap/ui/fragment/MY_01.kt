@@ -13,17 +13,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
-class MY_01(val activity : AppCompatActivity): Fragment() {
+class MY_01(val owner : AppCompatActivity): Fragment() {
 
-    private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
+    companion object {
+        fun newInstance(owner: AppCompatActivity) :Fragment {
+            return MY_01(owner)
+        }
+    }
+
+    private val binding by lazy {
+        FragmentMy01Binding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -79,7 +87,13 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
             val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_logout_no)
 
             okButton.setOnClickListener {
-                Toast.makeText(requireContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show()
+                if(UserPrefs.logout(owner)) {
+                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃 되었습니다.")
+                    startActivity(Intent(owner, LOGIN_01::class.java))
+                    owner.finish()
+                } else {
+                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃을 할 수 없습니다.")
+                }
                 mAlertDialog.dismiss()
             }
 
@@ -88,7 +102,6 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
                 Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
-            R.id.btn_logout -> UserPrefs.logout(owner)
         }
 
         //회원탈퇴
