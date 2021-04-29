@@ -22,7 +22,7 @@ class InformListAdapter(
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val imageView : ImageView = itemView.findViewById(R.id.image)
+        val imageView : ImageView = itemView.findViewById(R.id.marketIV)
         val name : TextView = itemView.findViewById(R.id.name)
         val address : TextView = itemView.findViewById(R.id.address)
         val sort : TextView = itemView.findViewById(R.id.sort)
