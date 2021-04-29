@@ -22,4 +22,9 @@
     <color name="yellow">#FBC02D</color>
 
     <color name="main">#F25D3D</color>
+
+    <!--CATEGORY_01_03-->
+    <color name="transparent">#1A000000</color>
+    <color name="transparentcolor">#8B42AFDA</color>
+
 </resources>

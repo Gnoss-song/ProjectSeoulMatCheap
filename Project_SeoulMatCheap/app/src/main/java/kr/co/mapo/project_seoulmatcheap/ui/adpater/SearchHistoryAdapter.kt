@@ -21,8 +21,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
  * @desc 검색어히스토리 관리 리사이클러뷰 어댑터
  */
 class SearchHistoryAdapter(
-    val list : MutableList<*>,
-    val owner: AppCompatActivity
+    private val list : MutableList<*>,
+    private val owner: AppCompatActivity
     ) : RecyclerView.Adapter<SearchHistoryAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {

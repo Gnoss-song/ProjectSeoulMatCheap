@@ -17,13 +17,12 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
  * Created by SANDY on 2021-04-20
  */
 class InformListAdapter(
-    val list: List<Test>) :
-
-    RecyclerView.Adapter<InformListAdapter.HolderView>() {
+    private val list: List<Test>)
+    : RecyclerView.Adapter<InformListAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val imageView : ImageView = itemView.findViewById(R.id.image)
+        val imageView : ImageView = itemView.findViewById(R.id.marketIV)
         val name : TextView = itemView.findViewById(R.id.name)
         val address : TextView = itemView.findViewById(R.id.address)
         val sort : TextView = itemView.findViewById(R.id.sort)
