@@ -67,11 +67,6 @@
     <string name="modify">수정하기</string>
     <string name="delete">삭제하기</string>
 
-
-
-
-
-
     <!--
     공지사항 관련
     -->
@@ -734,12 +729,6 @@
 
 <!--SEARCH -->
 <string name="search_hint">가게명/메뉴명 검색</string>
-
-
-
-
-
-
 
 
 </resources>

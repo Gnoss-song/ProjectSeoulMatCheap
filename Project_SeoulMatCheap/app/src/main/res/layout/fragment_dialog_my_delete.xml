@@ -11,6 +11,7 @@
         android:id="@+id/delete_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         android:elevation="1dp"
         tools:layout_editor_absoluteX="10dp">
 
@@ -18,7 +19,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:background="@drawable/round_button2"
+            android:elevation="@dimen/elevation1"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_basic">
 
             <TextView
                 android:id="@+id/deletecontext"
@@ -41,6 +45,7 @@
                 android:layout_height="40dp"
 
 
+                android:layout_marginTop="@dimen/margin_basic4"
                 android:layout_marginEnd="20dp"
                 android:text="예"
                 app:layout_constraintEnd_toStartOf="@+id/btn_delete_no"
@@ -55,7 +60,7 @@
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_delete_ok"
-                app:layout_constraintTop_toBottomOf="@+id/deletecontext" />
+                app:layout_constraintTop_toTopOf="@+id/btn_delete_ok" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

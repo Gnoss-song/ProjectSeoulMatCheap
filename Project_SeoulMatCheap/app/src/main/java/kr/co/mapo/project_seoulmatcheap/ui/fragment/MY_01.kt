@@ -13,19 +13,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
 class MY_01(val owner : AppCompatActivity): Fragment() {
 
     companion object {
-        fun newInstance(owner : AppCompatActivity): Fragment {
+        fun newInstance(owner: AppCompatActivity) :Fragment {
             return MY_01(owner)
         }
     }
@@ -35,8 +34,6 @@ class MY_01(val owner : AppCompatActivity): Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
-
         return binding.root
     }
 
@@ -81,12 +78,20 @@ class MY_01(val owner : AppCompatActivity): Fragment() {
             val mBuilder =
                 androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mLogoutView)
             val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setLayout(700,280)
+            mAlertDialog.window?.setBackgroundDrawable(null)
+            //mAlertDialog.window?.setLayout(700,ViewGroup.LayoutParams.WRAP_CONTENT)
             val okButton = mLogoutView.findViewById<Button>(R.id.btn_logout_ok)
             val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_logout_no)
 
             okButton.setOnClickListener {
-                Toast.makeText(requireContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show()
+                //로그아웃
+                if(UserPrefs.logout(owner)) {
+                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃 되었습니다.")
+                    startActivity(Intent(owner, LOGIN_01::class.java))
+                    owner.finish()
+                } else {
+                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃을 할 수 없습니다.")
+                }
                 mAlertDialog.dismiss()
             }
 
@@ -95,7 +100,6 @@ class MY_01(val owner : AppCompatActivity): Fragment() {
                 Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
-            UserPrefs.logout(owner)
         }
 
         //회원탈퇴
@@ -105,13 +109,21 @@ class MY_01(val owner : AppCompatActivity): Fragment() {
             val mBuilder =
                     androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mWithdrawalView)
             val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setLayout(700,280)
+            mAlertDialog.window?.setBackgroundDrawable(null)
+            //mAlertDialog.window?.setLayout(700,280)
 
             val okButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_ok)
             val cancelButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_no)
 
             okButton.setOnClickListener {
-                Toast.makeText(requireContext(),"탈퇴 되었습니다.",Toast.LENGTH_SHORT).show()
+                //탈퇴
+                if(UserPrefs.logout(owner)) {
+                    SeoulMatCheap.getInstance().showToast(owner, "탈퇴 되었습니다.")
+                    startActivity(Intent(owner, LOGIN_01::class.java))
+                    owner.finish()
+                } else {
+                    SeoulMatCheap.getInstance().showToast(owner, "탈퇴 할 수 없습니다.")
+                }
                 mAlertDialog.dismiss()
             }
             cancelButton.setOnClickListener{
