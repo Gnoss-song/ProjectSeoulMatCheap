@@ -40,7 +40,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_sports_golf_24"/>
+                android:src="@drawable/icon_medal"/>
             <TextView
                 android:id="@+id/moveTV"
                 android:layout_width="match_parent"
@@ -507,7 +507,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_filter_tilt_shift_24"
+                android:src="@drawable/icon_location"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
 
