@@ -11,16 +11,16 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.databinding.FragmentDialogMyBinding
+import kr.co.mapo.project_seoulmatcheap.databinding.FragmentDialogMyServiceBinding
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
 
-class DIALOG_MY : DialogFragment() {
+class DIALOG_MY_SERVICE : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentDialogMyBinding.inflate(inflater,container,false)
+        val binding = FragmentDialogMyServiceBinding.inflate(inflater,container,false)
         return binding.root
 
               }

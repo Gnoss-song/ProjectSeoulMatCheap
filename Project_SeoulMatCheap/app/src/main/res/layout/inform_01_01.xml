@@ -11,10 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingLeft="16dp"
+        android:paddingLeft="5dp"
         android:paddingTop="10dp"
         android:paddingRight="16dp"
         android:paddingBottom="10dp">
+
+        <CheckBox
+            android:id="@+id/checkbox_user"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_checkbox"
+            android:layout_marginRight="5dp"
+            android:button="@null"
+
+            />
 
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
@@ -26,7 +36,7 @@
                 android:id="@+id/marketIV"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
 
@@ -79,7 +89,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.0"
-            android:textSize="40sp" />
+            android:textSize="50sp" />
+
     </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E1E1E1" />
 
 </LinearLayout>

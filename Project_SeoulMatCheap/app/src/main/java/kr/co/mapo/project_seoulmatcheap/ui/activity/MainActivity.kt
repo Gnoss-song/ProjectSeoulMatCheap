@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         if (System.currentTimeMillis() <= pressedTime + 2000) {
             finish()
         }
+        return false
     }
 
 }

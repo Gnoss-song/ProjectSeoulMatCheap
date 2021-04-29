@@ -1,214 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#BEF6F3F3"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingTop="10dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="10dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="3dp">
-
-            <ImageView
-                android:id="@+id/profile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_launcher_background" />
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:id="@+id/linenarlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:layout_marginStart="80dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/nickName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp"
-                android:layout_weight="1"
-                android:text="@string/nickname"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <TextView
-                android:id="@+id/emailAddress"
-                android:layout_width="166dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:text="@string/email" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/img_rank"
-            android:layout_width="45dp"
-            android:layout_height="90dp"
-            android:layout_toEndOf="@id/linenarlayout"
-            android:src="@drawable/rank" />
+        android:layout_alignParentTop="true"
+        android:background="#b61827">
 
         <TextView
-            android:id="@+id/level"
+            android:id="@+id/title2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@id/img_rank"
-            android:gravity="center"
-            android:text="@string/level" />
-
-        <ImageView
-            android:id="@+id/btn_help"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_toEndOf="@id/level"
-            android:src="@drawable/rank" />
-
-
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_help"
-            android:layout_toEndOf="@+id/img_rank"
-            android:text="@string/logoutstring" />
-        <View
-            android:id="@+id/myPageLine2"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#E1E1E1"
-            android:layout_below="@+id/btn_logout"/>
-
-    </RelativeLayout>
-
-    <Space
-        android:id="@+id/space"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="110dp"
-        />
-    <Button
-        android:id="@+id/btn_favorite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="찜 목록"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@id/space"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <Button
-        android:id="@+id/btn_myreview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="마이리뷰"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_favorite"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <Button
-        android:id="@+id/btn_myreport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="내 제보 글 관리"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_myreview"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <Button
-        android:id="@+id/btn_notice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="공지사항"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_myreport"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <Button
-        android:id="@+id/btn_report"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="건의하기"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_notice"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <Button
-        android:id="@+id/btn_version"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="앱 버전"
-        android:textAlignment="textStart"
-        android:drawableStart="@drawable/ic_button"
-        android:drawableEnd="@drawable/ic_arrow"
-        android:layout_below="@+id/btn_report"
-
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
-
-    <include
-        android:id="@+id/help_Container"
-        layout="@layout/helpcontent"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/space"
-        android:visibility="gone" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/btn_dialog"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/service_manual"
-            android:textAlignment="center"
+            android:text="마이페이지"
             android:textColor="@color/white_93"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:textSize="24dp">
 
-        </Button>
+        </TextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:backgroundTint="#DCD6D6"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="10dp">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp">
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/btn_bg" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/linenarlayout"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_marginStart="80dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nickName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/nickname"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/emailAddress"
+                    android:layout_width="166dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:text="@string/email"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_rank"
+                android:layout_width="45dp"
+                android:layout_height="75dp"
+                android:layout_toEndOf="@id/linenarlayout"
+                android:src="@drawable/btn_medal" />
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_rank"
+                android:layout_toEndOf="@+id/linenarlayout"
+                android:text="@string/level"
+                android:textAlignment="center"
+                android:textSize="11dp" />
+
+            <ImageView
+                android:id="@+id/btn_help"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_toEndOf="@id/level"
+                android:src="@drawable/ic_helpbtn" />
+
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/btn_help"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@+id/img_rank"
+                android:background="@drawable/btn_logout" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_favorite"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:stateListAnimator="@null"
+
+
+                android:text="찜 목록"
+
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_myreview"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:stateListAnimator="@null"
+
+                android:text="마이리뷰"
+
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_myreport"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:stateListAnimator="@null"
+
+
+                android:text="내 제보 글 관리"
+
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_notice"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:stateListAnimator="@null"
+
+
+                android:text="공지사항"
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_version"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="5dp"
+
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:text="앱 버전"
+
+                android:textAlignment="textStart"
+
+
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_report"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/custom_button_my_01"
+                android:drawableLeft="@drawable/btn_homeaddress"
+
+                android:drawableRight="@drawable/btn_nexticon"
+                android:stateListAnimator="@null"
+
+                android:text="건의하기"
+
+                android:textAlignment="textStart"
+                android:textSize="16dp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/btn_withdrawal"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="150dp"
+                android:background="@drawable/btn_withdrawal"
+                android:textColor="@color/black"
+                android:textSize="11dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#00ff0000">
+
+
+                <Button
+                    android:id="@+id/btn_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="#00ff0000"
+                    android:gravity="center"
+                    android:text="@string/service_manual"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="11dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/help_Container"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/my_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
 
 </RelativeLayout>
 
