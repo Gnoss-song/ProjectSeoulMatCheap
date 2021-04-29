@@ -1,8 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.content.Intent
-import android.content.SharedPreferences
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +13,6 @@ import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.MatCheapService
 import kr.co.mapo.project_seoulmatcheap.data.NaverService
 import kr.co.mapo.project_seoulmatcheap.data.response.NaverLoginResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityLogin01Binding
@@ -20,6 +21,9 @@ import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 const val TAG = "[Login]"
 
@@ -36,7 +40,6 @@ class LOGIN_01 : AppCompatActivity() {
             startActivity(Intent(this, SPLASH_01::class.java))
             finish()
         }
-        UserPrefs.getUserEmail(this)
         init()
     }
 
@@ -56,7 +59,7 @@ class LOGIN_01 : AppCompatActivity() {
         with(binding) {
             loginTest.setOnClickListener {
                 Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
-                UserPrefs.saveUserEmail(this@LOGIN_01, "이메일 주소 저장")
+                UserPrefs.saveUserEmail(this@LOGIN_01, "이메일 주소 저장", code = -1)
                 startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
                 finish()
             }
@@ -130,7 +133,7 @@ class LOGIN_01 : AppCompatActivity() {
                 } else {
                     //로그인처리
                     if (user.kakaoAccount?.profile?.nickname != null) {
-                        UserPrefs.saveUserEmail(this@LOGIN_01, user.kakaoAccount?.email!!)
+                        UserPrefs.saveUserEmail(this@LOGIN_01, user.kakaoAccount?.email!!, 0)
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01,
                             user.kakaoAccount?.profile?.nickname + getString(R.string.login))
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01, "사용자 정보 요청 성공" +
@@ -162,7 +165,7 @@ class LOGIN_01 : AppCompatActivity() {
                 if(response.isSuccessful) {
                     val result = response.body()!!.response
                     Log.e(TAG, "${result.email}\n${result.nickname}\n${result.profileImage}")
-                    UserPrefs.saveUserEmail(this@LOGIN_01, result.email)
+                    UserPrefs.saveUserEmail(this@LOGIN_01, result.email, 1)
                     startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
                     finish()
                 }

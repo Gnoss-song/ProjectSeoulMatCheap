@@ -9,12 +9,12 @@ import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var tabLayout : TabLayout
-    private lateinit var my01fragment: MY_01
     private var pressedTime : Long = 0
 
     private lateinit var binding : ActivityMainBinding
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setView(x:Double, y:Double) {
-        my01fragment = MY_01()
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             //선택할 때
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     4 -> {
                         tab.text = getString(R.string.app_meun5)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, my01fragment).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01(this@MainActivity)).commit()
                     }
                 }
             }
