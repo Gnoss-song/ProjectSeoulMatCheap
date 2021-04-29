@@ -1,7 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,12 +26,14 @@ class My0102Adapter(
         ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
-    fun removeItem (position: Int){
+    private fun removeItem (position: Int){
         if(position>0) {
             list.removeAt(position)
             notifyDataSetChanged()
         }
     }
+
+
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
         val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)

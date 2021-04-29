@@ -19,9 +19,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
+import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
-class MY_01(val activity : AppCompatActivity): Fragment() {
+class MY_01(val owner : AppCompatActivity): Fragment() {
+
+    companion object {
+        fun newInstance(owner : AppCompatActivity): Fragment {
+            return MY_01(owner)
+        }
+    }
 
     private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
 
@@ -88,7 +95,7 @@ class MY_01(val activity : AppCompatActivity): Fragment() {
                 Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
-            R.id.btn_logout -> UserPrefs.logout(owner)
+            UserPrefs.logout(owner)
         }
 
         //회원탈퇴
