@@ -14,6 +14,7 @@ class CATEGORY_01 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //fsdf
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_category_01, container, false)
     }
