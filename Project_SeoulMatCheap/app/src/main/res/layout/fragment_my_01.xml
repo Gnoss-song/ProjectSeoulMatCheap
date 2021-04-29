@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="#b61827">
+        android:background="@color/main">
 
         <TextView
             android:id="@+id/title2"
@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:text="마이페이지"
             android:textColor="@color/white_93"
-            android:textSize="24dp">
+            android:textSize="24sp">
 
         </TextView>
 
@@ -262,40 +262,16 @@
                 android:id="@+id/btn_withdrawal"
                 android:layout_width="60dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="300dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginStart="320dp"
+                android:layout_marginTop="170dp"
                 android:background="@drawable/btn_withdrawal"
                 android:textColor="@color/black"
                 android:textSize="11dp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:background="#00ff0000">
-
-
-                <Button
-                    android:id="@+id/btn_service"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="#00ff0000"
-                    android:gravity="center"
-                    android:text="@string/service_manual"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="11dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </LinearLayout>
+
+
 
         <FrameLayout
             android:id="@+id/help_Container"
@@ -306,6 +282,31 @@
     </LinearLayout>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:background="#00ff0000">
+
+        <Button
+            android:id="@+id/btn_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#00ff0000"
+            android:gravity="center"
+            android:text="@string/service_manual"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <FrameLayout
         android:id="@+id/my_container"
         android:layout_width="match_parent"

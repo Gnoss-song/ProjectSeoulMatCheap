@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#b61827"
+        android:background="@color/main"
         android:layout_alignParentTop="true">
 
         <TextView
@@ -22,7 +22,7 @@
             android:layout_gravity="left"
             android:text="@string/myfavorite_title_modify"
             android:textColor="@color/white_93"
-            android:drawableStart="@drawable/ic_button"
+            android:drawableStart="@drawable/ic_back_icon"
 
             android:textSize="24dp">
 
