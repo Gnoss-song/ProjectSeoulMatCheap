@@ -64,24 +64,6 @@ class SeoulMatCheap : Application() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    /**
-     * 두 좌표의 거리를 계산한다.
-     * @param x 위도
-     * @param y 경도
-     * @return 두 좌표의 거리(km) - Double
-     */
-    fun getDistance(x: Double, y: Double) : Double {
-        val a = 2 * asin(
-            sqrt(
-                sin(Math.toRadians(x - this.x) / 2).pow(2.0)
-                        + sin(Math.toRadians(y - this.y) / 2).pow(2.0) * cos(Math.toRadians(this.x)) * cos(Math.toRadians(x)
-                )
-            )
-        )
-        Log.e("[거리계산]", "${(r * a) / 1000}")
-        return (r * a) / 1000
-    }
-
     //GPS로부터 위치정보를 얻어오는 함수
     fun setLocation(context: Context) {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
