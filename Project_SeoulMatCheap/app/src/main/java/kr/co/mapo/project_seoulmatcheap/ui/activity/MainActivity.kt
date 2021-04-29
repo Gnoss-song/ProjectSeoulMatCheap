@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout : TabLayout
     private var pressedTime : Long = 0
 
+
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
