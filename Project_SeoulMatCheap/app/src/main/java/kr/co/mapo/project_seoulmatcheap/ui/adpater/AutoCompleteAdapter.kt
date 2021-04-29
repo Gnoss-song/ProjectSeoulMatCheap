@@ -31,7 +31,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
  * @desc 자동완성 리사이클러뷰 어댑터
  */
 class AutoCompleteAdapter(
-    val unfilteredlist: ArrayList<String>,
+    private val unfilteredlist: ArrayList<String>,
     private val owner : AppCompatActivity
 ) : RecyclerView.Adapter<AutoCompleteAdapter.ViewHolder>(), Filterable {
 

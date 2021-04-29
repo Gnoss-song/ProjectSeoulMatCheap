@@ -29,8 +29,6 @@ class InformDetailAdapter (
 
     inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val itemView = itemView as LinearLayout
-
         val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
         val name: TextView = itemView.findViewById(R.id.name)
         val address: TextView = itemView.findViewById(R.id.address)
@@ -56,7 +54,6 @@ class InformDetailAdapter (
             score.text = itemData.score
             sort.text = itemData.sort
         }
-
         holder.itemView.setOnClickListener{
             val target = Intent(Activity(),INFORM_02::class.java)
             target.putExtra("marketIV",itemData.marketIV)

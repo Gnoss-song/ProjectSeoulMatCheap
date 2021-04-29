@@ -17,9 +17,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
  * Created by SANDY on 2021-04-20
  */
 class InformListAdapter(
-    val list: List<Test>) :
-
-    RecyclerView.Adapter<InformListAdapter.HolderView>() {
+    private val list: List<Test>)
+    : RecyclerView.Adapter<InformListAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

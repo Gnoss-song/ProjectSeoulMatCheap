@@ -44,12 +44,12 @@
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
+            android:onClick="@{fragment.showList}"
             android:padding="@dimen/margin_basic4"
             android:scaleType="fitCenter"
             android:src="@drawable/map_list"
-            android:onClick="@{fragment.showList}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -59,7 +59,7 @@
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
             android:onClick="@{fragment.showFilter}"
             android:padding="@dimen/margin_basic4"
@@ -74,12 +74,12 @@
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
-            android:background="@drawable/round_button"
+            android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
+            android:onClick="@{fragment.resetLocation}"
             android:padding="@dimen/margin_basic4"
             android:scaleType="fitCenter"
             android:src="@drawable/map_gps"
-            android:onClick="@{fragment.resetLocation}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter_btn" />
 

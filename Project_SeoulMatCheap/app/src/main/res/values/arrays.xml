@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="splash_radom_guide">
+        <item>착한가격업소는 맛 , 가격 , 서비스 모두 훌륭합니다</item>
+        <item>착한가격업소는 서울시에서 인증한 모범업소입니다</item>
+        <item>사용자들에게 맛 , 가격 , 서비스 인증을 받은 업소입니다</item>
+    </string-array>
+</resources>
