@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     4 -> {
                         tab.text = getString(R.string.app_meun5)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01(this@MainActivity)).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, MY_01.newInstance(this@MainActivity)).commit()
                     }
                 }
             }

@@ -80,9 +80,9 @@ class SeoulMatCheap : Application() {
         }
         // 해당 장치가 마지막으로 수신한 위치 얻기
         val location = locationManager.getLastKnownLocation(provider)
+        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
         Log.e("[TEST]", provider.toString())
         if(location != null) {
-            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
             x = location.latitude
             y = location.longitude
             adress = getAddress(x, y, context)
