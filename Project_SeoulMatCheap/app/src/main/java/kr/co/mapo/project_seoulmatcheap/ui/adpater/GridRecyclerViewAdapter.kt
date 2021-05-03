@@ -1,13 +1,16 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.item.GridItem
+import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_01
 
 class GridRecyclerViewAdapter(
     private val gridList: MutableList<GridItem>)
@@ -36,6 +39,11 @@ class GridRecyclerViewAdapter(
         with(holder) {
             gridIV.setImageResource(gridData.gridimage)
             gridTV.text = gridData.gridtitle
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView?.context, CATEGORY_01_01::class.java)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
 }
