@@ -91,7 +91,6 @@ class My0102Adapter(
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int){
         val obj = list[position]
-//        val objsize = obj.IVlist.size
 
 
         when (obj.type) {
@@ -158,6 +157,7 @@ class My0102Adapter(
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         mAlertDialog.dismiss()
+                        removeItem(position)
                     }
                     cancelButton.setOnClickListener {
                         Toast.makeText(owner, "취소되었습니다.", Toast.LENGTH_SHORT).show()
@@ -198,6 +198,7 @@ class My0102Adapter(
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         mAlertDialog.dismiss()
+                        removeItem(position)
                     }
                     cancelButton.setOnClickListener {
                         Toast.makeText(owner, "취소되었습니다.", Toast.LENGTH_SHORT).show()

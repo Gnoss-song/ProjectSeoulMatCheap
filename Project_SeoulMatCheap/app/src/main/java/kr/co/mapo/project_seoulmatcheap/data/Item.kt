@@ -1,5 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.data
 
+import android.widget.CheckBox
+
 /**
  * @author Gnoss
  * @email silmxmail@naver.com
@@ -11,5 +13,5 @@ data class Item(val marketIV:Int,
                 var address: String = "",
                 var sort: String ="",
                 var distance : String = "",
-                var score : String = "",
+                var score : String = ""
                 )

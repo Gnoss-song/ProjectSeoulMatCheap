@@ -18,13 +18,11 @@ import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0102Binding
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0102Adapter
 
-//import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0102Adapter
 
 class MY_01_02 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0102Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_my_01_01)
 
         binding = ActivityMy0102Binding.inflate(layoutInflater)
         setContentView(binding.root)

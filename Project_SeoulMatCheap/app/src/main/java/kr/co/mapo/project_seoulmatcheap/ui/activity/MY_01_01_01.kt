@@ -5,27 +5,28 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  * @created 2021-04-20
  * @desc
  */
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy010101Binding
+import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.My010101Adapter
 
 class MY_01_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy010101Binding
+    private lateinit var adapter : My010101Adapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMy010101Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val itemData = mutableListOf<Item>()
         itemData.add(Item(R.drawable.solip, "솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km", "4.7"))
@@ -114,8 +115,10 @@ class MY_01_01_01 : AppCompatActivity() {
             val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
             val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
 
+
             okButton.setOnClickListener {
                 Toast.makeText(this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                adapter.requestRemove(click = true)
                 mAlertDialog.dismiss()
             }
             cancelButton.setOnClickListener{

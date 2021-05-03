@@ -2,12 +2,17 @@ package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.view.menu.ActionMenuItemView
+import androidx.core.util.*
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
@@ -21,17 +26,18 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
  * @desc
  */
 
-class My010101Adapter (
-        private val itemList: MutableList<Item>
+class My010101Adapter(
+    private val itemList: MutableList<Item>
 ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
 
+
+
     // CheckBox의 클릭 상태를 저장할 array 객체
-    private val checkboxStatus = SparseBooleanArray()
+    private var checkboxStatus = SparseBooleanArray()
 
 
     inner class ViewHolderClass(private val binding : Inform0101Binding) : RecyclerView.ViewHolder(binding.root) {
 
-        val itemView = itemView as LinearLayout
 
         val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
         val name: TextView = itemView.findViewById(R.id.name)
@@ -42,6 +48,7 @@ class My010101Adapter (
 
         fun bind(itemList:Item) = with(binding){
             checkboxUser.isChecked = checkboxStatus[adapterPosition]
+            Log.d("체크박스","${checkboxStatus}")
 
             checkboxUser.setOnClickListener {
                 if (!checkboxUser.isChecked)
@@ -82,8 +89,20 @@ class My010101Adapter (
             target.putExtra("score",itemData.score)
             target.putExtra("sort",itemData.sort)
         }
+
     }
 
     override fun getItemCount() = itemList.size
-}
 
+    fun requestRemove(click : Boolean) {
+        if(click) {
+            checkboxStatus.forEach { key, value ->
+                if(value) {
+                    itemList.removeAt(key)
+                }
+            }
+            notifyDataSetChanged()
+            checkboxStatus.clear()
+        }
+    }
+}
