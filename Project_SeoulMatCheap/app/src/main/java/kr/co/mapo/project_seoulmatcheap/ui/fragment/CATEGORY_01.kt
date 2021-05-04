@@ -1,24 +1,30 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
-import android.content.Context
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.GridItem
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory01Binding
-import kr.co.mapo.project_seoulmatcheap.item.GridItem
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_01
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_03
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.GridRecyclerViewAdapter
 
-class CATEGORY_01 : Fragment(),View.OnClickListener {
+class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener {
 
+    companion object {
+        fun newInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
+            return CATEGORY_01(owner)
+        }
+    }
     private lateinit var binding: FragmentCategory01Binding
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCategory01Binding.inflate(layoutInflater)
         binding.moveTV.isSelected = true
@@ -71,6 +77,15 @@ class CATEGORY_01 : Fragment(),View.OnClickListener {
             }
             true
         }
+        binding.moveTV.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+            val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
+            with(builder) {
+                setView(balloonView)
+                show().window?.setBackgroundDrawable(null)
+            }
+        }
+        binding.categoryLocationTV.text = SeoulMatCheap.getInstance().adress
     }
 
     override fun onClick(v: View?) {
