@@ -9,6 +9,10 @@ import android.location.Criteria
 import android.location.Geocoder
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -42,8 +46,8 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    var x : Double = 0.0      //현재 위치 위도
-    var y : Double = 0.0      //현재 위치 경도
+    var x : Double = 37.5662043      //현재 위치 위도
+    var y : Double = 126.899455      //현재 위치 경도
     var adress : String = "현재위치"     //현재 위치 주소
     lateinit var sharedPreferences : SharedPreferences
 
@@ -64,6 +68,22 @@ class SeoulMatCheap : Application() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
+    //네트워크 연결확인 여부를 반환하는 함수
+    fun isNetworkAvailable(context: Context): Boolean {
+        var result = false
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE)
+                as ConnectivityManager
+        val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
+        if (capabilities != null) {
+            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                result = true
+            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                result = false
+            }
+        }
+        return result
+    }
+
     //GPS로부터 위치정보를 얻어오는 함수
     fun setLocation(context: Context) {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -75,14 +95,14 @@ class SeoulMatCheap : Application() {
             return
         }
         if (provider == null) {
-            Toast.makeText(context, "위치 정보를 사용할 수 있는 상태가 아닙니다, GPS를 확인해주세요.", Toast.LENGTH_SHORT).show()
+            showToast(context, context.getString(R.string.gps_notice))
             return
         }
         // 해당 장치가 마지막으로 수신한 위치 얻기
         val location = locationManager.getLastKnownLocation(provider)
+        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
         Log.e("[TEST]", provider.toString())
         if(location != null) {
-            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
             x = location.latitude
             y = location.longitude
             adress = getAddress(x, y, context)

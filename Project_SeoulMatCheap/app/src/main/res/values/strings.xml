@@ -8,11 +8,19 @@
     <string name="OAUTH_CLIENT_ID">Vwuh6NagdklKrwm5BxSA</string>
     <string name="OAUTH_CLIENT_SECRET">BrJOLJRbpw</string>
     <string name="OAUTH_CLIENT_NAME">@string/app_name</string>
+
+    <!-- LOGIN_01 -->
     <!--로그인 메세지-->
     <string name="login">님 환영합니다.</string>
     <string name="kakao_error">카카오톡이 설치되어 있지 않습니다\n카카오 계정 로그인을 해주세요.</string>
     <string name="logout">로그아웃 되었습니다.</string>
 
+    <!-- SPLASH_01 -->
+    <string name="permission_notice">권한을 허용해주세요.</string>
+    <string name="gps_notice">GPS가 꺼져있습니다. GPS를 사용해주세요.</string>
+    <string name="network_notice">네트워크 연결 상태를 확인해주세요.</string>
+
+    <!-- MainActivity -->
     <!--앱하단메뉴-->
     <string name="app_meun1">지도</string>
     <string name="app_meun2">검색</string>

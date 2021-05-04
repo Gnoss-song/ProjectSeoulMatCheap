@@ -25,7 +25,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
-const val TAG = "[Login]"
+private const val TAG = "[Login]"
 
 class LOGIN_01 : AppCompatActivity() {
 
@@ -110,7 +110,7 @@ class LOGIN_01 : AppCompatActivity() {
         UserApiClient.instance.me { user, error ->
             if (error != null) Log.e(TAG, "사용자 정보 요청 실패", error)
             else if (user != null) {
-                Log.e("[TEST]", "${user.kakaoAccount?.profile?.nickname}")
+                Log.e(TAG, "${user.kakaoAccount?.profile?.nickname}")
                 //이메일주소가 null일때
                 if(user.kakaoAccount?.email == null) {
                     // 사용자 정보 요청 (추가 동의)
@@ -154,7 +154,7 @@ class LOGIN_01 : AppCompatActivity() {
 
     private fun naverSucessCallback() {
         val accessToken: String = mOAuthLoginModule.getAccessToken(this@LOGIN_01)
-        val naverLoginService = NaverService.invoke().getNaverEmail("Bearer "+accessToken)
+        val naverLoginService = NaverService.invoke(this).getNaverEmail("Bearer "+accessToken)
         Log.e(TAG, "Bearer "+accessToken)
         naverLoginService.enqueue(object : Callback<NaverLoginResponse> {
             override fun onResponse(
