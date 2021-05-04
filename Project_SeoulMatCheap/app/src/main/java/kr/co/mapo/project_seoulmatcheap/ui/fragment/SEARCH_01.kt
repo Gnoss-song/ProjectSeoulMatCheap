@@ -55,7 +55,6 @@ open class SEARCH_01(
         preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
         val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
         filterAdapter = AutoCompleteAdapter(test, owner)
-
         searchHistoryAdapter = SearchHistoryAdapter(preferences.all.values.toMutableList(), owner)
         Log.e("[히스토리]", "${preferences.all.values.toMutableList().size}")
         setView()

@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.Log
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
-import kr.co.mapo.project_seoulmatcheap.ui.activity.TAG
 
 /**
  * @author SANDY
@@ -13,6 +12,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.TAG
  * @created 2021-04-28
  * @desc 로그인 세션관리 object
  */
+
+private const val TAG = "[LOGIN]"
 
 object UserPrefs {
 

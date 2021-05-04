@@ -1,5 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.data
 
+import android.content.Context
 import android.util.Log
 import com.google.gson.GsonBuilder
 import kr.co.mapo.project_seoulmatcheap.data.response.NaverLoginResponse
@@ -35,7 +36,7 @@ interface NaverService {
     companion object {
         private var _naverService : NaverService? = null
         private val naverService : NaverService get() = _naverService!!
-        operator fun invoke() : NaverService {
+        operator fun invoke(context: Context) : NaverService {
             if(_naverService != null) {
                 return naverService
             } else {
@@ -52,6 +53,7 @@ interface NaverService {
                     return@Interceptor chain.proceed(request)
                 }
                 val okHttpClient = OkHttpClient.Builder()
+                    .addInterceptor(NoConnectionInterceptor.getInstance(context))
                     .addInterceptor(requestInterceptor)
                     .connectTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(10, TimeUnit.SECONDS)

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.CATEGORY_01">
+    tools:context=".ui.fragment.CATEGORY_01"
+    android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
