@@ -22,7 +22,13 @@ import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
 class MY_01(private val owner : AppCompatActivity): Fragment() {
+    companion object {
+        fun newInstance(owner: AppCompatActivity) : Fragment {
+            return MY_01(owner)
+        }
+    }
     private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -33,9 +39,9 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
         //다이얼로그//
         binding.btnService.setOnClickListener {
             val mDialogView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_service, null)
+                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_service, null)
             val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mDialogView)
+                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDialogView)
                     .setTitle(R.string.dialog_title)
             val mAlertDialog = mBuilder.show()
             val okButton = mDialogView.findViewById<Button>(R.id.popup_ok)
@@ -46,9 +52,9 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
         // 도움말//
         binding.btnHelp.setOnClickListener {
             val mHelpView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_help, null)
+                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_help, null)
             val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mHelpView)
+                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mHelpView)
             val mAlertDialog = mBuilder.show()
             mAlertDialog.window?.setBackgroundDrawable(null)
             val okButton = mHelpView.findViewById<Button>(R.id.btn_help_ok)
@@ -59,9 +65,9 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
         //로그아웃 //
         binding.btnLogout.setOnClickListener {
             val mLogoutView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_logout, null)
+                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_logout, null)
             val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mLogoutView)
+                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mLogoutView)
             val mAlertDialog = mBuilder.show()
             mAlertDialog.window?.setBackgroundDrawable(null)
             val okButton = mLogoutView.findViewById<Button>(R.id.btn_logout_ok)
@@ -79,16 +85,16 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
                 mAlertDialog.dismiss()
             }
             cancelButton.setOnClickListener{
-                Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(owner,"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
         }
         //회원탈퇴
         binding.btnWithdrawal.setOnClickListener{
             val mWithdrawalView =
-                    LayoutInflater.from(requireContext()).inflate(R.layout.fragment_dialog_my_withdrawal, null)
+                    LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_withdrawal, null)
             val mBuilder =
-                    androidx.appcompat.app.AlertDialog.Builder(requireContext()).setView(mWithdrawalView)
+                    androidx.appcompat.app.AlertDialog.Builder(owner).setView(mWithdrawalView)
             val mAlertDialog = mBuilder.show()
             mAlertDialog.window?.setBackgroundDrawable(null)
             val okButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_ok)
@@ -105,7 +111,7 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
                 mAlertDialog.dismiss()
             }
             cancelButton.setOnClickListener{
-                Toast.makeText(requireContext(),"취소되었습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(owner,"취소되었습니다.",Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
         }
