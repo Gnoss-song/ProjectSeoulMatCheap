@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".system.SeoulMatCheap"
@@ -18,8 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.CATEGORY_01_03"
-            android:theme="@style/Transparent"></activity>
+        <activity
+            android:name=".ui.activity.SPLASH_00"
+            android:theme="@style/theme_splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.CATEGORY_01_03"
+            android:theme="@style/Transparent" />
         <activity android:name=".ui.activity.CATEGORY_01_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_02" />
         <activity android:name=".ui.activity.MY_01_01" />
@@ -33,13 +43,7 @@
         <activity android:name=".ui.activity.MATCHEAP_01_03_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_03" />
         <activity android:name=".ui.activity.MATCHEAP_01_02_01" />
-        <activity android:name=".ui.activity.LOGIN_01">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.activity.LOGIN_01"/>
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"

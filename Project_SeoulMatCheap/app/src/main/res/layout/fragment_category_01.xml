@@ -499,12 +499,14 @@
                     android:layout_marginLeft="15dp"/>
                 <!--                임시-->
                 <TextView
+                    android:id="@+id/category_locationTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="서울시 마포구 성산1동"/>
                 <!--                임시-->
             </LinearLayout>
             <ImageView
+                android:id="@+id/category_locationIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_location"

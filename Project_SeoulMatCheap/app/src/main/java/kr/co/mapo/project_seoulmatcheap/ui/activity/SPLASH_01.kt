@@ -1,12 +1,9 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Criteria
-import android.location.LocationManager
 import android.net.*
 import android.os.Build
 import android.os.Build.VERSION_CODES.M
@@ -14,15 +11,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivitySplash01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-
-const val RESULT_SUCCESS = 0
-const val RESULT_FAIL = -1
 
 private const val SPLASH_DELAY = 1000L
 private const val PERMISSION_REQUEST_CODE = 100
@@ -47,22 +40,10 @@ class SPLASH_01 : AppCompatActivity() {
         netWorkCallback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                val intent = Intent(this@SPLASH_01, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                goMainActivity()
             }
         }
         requestPermission()
-        setView()
-    }
-
-    private fun setView() {
-        with(binding) {
-            radomText.apply {
-                val randomList = resources.getStringArray(R.array.splash_radom_guide)
-                text = randomList[0]
-            }
-        }
     }
 
     override fun onRestart() {
@@ -79,7 +60,7 @@ class SPLASH_01 : AppCompatActivity() {
                     Manifest.permission.CALL_PHONE
                 ), PERMISSION_REQUEST_CODE)
         } else {
-            goNext(0)
+            resultPermission(PERMISSION_REQUIRE)
         }
     }
 
@@ -90,17 +71,19 @@ class SPLASH_01 : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if(requestCode == PERMISSION_REQUEST_CODE) {
-            goNext(grantResults[0])
+            resultPermission(grantResults[0])
         }
     }
 
-    private fun goNext(result: Int) {
+    private fun resultPermission(result: Int) {
         when(result) {
             PERMISSION_FAIL -> {
                 SeoulMatCheap.getInstance().showToast(this, getString(R.string.permission_notice))
                 if(Build.VERSION.SDK_INT > M) {
-                    val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
-                    appDetail.addCategory(Intent.CATEGORY_DEFAULT)
+                    val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")).apply {
+                        addCategory(Intent.CATEGORY_DEFAULT)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
                     startActivity(appDetail)
                 } else {
                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
@@ -110,9 +93,7 @@ class SPLASH_01 : AppCompatActivity() {
                 //네트워크 연결 확인
                 if(SeoulMatCheap.getInstance().isNetworkAvailable(this)) {
                     Handler(Looper.getMainLooper()).postDelayed({
-                        val intent = Intent(this@SPLASH_01, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        goMainActivity()
                     }, SPLASH_DELAY)
                 } else {
                     val builder =  NetworkRequest.Builder()
@@ -121,6 +102,12 @@ class SPLASH_01 : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun goMainActivity() {
+        val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onDestroy() {
