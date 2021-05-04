@@ -80,8 +80,10 @@ class SPLASH_01 : AppCompatActivity() {
             PERMISSION_FAIL -> {
                 SeoulMatCheap.getInstance().showToast(this, getString(R.string.permission_notice))
                 if(Build.VERSION.SDK_INT > M) {
-                    val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
-                    appDetail.addCategory(Intent.CATEGORY_DEFAULT)
+                    val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")).apply {
+                        addCategory(Intent.CATEGORY_DEFAULT)
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
                     startActivity(appDetail)
                 } else {
                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
