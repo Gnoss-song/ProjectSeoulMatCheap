@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
     private var pressedTime : Long = 0
 
     private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("[TEST]", savedInstanceState.toString())
         setContentView(R.layout.activity_main)
         if(savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01()).commit()

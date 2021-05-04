@@ -22,8 +22,8 @@ class MAP_01_01 : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
-            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            this.title = intent.getStringExtra(ADDRESS)
+            setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            title = intent.getStringExtra(ADDRESS)
         }
         init()
     }
@@ -69,21 +69,27 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     private fun setView(list: ArrayList<Test>) {
-        with(binding.include.recyclerView) {
-            layoutManager = LinearLayoutManager(this@MAP_01_01, LinearLayoutManager.VERTICAL, false)
-            adapter = InformListAdapter(list)
-        }
-        with(binding.include.sortDistanceBtn) {
-            setOnClickListener {
-                list.sortBy { it.distance }
-                binding.include.recyclerView.adapter = InformListAdapter(list)
+        with(binding.include) {
+            recyclerView.apply {
+                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@MAP_01_01,
+                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+                    false
+                )
+                adapter = kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter(list)
             }
-        }
-        with(binding.include.sortScoreBtn) {
-            setOnClickListener {
-                list.sortBy { it.rate }
-                binding.include.recyclerView.layoutManager = LinearLayoutManager(this@MAP_01_01, LinearLayoutManager.VERTICAL, true)
-                binding.include.recyclerView.adapter = InformListAdapter(list)
+            sortDistanceBtn.apply {
+                setOnClickListener {
+                    list.sortBy { it.distance }
+                    recyclerView.adapter = InformListAdapter(list)
+                }
+            }
+            sortScoreBtn.apply {
+                setOnClickListener {
+                    list.sortBy { it.rate }
+                    recyclerView.layoutManager = LinearLayoutManager(this@MAP_01_01, LinearLayoutManager.VERTICAL, true)
+                    recyclerView.adapter = InformListAdapter(list)
+                }
             }
         }
     }

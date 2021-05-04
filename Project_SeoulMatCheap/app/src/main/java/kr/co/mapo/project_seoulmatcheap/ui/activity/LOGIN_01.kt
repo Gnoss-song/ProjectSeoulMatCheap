@@ -25,7 +25,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
-const val TAG = "[Login]"
+private const val TAG = "[Login]"
 
 class LOGIN_01 : AppCompatActivity() {
 
@@ -154,7 +154,7 @@ class LOGIN_01 : AppCompatActivity() {
 
     private fun naverSucessCallback() {
         val accessToken: String = mOAuthLoginModule.getAccessToken(this@LOGIN_01)
-        val naverLoginService = NaverService.invoke().getNaverEmail("Bearer "+accessToken)
+        val naverLoginService = NaverService.invoke(this).getNaverEmail("Bearer "+accessToken)
         Log.e(TAG, "Bearer "+accessToken)
         naverLoginService.enqueue(object : Callback<NaverLoginResponse> {
             override fun onResponse(

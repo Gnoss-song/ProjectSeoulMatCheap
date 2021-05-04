@@ -2,9 +2,12 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
 import android.annotation.TargetApi
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.location.Criteria
+import android.location.LocationManager
+import android.net.*
 import android.os.Build
 import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
@@ -21,9 +24,16 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 const val RESULT_SUCCESS = 0
 const val RESULT_FAIL = -1
 
+private const val SPLASH_DELAY = 1000L
+private const val PERMISSION_REQUEST_CODE = 100
+private const val PERMISSION_FAIL = -1
+private const val PERMISSION_REQUIRE = 0
+
 class SPLASH_01 : AppCompatActivity() {
 
     private lateinit var binding : ActivitySplash01Binding
+    private lateinit var connectivityManager : ConnectivityManager
+    private lateinit var netWorkCallback : ConnectivityManager.NetworkCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +43,15 @@ class SPLASH_01 : AppCompatActivity() {
     }
 
     private fun init() {
+        connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        netWorkCallback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+                val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
         requestPermission()
         setView()
     }
@@ -54,7 +73,11 @@ class SPLASH_01 : AppCompatActivity() {
     private fun requestPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CALL_PHONE
+                ), PERMISSION_REQUEST_CODE)
         } else {
             goNext(0)
         }
@@ -66,14 +89,14 @@ class SPLASH_01 : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if(requestCode == 100) {
+        if(requestCode == PERMISSION_REQUEST_CODE) {
             goNext(grantResults[0])
         }
     }
 
     private fun goNext(result: Int) {
         when(result) {
-            -1 -> {
+            PERMISSION_FAIL -> {
                 SeoulMatCheap.getInstance().showToast(this, getString(R.string.permission_notice))
                 if(Build.VERSION.SDK_INT > M) {
                     val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))
@@ -83,13 +106,27 @@ class SPLASH_01 : AppCompatActivity() {
                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 100)
                 }
             }
-            0 -> { //퍼미션 완료 -> 네트워크, GPS 켜짐 확인 후 메인액티비티로
-                Handler(Looper.getMainLooper()).postDelayed({
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }, 1500)
+            PERMISSION_REQUIRE -> { //퍼미션 완료 -> 네트워크 확인 후 메인액티비티로
+                //네트워크 연결 확인
+                if(SeoulMatCheap.getInstance().isNetworkAvailable(this)) {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }, SPLASH_DELAY)
+                } else {
+                    val builder =  NetworkRequest.Builder()
+                    SeoulMatCheap.getInstance().showToast(this@SPLASH_01, getString(R.string.network_notice))
+                    connectivityManager.registerNetworkCallback(builder.build(), netWorkCallback)
+                }
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if(connectivityManager.isActiveNetworkMetered) {
+            connectivityManager.unregisterNetworkCallback(netWorkCallback)
         }
     }
 }
