@@ -11,16 +11,12 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.kakao.sdk.common.KakaoSdk
-import com.nhn.android.naverlogin.OAuthLogin
 import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
-import kotlin.math.*
 
 
 /**
@@ -30,8 +26,10 @@ import kotlin.math.*
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
  */
 
-private const val r = 6372.8 * 100
 const val SEARCH_HISTROY = "search_history_prefs"
+const val SEOULCITYHALL_X = 37.5662952
+const val SEOULCITYHALL_Y = 126.9779451
+const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
 
 class SeoulMatCheap : Application() {
 
@@ -46,9 +44,9 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    var x : Double = 37.5662952     //위도
-    var y : Double = 126.9779451      //경도
-    var adress : String = "현재위치"     //현재 위치 주소
+    var x : Double = SEOULCITYHALL_X     //위도
+    var y : Double = SEOULCITYHALL_Y      //경도
+    var address : String = SEOULCITYHALL_ADDRESS     //현재 위치 주소
     lateinit var sharedPreferences : SharedPreferences
 
     /* onCreate()
@@ -103,9 +101,9 @@ class SeoulMatCheap : Application() {
             if (location != null) {
                 x = location.latitude
                 y = location.longitude
-                adress = getAddress(x, y, context)
+                address = getAddress(x, y, context)
             }
-            Log.e("[GPS]", "$x, $y, $adress")
+            Log.e("[GPS]", "$x, $y, $address")
         }
     }
 

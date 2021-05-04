@@ -59,7 +59,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.title = SeoulMatCheap.getInstance().adress
+        binding.toolbar.title = SeoulMatCheap.getInstance().address
         mapFragment.getMapAsync(this)
     }
 
@@ -111,7 +111,7 @@ class MAP_01(
 
     fun showList(v : View) {
         val intent = Intent(owner, MAP_01_01::class.java)
-        intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().adress)
+        intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address)
         startActivity(intent)
     }
 
