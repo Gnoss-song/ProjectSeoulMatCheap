@@ -70,8 +70,7 @@ class SeoulMatCheap : Application() {
     //네트워크 연결 여부를 반환하는 함수
     fun isNetworkAvailable(context: Context): Boolean {
         var result = false
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE)
-                as ConnectivityManager
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
         if (capabilities != null) {
             if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
