@@ -16,6 +16,7 @@
     <string name="logout">로그아웃 되었습니다.</string>
 
     <!-- SPLASH_01 -->
+    <string name="intro_message">착한가격업소는 맛 , 가격 , 서비스 모두 훌륭합니다</string>
     <string name="permission_notice">권한을 허용해주세요.</string>
     <string name="gps_notice">GPS가 꺼져있습니다. GPS를 사용해주세요.</string>
     <string name="network_notice">네트워크 연결 상태를 확인해주세요.</string>

@@ -68,7 +68,7 @@ class SeoulMatCheap : Application() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    //네트워크 연결확인 여부를 반환하는 함수
+    //네트워크 연결 여부를 반환하는 함수
     fun isNetworkAvailable(context: Context): Boolean {
         var result = false
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE)

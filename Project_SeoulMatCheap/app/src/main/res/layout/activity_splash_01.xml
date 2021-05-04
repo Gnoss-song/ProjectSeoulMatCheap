@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.SPLASH_01">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
     <ImageView
         android:id="@+id/pattern"
         android:layout_width="0dp"
@@ -23,9 +37,11 @@
 
     <ImageView
         android:id="@+id/random_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_basic"
+        android:layout_marginEnd="@dimen/margin_basic"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,20 +51,24 @@
         android:id="@+id/radom_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_basic4"
+        android:layout_marginTop="@dimen/map_button"
         android:background="@drawable/round_button"
         android:padding="@dimen/margin_basic4"
+        android:text="@string/intro_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        tools:text="TextView" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/icon_width"
+        android:layout_height="@dimen/icon_height"
+        android:layout_marginTop="@dimen/margin_basic4"
+        android:indeterminateDrawable="@drawable/progressbar"
+        android:indeterminateTint="#B3000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/random_image" />
+        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
