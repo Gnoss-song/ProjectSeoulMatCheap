@@ -58,7 +58,6 @@ class SeoulMatCheap : Application() {
     override fun onCreate() {
         super.onCreate()
         sharedPreferences = getSharedPreferences(SEARCH_HISTROY, MODE_PRIVATE)
-        Log.e("[프리퍼런스]", "${sharedPreferences.all.size}")
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
     }
@@ -107,7 +106,7 @@ class SeoulMatCheap : Application() {
                 y = location.longitude
                 adress = getAddress(x, y, context)
             }
-            Log.e("[GPS]", "${x}, ${y}")
+            Log.e("[GPS]", "$x, $y, $adress")
         }
     }
 

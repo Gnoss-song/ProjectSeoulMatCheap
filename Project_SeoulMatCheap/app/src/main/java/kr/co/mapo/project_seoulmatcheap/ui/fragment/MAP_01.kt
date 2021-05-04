@@ -60,12 +60,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        address = SeoulMatCheap().getAddress(x, y, owner)
-        if(address != null) {
-            binding.toolbar.title = address
-        } else {
-            binding.toolbar.title = "GPS를 켜주세요"
-        }
+        address = SeoulMatCheap.getInstance().adress
         mapFragment.getMapAsync(this)
     }
 
