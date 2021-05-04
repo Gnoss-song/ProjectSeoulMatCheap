@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.item.GridItem
+import kr.co.mapo.project_seoulmatcheap.data.GridItem
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_01
 
 class GridRecyclerViewAdapter(
@@ -19,8 +19,6 @@ class GridRecyclerViewAdapter(
     inner class GridHolder(rowRoot: View) : RecyclerView.ViewHolder(rowRoot) {
         val gridIV : ImageView = rowRoot.findViewById(R.id.iv_grid_image)
         val gridTV : TextView = rowRoot.findViewById(R.id.tv_grid_title)
-
-
 
     }
 
