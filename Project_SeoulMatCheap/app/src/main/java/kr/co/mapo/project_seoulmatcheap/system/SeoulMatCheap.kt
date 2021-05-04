@@ -46,8 +46,8 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    var x : Double = 37.5662043      //현재 위치 위도
-    var y : Double = 126.899455      //현재 위치 경도
+    var x : Double = 37.5662952     //위도
+    var y : Double = 126.9779451      //경도
     var adress : String = "현재위치"     //현재 위치 주소
     lateinit var sharedPreferences : SharedPreferences
 
@@ -97,17 +97,18 @@ class SeoulMatCheap : Application() {
         if (provider == null) {
             showToast(context, context.getString(R.string.gps_notice))
             return
+        } else {
+            // 해당 장치가 마지막으로 수신한 위치 얻기
+            val location = locationManager.getLastKnownLocation(provider)
+            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
+            Log.e("[TEST]", provider.toString())
+            if (location != null) {
+                x = location.latitude
+                y = location.longitude
+                adress = getAddress(x, y, context)
+            }
+            Log.e("[GPS]", "${x}, ${y}")
         }
-        // 해당 장치가 마지막으로 수신한 위치 얻기
-        val location = locationManager.getLastKnownLocation(provider)
-        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
-        Log.e("[TEST]", provider.toString())
-        if(location != null) {
-            x = location.latitude
-            y = location.longitude
-            adress = getAddress(x, y, context)
-        }
-        Log.e("[GPS]", "${x}, ${y}")
     }
 
     //위도, 경도로부터 주소를 계산하는 함수
