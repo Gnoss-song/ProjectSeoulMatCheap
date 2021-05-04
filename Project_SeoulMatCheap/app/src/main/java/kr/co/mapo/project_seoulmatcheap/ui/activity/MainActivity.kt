@@ -21,9 +21,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if(savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01()).commit()
-        }
+//        if(savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01()).commit()
+//        }
         init()
     }
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     2 -> {
                         tab.text = getString(R.string.app_meun3)
-                        supportFragmentManager.beginTransaction().replace(R.id.container, CATEGORY_01()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container, CATEGORY_01(this@MainActivity)).commit()
                     }
                     3 -> {
                         tab.text = getString(R.string.app_meun4)
