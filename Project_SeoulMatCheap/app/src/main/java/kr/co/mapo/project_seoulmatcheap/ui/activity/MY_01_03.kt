@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.util.SparseBooleanArray
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -32,7 +33,15 @@ class MY_01_03 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMy0103Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        //백버튼
+        with(supportActionBar) {
+            this!!.setDisplayHomeAsUpEnabled(true)
+            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            setTitle(R.string.notice_title)
+        }
 
+        //데이터 테스트
         val itemData = mutableListOf<MY0103Item>()
         itemData.add(MY0103Item("04.21 안내", getText(R.string.notice).toString(), "2021-04-21", getText(R.string.notice1).toString()))
         itemData.add(MY0103Item("04.14 안내", getText(R.string.notice).toString(), "2021-04-14", getText(R.string.notice2).toString()))
@@ -49,17 +58,17 @@ class MY_01_03 : AppCompatActivity() {
         itemData.add(MY0103Item("08.15 업데이트", getText(R.string.update).toString(), "2020-08-15", getText(R.string.notice13).toString()))
         itemData.add(MY0103Item("08.14 안내",  getText(R.string.notice).toString(), "2020-08-14",getText(R.string.notice14).toString()))
 
-
-
-
         //리사이클러뷰 어댑터 연결
         val adapter2 = My0103Adapter(itemData)
-
         binding.recycler2.adapter = adapter2
-
         binding.recycler2.layoutManager = LinearLayoutManager(this)
-
-
-
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

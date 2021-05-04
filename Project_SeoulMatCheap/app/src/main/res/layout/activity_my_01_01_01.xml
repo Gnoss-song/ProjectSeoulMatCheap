@@ -20,10 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/myfavorite_title_modify"
             android:textColor="@color/white_93"
-            android:drawableStart="@drawable/ic_back_icon"
-
             android:textSize="24dp">
 
         </TextView>

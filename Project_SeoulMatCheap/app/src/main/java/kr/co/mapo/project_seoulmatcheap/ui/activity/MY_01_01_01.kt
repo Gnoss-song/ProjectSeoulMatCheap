@@ -7,6 +7,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  */
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,11 +24,17 @@ class MY_01_01_01 : AppCompatActivity() {
     private lateinit var adapter : My010101Adapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMy010101Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        //백버튼
+        with(supportActionBar) {
+            this!!.setDisplayHomeAsUpEnabled(true)
+            this!!.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            setTitle(R.string.myfavorite_title_modify)
+        }
 
-
+        //데이터 테스트
         val itemData = mutableListOf<Item>()
         itemData.add(Item(R.drawable.solip, "솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km", "4.7"))
         itemData.add(Item(R.drawable.poonyeon, "풍년갈비", "서울특별시 마포구 동교로 264 (연남동", "한식", "1.4km", "4.4"))
@@ -115,7 +122,6 @@ class MY_01_01_01 : AppCompatActivity() {
             val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
             val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
 
-
             okButton.setOnClickListener {
                 Toast.makeText(this,"삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                 adapter.requestRemove(click = true)
@@ -129,7 +135,14 @@ class MY_01_01_01 : AppCompatActivity() {
 
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
 }

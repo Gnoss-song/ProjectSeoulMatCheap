@@ -25,17 +25,13 @@ class InformDetailAdapter (
     private val itemList: MutableList<Item>
     ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>(){
 
-
-
     inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
         val name: TextView = itemView.findViewById(R.id.name)
         val address: TextView = itemView.findViewById(R.id.address)
         val distance: TextView = itemView.findViewById(R.id.distance)
         val score: TextView = itemView.findViewById(R.id.score)
         val sort: TextView = itemView.findViewById(R.id.sort)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
@@ -62,7 +58,6 @@ class InformDetailAdapter (
             target.putExtra("distance",itemData.distance)
             target.putExtra("score",itemData.score)
             target.putExtra("sort",itemData.sort)
-
         }
     }
     override fun getItemCount() = itemList.size

@@ -22,17 +22,14 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_02
 class My0102Adapter(
         private val list: MutableList<Model>,
         private val owner : Activity
-//        private val context : Context
         ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
-
+    //아이템 제거
     private fun removeItem (position: Int){
         if(position>=0) {
             list.removeAt(position)
             notifyDataSetChanged()
         }
     }
-
 
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
@@ -66,8 +63,7 @@ class My0102Adapter(
         val delete : Button = itemView.findViewById(R.id.btn_delete)
         val modify : Button = itemView.findViewById(R.id.btn_modify)
     }
-    // getItemViewType의 리턴값 Int가 viewType으로 넘어온다.
-    // viewType으로 넘어오는 값에 따라 viewHolder를 알맞게 처리해주면 된다.
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View?
         return when (viewType) {
@@ -86,13 +82,13 @@ class My0102Adapter(
             else -> throw RuntimeException("알 수 없는 뷰 타입 에러")
         }
     }
+
     override fun getItemCount(): Int {
         return list.size
     }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int){
         val obj = list[position]
-
-
         when (obj.type) {
             Model.IMAGE_TYPE -> {
                 (holder as ImageTypeViewHolder).title.text = obj.title
@@ -101,18 +97,14 @@ class My0102Adapter(
                 holder.image.setImageResource(obj.IV)
                 holder.review.text = obj.review
                 holder.delete.setOnClickListener {
-                    //삭제하기 버튼 클릭시
                     val mDeleteView =
                             LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
                     mAlertDialog.window?.setBackgroundDrawable(null)
-                    //mAlertDialog.window?.setLayout(850, 320)
-
-                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
+                                       val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
-
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         mAlertDialog.dismiss()
@@ -132,10 +124,8 @@ class My0102Adapter(
                     target.putExtra("review",obj.review)
                     owner.startActivity(target)
                 }
-
             }
             Model.IMAGE_TYPE2 -> {
-
                 (holder as ImageType2ViewHolder).title.text = obj.title
                 holder.date.text = obj.date
                 holder.rate.rating = obj.ratingBar
@@ -143,17 +133,14 @@ class My0102Adapter(
                 holder.image2.setImageResource(obj.IV2!!)
                 holder.review.text = obj.review
                 holder.delete.setOnClickListener {
-                    //삭제하기 버튼 클릭시
                     val mDeleteView =
                             LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
                     mAlertDialog.window?.setBackgroundDrawable(null)
-
                     val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
-
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         mAlertDialog.dismiss()
@@ -184,17 +171,14 @@ class My0102Adapter(
                 holder.image3.setImageResource(obj.IV3!!)
                 holder.review.text = obj.review
                 holder.delete.setOnClickListener() {
-                    //삭제하기 버튼 클릭시
                     val mDeleteView =
                             LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
                     val mBuilder =
                             androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
                     val mAlertDialog = mBuilder.show()
                     mAlertDialog.window?.setBackgroundDrawable(null)
-
                     val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
-
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         mAlertDialog.dismiss()
@@ -219,10 +203,9 @@ class My0102Adapter(
             }
         }
     }
-    // 여기서 받는 position은 데이터의 index다.
+
     override fun getItemViewType(position: Int): Int {
         Log.d("MultiViewTypeAdapter", "Hi, getItemViewType")
-
         return list[position].type
     }
 

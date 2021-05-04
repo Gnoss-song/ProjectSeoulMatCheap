@@ -29,44 +29,30 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
 class My010101Adapter(
     private val itemList: MutableList<Item>
 ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
-
-
-
-    // CheckBox의 클릭 상태를 저장할 array 객체
+    //체크박스 상태 저장
     private var checkboxStatus = SparseBooleanArray()
 
-
     inner class ViewHolderClass(private val binding : Inform0101Binding) : RecyclerView.ViewHolder(binding.root) {
-
-
         val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
         val name: TextView = itemView.findViewById(R.id.name)
         val address: TextView = itemView.findViewById(R.id.address)
         val distance: TextView = itemView.findViewById(R.id.distance)
         val score: TextView = itemView.findViewById(R.id.score)
         val sort: TextView = itemView.findViewById(R.id.sort)
-
         fun bind(itemList:Item) = with(binding){
             checkboxUser.isChecked = checkboxStatus[adapterPosition]
-            Log.d("체크박스","${checkboxStatus}")
-
             checkboxUser.setOnClickListener {
                 if (!checkboxUser.isChecked)
                     checkboxStatus.put(adapterPosition, false)
                 else
                     checkboxStatus.put(adapterPosition, true)
                 notifyItemChanged(adapterPosition)
-
             }
-
         }
-
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolderClass
             = ViewHolderClass(Inform0101Binding.inflate(LayoutInflater.from(parent.context), parent, false))
-
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val itemData = itemList[position]
@@ -79,7 +65,6 @@ class My010101Adapter(
             sort.text = itemData.sort
             bind(itemList[position])
         }
-
         holder.itemView.setOnClickListener{
             val target = Intent(Activity(),INFORM_02::class.java)
             target.putExtra("marketIV",itemData.marketIV)
@@ -89,7 +74,6 @@ class My010101Adapter(
             target.putExtra("score",itemData.score)
             target.putExtra("sort",itemData.sort)
         }
-
     }
 
     override fun getItemCount() = itemList.size

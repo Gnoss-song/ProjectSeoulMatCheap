@@ -7,6 +7,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  */
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,15 @@ class MY_01_02 : AppCompatActivity() {
 
         binding = ActivityMy0102Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        //백버튼
+        with(supportActionBar) {
+            this!!.setDisplayHomeAsUpEnabled(true)
+            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            setTitle(R.string.myreview_title)
+        }
 
+        //데이터 테스트
         val list = mutableListOf(
                 Model(Model.IMAGE_TYPE, "성수칼국수", "2021.04.03", 3.5f,R.drawable.halbum,null,null,getText(R.string.review1).toString()),
                 Model(Model.IMAGE_TYPE2, "모르겠어집", "2021.03.15", 4.5f,R.drawable.solip,R.drawable.btn_homeaddress,null,getText(R.string.review2).toString()),
@@ -39,20 +48,23 @@ class MY_01_02 : AppCompatActivity() {
                 Model(Model.IMAGE_TYPE3, "6번입니다", "2020.07.22", 1.0f,R.drawable.poonyeon,R.drawable.solip,R.drawable.poonyeon,getText(R.string.review9).toString()),
                 Model(Model.IMAGE_TYPE, "7번입니다", "2020.12.12", 1.5f,R.drawable.wellbeing,null,null,getText(R.string.review10).toString()),
                 Model(Model.IMAGE_TYPE, "8번입니다", "2020.03.03", 4.5f,R.drawable.halbum,null,null,getText(R.string.review11).toString()),
-                Model(Model.IMAGE_TYPE2, "9번입니다", "2020.01.03", 4.0f,R.drawable.solip,R.drawable.western,null,getText(R.string.review12).toString()),
-
+                Model(Model.IMAGE_TYPE2, "9번입니다", "2020.01.03", 4.0f,R.drawable.solip,R.drawable.western,null,getText(R.string.review12).toString())
         )
+        //아이템 구분선
         val  dividerItemDecoration =
                 DividerItemDecoration(binding.recycler3.context, LinearLayoutManager(this).orientation)
-
         binding.recycler3.addItemDecoration(dividerItemDecoration)
 
         val adpater = My0102Adapter(list ,this)
         binding.recycler3.layoutManager = LinearLayoutManager(this)
         binding.recycler3.adapter = adpater
-
     }
-
-
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

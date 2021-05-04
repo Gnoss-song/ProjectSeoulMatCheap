@@ -11,10 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/round_button2"
+        android:background="@drawable/round_button"
         android:elevation="@dimen/elevation1"
         android:orientation="horizontal"
-        android:padding="@dimen/margin_basic">
+        android:paddingRight="@dimen/margin_basic"
+        android:paddingLeft="@dimen/margin_basic"
+        android:paddingBottom="@dimen/margin_basic">
 
 
         <TextView
