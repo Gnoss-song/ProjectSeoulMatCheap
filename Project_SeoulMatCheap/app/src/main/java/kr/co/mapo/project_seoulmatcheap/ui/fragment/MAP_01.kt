@@ -42,7 +42,6 @@ class MAP_01(
     private lateinit var binding : FragmentMap01Binding
     private lateinit var naverMap : NaverMap
     private lateinit var mapFragment : MapFragment
-    private var address = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +59,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        address = SeoulMatCheap.getInstance().adress
+        binding.toolbar.title = SeoulMatCheap.getInstance().adress
         mapFragment.getMapAsync(this)
     }
 
@@ -112,7 +111,7 @@ class MAP_01(
 
     fun showList(v : View) {
         val intent = Intent(owner, MAP_01_01::class.java)
-        intent.putExtra(ADDRESS, address)
+        intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().adress)
         startActivity(intent)
     }
 
