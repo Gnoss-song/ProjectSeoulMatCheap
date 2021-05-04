@@ -68,7 +68,7 @@ class AutoCompleteAdapter(
             changeTextColor(constraint)
             itemView.setOnClickListener {
                 val edit = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE).edit()
-                edit.putString("word.text", word.text.toString().trim())
+                edit.putString("word.text", word.text.toString().trim()).apply()
                 owner.supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container, SEARCH_01_01.newInstance(owner, word.text.toString()))

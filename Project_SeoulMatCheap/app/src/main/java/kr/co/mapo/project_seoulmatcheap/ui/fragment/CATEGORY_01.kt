@@ -20,7 +20,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.adpater.GridRecyclerViewAdapter
 class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener {
 
     companion object {
-        fun newInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
+        fun newInstance(owner: AppCompatActivity) : Fragment {
             return CATEGORY_01(owner)
         }
     }
@@ -85,7 +85,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                 show().window?.setBackgroundDrawable(null)
             }
         }
-        binding.categoryLocationTV.text = SeoulMatCheap.getInstance().adress
+        binding.categoryLocationTV.text = SeoulMatCheap.getInstance().address
     }
 
     override fun onClick(v: View?) {
