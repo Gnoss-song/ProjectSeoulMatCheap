@@ -12,10 +12,6 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
-enum class BOTTOM_TAP(val position: Int) {
-    MAP(0), SEARCH(1), MAIN(2), MATCHEAP(3), MY(4)
-}
-
 class MainActivity : AppCompatActivity() {
 
     private var pressedTime : Long = 0
