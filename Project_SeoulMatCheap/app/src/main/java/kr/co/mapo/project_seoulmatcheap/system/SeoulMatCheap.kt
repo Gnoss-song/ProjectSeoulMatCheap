@@ -74,6 +74,7 @@ class SeoulMatCheap : Application() {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
         val provider = locationManager.getBestProvider(Criteria(), true)
+        Log.e("[GPS0]", "$provider")
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -86,23 +87,27 @@ class SeoulMatCheap : Application() {
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
-                    if (location != null) {
-                        x = location.latitude
-                        y = location.longitude
-                        address.value = getAddress(x, y, context)
+                    if(location == null) {
+                        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {
+                            updateLocation(it.latitude, it.longitude, context)
+                        })
+                    } else {
+                        updateLocation(location.latitude, location.longitude, context)
                     }
-                    Log.e("[GPS]", "$x, $y, ${address.value}")
                 }
 
         }
     }
 
     //위도, 경도로부터 주소를 계산하는 함수
-    fun getAddress(lat: Double, lng: Double, context: Context): String {
-        val geocoder = Geocoder(context, Locale.getDefault()) //주소 구하기 객체
-        val address : String = geocoder.getFromLocation(lat, lng, 1)[0].getAddressLine(0) // 현재 주소
-        Log.e("[address]", address)
-        return address.slice(11 until address.length)
+    private fun updateLocation(lat: Double, lng: Double, context: Context) {
+        this.x = lat
+        this.y = lng
+        this.address.value = Geocoder(context, Locale.getDefault())
+            .getFromLocation(lat, lng, 1)[0]
+            .getAddressLine(0)
+            .substring(11)
+        Log.e("[GSP]", "$x, $y, ${address.value}")
     }
 
 }
