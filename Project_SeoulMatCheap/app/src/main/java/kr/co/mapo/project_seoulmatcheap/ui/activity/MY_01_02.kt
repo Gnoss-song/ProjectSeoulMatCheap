@@ -6,14 +6,10 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  * @desc
  */
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0102Binding
@@ -38,7 +34,7 @@ class MY_01_02 : AppCompatActivity() {
         //데이터 테스트
         val list = mutableListOf(
                 Model(Model.IMAGE_TYPE, "성수칼국수", "2021.04.03", 3.5f,R.drawable.halbum,null,null,getText(R.string.review1).toString()),
-                Model(Model.IMAGE_TYPE2, "모르겠어집", "2021.03.15", 4.5f,R.drawable.solip,R.drawable.btn_homeaddress,null,getText(R.string.review2).toString()),
+                Model(Model.IMAGE_TYPE2, "모르겠어집", "2021.03.15", 4.5f,R.drawable.solip,R.drawable.ic_homeaddress,null,getText(R.string.review2).toString()),
                 Model(Model.IMAGE_TYPE3, "맛있어요집", "2021.03.10", 4.0f,R.drawable.poonyeon,R.drawable.custom_checkbox,R.drawable.solip,getText(R.string.review3).toString()),
                 Model(Model.IMAGE_TYPE3, "1번입니다", "2021.03.07", 2.0f,R.drawable.poonyeon,R.drawable.solip,R.drawable.wellbeing,getText(R.string.review4).toString()),
                 Model(Model.IMAGE_TYPE, "2번입니다", "2021.02.10", 3.5f,R.drawable.wellbeing,null,null,getText(R.string.review5).toString()),

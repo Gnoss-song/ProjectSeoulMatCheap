@@ -6,23 +6,20 @@ package kr.co.mapo.project_seoulmatcheap.ui.adpater
  * @desc
  */
 import android.app.Activity
-import android.content.ClipData
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
-import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_01
 
 class InformDetailAdapter (
-    private val itemList: MutableList<Item>
+    private val itemList: MutableList<Item>,
+    private val owner : Activity
     ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>(){
 
     inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -58,6 +55,7 @@ class InformDetailAdapter (
             target.putExtra("distance",itemData.distance)
             target.putExtra("score",itemData.score)
             target.putExtra("sort",itemData.sort)
+            owner.startActivity(target)
         }
     }
     override fun getItemCount() = itemList.size

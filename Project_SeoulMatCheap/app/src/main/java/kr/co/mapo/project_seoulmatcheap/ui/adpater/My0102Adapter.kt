@@ -97,13 +97,12 @@ class My0102Adapter(
                 holder.image.setImageResource(obj.IV)
                 holder.review.text = obj.review
                 holder.delete.setOnClickListener {
-                    val mDeleteView =
-                            LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
-                    val mBuilder =
-                            androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
-                    val mAlertDialog = mBuilder.show()
-                    mAlertDialog.window?.setBackgroundDrawable(null)
-                                       val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
+                    val mDeleteView =LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_delete, null)
+                    val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDeleteView)
+                    val mAlertDialog = mBuilder.show().apply {
+                        window?.setBackgroundDrawable(null)
+                    }
+                    val okButton = mDeleteView.findViewById<Button>(R.id.btn_delete_ok)
                     val cancelButton = mDeleteView.findViewById<Button>(R.id.btn_delete_no)
                     okButton.setOnClickListener {
                         Toast.makeText(owner, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()

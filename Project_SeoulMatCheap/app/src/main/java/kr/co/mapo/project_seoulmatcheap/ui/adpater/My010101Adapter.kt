@@ -2,16 +2,11 @@ package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.core.util.*
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
@@ -27,7 +22,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
  */
 
 class My010101Adapter(
-    private val itemList: MutableList<Item>
+    private val itemList: MutableList<Item>,
+    private val owner : Activity
 ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
     //체크박스 상태 저장
     private var checkboxStatus = SparseBooleanArray()
@@ -66,13 +62,14 @@ class My010101Adapter(
             bind(itemList[position])
         }
         holder.itemView.setOnClickListener{
-            val target = Intent(Activity(),INFORM_02::class.java)
+            val target = Intent(owner, INFORM_02::class.java)
             target.putExtra("marketIV",itemData.marketIV)
             target.putExtra("name",itemData.name)
             target.putExtra("address",itemData.address)
             target.putExtra("distance",itemData.distance)
             target.putExtra("score",itemData.score)
             target.putExtra("sort",itemData.sort)
+            owner.startActivity(target)
         }
     }
 

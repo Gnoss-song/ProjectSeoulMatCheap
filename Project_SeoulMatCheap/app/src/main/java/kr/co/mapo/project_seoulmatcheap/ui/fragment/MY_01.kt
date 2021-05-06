@@ -7,7 +7,6 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
  */
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +21,13 @@ import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
 class MY_01(private val owner : AppCompatActivity): Fragment() {
+
     companion object {
         fun newInstance(owner: AppCompatActivity) : Fragment {
             return MY_01(owner)
         }
     }
+
     private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
 
     override fun onCreateView(
@@ -36,40 +37,39 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //다이얼로그//
+        // 다이얼로그 //
+
+        // 이용약관 //
         binding.btnService.setOnClickListener {
-            val mDialogView =
-                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_service, null)
-            val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDialogView)
-                    .setTitle(R.string.dialog_title)
-            val mAlertDialog = mBuilder.show()
+            val mDialogView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_service, null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDialogView).setTitle(null)
+            val mAlertDialog = mBuilder.show().apply {
+                window?.setBackgroundDrawable(null)
+            }
             val okButton = mDialogView.findViewById<Button>(R.id.popup_ok)
             okButton.setOnClickListener {
                 mAlertDialog.dismiss()
             }
         }
-        // 도움말//
+        // 도움말 //
         binding.btnHelp.setOnClickListener {
-            val mHelpView =
-                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_help, null)
-            val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mHelpView)
-            val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setBackgroundDrawable(null)
+            val mHelpView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_help, null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mHelpView)
+            val mAlertDialog = mBuilder.show().apply {
+                window?.setBackgroundDrawable(null)
+            }
             val okButton = mHelpView.findViewById<Button>(R.id.btn_help_ok)
             okButton.setOnClickListener {
                 mAlertDialog.dismiss()
             }
         }
-        //로그아웃 //
+        // 로그아웃 //
         binding.btnLogout.setOnClickListener {
-            val mLogoutView =
-                LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_logout, null)
-            val mBuilder =
-                androidx.appcompat.app.AlertDialog.Builder(owner).setView(mLogoutView)
-            val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setBackgroundDrawable(null)
+            val mLogoutView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_logout, null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mLogoutView)
+            val mAlertDialog = mBuilder.show().apply {
+                window?.setBackgroundDrawable(null)
+            }
             val okButton = mLogoutView.findViewById<Button>(R.id.btn_logout_ok)
             val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_logout_no)
 
@@ -89,14 +89,13 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
                 mAlertDialog.dismiss()
             }
         }
-        //회원탈퇴
+        // 회원탈퇴 //
         binding.btnWithdrawal.setOnClickListener{
-            val mWithdrawalView =
-                    LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_withdrawal, null)
-            val mBuilder =
-                    androidx.appcompat.app.AlertDialog.Builder(owner).setView(mWithdrawalView)
-            val mAlertDialog = mBuilder.show()
-            mAlertDialog.window?.setBackgroundDrawable(null)
+            val mWithdrawalView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_withdrawal, null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mWithdrawalView)
+            val mAlertDialog = mBuilder.show().apply {
+                window?.setBackgroundDrawable(null)
+            }
             val okButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_ok)
             val cancelButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_no)
             okButton.setOnClickListener {
@@ -131,22 +130,17 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
         binding.btnNotice.setOnClickListener {
             val intent03 = Intent(activity, MY_01_03::class.java)
             startActivity(intent03)
-            Log.e("TEST", "여기인가?")
         }
         //건의사항 메일보내기
         binding.btnReport.setOnClickListener {
             val sendEmail = Intent(Intent.ACTION_SEND)
-            sendEmail.type = "plain/Text"
-            sendEmail.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(getString(R.string.email)))
-            sendEmail.putExtra(
-                Intent.EXTRA_SUBJECT,
-                "<" + getString(R.string.app_name) + " " + getString(R.string.report) + ">"
-            )
-            sendEmail.putExtra(
-                Intent.EXTRA_TEXT,
-                "기기명 (Device):\n안드로이드 OS (Android OS):\n내용 (Content):\n"
-            )
-            sendEmail.type = "message/rfc822"
+            with(sendEmail){
+                type = "plain/Text"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(getString(R.string.email)))
+                putExtra(Intent.EXTRA_SUBJECT,"<" + getString(R.string.app_name) + " " + getString(R.string.report) + ">")
+                putExtra(Intent.EXTRA_TEXT,"기기명 (Device):\n안드로이드 OS (Android OS):\n내용 (Content):\n")
+                type = "message/rfc822"
+            }
             startActivity(sendEmail)
         }
     }
