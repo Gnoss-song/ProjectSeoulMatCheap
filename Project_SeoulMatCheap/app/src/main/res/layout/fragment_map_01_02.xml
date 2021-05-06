@@ -9,21 +9,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="450dp"
+        android:layout_height="350dp"
         android:background="@drawable/round_edge"
         android:elevation="@dimen/elevation1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
-            android:id="@+id/close_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:background="@null"
-            android:src="@drawable/ic_round_clear_24"
+        <View
+            android:id="@+id/view2"
+            android:layout_width="@dimen/map_item_width"
+            android:layout_height="@dimen/map_item_height"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_basic4"
+            android:background="@drawable/round_button2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,21 +31,34 @@
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_basic2"
             android:layout_marginTop="@dimen/margin_basic4"
             android:text="@string/filter_menu1"
+            android:textColor="@color/main"
             android:textSize="@dimen/text_filter_title"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/close_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_basic2"
+            android:layout_marginBottom="@dimen/margin_basic4"
+            android:background="@color/main"
+            android:text="@string/filter_menu1_add"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size2"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="@+id/view4" />
 
         <View
             android:id="@+id/view4"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="@dimen/margin_basic2"
             android:layout_marginTop="@dimen/margin_height"
-            android:layout_marginEnd="@dimen/margin_basic2"
-            android:background="#858585"
+            android:background="@color/divide_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -70,21 +83,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton1"
+                <ToggleButton
+                    android:id="@+id/button_hansik"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_hansik" />
+                    android:background="@drawable/icon_hansik_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/text_hansik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category1"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -95,21 +110,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
+                <ToggleButton
+                    android:id="@+id/button_japan"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_japan" />
+                    android:background="@drawable/icon_japan_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/text_japan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category2"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -120,21 +137,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
+                <ToggleButton
+                    android:id="@+id/button_china"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_china" />
+                    android:background="@drawable/icon_china_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/text_china"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category3"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -145,21 +164,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton4"
+                <ToggleButton
+                    android:id="@+id/button_food"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_food" />
+                    android:background="@drawable/icon_food_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/text_food"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category4"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -186,21 +207,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton5"
+                <ToggleButton
+                    android:id="@+id/button_wash"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_wash" />
+                    android:background="@drawable/icon_wash_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/text_wash"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category5"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -211,21 +234,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton6"
+                <ToggleButton
+                    android:id="@+id/button_beauty"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_beauty" />
+                    android:background="@drawable/icon_beauty_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/text_beauty"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category6"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -236,21 +261,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton7"
+                <ToggleButton
+                    android:id="@+id/button_hotel"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_hotel" />
+                    android:background="@drawable/icon_hotel_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/text_hotel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category7"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -261,21 +288,23 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/imageButton8"
+                <ToggleButton
+                    android:id="@+id/button_store"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:background="@null"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/icon_store" />
+                    android:background="@drawable/icon_store_off"
+                    android:textOff="@null"
+                    android:textOn="@null" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/text_store"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_height"
                     android:gravity="center"
                     android:text="@string/category8"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_icon" />
             </LinearLayout>
 
@@ -286,10 +315,12 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_basic2"
             android:layout_marginTop="@dimen/margin_basic3"
             android:text="@string/filter_menu2"
+            android:textColor="@color/main"
             android:textSize="@dimen/text_filter_title"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -297,10 +328,8 @@
             android:id="@+id/view5"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginStart="@dimen/margin_basic2"
             android:layout_marginTop="@dimen/margin_height"
-            android:layout_marginEnd="@dimen/margin_basic2"
-            android:background="#858585"
+            android:background="@color/divide_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />

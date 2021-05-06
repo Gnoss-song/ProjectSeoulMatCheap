@@ -33,10 +33,13 @@
 
     <!--텍스트메뉴버튼-->
     <dimen name="text_menu">20sp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size2">12sp</dimen>
+    <dimen name="text_padding">3dp</dimen>
 
     <!--아이콘 크기-->
-    <dimen name="icon_width">50dp</dimen>
-    <dimen name="icon_height">50dp</dimen>
+    <dimen name="icon_width">40dp</dimen>
+    <dimen name="icon_height">40dp</dimen>
     <dimen name="icon_logo">250dp</dimen>
     <dimen name="logo_height">64dp</dimen>
 

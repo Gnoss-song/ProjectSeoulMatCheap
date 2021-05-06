@@ -27,4 +27,6 @@
     <color name="transparent">#1A000000</color>
     <color name="transparentcolor">#8B42AFDA</color>
 
+    <color name="divide_line">#EEEEEE</color>
+
 </resources>
