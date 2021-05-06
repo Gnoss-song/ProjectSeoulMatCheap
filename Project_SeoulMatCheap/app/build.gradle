@@ -74,4 +74,7 @@ dependencies {
     //네이버로그인
     implementation files('libs/naveridlogin_android_sdk_4.2.6.aar')
 
+    //구글 FusedLocationProvider
+    implementation "com.google.android.gms:play-services-location:18.0.0"
+
 }

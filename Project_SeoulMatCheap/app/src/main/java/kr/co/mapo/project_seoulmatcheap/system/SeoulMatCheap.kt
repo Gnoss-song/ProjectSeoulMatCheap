@@ -5,16 +5,18 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.Criteria
-import android.location.Geocoder
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
+import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
 
@@ -46,8 +48,11 @@ class SeoulMatCheap : Application() {
 
     var x : Double = SEOULCITYHALL_X     //위도
     var y : Double = SEOULCITYHALL_Y      //경도
-    var address : String = SEOULCITYHALL_ADDRESS     //현재 위치 주소
-    lateinit var sharedPreferences : SharedPreferences
+    var address : MutableLiveData<String> = MutableLiveData()
+
+    init {
+        this.address.value = SEOULCITYHALL_ADDRESS
+    }
 
     /* onCreate()
      * Activity, Service, Receiver가 생성되기전 어플리케이션이 시작중일때
@@ -55,7 +60,6 @@ class SeoulMatCheap : Application() {
      * */
     override fun onCreate() {
         super.onCreate()
-        sharedPreferences = getSharedPreferences(SEARCH_HISTROY, MODE_PRIVATE)
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
     }
@@ -63,21 +67,6 @@ class SeoulMatCheap : Application() {
     //토스트메세지 출력
     fun showToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    //네트워크 연결 여부를 반환하는 함수
-    fun isNetworkAvailable(context: Context): Boolean {
-        var result = false
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                result = true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                result = false
-            }
-        }
-        return result
     }
 
     //GPS로부터 위치정보를 얻어오는 함수
@@ -94,16 +83,17 @@ class SeoulMatCheap : Application() {
             showToast(context, context.getString(R.string.gps_notice))
             return
         } else {
-            // 해당 장치가 마지막으로 수신한 위치 얻기
-            val location = locationManager.getLastKnownLocation(provider)
-            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
-            Log.e("[TEST]", provider.toString())
-            if (location != null) {
-                x = location.latitude
-                y = location.longitude
-                address = getAddress(x, y, context)
-            }
-            Log.e("[GPS]", "$x, $y, $address")
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location : Location? ->
+                    if (location != null) {
+                        x = location.latitude
+                        y = location.longitude
+                        address.value = getAddress(x, y, context)
+                    }
+                    Log.e("[GPS]", "$x, $y, ${address.value}")
+                }
+
         }
     }
 

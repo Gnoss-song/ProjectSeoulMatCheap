@@ -106,6 +106,7 @@ class SPLASH_01 : AppCompatActivity() {
 
     private fun goMainActivity() {
         val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+        SeoulMatCheap.getInstance().setLocation(this)
         startActivity(intent)
         finish()
     }

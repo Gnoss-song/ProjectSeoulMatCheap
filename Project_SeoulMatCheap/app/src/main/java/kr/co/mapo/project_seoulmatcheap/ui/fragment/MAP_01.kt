@@ -28,14 +28,12 @@ import java.io.Serializable
 const val ADDRESS = "address"
 
 class MAP_01(
-    val owner : AppCompatActivity,
-    var x : Double,
-    var y : Double
+    val owner : AppCompatActivity
     ) : Fragment(), OnMapReadyCallback {
 
     companion object {
-        fun newInstance(owner: AppCompatActivity, x: Double, y:Double) : Fragment {
-            return MAP_01(owner, x, y)
+        fun newInstance(owner: AppCompatActivity) : Fragment {
+            return MAP_01(owner)
         }
     }
 
@@ -59,7 +57,7 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.title = SeoulMatCheap.getInstance().address
+        binding.toolbar.title = SeoulMatCheap.getInstance().address.value
         mapFragment.getMapAsync(this)
     }
 
@@ -67,9 +65,9 @@ class MAP_01(
     override fun onMapReady(p0: NaverMap) {
         naverMap = p0
         naverMap.apply {
-            cameraPosition = setMapCamera(x, y)
+            cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y)
         }
-        createInfoWindow("테스트1", createMaker(x, y, R.drawable.icon_hansik))
+        createInfoWindow("테스트1", createMaker(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().x, R.drawable.icon_hansik))
         createInfoWindow("테스트2", createMaker(37.564338, 126.910794, R.drawable.icon_china))
         createInfoWindow("테스트3", createMaker(37.564110, 126.911041, R.drawable.icon_japan))
     }
@@ -111,13 +109,13 @@ class MAP_01(
 
     fun showList(v : View) {
         val intent = Intent(owner, MAP_01_01::class.java)
-        intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address)
+        intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
         startActivity(intent)
     }
 
     fun resetLocation(v : View) {
         naverMap.apply {
-            cameraPosition = setMapCamera(x, y)
+            cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y)
         }
     }
 
