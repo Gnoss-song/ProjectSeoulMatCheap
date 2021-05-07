@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 /**
  * @author Gnoss
@@ -61,16 +61,7 @@ class My010101Adapter(
             sort.text = itemData.sort
             bind(itemList[position])
         }
-        holder.itemView.setOnClickListener{
-            val target = Intent(owner, INFORM_02::class.java)
-            target.putExtra("marketIV",itemData.marketIV)
-            target.putExtra("name",itemData.name)
-            target.putExtra("address",itemData.address)
-            target.putExtra("distance",itemData.distance)
-            target.putExtra("score",itemData.score)
-            target.putExtra("sort",itemData.sort)
-            owner.startActivity(target)
-        }
+
     }
 
     override fun getItemCount() = itemList.size

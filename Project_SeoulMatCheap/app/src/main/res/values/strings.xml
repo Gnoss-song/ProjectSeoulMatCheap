@@ -209,8 +209,8 @@
     <string name="withdrawl_contest"> &#160;&#160;&#160;탈퇴하시겠습니까?\n(정보는 복구되지 않습니다.)</string>
     <string name="notice">안내</string>
     <string name="update">업데이트</string>
-    <string name="modify">수정하기</string>
-    <string name="delete">삭제하기</string>
+    <string name="modify">수정</string>
+    <string name="delete">삭제</string>
 
     <!--
     공지사항 관련
@@ -974,13 +974,13 @@
     <string name="review12">앙장구밥은 처음 먹어보는데 비린내도 없고 꼬소하니 너무 맛있었어요! 양이 많지않아서 갈치찌개도 시켰는데 매콤하고 갈치도 많이 주셔서 좋았어요. 가족들 전부 만족했고 기장여행하시는분들께 추천드리고싶어요 :D</string>
 
 
-<!-- MAP_01_02 -->
-<string name="filter_menu0">적용</string>
-<string name="filter_menu1">종류</string>
-<string name="filter_menu2">거리</string>
-<string name="filter_distance1">100m</string>
-<string name="filter_distance2">500m</string>
-<string name="filter_distance3">2km</string>
+    <!-- MAP_01_02 -->
+    <string name="filter_menu0">적용</string>
+    <string name="filter_menu1">종류</string>
+    <string name="filter_menu2">거리</string>
+    <string name="filter_distance1">100m</string>
+    <string name="filter_distance2">500m</string>
+    <string name="filter_distance3">2km</string>
 
     <!--SEARCH -->
     <string name="search_hint">가게명/메뉴명 검색</string>

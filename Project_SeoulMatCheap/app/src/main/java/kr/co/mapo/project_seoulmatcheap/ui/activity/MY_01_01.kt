@@ -8,6 +8,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_02
 
 class MY_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0101Binding
+    private lateinit var itemData: MutableList<Item>
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
@@ -27,12 +29,13 @@ class MY_01_01 : AppCompatActivity() {
         binding = ActivityMy0101Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        //백버튼
-        with(supportActionBar) {
-            this!!.setDisplayHomeAsUpEnabled(true)
-            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            setTitle(R.string.myfavorite_title)
-        }
+//        //백버튼
+//        with(supportActionBar) {
+//            this!!.setDisplayHomeAsUpEnabled(true)
+//            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+//            setTitle(R.string.myfavorite_title)
+//
+//        }
 
         val itemData = mutableListOf<Item>()
         with(itemData){
@@ -41,6 +44,12 @@ class MY_01_01 : AppCompatActivity() {
             add(Item(R.drawable.wellbeing, "웰빙뚝배기", "서울특별시 마포구 동교로12길 21 (서교동)", "한식", "2.2km", "3.3"))
             add(Item(R.drawable.western, "웨스턴후라이드라이스", "서울특별시 마포구 홍익로 26 (동교동)", "일식", "0.5km", "4.5"))
             add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
+        }
+        //백버튼
+        with(supportActionBar) {
+            this!!.setDisplayHomeAsUpEnabled(true)
+            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            setTitle(R.string.myfavorite_title)
         }
         //리사이클러뷰 어댑터 연결
         val adapter = InformDetailAdapter(itemData,this)
@@ -56,6 +65,8 @@ class MY_01_01 : AppCompatActivity() {
             val intent = Intent(this,MY_01_01_01::class.java)
             startActivity(intent)
         }
+
+
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {

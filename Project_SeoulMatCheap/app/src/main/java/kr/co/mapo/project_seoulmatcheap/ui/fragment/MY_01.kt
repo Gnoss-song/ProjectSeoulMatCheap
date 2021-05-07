@@ -20,7 +20,9 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
-class MY_01(private val owner : AppCompatActivity): Fragment() {
+class MY_01(
+    private val owner : AppCompatActivity
+    ): Fragment() {
 
     companion object {
         fun newInstance(owner: AppCompatActivity) : Fragment {
@@ -28,11 +30,12 @@ class MY_01(private val owner : AppCompatActivity): Fragment() {
         }
     }
 
-    private val binding by lazy { FragmentMy01Binding.inflate(layoutInflater) }
+    private lateinit var binding : FragmentMy01Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        binding = FragmentMy01Binding.inflate(inflater,container,false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

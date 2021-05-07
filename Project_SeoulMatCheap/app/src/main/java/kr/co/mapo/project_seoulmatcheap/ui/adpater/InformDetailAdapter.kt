@@ -12,15 +12,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_01
 
 class InformDetailAdapter (
     private val itemList: MutableList<Item>,
-    private val owner : Activity
-    ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>(){
+    private val owner : AppCompatActivity
+    ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>() {
 
     inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
@@ -33,13 +35,16 @@ class InformDetailAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val view = LayoutInflater.from(parent.context).inflate(
-                R.layout.inform_01,parent,false)
+            R.layout.inform_01, parent, false
+        )
+
+
         return ViewHolderClass(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val itemData = itemList[position]
-        with(holder){
+        with(holder) {
             marketIV.setImageResource(itemData.marketIV)
             name.text = itemData.name
             address.text = itemData.address
@@ -47,17 +52,18 @@ class InformDetailAdapter (
             score.text = itemData.score
             sort.text = itemData.sort
         }
-        holder.itemView.setOnClickListener{
-            val target = Intent(Activity(),INFORM_02::class.java)
-            target.putExtra("marketIV",itemData.marketIV)
-            target.putExtra("name",itemData.name)
-            target.putExtra("address",itemData.address)
-            target.putExtra("distance",itemData.distance)
-            target.putExtra("score",itemData.score)
-            target.putExtra("sort",itemData.sort)
+        holder.itemView.setOnClickListener {
+            val target = Intent(owner, INFORM_02::class.java)
+            target.putExtra("marketIV", itemData.marketIV)
+            target.putExtra("name", itemData.name)
+            target.putExtra("address", itemData.address)
+            target.putExtra("distance", itemData.distance)
+            target.putExtra("score", itemData.score)
+            target.putExtra("sort", itemData.sort)
             owner.startActivity(target)
         }
     }
     override fun getItemCount() = itemList.size
 }
+
 
