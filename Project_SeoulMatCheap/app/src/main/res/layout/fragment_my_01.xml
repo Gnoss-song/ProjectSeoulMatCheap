@@ -1,75 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#BEF6F3F3"
-    android:gravity="center"
     android:orientation="vertical">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/main">
-
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="마이페이지"
-            android:textColor="@color/white_93"
-            android:textSize="24sp">
-
-        </TextView>
-
-    </androidx.appcompat.widget.Toolbar>
 
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_below="@id/toolbar">
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/linearlayout0"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
-            android:backgroundTint="#DCD6D6"
-            android:orientation="vertical"
-            android:paddingStart="10dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="0dp">
+            android:layout_height="wrap_content" >
 
-            <androidx.cardview.widget.CardView
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+                android:layout_alignParentTop="true"
+                android:background="@color/main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="마이페이지"
+                    android:textColor="@color/white_93"
+                    android:textSize="24sp">
+
+                </TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="18dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="0dp">
 
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardview"
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginTop="10dp"
                         app:cardCornerRadius="5dp"
-                        app:cardElevation="0dp">
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
                             android:id="@+id/profile"
@@ -79,99 +78,153 @@
                             app:srcCompat="@drawable/btn_bg" />
                     </androidx.cardview.widget.CardView>
 
-
-                    <LinearLayout
-                        android:id="@+id/linenarlayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_toEndOf="@+id/cardview"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/nickName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_marginBottom="3dp"
-                            android:layout_weight="1"
-                            android:text="@string/nickname"
-                            android:textSize="16dp" />
-
-                        <TextView
-                            android:id="@+id/emailAddress"
-                            android:layout_width="140dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="@string/email"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/img_rank"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_toEndOf="@id/linenarlayout"
-                        android:src="@drawable/btn_medal" />
-
-                    <TextView
-                        android:id="@+id/level"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:layout_toEndOf="@+id/img_rank"
-                        android:text="@string/level"
-                        android:textAlignment="textStart"
-                        android:textSize="11dp" />
-
                     <ImageView
                         android:id="@+id/btn_help"
                         android:layout_width="25dp"
                         android:layout_height="33dp"
-                        android:layout_below="@id/level"
-                        android:layout_toEndOf="@+id/img_rank"
-                        android:src="@drawable/ic_helpbtn" />
+                        android:layout_marginTop="28dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/ic_helpbtn"
+                        app:layout_constraintBottom_toTopOf="@+id/nickName"
+                        app:layout_constraintStart_toEndOf="@+id/cardview"
+                        app:layout_constraintTop_toTopOf="@+id/cardview" />
 
-
-                    <Button
-                        android:id="@+id/btn_logout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_below="@+id/img_rank"
-                        android:layout_alignStart="@+id/img_rank"
+                    <TextView
+                        android:id="@+id/nickName"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="118dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/btn_logout" />
+                        android:layout_marginEnd="118dp"
+                        android:gravity="center"
+                        android:text="@string/nickname"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardview" />
 
-                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/myfavoritedata"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="140dp"
+                        android:layout_marginEnd="110dp"
+                        android:gravity="center"
+                        android:text="10"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toStartOf="@+id/myleveldata"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/emailAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="100dp"
+                        android:gravity="center"
+                        android:text="@string/email"
+                        android:textSize="11sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/nickName" />
+
+                    <TextView
+                        android:id="@+id/myfavorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="220dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="찜한 가게"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/myfavoritedata" />
+
+                    <TextView
+                        android:id="@+id/myreviewdata"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="140dp"
+                        android:layout_marginEnd="40dp"
+                        android:text="10"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toStartOf="@+id/myleveldata"
+                        app:layout_constraintStart_toEndOf="@+id/myfavoritedata"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/myreview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="마이 리뷰"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/mylevel"
+                        app:layout_constraintStart_toEndOf="@+id/myfavorite"
+                        app:layout_constraintTop_toBottomOf="@+id/myreviewdata" />
+
+                    <TextView
+                        android:id="@+id/myleveldata"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="250dp"
+                        android:layout_marginTop="140dp"
+                        android:layout_marginEnd="60dp"
+                        android:text="10"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/mylevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="70dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="나의 레벨"
+                        android:textSize="11sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/myleveldata" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="5dp"
-                android:elevation="5dp"
-                android:layout_margin="5dp">
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-                <LinearLayout
-                    android:id="@+id/linearlayout"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="430dp"
-                    android:layout_marginTop="0dp"
-                    android:elevation="5dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp">
+                    android:layout_height="match_parent">
+
 
                     <Button
                         android:id="@+id/btn_favorite"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="8dp"
                         android:background="@drawable/custom_button_my_01"
                         android:drawableLeft="@drawable/btn_homeaddress"
 
@@ -185,13 +238,15 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_notice" />
 
                     <Button
                         android:id="@+id/btn_myreview"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="8dp"
                         android:background="@drawable/custom_button_my_01"
                         android:drawableLeft="@drawable/btn_homeaddress"
 
@@ -203,13 +258,15 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_favorite" />
 
                     <Button
                         android:id="@+id/btn_myreport"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="8dp"
                         android:background="@drawable/custom_button_my_01"
 
                         android:drawableLeft="@drawable/btn_homeaddress"
@@ -222,13 +279,15 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_myreview" />
 
                     <Button
                         android:id="@+id/btn_notice"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="8dp"
                         android:background="@drawable/custom_button_my_01"
                         android:drawableLeft="@drawable/btn_homeaddress"
                         android:drawableRight="@drawable/btn_nexticon"
@@ -240,13 +299,15 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
                         android:id="@+id/btn_report"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginBottom="8dp"
                         android:background="@drawable/custom_button_my_01"
                         android:drawableLeft="@drawable/btn_homeaddress"
                         android:drawableRight="@drawable/btn_nexticon"
@@ -257,7 +318,10 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_myreport" />
 
                     <Button
                         android:id="@+id/btn_version"
@@ -273,68 +337,80 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
 
-                        app:backgroundTint="@null" />
+                        app:backgroundTint="@null"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_report" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    <Button
-                        android:id="@+id/btn_withdrawal"
-                        android:layout_width="60dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="230dp"
-                        android:layout_marginTop="30dp"
-                        android:background="@drawable/btn_withdrawal" />
-
-
-                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/ic_logout"
+                app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-            <FrameLayout
-                android:id="@+id/help_Container"
-                android:layout_width="250dp"
-                android:layout_height="200dp"
-                android:visibility="gone" />
+            <Button
+                android:id="@+id/btn_withdrawal"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="140dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_withdrawal"
+                app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_logout"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintlayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linearlayout"
                 android:layout_alignParentBottom="true"
                 android:layout_weight="1"
-                android:background="#00ff0000">
+                android:background="#00ff0000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
 
                 <Button
                     android:id="@+id/btn_service"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:background="#00ff0000"
-                    android:gravity="center"
                     android:text="@string/service_manual"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="9sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
 
     <FrameLayout
         android:id="@+id/my_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteY="502dp">
 
     </FrameLayout>
 
-
-</RelativeLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>

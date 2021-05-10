@@ -14,6 +14,10 @@
     <dimen name="inner_frame_layout_padding">5dp</dimen>
 
     <dimen name="btn_icon"> 30dp </dimen>
+    <dimen name="btn_clickiconwidth"> 60dp </dimen>
+    <dimen name="btn_clickiconheight"> 20dp </dimen>
+
+
 
     <!--여백-->
     <dimen name="margin_basic">16dp</dimen>

@@ -62,7 +62,7 @@ class MY_01_01 : AppCompatActivity() {
 
         //화면 이동 MY_01_01_01
         binding.btnEdit.setOnClickListener {
-            val intent = Intent(this,MY_01_01_01::class.java)
+            val intent = Intent(this,INFORM_02_02::class.java)
             startActivity(intent)
         }
 

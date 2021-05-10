@@ -25,8 +25,8 @@
 
             <TextView
                 android:id="@+id/modifycontext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center"
@@ -40,8 +40,8 @@
 
             <Button
                 android:id="@+id/btn_modify_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
 
                 android:layout_marginTop="@dimen/margin_basic4"
@@ -53,8 +53,8 @@
 
             <Button
                 android:id="@+id/btn_modify_no"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
                 android:text="아니오"
                 app:layout_constraintEnd_toEndOf="parent"
