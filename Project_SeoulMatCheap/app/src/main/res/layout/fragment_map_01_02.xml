@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B3000000"
     tools:context=".ui.fragment.MAP_01_02">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_height="365dp"
         android:background="@drawable/round_edge"
         android:elevation="@dimen/elevation1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,23 +45,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_basic2"
-            android:layout_marginBottom="@dimen/margin_basic4"
-            android:background="@color/main"
             android:text="@string/filter_menu1_add"
-            android:textColor="@color/white"
+            android:textColor="@color/main"
             android:textSize="@dimen/text_size2"
-            app:layout_constraintBottom_toTopOf="@+id/view4"
-            app:layout_constraintEnd_toEndOf="@+id/view4" />
-
-        <View
-            android:id="@+id/view4"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/margin_height"
-            android:background="@color/divide_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -74,7 +62,7 @@
             android:weightSum="4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4">
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
 
             <LinearLayout
                 android:layout_width="@dimen/icon_width"
@@ -87,8 +75,8 @@
                     android:id="@+id/button_hansik"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_hansik_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -114,8 +102,8 @@
                     android:id="@+id/button_japan"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_japan_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -141,8 +129,8 @@
                     android:id="@+id/button_china"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_china_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -168,8 +156,8 @@
                     android:id="@+id/button_food"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_food_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -194,8 +182,10 @@
             android:layout_marginStart="@dimen/margin_basic2"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic2"
+            android:layout_marginBottom="@dimen/margin_basic"
             android:orientation="horizontal"
             android:weightSum="4"
+            app:layout_constraintBottom_toTopOf="@+id/view5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -211,8 +201,8 @@
                     android:id="@+id/button_wash"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_wash_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -238,8 +228,8 @@
                     android:id="@+id/button_beauty"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_beauty_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -265,8 +255,8 @@
                     android:id="@+id/button_hotel"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_hotel_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -292,8 +282,8 @@
                     android:id="@+id/button_store"
                     android:layout_width="@dimen/icon_width"
                     android:layout_height="@dimen/icon_height"
-                    android:scaleType="fitCenter"
                     android:background="@drawable/icon_store_off"
+                    android:scaleType="fitCenter"
                     android:textOff="@null"
                     android:textOn="@null" />
 
@@ -316,57 +306,95 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic3"
+            android:layout_marginTop="@dimen/margin_basic"
             android:text="@string/filter_menu2"
             android:textColor="@color/main"
             android:textSize="@dimen/text_filter_title"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
 
         <View
             android:id="@+id/view5"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/margin_height"
+            android:layout_marginTop="@dimen/margin_basic"
             android:background="@color/divide_line"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/filter_distance_right"
+            android:layout_marginEnd="@dimen/logo_height"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_500">
+
+            <RadioButton
+                android:id="@+id/button_100"
+                android:layout_width="@dimen/filter_distance"
+                android:layout_height="@dimen/filter_distance"
+                android:layout_weight="1"
+                android:buttonTint="@color/main"
+                app:useMaterialThemeColors="true" />
+
+            <RadioButton
+                android:id="@+id/button_500"
+                android:layout_width="@dimen/filter_distance"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:buttonTint="@color/main"
+                app:useMaterialThemeColors="true" />
+
+            <RadioButton
+                android:id="@+id/button_2000"
+                android:layout_width="@dimen/filter_distance"
+                android:layout_height="@dimen/filter_distance"
+                android:buttonTint="@color/main"
+                app:useMaterialThemeColors="true" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/text_100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/filter_distance_left"
+            android:text="@string/filter_distance1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_500" />
+
+        <TextView
+            android:id="@+id/text_500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_basic4"
+            android:text="@string/filter_distance2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_icon"
+            app:layout_constraintEnd_toStartOf="@+id/text_2000"
+            app:layout_constraintStart_toEndOf="@+id/text_100"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-        <ToggleButton
-            android:id="@+id/toggleButton1"
+        <TextView
+            android:id="@+id/text_2000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic4"
-            android:text="@string/filter_distance1"
-            android:textOff="@string/filter_distance1"
-            android:textOn="@string/filter_distance1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-        <ToggleButton
-            android:id="@+id/toggleButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/filter_distance2"
-            android:textOff="@string/filter_distance2"
-            android:textOn="@string/filter_distance2"
-            app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
-            app:layout_constraintStart_toEndOf="@+id/toggleButton1"
-            app:layout_constraintTop_toTopOf="@+id/toggleButton1" />
-
-        <ToggleButton
-            android:id="@+id/toggleButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_basic2"
+            android:layout_marginEnd="@dimen/filter_distance_right"
             android:text="@string/filter_distance3"
-            android:textOff="@string/filter_distance3"
-            android:textOn="@string/filter_distance3"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toggleButton2" />
+            app:layout_constraintTop_toTopOf="@+id/text_500" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

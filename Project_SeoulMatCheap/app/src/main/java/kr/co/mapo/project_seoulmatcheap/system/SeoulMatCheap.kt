@@ -32,6 +32,7 @@ const val SEARCH_HISTROY = "search_history_prefs"
 const val SEOULCITYHALL_X = 37.5662952
 const val SEOULCITYHALL_Y = 126.9779451
 const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
+const val SEOUL = "서울특별시"
 
 class SeoulMatCheap : Application() {
 
@@ -103,11 +104,18 @@ class SeoulMatCheap : Application() {
     private fun updateLocation(lat: Double, lng: Double, context: Context) {
         this.x = lat
         this.y = lng
+        val test = Geocoder(context, Locale.getDefault()).getFromLocation(lat, lng, 1)[0]
         this.address.value = Geocoder(context, Locale.getDefault())
             .getFromLocation(lat, lng, 1)[0]
             .getAddressLine(0)
             .substring(11)
         Log.e("[GSP]", "$x, $y, ${address.value}")
+    }
+
+    //서울시인지 여부 판단하는 함수
+    fun adminArea(lat: Double, lng: Double, context: Context) : Boolean {
+        val address = Geocoder(context, Locale.getDefault()).getFromLocation(lat, lng, 1)[0]
+        return address.adminArea === SEOUL
     }
 
 }
