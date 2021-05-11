@@ -33,7 +33,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         setHasOptionsMenu(true)
 
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
-            Log.e("[TEST0]", SeoulMatCheap.getInstance().address.value.toString())
             binding.categoryLocationTV.text = it
         })
 
