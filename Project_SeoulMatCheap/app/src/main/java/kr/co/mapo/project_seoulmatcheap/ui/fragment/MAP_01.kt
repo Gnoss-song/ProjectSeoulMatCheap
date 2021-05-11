@@ -140,11 +140,21 @@ class MAP_01(
     //정보창 생성함수
     private fun createInfoWindow(message : String, marker: Marker) : InfoWindow {
         return InfoWindow().apply {
+            adapter = object : InfoWindow.ViewAdapter() {
+                override fun getView(p0: InfoWindow): View {
+                    val view = View.inflate(owner, R.layout.map_item_infowindow, null)
+                    view.findViewById<TextView>(R.id.textView).text = message
+                    return view
+                }
+
+            }
+            /*
             adapter = object : InfoWindow.DefaultTextAdapter(owner) {
                 override fun getText(p0: InfoWindow): CharSequence {
                     return message
                 }
             }
+            */
             /*
             adapter = object : InfoWindow.DefaultViewAdapter(owner) {
                 override fun getContentView(p0: InfoWindow): View {

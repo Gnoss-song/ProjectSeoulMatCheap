@@ -106,12 +106,14 @@ class MAP_01_02 : BottomSheetDialogFragment() {
         if(button.isChecked) {
             button.background = requireContext().resources.getDrawable(on_image, null)
             with(text) {
+                setBackgroundColor(resources.getColor(R.color.map_circle, null))
                 setTextColor(resources.getColor(R.color.main, null))
                 typeface = Typeface.DEFAULT_BOLD
             }
         } else {
             button.background = requireContext().resources.getDrawable(off_image, null)
             with(text) {
+                background = null
                 setTextColor(resources.getColor(R.color.black, null))
                 typeface = null
             }

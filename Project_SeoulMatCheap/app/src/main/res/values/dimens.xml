@@ -38,6 +38,7 @@
     <dimen name="text_size">16sp</dimen>
     <dimen name="text_size2">12sp</dimen>
     <dimen name="text_padding">3dp</dimen>
+    <dimen name="text_padding2">5dp</dimen>
 
     <!--아이콘 크기-->
     <dimen name="icon_width">40dp</dimen>
