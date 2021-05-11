@@ -29,4 +29,6 @@
 
     <color name="divide_line">#EEEEEE</color>
 
+    <!--MAP_01-->
+    <color name="map_circle">#0DF25D3D</color>
 </resources>

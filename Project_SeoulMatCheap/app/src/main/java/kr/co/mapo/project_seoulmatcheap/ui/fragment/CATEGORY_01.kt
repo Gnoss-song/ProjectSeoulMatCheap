@@ -32,6 +32,11 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         binding.moveTV.isSelected = true
         setHasOptionsMenu(true)
 
+        SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
+            Log.e("[TEST0]", SeoulMatCheap.getInstance().address.value.toString())
+            binding.categoryLocationTV.text = it
+        })
+
         val manager = GridLayoutManager(context,4)
         with(binding.gridRecyclerView) {
             layoutManager = manager
@@ -87,14 +92,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                 show().window?.setBackgroundDrawable(null)
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        SeoulMatCheap.getInstance().address.observe(this, Observer {
-            Log.e("[TEST0]", SeoulMatCheap.getInstance().address.value.toString())
-            binding.categoryLocationTV.text = it
-        })
     }
 
     override fun onClick(v: View?) {

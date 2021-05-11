@@ -1,6 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PointF
 import android.location.Location
 import android.os.Bundle
@@ -10,19 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.InfoWindow
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.*
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
@@ -31,7 +30,7 @@ import java.io.Serializable
 import kotlin.properties.Delegates
 
 const val ADDRESS = "address"
-private const val MAP_ZOOM = 15.0
+private const val MAP_ZOOM = 18.0
 
 class MAP_01(
     val owner : AppCompatActivity
@@ -47,8 +46,6 @@ class MAP_01(
     private lateinit var naverMap : NaverMap
     private lateinit var mapFragment : MapFragment
     private lateinit var sheetBehavior : BottomSheetBehavior<LinearLayout>
-    private val x : Double = SeoulMatCheap.getInstance().x
-    private val y : Double = SeoulMatCheap.getInstance().y
     private lateinit var list : MutableList<StoreTest>
 
     override fun onCreateView(
@@ -69,7 +66,9 @@ class MAP_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.title = SeoulMatCheap.getInstance().address.value
+        SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
+            binding.toolbar.title = it
+        })
         mapFragment.getMapAsync(this)
     }
 
@@ -77,14 +76,27 @@ class MAP_01(
     override fun onMapReady(p0: NaverMap) {
         naverMap = p0
         naverMap.apply {
-            cameraPosition = setMapCamera(x, y)
+            val locationObserver = Observer<Location> {
+                cameraPosition = setMapCamera(it.latitude, it.longitude)
+                locationOverlay.apply {
+                    isVisible = true
+                    position = LatLng(it.latitude, it.longitude)
+                    icon = OverlayImage.fromResource(R.drawable.map_marker)
+                    iconHeight = 200
+                    iconWidth = 200
+                }
+            }
+            SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
             symbolScale = 0.8f
-            Marker().apply {
-                position = LatLng(x, y)
-                map = naverMap
-                icon = OverlayImage.fromResource(R.drawable.map_marker)
-                width = 200
-                height = 200
+            setOnMapClickListener { _, _ ->
+                if(sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                }
+            }
+            addOnCameraChangeListener { reason, _ ->
+                if(reason != CameraUpdate.REASON_DEVELOPER) {
+                    SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
+                }
             }
         }
         list.forEach{
@@ -133,7 +145,26 @@ class MAP_01(
                     return message
                 }
             }
+            /*
+            adapter = object : InfoWindow.DefaultViewAdapter(owner) {
+                override fun getContentView(p0: InfoWindow): View {
+                    val view = View.inflate(owner, R.layout.map_item_infowindow, null)
+                    view.findViewById<TextView>(R.id.textView).text = message
+                    return view
+                }
+            }
+             */
             open(marker)
+        }
+    }
+
+    //서클원 생성함수
+    private fun createCircle(lat:Double, lng:Double, m:Double) : CircleOverlay {
+        return CircleOverlay().apply {
+            center = LatLng(lat, lng)
+            radius = m
+            color = resources.getColor(R.color.map_circle, null)
+            map = naverMap
         }
     }
 
@@ -158,12 +189,11 @@ class MAP_01(
                 startActivity(intent)
             }
             R.id.button_filter -> {
-                owner.supportFragmentManager.beginTransaction().add(R.id.filter, MAP_01_02(owner))
-                    .commit()
+                MAP_01_02().show(owner.supportFragmentManager, FILTER)
             }
             R.id.button_gps -> {
                 naverMap.apply {
-                    cameraPosition = setMapCamera(x, y)
+                    cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y)
                 }
             }
         }

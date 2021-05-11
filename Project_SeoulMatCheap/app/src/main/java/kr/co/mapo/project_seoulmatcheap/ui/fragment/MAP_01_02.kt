@@ -1,6 +1,8 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
+import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,18 +12,21 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap0102Binding
 
-class MAP_01_02(val owner : AppCompatActivity) : Fragment() {
+const val FILTER = "filter_bottomSheet_dialog"
 
-    companion object {
-        fun getInstance(owner : AppCompatActivity) : Fragment {
-            return MAP_01_02(owner)
-        }
-    }
+class MAP_01_02 : BottomSheetDialogFragment() {
 
     private lateinit var binding : FragmentMap0102Binding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.filterBottomSheetTheme)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,13 +104,13 @@ class MAP_01_02(val owner : AppCompatActivity) : Fragment() {
     private fun optionSort(v1: View, on_image: Int, text : TextView, off_image: Int) {
         val button = v1 as ToggleButton
         if(button.isChecked) {
-            button.background = owner.resources.getDrawable(on_image, null)
+            button.background = requireContext().resources.getDrawable(on_image, null)
             with(text) {
                 setTextColor(resources.getColor(R.color.main, null))
                 typeface = Typeface.DEFAULT_BOLD
             }
         } else {
-            button.background = owner.resources.getDrawable(off_image, null)
+            button.background = requireContext().resources.getDrawable(off_image, null)
             with(text) {
                 setTextColor(resources.getColor(R.color.black, null))
                 typeface = null

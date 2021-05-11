@@ -41,4 +41,12 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!--FILTER-->
+    <style name="filterBottomSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/filterBottomSheetStyle</item>
+    </style>
+    <style name="filterBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@null</item>
+    </style>
+
 </resources>
