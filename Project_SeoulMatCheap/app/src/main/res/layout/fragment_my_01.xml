@@ -1,416 +1,425 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#BEF6F3F3"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-
-    <androidx.core.widget.NestedScrollView
+    <data>
+        <variable
+            name="review"
+            type="kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_02" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:background="#BEF6F3F3"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:background="@color/main"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/title2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:text="마이페이지"
-                    android:textColor="@color/white_93"
-                    android:textSize="24sp">
-
-                </TextView>
-
-            </androidx.appcompat.widget.Toolbar>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="18dp"
-                android:elevation="5dp"
-                app:cardCornerRadius="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="0dp">
-
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardview"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="10dp"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:id="@+id/profile"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitCenter"
-                            app:srcCompat="@drawable/btn_bg" />
-                    </androidx.cardview.widget.CardView>
-
-                    <ImageView
-                        android:id="@+id/btn_help"
-                        android:layout_width="25dp"
-                        android:layout_height="33dp"
-                        android:layout_marginTop="28dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_helpbtn"
-                        app:layout_constraintBottom_toTopOf="@+id/nickName"
-                        app:layout_constraintStart_toEndOf="@+id/cardview"
-                        app:layout_constraintTop_toTopOf="@+id/cardview" />
-
-                    <TextView
-                        android:id="@+id/nickName"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="118dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="118dp"
-                        android:gravity="center"
-                        android:text="@string/nickname"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardview" />
-
-                    <TextView
-                        android:id="@+id/myfavoritedata"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginTop="140dp"
-                        android:layout_marginEnd="110dp"
-                        android:gravity="center"
-                        android:text="10"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toStartOf="@+id/myleveldata"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/emailAddress"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="100dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="100dp"
-                        android:gravity="center"
-                        android:text="@string/email"
-                        android:textSize="11sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/nickName" />
-
-                    <TextView
-                        android:id="@+id/myfavorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="60dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="220dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="찜한 가게"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/myfavoritedata" />
-
-                    <TextView
-                        android:id="@+id/myreviewdata"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="140dp"
-                        android:layout_marginEnd="40dp"
-                        android:text="10"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toStartOf="@+id/myleveldata"
-                        app:layout_constraintStart_toEndOf="@+id/myfavoritedata"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/myreview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="마이 리뷰"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/mylevel"
-                        app:layout_constraintStart_toEndOf="@+id/myfavorite"
-                        app:layout_constraintTop_toBottomOf="@+id/myreviewdata" />
-
-                    <TextView
-                        android:id="@+id/myleveldata"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginStart="250dp"
-                        android:layout_marginTop="140dp"
-                        android:layout_marginEnd="60dp"
-                        android:text="10"
-                        android:textSize="24sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/mylevel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="70dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="나의 레벨"
-                        android:textSize="11sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/myleveldata" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
-                app:cardCornerRadius="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-
-                    <Button
-                        android:id="@+id/btn_favorite"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_button_my_01"
-                        android:drawableLeft="@drawable/btn_homeaddress"
-
-
-                        android:drawableRight="@drawable/btn_nexticon"
-                        android:stateListAnimator="@null"
-
-
-                        android:text="찜 목록"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_notice" />
-
-                    <Button
-                        android:id="@+id/btn_myreview"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_button_my_01"
-                        android:drawableLeft="@drawable/btn_homeaddress"
-
-                        android:drawableRight="@drawable/btn_nexticon"
-                        android:stateListAnimator="@null"
-
-                        android:text="마이리뷰"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_favorite" />
-
-                    <Button
-                        android:id="@+id/btn_myreport"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_button_my_01"
-
-                        android:drawableLeft="@drawable/btn_homeaddress"
-                        android:drawableRight="@drawable/btn_nexticon"
-
-                        android:stateListAnimator="@null"
-
-                        android:text="내 제보 글 관리"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_myreview" />
-
-                    <Button
-                        android:id="@+id/btn_notice"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_button_my_01"
-                        android:drawableLeft="@drawable/btn_homeaddress"
-                        android:drawableRight="@drawable/btn_nexticon"
-
-                        android:stateListAnimator="@null"
-
-                        android:text="공지사항"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Button
-                        android:id="@+id/btn_report"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/custom_button_my_01"
-                        android:drawableLeft="@drawable/btn_homeaddress"
-                        android:drawableRight="@drawable/btn_nexticon"
-                        android:stateListAnimator="@null"
-
-                        android:text="건의하기"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_myreport" />
-
-                    <Button
-                        android:id="@+id/btn_version"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-
-                        android:background="@drawable/custom_button_my_01"
-                        android:drawableLeft="@drawable/btn_homeaddress"
-                        android:drawableRight="@drawable/btn_nexticon"
-
-                        android:text="앱 버전"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-
-                        app:backgroundTint="@null"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_report" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="140dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/ic_logout"
-                app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-            <Button
-                android:id="@+id/btn_withdrawal"
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="140dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_withdrawal"
-                app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_logout"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_weight="1"
-                android:background="#00ff0000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_height="wrap_content" >
 
-
-                <Button
-                    android:id="@+id/btn_service"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#00ff0000"
-                    android:text="@string/service_manual"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="9sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:text="마이페이지"
+                        android:textColor="@color/white_93"
+                        android:textSize="24sp">
+
+                    </TextView>
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="18dp"
+                    android:elevation="5dp"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="0dp">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardview"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="10dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/profile"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
+                                app:srcCompat="@drawable/btn_bg" />
+                        </androidx.cardview.widget.CardView>
+
+                        <ImageView
+                            android:id="@+id/btn_help"
+                            android:layout_width="25dp"
+                            android:layout_height="33dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/ic_helpbtn"
+                            app:layout_constraintBottom_toTopOf="@+id/nickName"
+                            app:layout_constraintStart_toEndOf="@+id/cardview"
+                            app:layout_constraintTop_toTopOf="@+id/cardview" />
+
+                        <TextView
+                            android:id="@+id/nickName"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="118dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="118dp"
+                            android:gravity="center"
+                            android:text="@string/nickname"
+                            android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/cardview" />
+
+                        <TextView
+                            android:id="@+id/myfavoritedata"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="140dp"
+                            android:layout_marginEnd="110dp"
+                            android:gravity="center"
+                            android:text="10"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toStartOf="@+id/myleveldata"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/emailAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="100dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="100dp"
+                            android:gravity="center"
+                            android:text="@string/email"
+                            android:textSize="11sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/nickName" />
+
+                        <TextView
+                            android:id="@+id/myfavorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="220dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="찜한 가게"
+                            android:textSize="11sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/myfavoritedata" />
+
+                        <TextView
+                            android:id="@+id/myreviewdata"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="140dp"
+                            android:layout_marginEnd="40dp"
+                            android:text="10"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toStartOf="@+id/myleveldata"
+                            app:layout_constraintStart_toEndOf="@+id/myfavoritedata"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/myreview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="40dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="40dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="마이 리뷰"
+                            android:textSize="11sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/mylevel"
+                            app:layout_constraintStart_toEndOf="@+id/myfavorite"
+                            app:layout_constraintTop_toBottomOf="@+id/myreviewdata" />
+
+                        <TextView
+                            android:id="@+id/myleveldata"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="250dp"
+                            android:layout_marginTop="140dp"
+                            android:layout_marginEnd="60dp"
+                            android:text="10"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/mylevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="70dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="나의 레벨"
+                            android:textSize="11sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/myleveldata" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <Button
+                            android:id="@+id/btn_favorite"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/custom_button_my_01"
+                            android:drawableLeft="@drawable/btn_homeaddress"
+
+
+                            android:drawableRight="@drawable/btn_nexticon"
+                            android:stateListAnimator="@null"
+
+
+                            android:text="찜 목록"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_notice" />
+
+                        <Button
+                            android:id="@+id/btn_myreview"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/custom_button_my_01"
+                            android:drawableLeft="@drawable/btn_homeaddress"
+
+                            android:drawableRight="@drawable/btn_nexticon"
+                            android:stateListAnimator="@null"
+
+                            android:text="마이리뷰"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_favorite" />
+
+                        <Button
+                            android:id="@+id/btn_myreport"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/custom_button_my_01"
+
+                            android:drawableLeft="@drawable/btn_homeaddress"
+                            android:drawableRight="@drawable/btn_nexticon"
+
+                            android:stateListAnimator="@null"
+
+                            android:text="내 제보 글 관리"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_myreview" />
+
+                        <Button
+                            android:id="@+id/btn_notice"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/custom_button_my_01"
+                            android:drawableLeft="@drawable/btn_homeaddress"
+                            android:drawableRight="@drawable/btn_nexticon"
+
+                            android:stateListAnimator="@null"
+
+                            android:text="공지사항"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btn_report"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/custom_button_my_01"
+                            android:drawableLeft="@drawable/btn_homeaddress"
+                            android:drawableRight="@drawable/btn_nexticon"
+                            android:stateListAnimator="@null"
+
+                            android:text="건의하기"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_myreport" />
+
+                        <Button
+                            android:id="@+id/btn_version"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+
+                            android:background="@drawable/custom_button_my_01"
+                            android:drawableLeft="@drawable/btn_homeaddress"
+                            android:drawableRight="@drawable/btn_nexticon"
+
+                            android:text="앱 버전"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+
+                            app:backgroundTint="@null"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/btn_report" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="140dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/ic_logout"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+                <Button
+                    android:id="@+id/btn_withdrawal"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="140dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_withdrawal"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_logout"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_weight="1"
+                    android:background="#00ff0000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+
+                    <Button
+                        android:id="@+id/btn_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#00ff0000"
+                        android:text="@string/service_manual"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="9sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
-    <FrameLayout
-        android:id="@+id/my_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="502dp">
+        <FrameLayout
+            android:id="@+id/my_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="502dp">
 
-    </FrameLayout>
+        </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.*
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
@@ -23,7 +24,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 class My010101Adapter(
     private val itemList: MutableList<Item>,
-    private val owner : Activity
+    private val owner : AppCompatActivity
 ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
     //체크박스 상태 저장
     private var checkboxStatus = SparseBooleanArray()

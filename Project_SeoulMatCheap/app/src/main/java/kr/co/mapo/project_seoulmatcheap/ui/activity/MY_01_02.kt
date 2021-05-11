@@ -18,6 +18,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0102Adapter
 
 class MY_01_02 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0102Binding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +31,6 @@ class MY_01_02 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.myreview_title)
         }
-
         //데이터 테스트
         val list = mutableListOf(
                 Model(Model.IMAGE_TYPE, "성수칼국수", "2021.04.03", 3.5f,R.drawable.halbum,null,null,getText(R.string.review1).toString()),

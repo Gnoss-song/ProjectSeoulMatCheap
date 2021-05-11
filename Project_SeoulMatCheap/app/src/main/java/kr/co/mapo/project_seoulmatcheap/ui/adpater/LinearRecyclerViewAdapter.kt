@@ -13,7 +13,7 @@ class LinearRecyclerViewAdapter(private val linearList: MutableList<LinearItem>)
     : RecyclerView.Adapter<LinearRecyclerViewAdapter.LinearHolder>() {
 
     inner class LinearHolder(rowRoot: View) : RecyclerView.ViewHolder(rowRoot) {
-        val linearIV: ImageView = itemView.findViewById(R.id.image)
+        val linearIV: ImageView = itemView.findViewById(R.id.reviewitem)
         val linearName: TextView = itemView.findViewById(R.id.name)
         val linearAddress: TextView = itemView.findViewById(R.id.address)
         val linearScore: TextView = itemView.findViewById(R.id.score)

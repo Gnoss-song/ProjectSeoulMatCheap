@@ -31,6 +31,7 @@ class My0102Adapter(
         }
     }
 
+
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
         val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)

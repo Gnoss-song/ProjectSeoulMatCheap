@@ -1,95 +1,140 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
-import android.app.Activity
+import android.Manifest
+import android.content.ClipData
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.MultiImageAdapter
-import java.lang.Exception
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 
 class INFORM_02_02 : AppCompatActivity() {
-    private lateinit var binding: ActivityInform0202Binding
-    private lateinit var recyclerview2: RecyclerView
-    private lateinit var adapter: MultiImageAdapter
-
-
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var binding : ActivityInform0202Binding
     private val OPEN_GALLERY = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInform0202Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        recyclerView = findViewById(R.id.recyclerView2)
+        recyclerView.layoutManager = LinearLayoutManager(this@INFORM_02_02, LinearLayoutManager.HORIZONTAL, false)
 
+        binding.btnComplete.setOnClickListener {
+            val mLogoutView = LayoutInflater.from(this).inflate(R.layout.fragment_dialog_inform_complete, null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(this).setView(mLogoutView)
+            val mAlertDialog = mBuilder.show().apply {
+                window?.setBackgroundDrawable(null)
+            }
+            val okButton = mLogoutView.findViewById<Button>(R.id.btn_complete_ok)
+            val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_complete_no)
 
-        binding.btnRegistercam.setOnClickListener {
-            openGallery()
+            okButton.setOnClickListener {
+                Toast.makeText(this,"리뷰 쓰기 성공",Toast.LENGTH_SHORT).show()
+
+                //화면이동 INFORM_02_01로. 가게이름의 정보를 가진채로.
+
+                mAlertDialog.dismiss()
+            }
+            cancelButton.setOnClickListener{
+                Toast.makeText(this,"취소되었습니다.",Toast.LENGTH_SHORT).show()
+                mAlertDialog.dismiss()
+            }
         }
-        private fun openGallery() {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//        startActivityForResult(Intent.createChooser(intent,"Select Pictures"),1)
+
+        with(supportActionBar) {
+            this!!.setDisplayHomeAsUpEnabled(true)
+            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            setTitle(R.string.review_title)
+        }
+
+    }
+    fun openGallary(v : View) {
+        var writePermission =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        var readPermission =
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (writePermission == PackageManager.PERMISSION_DENIED
+            || readPermission == PackageManager.PERMISSION_DENIED) { // 권한 없어서 요청
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+        } else { // 권한 있음
+            val intent = Intent(Intent.ACTION_PICK).apply {
+                type = "image/*"
+                data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            }
             startActivityForResult(intent, OPEN_GALLERY)
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
-
-            if (data == null) { // 어떤 이미지도 선택하지 않은 경우
-                Toast.makeText(applicationContext, "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG)
-                    .show()
-            } else { // 이미지를 하나라도 선택한 경우
-                if (data.clipData == null) { // 이미지를 하나만 선택한 경우
-                    Log.e("single choice: ", String.valueOf(data.data))
-                    val imageUri = data.data
-                    uriList.add(imageUri)
-                    adapter = MultiImageAdapter(uriList, applicationContext)
-                    recyclerview2.adapter = adapter
-                    recyclerview2.layoutManager = LinearLayoutManager(
-                        this,
-                        LinearLayoutManager.HORIZONTAL,
-                        true
-                    )
-                } else { // 이미지를 여러장 선택한 경우
-                    val clipData = data.clipData
-                    Log.e("clipData", String.valueOf(clipData.getItemCount()))
-                    if (clipData.getItemCount() > 10) { // 선택한 이미지가 11장 이상인 경우
-                        Toast.makeText(
-                            applicationContext,
-                            "사진은 10장까지 선택 가능��니다.",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else { // 선택한 이미지가 1장 이상 10장 이하인 경우
-                        Log.e(TAG, "multiple choice")
-                        for (i in 0 until clipData.getItemCount()) {
-                            val imageUri = clipData.getItemAt(i).uri // 선택한 이미지들의 uri를 가져온다.
-                            try {
-                                uriList.add(imageUri) //uri를 list에 담는다.
-                            } catch (e: Exception) {
-                                Log.e("TAG", "File select error", e)
+            val list = mutableListOf<Uri>().apply {
+                if (requestCode == OPEN_GALLERY) {
+                    if (data?.clipData == null) {
+                        if (data != null) {
+                            this.add(Uri.parse(data.dataString))
+                        }
+                    }
+                    else {
+                        for (i in 0 until data.clipData!!.itemCount) {
+                            this.add(data.clipData!!.getItemAt(i).uri)
+                            if (data.clipData!!.itemCount>4){
+                                Toast.makeText(applicationContext,"사진은 최대 3개까지 가능합니다.",Toast.LENGTH_SHORT).show()
                             }
                         }
-                        adapter = MultiImageAdapter(uriList, applicationContext)
-                        recyclerview2.adapter = adapter // 리사이클러뷰에 어댑터 세팅
-                        recyclerview2.layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL,
-                            true
-                        ) // 리사이클러뷰 수평 스크롤 적용
                     }
                 }
             }
+            recyclerView.adapter = MultiImageAdapter(list)
         }
-        companion object {
-            private val TAG = "MultiImageActivity"
+
+        inner class MultiImageAdapter(private val list: List<Uri>) :
+            RecyclerView.Adapter<MultiImageAdapter.HolderView>() {
+
+            inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
+                val imageView: ImageView = itemView.findViewById(R.id.reviewitem)
+            }
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderView {
+                return HolderView(
+                    LayoutInflater.from(parent.context).inflate(R.layout.multi_image_item, parent, false)
+                )
+            }
+
+            override fun onBindViewHolder(holder: HolderView, position: Int) {
+                holder.imageView.setImageURI(list[position])
+            }
+
+            override fun getItemCount(): Int {
+                return list.size
+            }
         }
     }
-}
+

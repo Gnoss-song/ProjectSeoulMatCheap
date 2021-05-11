@@ -195,14 +195,19 @@
     <string name="nickname">닉네임</string>
     <string name="level">Lv.10</string>
     <string name="logoutstring">로그아웃</string>
+    <string name="completestring">로그아웃</string>
     <string name="notice_title">공지사항</string>
     <string name="myreview_title">마이리뷰(0)</string>
     <string name="myfavorite_title">찜 목록(10)</string>
     <string name="myfavorite_title_modify">찜 목록(10)</string>
+    <string name="review_title">리뷰쓰기</string>
+    <string name="review_title_modify">리뷰 수정하기</string>
     <string name="title_activity_m_y_02">MY_02</string>
     <string name="title_activity_m_y_01_02">MY_01_02</string>
     <string name="title_activity_m_y_01_01_01">MY_01_01_01</string>
     <string name="logout_contest">로그아웃 하시겠습니까?</string>
+    <string name="complete_contest">작성 완료 하시겠습니까?</string>
+
     <string name="delete_contest">삭제 하시겠습니까?</string>
     <string name="modify_contest">수정 하시겠습니까?</string>
 
