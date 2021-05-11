@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
 import com.naver.maps.map.util.FusedLocationSource
@@ -25,13 +26,14 @@ import java.util.*
  * @author SANDY
  * @email nnal0256@naver.com
  * @created 2021-04-06
- * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
+ * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션
  */
 
 const val SEARCH_HISTROY = "search_history_prefs"
 const val SEOULCITYHALL_X = 37.5662952
 const val SEOULCITYHALL_Y = 126.9779451
 const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
+const val SEOUL = "서울특별시"
 
 class SeoulMatCheap : Application() {
 
@@ -46,9 +48,10 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    var x : Double = SEOULCITYHALL_X     //위도
-    var y : Double = SEOULCITYHALL_Y      //경도
-    var address : MutableLiveData<String> = MutableLiveData()
+    var x = SEOULCITYHALL_X   //위도
+    var y = SEOULCITYHALL_Y     //경도
+    val address = MutableLiveData<String>()
+    val location = MutableLiveData<Location>()
 
     init {
         this.address.value = SEOULCITYHALL_ADDRESS
@@ -87,27 +90,38 @@ class SeoulMatCheap : Application() {
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
+                    locationManager.requestLocationUpdates(provider, 100, 1f, LocationListener {
+                        updateLocation(it, context)
+                    })
+                    /*
                     if(location == null) {
                         locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {
-                            updateLocation(it.latitude, it.longitude, context)
+                            updateLocation(it, context)
                         })
                     } else {
-                        updateLocation(location.latitude, location.longitude, context)
+                        updateLocation(location, context)
                     }
+                     */
                 }
-
         }
     }
 
     //위도, 경도로부터 주소를 계산하는 함수
-    private fun updateLocation(lat: Double, lng: Double, context: Context) {
-        this.x = lat
-        this.y = lng
+    private fun updateLocation(location: Location, context: Context) {
+        this.location.value = location
+        this.x = location.latitude
+        this.y = location.longitude
         this.address.value = Geocoder(context, Locale.getDefault())
-            .getFromLocation(lat, lng, 1)[0]
+            .getFromLocation(x, y, 1)[0]
             .getAddressLine(0)
             .substring(11)
         Log.e("[GSP]", "$x, $y, ${address.value}")
+    }
+
+    //서울시인지 여부 판단하는 함수
+    fun adminArea(lat: Double, lng: Double, context: Context) : Boolean {
+        val address = Geocoder(context, Locale.getDefault()).getFromLocation(lat, lng, 1)[0]
+        return address.adminArea === SEOUL
     }
 
 }

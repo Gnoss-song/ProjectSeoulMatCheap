@@ -730,8 +730,9 @@
 
     <!-- MAP_01_02 -->
     <string name="filter_menu0">적용</string>
-    <string name="filter_menu1">종류</string>
+    <string name="filter_menu1">음식종류</string>
     <string name="filter_menu2">거리</string>
+    <string name="filter_menu1_add">&#160;중복선택 가능&#160;</string>
     <string name="filter_distance1">100m</string>
     <string name="filter_distance2">500m</string>
     <string name="filter_distance3">2km</string>

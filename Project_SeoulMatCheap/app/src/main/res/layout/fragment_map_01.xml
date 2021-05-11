@@ -16,17 +16,6 @@
         android:elevation="5dp"
         tools:context=".ui.fragment.MAP_01">
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.naver.maps.map.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navermap_mapType="Basic" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -36,17 +25,31 @@
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:navermap_mapType="Basic" />
 
         <ImageButton
-            android:id="@+id/list_btn"
+            android:id="@+id/button_list"
             android:layout_width="@android:dimen/app_icon_size"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
             android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
-            android:onClick="@{fragment.showList}"
+            android:onClick="@{fragment.mapButtonClick}"
             android:padding="@dimen/margin_basic4"
             android:scaleType="fitCenter"
             android:src="@drawable/map_list"
@@ -54,42 +57,47 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <ImageButton
-            android:id="@+id/filter_btn"
+            android:id="@+id/button_filter"
             android:layout_width="@android:dimen/app_icon_size"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
             android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
-            android:onClick="@{fragment.showFilter}"
+            android:onClick="@{fragment.mapButtonClick}"
             android:padding="@dimen/margin_basic4"
             android:scaleType="fitCenter"
             android:src="@drawable/map_filter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/button_list" />
 
         <ImageButton
-            android:id="@+id/gps_btn"
+            android:id="@+id/button_gps"
             android:layout_width="@android:dimen/app_icon_size"
             android:layout_height="@android:dimen/app_icon_size"
             android:layout_marginTop="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
             android:background="@drawable/round_button2"
             android:elevation="@dimen/elevation1"
-            android:onClick="@{fragment.resetLocation}"
+            android:onClick="@{fragment.mapButtonClick}"
             android:padding="@dimen/margin_basic4"
             android:scaleType="fitCenter"
             android:src="@drawable/map_gps"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filter_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/button_filter" />
 
-        <include
-            layout="@layout/map_item_inform"
-            android:layout_width="0dp"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/map"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/map_item_inform" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <FrameLayout
             android:id="@+id/filter"
@@ -98,8 +106,10 @@
             android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
         </FrameLayout>
 
