@@ -2,18 +2,20 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -22,6 +24,7 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.*
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
+import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 
@@ -41,22 +44,19 @@ class MAP_01(
     private lateinit var binding : FragmentMap01Binding
     private lateinit var naverMap : NaverMap
     private lateinit var mapFragment : MapFragment
-    private lateinit var sheetBehavior : BottomSheetBehavior<LinearLayout>
+    private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
     private lateinit var list : MutableList<StoreTest>
-    private lateinit var text_name : TextView
-    private lateinit var view_content1 : View
-    private lateinit var view_content2 : LinearLayout
-    private lateinit var view_bottom1 : ImageView
-    private lateinit var view_bottom2 : ImageView
 
     //infoWindow
-    private lateinit var view: ConstraintLayout
+    private lateinit var view: MapItemInfowindowBinding
+    private val behavior_state = MutableLiveData<Boolean>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map_01, container,false)
+        view = MapItemInfowindowBinding.inflate(inflater)
         binding.fragment = this
         init()
         return binding.root
@@ -65,13 +65,8 @@ class MAP_01(
     private fun init() {
         list = addData()
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
-        sheetBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
-        view = View.inflate(owner, R.layout.map_item_infowindow, null) as ConstraintLayout
-        text_name = view.findViewById(R.id.text_name)
-        view_content1 = view.findViewById(R.id.view_content1)
-        view_content2 = view.findViewById(R.id.view_content2)
-        view_bottom1 = view.findViewById(R.id.view_bottom1)
-        view_bottom2 = view.findViewById(R.id.view_bottom2)
+        storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
+        behavior_state.value = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,20 +93,22 @@ class MAP_01(
             }
             SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
             symbolScale = 0.8f
-            setOnMapClickListener { _, _ ->
-                if(sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    sheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
-            }
             addOnCameraChangeListener { reason, _ ->
                 if(reason != CameraUpdate.REASON_DEVELOPER) {
                     SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
                 }
             }
+            setOnMapClickListener { _, _ ->
+                if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    behavior_state.value = false
+                }
+            }
         }
-        list.forEach{
-            val marker = createMaker(it.x, it.y,
-                when(it.sort) {
+        list.forEach {
+            val marker = createMaker(
+                it.x, it.y,
+                when (it.sort) {
                     "한식" -> R.drawable.icon_hansik
                     "중식" -> R.drawable.icon_china
                     "경양식일식" -> R.drawable.icon_japan
@@ -122,7 +119,7 @@ class MAP_01(
                     else -> R.drawable.icon_store
                 }, it
             )
-            createInfoWindow(it, marker)
+            createInfoWindow (it, marker)
         }
     }
 
@@ -149,32 +146,69 @@ class MAP_01(
 
     //정보창 생성함수
     private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
+        var clicked = false
+        return InfoWindow().apply {
+            val behaviorObserver = Observer<Boolean> {
+                adapter = createInfoWindowAdapter(item, it)
+            }
+            behavior_state.removeObserver(behaviorObserver)
+            adapter = createInfoWindowAdapter(item, clicked)
+            setOnClickListener {
+                setBottomSheetData(item)
+                if(!clicked) {
+                    adapter = createInfoWindowAdapter(item, true)
+                    clicked = true
+                } else {
+                    adapter = createInfoWindowAdapter(item, false)
+                    clicked = false
+                    if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                        storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                        behavior_state.value = false
+                    }
+                    behavior_state.observe(viewLifecycleOwner, behaviorObserver)
+                }
+                true
+            }
+            open(marker)
+        }
+    }
+
+    //정보창전용 어댑터 생성 함수
+    private fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean) : InfoWindow.ViewAdapter {
+        val clickedColor = ColorStateList.valueOf(resources.getColor(R.color.black, null))
+        val unClickedColor = ColorStateList.valueOf(resources.getColor(R.color.white, null))
         val color = ColorStateList.valueOf(resources.getColor(
             when(item.code) {
                 0 -> R.color.map_seoul  //(임시)착한업소
                 1 -> R.color.map_mat    //(임시)인증맛칩
                 else -> R.color.map_like   //(임시) 찜
             }, null))
-        val clickedColor = ColorStateList.valueOf(resources.getColor(R.color.black, null))
-        return InfoWindow().apply {
-            adapter = object : InfoWindow.ViewAdapter() {
-                override fun getView(p0: InfoWindow): View {
-                    text_name.text =item.name
-                    view_content1.backgroundTintList = color
-                    view_bottom1.imageTintList = color
-                    return view
+        return object : InfoWindow.ViewAdapter() {
+            override fun getView(p0: InfoWindow): View {
+                with(view) {
+                    textName.text = item.name
+                    if(!clicked) {
+                        viewContent1.backgroundTintList = color
+                        viewContent2.backgroundTintList = unClickedColor
+                        viewBottom1.imageTintList = color
+                        viewBottom2.imageTintList = unClickedColor
+                        textName.apply {
+                            typeface = null
+                            setTextColor(resources.getColor(R.color.black, null))
+                        }
+                    } else {
+                        viewContent1.backgroundTintList = clickedColor
+                        viewContent2.backgroundTintList = clickedColor
+                        viewBottom1.imageTintList = clickedColor
+                        viewBottom2.imageTintList = clickedColor
+                        textName.apply {
+                            typeface = Typeface.DEFAULT_BOLD
+                            setTextColor(resources.getColor(R.color.white, null))
+                        }
+                    }
+                    return view.root
                 }
             }
-            setOnClickListener {
-                view_content1.backgroundTintList = clickedColor
-                view_content2.backgroundTintList = clickedColor
-                view_bottom1.imageTintList = clickedColor
-                view_bottom2.imageTintList = clickedColor
-                text_name.setTextColor(resources.getColor(R.color.white, null))
-                setBottomSheetData(item)
-                true
-            }
-            open(marker)
         }
     }
 
@@ -198,7 +232,8 @@ class MAP_01(
             distance.text = "${item.distance} km"
             score.text = item.score.toString()
         }
-        sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior_state.value = true
     }
 
     fun mapButtonClick(v : View) {
