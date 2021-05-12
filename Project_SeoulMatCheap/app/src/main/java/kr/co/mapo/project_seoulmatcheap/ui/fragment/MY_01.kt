@@ -146,5 +146,19 @@ class MY_01(
             }
             startActivity(sendEmail)
         }
+
+        //test
+        binding.test1.setOnClickListener {
+            val intent03 = Intent(activity, INFORM_02_02::class.java)
+            startActivity(intent03)
+        }
+        binding.test2.setOnClickListener {
+            val intent03 = Intent(activity, INFORM_02_02_01::class.java)
+            startActivity(intent03)
+        }
+
+
+
+
     }
 }

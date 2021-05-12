@@ -1,14 +1,12 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
-import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -22,8 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
-import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 
 class INFORM_02_02 : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
@@ -58,18 +54,18 @@ class INFORM_02_02 : AppCompatActivity() {
                 mAlertDialog.dismiss()
             }
         }
-
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.review_title)
         }
 
+
     }
     fun openGallary(v : View) {
-        var writePermission =
+        val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        var readPermission =
+        val readPermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (writePermission == PackageManager.PERMISSION_DENIED
             || readPermission == PackageManager.PERMISSION_DENIED) { // 권한 없어서 요청
@@ -92,7 +88,6 @@ class INFORM_02_02 : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
             val list = mutableListOf<Uri>().apply {
@@ -105,34 +100,34 @@ class INFORM_02_02 : AppCompatActivity() {
                     else {
                         for (i in 0 until data.clipData!!.itemCount) {
                             this.add(data.clipData!!.getItemAt(i).uri)
-                            if (data.clipData!!.itemCount>4){
+                            if (data.clipData!!.itemCount>3){
                                 Toast.makeText(applicationContext,"사진은 최대 3개까지 가능합니다.",Toast.LENGTH_SHORT).show()
                             }
+                            binding.scrollView.visibility = View.GONE
                         }
                     }
                 }
             }
             recyclerView.adapter = MultiImageAdapter(list)
         }
-
         inner class MultiImageAdapter(private val list: List<Uri>) :
             RecyclerView.Adapter<MultiImageAdapter.HolderView>() {
 
             inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
                 val imageView: ImageView = itemView.findViewById(R.id.reviewitem)
             }
-
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderView {
                 return HolderView(
                     LayoutInflater.from(parent.context).inflate(R.layout.multi_image_item, parent, false)
                 )
             }
-
             override fun onBindViewHolder(holder: HolderView, position: Int) {
                 holder.imageView.setImageURI(list[position])
             }
-
             override fun getItemCount(): Int {
+                if (list.size>3){
+                    return 3
+                }
                 return list.size
             }
         }

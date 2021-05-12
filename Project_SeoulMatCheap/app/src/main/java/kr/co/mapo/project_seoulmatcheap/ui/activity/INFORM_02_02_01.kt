@@ -1,14 +1,12 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
-import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -22,9 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
-import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
-import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 
 class INFORM_02_02_01 : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
@@ -68,9 +63,9 @@ class INFORM_02_02_01 : AppCompatActivity() {
 
     }
     fun openGallary(v : View) {
-        var writePermission =
+        val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        var readPermission =
+        val readPermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (writePermission == PackageManager.PERMISSION_DENIED
             || readPermission == PackageManager.PERMISSION_DENIED) { // 권한 없어서 요청
@@ -106,9 +101,10 @@ class INFORM_02_02_01 : AppCompatActivity() {
                 else {
                     for (i in 0 until data.clipData!!.itemCount) {
                         this.add(data.clipData!!.getItemAt(i).uri)
-                        if (data.clipData!!.itemCount>4){
+                        if (data.clipData!!.itemCount>3){
                             Toast.makeText(applicationContext,"사진은 최대 3개까지 가능합니다.",Toast.LENGTH_SHORT).show()
                         }
+                        binding.scrollView.visibility = View.GONE
                     }
                 }
             }
@@ -134,6 +130,9 @@ class INFORM_02_02_01 : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int {
+            if (list.size>3){
+                return 3
+            }
             return list.size
         }
     }

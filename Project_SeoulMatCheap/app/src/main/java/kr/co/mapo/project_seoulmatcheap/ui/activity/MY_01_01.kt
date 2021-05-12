@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_02
 
 
 class MY_01_01 : AppCompatActivity() {
@@ -29,14 +30,8 @@ class MY_01_01 : AppCompatActivity() {
         binding = ActivityMy0101Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-//        //백버튼
-//        with(supportActionBar) {
-//            this!!.setDisplayHomeAsUpEnabled(true)
-//            this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-//            setTitle(R.string.myfavorite_title)
-//
-//        }
 
+        //데이터 테스트
         val itemData = mutableListOf<Item>()
         with(itemData){
             add(Item(R.drawable.solip, "솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km", "4.8"))
@@ -62,12 +57,11 @@ class MY_01_01 : AppCompatActivity() {
 
         //화면 이동 MY_01_01_01
         binding.btnEdit.setOnClickListener {
-            val intent = Intent(this,INFORM_02_02::class.java)
+            val intent = Intent(this,MY_01_01_01::class.java)
             startActivity(intent)
         }
-
-
     }
+    //백버튼 활성화
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             android.R.id.home -> {
@@ -77,4 +71,49 @@ class MY_01_01 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
+    //어댑터
+    inner class InformDetailAdapter (
+        private val itemList: MutableList<Item>,
+        private val owner : AppCompatActivity
+    ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>() {
+
+        inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
+            val name: TextView = itemView.findViewById(R.id.name)
+            val address: TextView = itemView.findViewById(R.id.address)
+            val distance: TextView = itemView.findViewById(R.id.distance)
+            val score: TextView = itemView.findViewById(R.id.score)
+            val sort: TextView = itemView.findViewById(R.id.sort)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
+            val view = LayoutInflater.from(parent.context).inflate(
+                R.layout.inform_01, parent, false
+            )
+            return ViewHolderClass(view)
+        }
+        override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
+            val itemData = itemList[position]
+            with(holder) {
+                marketIV.setImageResource(itemData.marketIV)
+                name.text = itemData.name
+                address.text = itemData.address
+                distance.text = itemData.distance
+                score.text = itemData.score
+                sort.text = itemData.sort
+            }
+            holder.itemView.setOnClickListener {
+                val target = Intent(owner, INFORM_02::class.java)
+                target.putExtra("marketIV", itemData.marketIV)
+                target.putExtra("name", itemData.name)
+                target.putExtra("address", itemData.address)
+                target.putExtra("distance", itemData.distance)
+                target.putExtra("score", itemData.score)
+                target.putExtra("sort", itemData.sort)
+                owner.startActivity(target)
+            }
+        }
+        override fun getItemCount() = itemList.size
+    }
 }
