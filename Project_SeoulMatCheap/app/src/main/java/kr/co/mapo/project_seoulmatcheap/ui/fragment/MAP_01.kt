@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.ArrayMap
+import androidx.collection.arrayMapOf
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
@@ -27,6 +30,9 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
+import java.util.*
+import java.util.stream.Collectors
+import kotlin.collections.HashMap
 
 const val ADDRESS = "address"
 private const val MAP_ZOOM = 18.0
@@ -43,30 +49,37 @@ class MAP_01(
 
     private lateinit var binding : FragmentMap01Binding
     private lateinit var naverMap : NaverMap
-    private lateinit var mapFragment : MapFragment
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
     private lateinit var list : MutableList<StoreTest>
+    private lateinit var mapMarkers : Vector<Marker>
+    private lateinit var mapCircleOverlay : Vector<CircleOverlay>
+    private lateinit var infoWindows : Vector<InfoWindow>
 
     //infoWindow
     private lateinit var view: MapItemInfowindowBinding
-    private val behavior_state = MutableLiveData<Boolean>()
+    private val storeWindowState = MutableLiveData<Boolean>()
+    private lateinit var clickedInfoWindow : ArrayMap<InfoWindow, StoreTest>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map_01, container,false)
-        view = MapItemInfowindowBinding.inflate(inflater)
-        binding.fragment = this
         init()
         return binding.root
     }
 
     private fun init() {
-        list = addData()
-        mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
+        view = MapItemInfowindowBinding.inflate(layoutInflater)
+        binding.fragment = this
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
+        mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
-        behavior_state.value = false
+        mapMarkers = Vector()
+        mapCircleOverlay = Vector()
+        infoWindows = Vector()
+        clickedInfoWindow = arrayMapOf()
+        list = addData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +87,6 @@ class MAP_01(
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
-        mapFragment.getMapAsync(this)
     }
 
     //네이버지도 초기 설정
@@ -83,7 +95,7 @@ class MAP_01(
         naverMap.apply {
             val locationObserver = Observer<Location> {
                 cameraPosition = setMapCamera(it.latitude, it.longitude)
-                locationOverlay.apply {
+                with(locationOverlay) {
                     isVisible = true
                     position = LatLng(it.latitude, it.longitude)
                     icon = OverlayImage.fromResource(R.drawable.map_marker)
@@ -92,7 +104,6 @@ class MAP_01(
                 }
             }
             SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
-            symbolScale = 0.8f
             addOnCameraChangeListener { reason, _ ->
                 if(reason != CameraUpdate.REASON_DEVELOPER) {
                     SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
@@ -101,7 +112,15 @@ class MAP_01(
             setOnMapClickListener { _, _ ->
                 if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                     storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    behavior_state.value = false
+                    storeWindowState.value = false
+                    if(clickedInfoWindow.isNotEmpty()) {
+                        Log.e("[TEST]", "실행되나!")
+                        clickedInfoWindow.forEach { (t, u) ->
+                            t.adapter = createInfoWindowAdapter(u, false)
+                            clickedInfoWindow.remove(t)
+                        }
+                    }
+
                 }
             }
         }
@@ -119,6 +138,7 @@ class MAP_01(
                     else -> R.drawable.icon_store
                 }, it
             )
+            mapMarkers.add(marker)
             createInfoWindow (it, marker)
         }
     }
@@ -146,27 +166,28 @@ class MAP_01(
 
     //정보창 생성함수
     private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
-        var clicked = false
+        var clicked : Boolean = false
         return InfoWindow().apply {
-            val behaviorObserver = Observer<Boolean> {
-                adapter = createInfoWindowAdapter(item, it)
-            }
-            behavior_state.removeObserver(behaviorObserver)
+            tag = item
+            infoWindows.add(this)
             adapter = createInfoWindowAdapter(item, clicked)
             setOnClickListener {
+                clickedInfoWindow[this] = item
                 setBottomSheetData(item)
                 if(!clicked) {
+                    Log.e("$this", "뭐가 실행됩니까 True")
                     adapter = createInfoWindowAdapter(item, true)
                     clicked = true
                 } else {
+                    Log.e("$this", "뭐가 실행됩니까 False")
                     adapter = createInfoWindowAdapter(item, false)
                     clicked = false
                     if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                         storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                        behavior_state.value = false
+                        storeWindowState.value = false
                     }
-                    behavior_state.observe(viewLifecycleOwner, behaviorObserver)
                 }
+                Log.e("[히히]", "${clickedInfoWindow.keys}")
                 true
             }
             open(marker)
@@ -215,10 +236,12 @@ class MAP_01(
     //서클원 생성함수
     private fun createCircle(lat:Double, lng:Double, m:Double) : CircleOverlay {
         return CircleOverlay().apply {
+            tag = m
             center = LatLng(lat, lng)
             radius = m
             color = resources.getColor(R.color.map_circle, null)
             map = naverMap
+            mapCircleOverlay.add(this)
         }
     }
 
@@ -233,7 +256,7 @@ class MAP_01(
             score.text = item.score.toString()
         }
         storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        behavior_state.value = true
+        storeWindowState.value = true
     }
 
     fun mapButtonClick(v : View) {
@@ -244,13 +267,24 @@ class MAP_01(
                 startActivity(intent)
             }
             R.id.button_filter -> {
-                MAP_01_02().show(owner.supportFragmentManager, FILTER)
+                MAP_01_02(this).show(owner.supportFragmentManager, FILTER)
             }
             R.id.button_gps -> {
                 naverMap.apply {
                     cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y)
                 }
             }
+        }
+    }
+
+    fun filterData(sort: String?, distance: Double?) {
+        if(distance != null) {
+            if(mapCircleOverlay.size > 0) {
+                mapCircleOverlay.forEach {
+                    it.map = null
+                }
+            }
+            createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance)
         }
     }
 

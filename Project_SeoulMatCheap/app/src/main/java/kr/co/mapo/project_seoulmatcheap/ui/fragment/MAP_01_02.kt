@@ -1,17 +1,13 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.mapo.project_seoulmatcheap.R
@@ -19,7 +15,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap0102Binding
 
 const val FILTER = "filter_bottomSheet_dialog"
 
-class MAP_01_02 : BottomSheetDialogFragment() {
+class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
 
     private lateinit var binding : FragmentMap0102Binding
 
@@ -86,16 +82,19 @@ class MAP_01_02 : BottomSheetDialogFragment() {
             button100.apply {
                 setOnCheckedChangeListener { _, isChecked ->
                     optionDistance(text100, isChecked)
+                    map.filterData(null, 100.0)
                 }
             }
             button500.apply {
                 setOnCheckedChangeListener { _, isChecked ->
                     optionDistance(text500, isChecked)
+                    map.filterData(null, 500.0)
                 }
             }
             button2000.apply {
                 setOnCheckedChangeListener { _, isChecked ->
                     optionDistance(text2000, isChecked)
+                    map.filterData(null, 2000.0)
                 }
             }
         }
