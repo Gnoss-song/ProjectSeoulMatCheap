@@ -47,10 +47,11 @@
     <dimen name="icon_width2">50dp</dimen>
     <dimen name="icon_height">40dp</dimen>
     <dimen name="icon_height2">50dp</dimen>
+    <dimen name="icon_height3">150dp</dimen>
     <dimen name="icon_logo">250dp</dimen>
     <dimen name="logo_height">64dp</dimen>
     <dimen name="filter_distance">30dp</dimen>
-    <dimen name="logo_margin_height">100dp</dimen>
+    <dimen name="logo_margin">100dp</dimen>
 
     <!--텍스트 사이즈-->
     <dimen name="text_filter_title">20sp</dimen>

@@ -36,8 +36,8 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
     
-    <style name="theme_splash" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
+    <style name="theme_splash" parent="Theme.Project_SeoulMatCheap">
+        <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 

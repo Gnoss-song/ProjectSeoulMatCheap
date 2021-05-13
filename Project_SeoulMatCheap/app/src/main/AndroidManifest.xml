@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.PERMISSION_01"></activity>
+        <activity android:name=".ui.activity.PERMISSION_01"
+            android:theme="@style/theme_splash"/>
         <activity
             android:name=".ui.activity.SPLASH_00"
             android:theme="@style/theme_splash">
@@ -36,7 +37,8 @@
         <activity android:name=".ui.activity.MY_01_02" />
         <activity android:name=".ui.activity.MY_01_03" />
         <activity android:name=".ui.activity.MY_01_01_01" />
-        <activity android:name=".ui.activity.SPLASH_01" />
+        <activity android:name=".ui.activity.SPLASH_01"
+            android:theme="@style/theme_splash" />
         <activity android:name=".ui.activity.MAP_01_01" />
         <activity android:name=".ui.activity.INFORM_02_02_01" />
         <activity android:name=".ui.activity.INFORM_02_02" />

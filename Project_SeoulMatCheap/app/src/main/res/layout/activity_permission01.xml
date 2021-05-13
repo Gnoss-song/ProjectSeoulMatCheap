@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.activity.PERMISSION_01">
 
     <ImageView
@@ -11,7 +12,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_basic"
-        android:layout_marginTop="@dimen/margin_basic"
         android:layout_marginEnd="@dimen/margin_basic"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_basic"
+        android:layout_marginTop="@dimen/icon_height"
         android:layout_marginEnd="@dimen/margin_basic"
         android:background="@drawable/dot_round_edge"
         android:elevation="@dimen/elevation1"
@@ -43,24 +44,27 @@
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/icon_height3"
+                android:layout_marginStart="@dimen/logo_margin"
+                android:layout_marginEnd="@dimen/logo_margin"
                 android:baselineAlignBottom="false"
                 android:cropToPadding="false"
                 android:duplicateParentState="false"
                 android:fitsSystemWindows="false"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/seoul_mark" />
+                app:srcCompat="@drawable/app_logo" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:layout_marginBottom="@dimen/margin_basic2"
+                android:bufferType="spannable"
                 android:text="@string/permission_guide"
                 android:textAlignment="center"
-                android:textSize="@dimen/margin_basic3"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -70,6 +74,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_basic"
+        android:layout_marginTop="@dimen/btn_icon"
         android:layout_marginEnd="@dimen/margin_basic"
         android:background="@drawable/round_button2"
         android:backgroundTint="@color/white"
@@ -95,7 +100,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_basic"
                 android:orientation="vertical">
 
@@ -111,6 +116,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/map_item_height"
                     android:text="@string/permission_gps"
                     android:textSize="@dimen/permission_text" />
             </LinearLayout>
@@ -138,7 +144,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_basic4"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -155,6 +161,7 @@
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/map_item_height"
                     android:text="@string/permission_call"
                     android:textSize="@dimen/permission_text" />
             </LinearLayout>
@@ -181,7 +188,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_basic4"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -198,6 +205,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/map_item_height"
                     android:text="@string/permission_gallery"
                     android:textSize="@dimen/permission_text" />
             </LinearLayout>
@@ -212,6 +220,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_button2"
+        android:elevation="0dp"
+        android:onClick="goNextActivity"
         android:text="@string/ok"
         android:textSize="@dimen/permission_name"
         android:textStyle="bold"

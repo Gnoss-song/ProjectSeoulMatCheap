@@ -24,7 +24,7 @@
     <string name="network_notice">모바일 네트워크 연결 상태를 확인해주세요.</string>
 
     <!-- PERMISSION_01 -->
-    <string name="permission_guide">서울맛칩앱 이용을 위해\n다음 권한을 허용이 필요합니다.</string>
+    <string name="permission_guide">서울맛칩 앱 이용을 위해\n다음 권한의 허용이 필요합니다.</string>
     <string name="permission_gps_name">위치(필수)</string>
     <string name="permission_gps">현재 나의위치 및 지도 서비스\n이용을 위해 필요한 권한입니다.</string>
     <string name="permission_call_name">전화(선택)</string>
