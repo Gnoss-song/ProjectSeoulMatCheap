@@ -85,7 +85,6 @@ class SPLASH_01 : AppCompatActivity() {
                 if(Build.VERSION.SDK_INT > M) {
                     val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")).apply {
                         addCategory(Intent.CATEGORY_DEFAULT)
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     }
                     startActivity(appDetail)
                 } else {

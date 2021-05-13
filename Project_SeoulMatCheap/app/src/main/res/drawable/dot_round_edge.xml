@@ -6,8 +6,8 @@
     <solid
         android:color="@color/white"/>
     <stroke
-        android:width="5dp"
+        android:width="3dp"
         android:color="@color/dot_edge"
-        android:dashGap="12dp"
+        android:dashGap="10dp"
         android:dashWidth="10dp"/>
 </shape>
