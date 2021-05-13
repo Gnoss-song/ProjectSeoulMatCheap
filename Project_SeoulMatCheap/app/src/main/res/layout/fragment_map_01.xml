@@ -39,7 +39,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:navermap_mapType="Basic" />
+            app:navermap_tiltGesturesEnabled="false"
+            app:navermap_rotateGesturesEnabled="false"
+            app:navermap_mapType="Basic"
+            app:navermap_symbolScale="0.8"/>
 
         <ImageButton
             android:id="@+id/button_list"

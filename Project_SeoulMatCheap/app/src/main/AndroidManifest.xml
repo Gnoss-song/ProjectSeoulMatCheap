@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.activity.PERMISSION_01"></activity>
         <activity
             android:name=".ui.activity.SPLASH_00"
             android:theme="@style/theme_splash">
@@ -42,7 +43,7 @@
         <activity android:name=".ui.activity.MATCHEAP_01_03_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_03" />
         <activity android:name=".ui.activity.MATCHEAP_01_02_01" />
-        <activity android:name=".ui.activity.LOGIN_01"/>
+        <activity android:name=".ui.activity.LOGIN_01" />
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"
