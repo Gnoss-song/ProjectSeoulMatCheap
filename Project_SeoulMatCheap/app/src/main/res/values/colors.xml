@@ -31,4 +31,7 @@
 
     <!--MAP_01-->
     <color name="map_circle">#1AF25D3D</color>
+    <color name="map_like">#FFE600</color>
+    <color name="map_seoul">#0d62d1</color>
+    <color name="map_mat">#ff0000</color>
 </resources>

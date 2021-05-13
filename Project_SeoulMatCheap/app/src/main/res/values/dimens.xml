@@ -26,12 +26,14 @@
     <!--그림자-->
     <dimen name="elevation1">5dp</dimen>
 
-    <!--지도메뉴버튼-->
+    <!--지도-->
     <dimen name="map_button">30dp</dimen>
     <dimen name="map_item_width">40dp</dimen>
     <dimen name="map_item_height">5dp</dimen>
     <dimen name="filter_distance_left">60dp</dimen>
     <dimen name="filter_distance_right">64dp</dimen>
+    <dimen name="info_window_rotation">180</dimen>
+    <dimen name="info_window_text">11sp</dimen>
 
     <!--텍스트메뉴버튼-->
     <dimen name="text_menu">20sp</dimen>
@@ -50,4 +52,5 @@
     <!--텍스트 사이즈-->
     <dimen name="text_filter_title">20sp</dimen>
     <dimen name="text_icon">15sp</dimen>
+
 </resources>
