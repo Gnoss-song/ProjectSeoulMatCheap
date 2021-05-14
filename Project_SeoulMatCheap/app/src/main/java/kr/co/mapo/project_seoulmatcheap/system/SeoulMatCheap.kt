@@ -29,12 +29,6 @@ import java.util.*
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션
  */
 
-const val SEARCH_HISTROY = "search_history_prefs"
-const val SEOULCITYHALL_X = 37.5662952
-const val SEOULCITYHALL_Y = 126.9779451
-const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
-const val SEOUL = "서울특별시"
-
 class SeoulMatCheap : Application() {
 
     companion object {
@@ -65,6 +59,7 @@ class SeoulMatCheap : Application() {
         super.onCreate()
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
+        Log.e("[TEST0]", "${UserPrefs.getUserEmail(this)}")
     }
 
     //토스트메세지 출력

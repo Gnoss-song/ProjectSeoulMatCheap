@@ -17,7 +17,6 @@ private const val TAG = "[LOGIN]"
 
 object UserPrefs {
 
-    private const val USER_PRESFS = "user_prefs"
     private const val USER_EMAIL = "email"
     private const val OAUTH_CODE = "oauth_code"
 

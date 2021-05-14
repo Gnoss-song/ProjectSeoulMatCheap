@@ -61,6 +61,18 @@ class MAP_01(
     private val storeWindowState = MutableLiveData<Boolean>()
     private lateinit var clickedInfoWindow : ArrayMap<InfoWindow, StoreTest>
 
+    //오버레이 속성 전역변수
+    private val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
+    private val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
+    private val icon_japan = OverlayImage.fromResource(R.drawable.icon_japan)
+    private val icon_food = OverlayImage.fromResource(R.drawable.icon_food)
+    private val icon_beauty = OverlayImage.fromResource(R.drawable.icon_beauty)
+    private val icon_wash = OverlayImage.fromResource(R.drawable.icon_wash)
+    private val icon_hotel = OverlayImage.fromResource(R.drawable.icon_hotel)
+    private val icon_store = OverlayImage.fromResource(R.drawable.icon_store)
+    private lateinit var unClickedAdapter : InfoWindow.ViewAdapter
+    private lateinit var clickedAdapter : InfoWindow.ViewAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -248,6 +260,7 @@ class MAP_01(
 
     //식당정보 바텀시트 데이터 설정함수
     private fun setBottomSheetData(item : StoreTest) {
+        val test = MapItemInfowindowBinding.bind(view.root)
         with(binding.include) {
             Glide.with(owner).load(item.image).into(image)
             name.text = item.name
