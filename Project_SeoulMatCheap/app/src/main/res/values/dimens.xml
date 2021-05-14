@@ -62,5 +62,6 @@
     <dimen name="text_icon">15sp</dimen>
     <dimen name="permission_name">20dp</dimen>
     <dimen name="permission_text">15dp</dimen>
+    <dimen name="marketinfo_text">11sp</dimen>
 
 </resources>

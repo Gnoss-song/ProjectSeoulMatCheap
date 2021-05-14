@@ -11,10 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingTop="10dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="10dp">
+        android:padding="@dimen/margin_basic">
 
         <CheckBox
             android:id="@+id/checkbox_user"
@@ -29,7 +26,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -65,7 +62,7 @@
                 android:layout_marginBottom="3dp"
                 android:singleLine="true"
                 android:text="주소"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/marketinfo_text"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,7 +73,7 @@
                     android:id="@+id/sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/marketinfo_text"
                     android:text="종류" />
 
                 <TextView
@@ -84,10 +81,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/marketinfo_text"
                     android:text="0.0 km" />
             </LinearLayout>
         </LinearLayout>
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_star"
+            android:layout_marginEnd="10dp"
+            />
 
         <TextView
             android:id="@+id/score"
@@ -100,9 +104,11 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/view3"
+        android:id="@+id/view9"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#E1E1E1" />
+        android:background="#C6C6C6"/>
 
 </LinearLayout>

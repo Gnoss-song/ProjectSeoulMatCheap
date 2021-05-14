@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -12,15 +12,12 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingTop="10dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="10dp">
+        android:padding="@dimen/margin_basic">
 
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -55,11 +52,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:singleLine="true"
                 android:lineSpacingExtra="8sp"
-                android:textStyle="normal"
-                android:textSize="14sp"
-                android:text="주소" />
+                android:singleLine="true"
+                android:text="주소"
+                android:textSize="@dimen/marketinfo_text"
+                android:textStyle="normal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,20 +67,27 @@
                     android:id="@+id/sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
-                    android:textSize="14sp"
-                    android:text="종류" />
+                    android:text="종류"
+                    android:textSize="@dimen/marketinfo_text"
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
                     android:layout_marginStart="16dp"
-                    android:textSize="14sp"
-                    android:text="0.0 km" />
+                    android:text="0.0 km"
+                    android:textSize="@dimen/marketinfo_text"
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:srcCompat="@drawable/ic_star"
+            android:layout_marginEnd="10dp"/>
 
         <TextView
             android:id="@+id/score"
@@ -93,5 +97,13 @@
             android:textColor="#000000"
             android:textSize="45sp" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/view9"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#C6C6C6"/>
 
 </LinearLayout>

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
+import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
 
 class INFORM_02_02_01 : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
@@ -28,15 +29,18 @@ class INFORM_02_02_01 : AppCompatActivity() {
     var str: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityInform020201Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         recyclerView = findViewById(R.id.recyclerView2)
-        recyclerView.layoutManager = LinearLayoutManager(this@INFORM_02_02_01, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this@INFORM_02_02_01, LinearLayoutManager.HORIZONTAL, false)
 
         binding.btnComplete.setOnClickListener {
-            val mLogoutView = LayoutInflater.from(this).inflate(R.layout.fragment_dialog_inform_complete, null)
+            val mLogoutView =
+                LayoutInflater.from(this).inflate(R.layout.fragment_dialog_inform_complete, null)
             val mBuilder = androidx.appcompat.app.AlertDialog.Builder(this).setView(mLogoutView)
             val mAlertDialog = mBuilder.show().apply {
                 window?.setBackgroundDrawable(null)
@@ -44,15 +48,16 @@ class INFORM_02_02_01 : AppCompatActivity() {
             val okButton = mLogoutView.findViewById<Button>(R.id.btn_complete_ok)
             val cancelButton = mLogoutView.findViewById<Button>(R.id.btn_complete_no)
 
+
             okButton.setOnClickListener {
-                Toast.makeText(this,"리뷰 쓰기 성공",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "리뷰 쓰기 성공", Toast.LENGTH_SHORT).show()
 
                 //화면이동 INFORM_02_01로. 가게이름의 정보를 가진채로.
 
                 mAlertDialog.dismiss()
             }
-            cancelButton.setOnClickListener{
-                Toast.makeText(this,"취소되었습니다.",Toast.LENGTH_SHORT).show()
+            cancelButton.setOnClickListener {
+                Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
                 mAlertDialog.dismiss()
             }
         }
@@ -60,9 +65,8 @@ class INFORM_02_02_01 : AppCompatActivity() {
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            setTitle(R.string.review_title_modify)
+            setTitle(R.string.review_title)
         }
-
         ratingBar = findViewById(R.id.ratingBar)
         ratingscore = findViewById(R.id.ratingscore)
         ratingBar.onRatingBarChangeListener =
@@ -71,15 +75,22 @@ class INFORM_02_02_01 : AppCompatActivity() {
                 ratingscore.text = str
             }
     }
-    fun openGallary(v : View) {
+
+    fun openGallary(v: View) {
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val readPermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (writePermission == PackageManager.PERMISSION_DENIED
-            || readPermission == PackageManager.PERMISSION_DENIED) { // 권한 없어서 요청
-            ActivityCompat.requestPermissions(this,
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 100)
+            || readPermission == PackageManager.PERMISSION_DENIED
+        ) { // 권한 없어서 요청
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ), 100
+            )
         } else { // 권한 있음
             val intent = Intent(Intent.ACTION_PICK).apply {
                 type = "image/*"
@@ -89,8 +100,9 @@ class INFORM_02_02_01 : AppCompatActivity() {
             startActivityForResult(intent, OPEN_GALLERY)
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
             }
@@ -106,12 +118,15 @@ class INFORM_02_02_01 : AppCompatActivity() {
                     if (data != null) {
                         this.add(Uri.parse(data.dataString))
                     }
-                }
-                else {
+                } else {
                     for (i in 0 until data.clipData!!.itemCount) {
                         this.add(data.clipData!!.getItemAt(i).uri)
-                        if (data.clipData!!.itemCount>3){
-                            Toast.makeText(applicationContext,"사진은 최대 3개까지 가능합니다.",Toast.LENGTH_SHORT).show()
+                        if (data.clipData!!.itemCount > 3) {
+                            Toast.makeText(
+                                applicationContext,
+                                "사진은 최대 3개까지 가능합니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         binding.scrollView.visibility = View.GONE
                     }
@@ -130,7 +145,8 @@ class INFORM_02_02_01 : AppCompatActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderView {
             return HolderView(
-                LayoutInflater.from(parent.context).inflate(R.layout.multi_image_item, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.multi_image_item, parent, false)
             )
         }
 
@@ -139,11 +155,15 @@ class INFORM_02_02_01 : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int {
-            if (list.size>3){
+            if (list.size > 3) {
                 return 3
             }
             return list.size
         }
+
+
     }
+
 }
+
 

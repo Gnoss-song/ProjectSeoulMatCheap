@@ -52,8 +52,8 @@ class MY_01_01 : AppCompatActivity() {
         binding.recycler.layoutManager = LinearLayoutManager(this)
 
         //구분선
-        val  dividerItemDecoration =  DividerItemDecoration(binding.recycler.context, LinearLayoutManager(this).orientation)
-        binding.recycler.addItemDecoration(dividerItemDecoration)
+//        val  dividerItemDecoration =  DividerItemDecoration(binding.recycler.context, LinearLayoutManager(this).orientation)
+//        binding.recycler.addItemDecoration(dividerItemDecoration)
 
         //화면 이동 MY_01_01_01
         binding.btnEdit.setOnClickListener {

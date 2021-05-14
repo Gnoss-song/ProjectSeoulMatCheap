@@ -215,7 +215,7 @@
                             android:layout_marginStart="11dp"
                             android:layout_marginTop="65dp"
                             android:layout_marginEnd="18dp"
-                            android:text="020201"
+                            android:text="리뷰수정"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/nickName"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -227,7 +227,7 @@
                             android:layout_marginStart="17dp"
                             android:layout_marginTop="65dp"
                             android:layout_marginEnd="13dp"
-                            android:text="0202"
+                            android:text="리뷰쓰기"
                             app:layout_constraintEnd_toStartOf="@+id/nickName"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
