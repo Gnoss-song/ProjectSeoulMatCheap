@@ -38,6 +38,7 @@ import kotlin.collections.HashMap
 class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     companion object {
+
         fun newInstance(owner: AppCompatActivity) : Fragment {
             return MAP_01(owner)
         }
