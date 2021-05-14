@@ -18,6 +18,7 @@ import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -289,15 +290,3 @@ class MAP_01(
         }
     }
 }
-
-data class StoreTest(
-    val code : Int,
-    val image : String,
-    val name : String,
-    val address : String,
-    val sort : String,
-    val distance : Double,
-    val score : Double,
-    val x : Double,
-    val y : Double
-)

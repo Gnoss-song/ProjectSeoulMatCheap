@@ -68,3 +68,15 @@ class Test {
         }
     }
 }
+
+data class StoreTest(
+    val code : Int,
+    val image : String,
+    val name : String,
+    val address : String,
+    val sort : String,
+    val distance : Double,
+    val score : Double,
+    val x : Double,
+    val y : Double
+)
