@@ -13,8 +13,6 @@ import com.nhn.android.naverlogin.OAuthLogin
  * @desc 로그인 세션관리 object
  */
 
-private const val TAG = "[LOGIN]"
-
 object UserPrefs {
 
     private const val USER_EMAIL = "email"
@@ -44,10 +42,10 @@ object UserPrefs {
                 Log.e("[TEST]", "카카오 로그아웃")
                 UserApiClient.instance.unlink { error ->
                     if (error != null) {
-                        Log.e(TAG, "연결 끊기 실패", error)
+                        Log.e("[TEST]", "연결 끊기 실패", error)
                     }
                     else {
-                        Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                        Log.i("[TEST]", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
                     }
                 }
             }
@@ -60,8 +58,8 @@ object UserPrefs {
                 if (!isSuccessDeleteToken) {
                     // 서버에서 토큰 삭제에 실패했어도 클라이언트에 있는 토큰은 삭제되어 로그아웃된 상태입니다.
                     // 클라이언트에 토큰 정보가 없기 때문에 추가로 처리할 수 있는 작업은 없습니다.
-                    Log.e(TAG, "errorCode:" + mOAuthLoginInstance.getLastErrorCode(context));
-                    Log.e(TAG, "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(context));
+                    Log.e("[TEST]", "errorCode:" + mOAuthLoginInstance.getLastErrorCode(context));
+                    Log.e("[TEST]", "errorDesc:" + mOAuthLoginInstance.getLastErrorDesc(context));
                 }
             }
         }

@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -59,7 +60,6 @@ class SeoulMatCheap : Application() {
         super.onCreate()
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
-        Log.e("[TEST0]", "${UserPrefs.getUserEmail(this)}")
     }
 
     //토스트메세지 출력

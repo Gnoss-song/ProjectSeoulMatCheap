@@ -18,7 +18,6 @@ class SPLASH_00 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_00)
-        Log.e("[TEST1]", "${UserPrefs.getUserEmail(this)}")
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, LOGIN_01::class.java)
             startActivity(intent)

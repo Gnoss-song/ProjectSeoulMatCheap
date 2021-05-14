@@ -38,8 +38,6 @@ class LOGIN_01 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         //SharedPreferences 안에 이메일 값이 저장되어 있을 때 -> SPLASH_01로 이동
-        Log.e("로그인", "제대로")
-        Log.e("[TEST2]", "${UserPrefs.getUserEmail(this)}")
         if(UserPrefs.getUserEmail(this).isNotBlank()) {
             goNextActivity()
         }
