@@ -12,7 +12,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/margin_basic"
-        android:layout_marginTop="@dimen/margin_basic"
         android:layout_marginEnd="@dimen/margin_basic"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"

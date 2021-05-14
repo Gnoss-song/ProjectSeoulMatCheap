@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kr.co.mapo.project_seoulmatcheap">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.INFORM_02"></activity>
+
+        <activity android:name=".ui.activity.PERMISSION_01"
+            android:theme="@style/theme_splash"/>
         <activity
             android:name=".ui.activity.SPLASH_00"
             android:theme="@style/theme_splash">
@@ -33,11 +34,13 @@
             android:theme="@style/Transparent" />
         <activity android:name=".ui.activity.CATEGORY_01_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_02" />
+        <activity android:name=".ui.activity.INFORM_02"></activity>
         <activity android:name=".ui.activity.MY_01_01" />
         <activity android:name=".ui.activity.MY_01_02" />
         <activity android:name=".ui.activity.MY_01_03" />
         <activity android:name=".ui.activity.MY_01_01_01" />
-        <activity android:name=".ui.activity.SPLASH_01" />
+        <activity android:name=".ui.activity.SPLASH_01"
+            android:theme="@style/theme_splash" />
         <activity android:name=".ui.activity.MAP_01_01" />
         <activity
             android:name=".ui.activity.INFORM_02_02_01"

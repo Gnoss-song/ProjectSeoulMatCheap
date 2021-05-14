@@ -1,5 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -8,6 +9,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
@@ -37,8 +39,7 @@ class LOGIN_01 : AppCompatActivity() {
         setContentView(binding.root)
         //SharedPreferences 안에 이메일 값이 저장되어 있을 때 -> SPLASH_01로 이동
         if(UserPrefs.getUserEmail(this).isNotBlank()) {
-            startActivity(Intent(this, SPLASH_01::class.java))
-            finish()
+            goNextActivity()
         }
         init()
     }
@@ -60,8 +61,7 @@ class LOGIN_01 : AppCompatActivity() {
             loginTest.setOnClickListener {
                 Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
                 UserPrefs.saveUserEmail(this@LOGIN_01, "이메일 주소 저장", code = -1)
-                startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
-                finish()
+                goNextActivity()
             }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인
@@ -142,8 +142,7 @@ class LOGIN_01 : AppCompatActivity() {
                                 "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
                                 "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
                         Log.e(TAG, "로그인 성공2 ${user.kakaoAccount?.profile?.nickname}")
-                        startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
-                        finish()
+                        goNextActivity()
                     } else {
                         Log.e(TAG, "로그인 실패2")
                     }
@@ -166,12 +165,21 @@ class LOGIN_01 : AppCompatActivity() {
                     val result = response.body()!!.response
                     Log.e(TAG, "${result.email}\n${result.nickname}\n${result.profileImage}")
                     UserPrefs.saveUserEmail(this@LOGIN_01, result.email, 1)
-                    startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
-                    finish()
+                    goNextActivity()
                 }
             }
             override fun onFailure(call: Call<NaverLoginResponse>, t: Throwable) {
             }
         })
+    }
+
+    private fun goNextActivity() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            startActivity(Intent(this@LOGIN_01, PERMISSION_01::class.java))
+        } else {
+            startActivity(Intent(this@LOGIN_01, SPLASH_01::class.java))
+        }
+        finish()
     }
 }

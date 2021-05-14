@@ -33,7 +33,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
 class AutoCompleteAdapter(
     private val unfilteredlist: ArrayList<String>,
     private val owner : AppCompatActivity
-) : RecyclerView.Adapter<AutoCompleteAdapter.ViewHolder>(), Filterable {
+    ) : RecyclerView.Adapter<AutoCompleteAdapter.ViewHolder>(), Filterable {
 
     private var filteredList : ArrayList<String> = unfilteredlist
     private var constraint: String = ""

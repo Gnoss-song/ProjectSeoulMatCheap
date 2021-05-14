@@ -3,11 +3,13 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.GridItem
@@ -29,6 +31,10 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         binding = FragmentCategory01Binding.inflate(layoutInflater)
         binding.moveTV.isSelected = true
         setHasOptionsMenu(true)
+
+        SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
+            binding.categoryLocationTV.text = it
+        })
 
         val manager = GridLayoutManager(context,4)
         with(binding.gridRecyclerView) {
@@ -85,7 +91,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                 show().window?.setBackgroundDrawable(null)
             }
         }
-        binding.categoryLocationTV.text = SeoulMatCheap.getInstance().address
     }
 
     override fun onClick(v: View?) {

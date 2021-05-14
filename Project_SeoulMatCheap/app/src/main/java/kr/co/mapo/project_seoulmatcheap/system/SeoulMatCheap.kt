@@ -5,16 +5,19 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.Criteria
-import android.location.Geocoder
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
+import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
 import java.util.*
 
@@ -23,13 +26,14 @@ import java.util.*
  * @author SANDY
  * @email nnal0256@naver.com
  * @created 2021-04-06
- * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션, rest 등 설정
+ * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션
  */
 
 const val SEARCH_HISTROY = "search_history_prefs"
 const val SEOULCITYHALL_X = 37.5662952
 const val SEOULCITYHALL_Y = 126.9779451
 const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
+const val SEOUL = "서울특별시"
 
 class SeoulMatCheap : Application() {
 
@@ -44,10 +48,14 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    var x : Double = SEOULCITYHALL_X     //위도
-    var y : Double = SEOULCITYHALL_Y      //경도
-    var address : String = SEOULCITYHALL_ADDRESS     //현재 위치 주소
-    lateinit var sharedPreferences : SharedPreferences
+    var x = SEOULCITYHALL_X   //위도
+    var y = SEOULCITYHALL_Y     //경도
+    val address = MutableLiveData<String>()
+    val location = MutableLiveData<Location>()
+
+    init {
+        this.address.value = SEOULCITYHALL_ADDRESS
+    }
 
     /* onCreate()
      * Activity, Service, Receiver가 생성되기전 어플리케이션이 시작중일때
@@ -55,7 +63,6 @@ class SeoulMatCheap : Application() {
      * */
     override fun onCreate() {
         super.onCreate()
-        sharedPreferences = getSharedPreferences(SEARCH_HISTROY, MODE_PRIVATE)
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
     }
@@ -65,26 +72,12 @@ class SeoulMatCheap : Application() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    //네트워크 연결 여부를 반환하는 함수
-    fun isNetworkAvailable(context: Context): Boolean {
-        var result = false
-        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
-        if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                result = true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                result = false
-            }
-        }
-        return result
-    }
-
     //GPS로부터 위치정보를 얻어오는 함수
     fun setLocation(context: Context) {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
         val provider = locationManager.getBestProvider(Criteria(), true)
+        Log.e("[GPS0]", "$provider")
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -94,25 +87,41 @@ class SeoulMatCheap : Application() {
             showToast(context, context.getString(R.string.gps_notice))
             return
         } else {
-            // 해당 장치가 마지막으로 수신한 위치 얻기
-            val location = locationManager.getLastKnownLocation(provider)
-            locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener { })
-            Log.e("[TEST]", provider.toString())
-            if (location != null) {
-                x = location.latitude
-                y = location.longitude
-                address = getAddress(x, y, context)
-            }
-            Log.e("[GPS]", "$x, $y, $address")
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location : Location? ->
+                    locationManager.requestLocationUpdates(provider, 100, 1f, LocationListener {
+                        updateLocation(it, context)
+                    })
+                    /*
+                    if(location == null) {
+                        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {
+                            updateLocation(it, context)
+                        })
+                    } else {
+                        updateLocation(location, context)
+                    }
+                     */
+                }
         }
     }
 
     //위도, 경도로부터 주소를 계산하는 함수
-    fun getAddress(lat: Double, lng: Double, context: Context): String {
-        val geocoder = Geocoder(context, Locale.getDefault()) //주소 구하기 객체
-        val address : String = geocoder.getFromLocation(lat, lng, 1)[0].getAddressLine(0) // 현재 주소
-        Log.e("[address]", address)
-        return address.slice(11 until address.length)
+    private fun updateLocation(location: Location, context: Context) {
+        this.location.value = location
+        this.x = location.latitude
+        this.y = location.longitude
+        this.address.value = Geocoder(context, Locale.getDefault())
+            .getFromLocation(x, y, 1)[0]
+            .getAddressLine(0)
+            .substring(11)
+        Log.e("[GSP]", "$x, $y, ${address.value}")
+    }
+
+    //서울시인지 여부 판단하는 함수
+    fun adminArea(lat: Double, lng: Double, context: Context) : Boolean {
+        val address = Geocoder(context, Locale.getDefault()).getFromLocation(lat, lng, 1)[0]
+        return address.adminArea === SEOUL
     }
 
 }

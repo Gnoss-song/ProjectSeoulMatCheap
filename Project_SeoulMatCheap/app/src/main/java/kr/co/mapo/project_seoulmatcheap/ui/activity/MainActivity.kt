@@ -12,72 +12,64 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
 
-enum class BOTTOM_TAP(val position: Int) {
-    MAP(0), SEARCH(1), MAIN(2), MATCHEAP(3), MY(4)
-}
-
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tabLayout : TabLayout
     private var pressedTime : Long = 0
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if(savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.container, CATEGORY_01(this@MainActivity)).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.container, CATEGORY_01(this@MainActivity))
+                .commit()
         }
         init()
     }
 
     private fun init() {
-        tabLayout = findViewById(R.id.tabLayout)
         val seoulMatCheap = SeoulMatCheap.getInstance()
         seoulMatCheap.setLocation(this)
-        setView(seoulMatCheap.x, seoulMatCheap.y)
+        setView()
     }
 
-    private fun setView(x:Double, y:Double) {
-        with(tabLayout) {
-            getTabAt(2)!!.apply {
-                select()
-                text = getString(R.string.app_meun3)
-            }
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-                //선택할 때
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when(tab!!.position) {
-                        BOTTOM_TAP.MAP.position ->  {
-                            tab.text = getString(R.string.app_meun1)
-                            supportFragmentManager.beginTransaction().replace(R.id.container, MAP_01.newInstance(this@MainActivity, x, y)).commit()
-                        }
-                        BOTTOM_TAP.SEARCH.position -> {
-                            tab.text = getString(R.string.app_meun2)
-                            supportFragmentManager.beginTransaction().replace(R.id.container, SEARCH_01.newInstance(this@MainActivity)).commit()
-                        }
-                        BOTTOM_TAP.MAIN.position -> {
-                            tab.text = getString(R.string.app_meun3)
-                            supportFragmentManager.beginTransaction().replace(R.id.container, CATEGORY_01(this@MainActivity)).commit()
-                        }
-                        BOTTOM_TAP.MATCHEAP.position -> {
-                            tab.text = getString(R.string.app_meun4)
-                            supportFragmentManager.beginTransaction().replace(R.id.container, MATCHEAP_01()).commit()
-                        }
-                        BOTTOM_TAP.MY.position -> {
-                            tab.text = getString(R.string.app_meun5)
-                            supportFragmentManager.beginTransaction().replace(R.id.container, MY_01.newInstance(this@MainActivity)).commit()
-                        }
+    private fun setView() {
+        with(binding.bottomNavigationView) {
+            selectedItemId = R.id.main
+            setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.map -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, MAP_01.newInstance(this@MainActivity))
+                            .commit()
+                    }
+                    R.id.search -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, SEARCH_01.newInstance(this@MainActivity))
+                            .commit()
+                    }
+                    R.id.main -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, CATEGORY_01(this@MainActivity))
+                            .commit()
+                    }
+                    R.id.mat -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, MATCHEAP_01())
+                            .commit()
+                    }
+                    R.id.my -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.container, MY_01.newInstance(this@MainActivity))
+                            .commit()
                     }
                 }
-                //선택이 풀릴 때
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    tab!!.text = null
-                }
-                //선택된 상태에서 다시 선택될 때
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                }
-            })
+                return@setOnNavigationItemSelectedListener true
+            }
         }
+
     }
 
     override fun onBackPressed() {

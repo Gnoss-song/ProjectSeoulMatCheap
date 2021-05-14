@@ -35,11 +35,18 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
-    
-    <style name="theme_splash" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
+
+    <style name="theme_splash" parent="Theme.Project_SeoulMatCheap">
+        <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <!--FILTER-->
+    <style name="filterBottomSheetTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/filterBottomSheetStyle</item>
+    </style>
+    <style name="filterBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@null</item>
+    </style>
 
 </resources>

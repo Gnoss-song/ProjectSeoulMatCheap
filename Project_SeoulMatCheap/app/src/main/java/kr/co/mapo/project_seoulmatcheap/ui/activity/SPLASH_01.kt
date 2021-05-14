@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kr.co.mapo.project_seoulmatcheap.R
@@ -27,6 +29,7 @@ class SPLASH_01 : AppCompatActivity() {
     private lateinit var binding : ActivitySplash01Binding
     private lateinit var connectivityManager : ConnectivityManager
     private lateinit var netWorkCallback : ConnectivityManager.NetworkCallback
+    private var network_state = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +85,6 @@ class SPLASH_01 : AppCompatActivity() {
                 if(Build.VERSION.SDK_INT > M) {
                     val appDetail = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")).apply {
                         addCategory(Intent.CATEGORY_DEFAULT)
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     }
                     startActivity(appDetail)
                 } else {
@@ -90,15 +92,23 @@ class SPLASH_01 : AppCompatActivity() {
                 }
             }
             PERMISSION_REQUIRE -> { //퍼미션 완료 -> 네트워크 확인 후 메인액티비티로
-                //네트워크 연결 확인
-                if(SeoulMatCheap.getInstance().isNetworkAvailable(this)) {
+                //네트워크 연결상태
+                val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+                if(capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+                    || capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true) {
+                    network_state = true
                     Handler(Looper.getMainLooper()).postDelayed({
                         goMainActivity()
                     }, SPLASH_DELAY)
+                //네트워크 연결X
                 } else {
+                    SeoulMatCheap.getInstance().showToast(this, getString(R.string.network_notice))
                     val builder =  NetworkRequest.Builder()
-                    SeoulMatCheap.getInstance().showToast(this@SPLASH_01, getString(R.string.network_notice))
-                    connectivityManager.registerNetworkCallback(builder.build(), netWorkCallback)
+                        .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                        .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
+                        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                        .build()
+                    connectivityManager.registerNetworkCallback(builder, netWorkCallback)
                 }
             }
         }
@@ -106,13 +116,15 @@ class SPLASH_01 : AppCompatActivity() {
 
     private fun goMainActivity() {
         val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+        SeoulMatCheap.getInstance().setLocation(this)
         startActivity(intent)
         finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if(connectivityManager.isActiveNetworkMetered) {
+        if(!network_state) {
+            connectivityManager.bindProcessToNetwork(null)
             connectivityManager.unregisterNetworkCallback(netWorkCallback)
         }
     }

@@ -22,9 +22,18 @@
     <color name="yellow">#FBC02D</color>
 
     <color name="main">#F25D3D</color>
+    <color name="divide">#f1f1f1</color>
 
     <!--CATEGORY_01_03-->
     <color name="transparent">#1A000000</color>
     <color name="transparentcolor">#8B42AFDA</color>
 
+    <!--MAP_01-->
+    <color name="map_circle">#1AF25D3D</color>
+    <color name="map_like">#FFE600</color>
+    <color name="map_seoul">#0d62d1</color>
+    <color name="map_mat">#ff0000</color>
+
+    <!--PERMISSION-->
+    <color name="dot_edge">#707070</color>
 </resources>
