@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.ArrayMap
@@ -248,7 +249,7 @@ class MAP_01(
     //식당정보 바텀시트 데이터 설정함수
     private fun setBottomSheetData(item : StoreTest) {
         with(binding.include) {
-            Glide.with(owner).load(item.image).into(image)
+            Glide.with(owner).load(item.image).into(reviewitem)
             name.text = item.name
             address.text = item.address
             sort.text = item.sort

@@ -11,9 +11,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,10 @@ class INFORM_02_02_01 : AppCompatActivity() {
     private lateinit var recyclerView : RecyclerView
     private lateinit var binding : ActivityInform020201Binding
     private val OPEN_GALLERY = 1
+    private lateinit var ratingscore : TextView
+    private lateinit var ratingBar: RatingBar
+    var str: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInform020201Binding.inflate(layoutInflater)
@@ -61,6 +63,13 @@ class INFORM_02_02_01 : AppCompatActivity() {
             setTitle(R.string.review_title_modify)
         }
 
+        ratingBar = findViewById(R.id.ratingBar)
+        ratingscore = findViewById(R.id.ratingscore)
+        ratingBar.onRatingBarChangeListener =
+            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
+                str = rating.toString()
+                ratingscore.text = str
+            }
     }
     fun openGallary(v : View) {
         val writePermission =
