@@ -73,15 +73,17 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.toolbarMain.inflateMenu(R.menu.category_toolbar)
-        binding.toolbarMain.setOnMenuItemClickListener {
-            when(it.itemId) {
-                R.id.toolbar_help -> {
-                    val intent_tran = Intent(context, CATEGORY_01_03::class.java)
-                    startActivity(intent_tran)
+        binding.toolbarMain.apply {
+            inflateMenu(R.menu.category_toolbar)
+            setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.toolbar_help -> {
+                        val intent_tran = Intent(context, CATEGORY_01_03::class.java)
+                        startActivity(intent_tran)
+                    }
                 }
+                true
             }
-            true
         }
         binding.moveTV.setOnClickListener {
             val builder = AlertDialog.Builder(context)
@@ -97,7 +99,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         val intent = Intent(context, CATEGORY_01_01::class.java)
         startActivity(intent)
 
-        when(v?.id){
+        when(v?.id) {
             binding.button1GS.id -> intent
             binding.button2YC.id -> intent
             binding.button3GR.id -> intent
