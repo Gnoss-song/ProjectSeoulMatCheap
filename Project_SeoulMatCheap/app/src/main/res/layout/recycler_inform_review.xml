@@ -39,7 +39,11 @@
 
         <RatingBar
             android:id="@+id/ratingBar2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_basic4"
+            android:numStars="5" />
+
     </LinearLayout>
 </LinearLayout>

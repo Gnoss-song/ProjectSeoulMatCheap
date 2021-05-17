@@ -214,8 +214,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             setOnClickListener {
                 if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                     storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
-                setBottomSheetData(item)
+                } else setBottomSheetData(item)
                 adapter = createInfoWindowAdapter(item, clicked)
                 clicked = !clicked
                 true
