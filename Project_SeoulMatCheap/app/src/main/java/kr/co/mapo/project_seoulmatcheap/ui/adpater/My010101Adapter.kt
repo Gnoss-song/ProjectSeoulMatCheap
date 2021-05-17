@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 /**
  * @author Gnoss
@@ -74,7 +74,7 @@ class My010101Adapter (
         }
 
         holder.itemView.setOnClickListener{
-            val target = Intent(Activity(),INFORM_02::class.java)
+            val target = Intent(Activity(), INFORM_02::class.java)
             target.putExtra("marketIV",itemData.marketIV)
             target.putExtra("name",itemData.name)
             target.putExtra("address",itemData.address)

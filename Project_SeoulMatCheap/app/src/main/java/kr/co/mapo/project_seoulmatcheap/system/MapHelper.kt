@@ -11,6 +11,7 @@ import kr.co.mapo.project_seoulmatcheap.R
  * @created 2021-05-14
  * @desc 지도 오버레이 컴포넌트 객체 헬퍼 오브젝트
  */
+/*
 object MapHelper {
 
     val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
@@ -33,4 +34,4 @@ object MapHelper {
     val icon_hotel = OverlayImage.fromResource(R.drawable.icon_hotel)
     val icon_store = OverlayImage.fromResource(R.drawable.icon_store)
 
-}
+}*/

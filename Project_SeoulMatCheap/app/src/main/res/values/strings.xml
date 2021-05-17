@@ -769,4 +769,13 @@
     <!--CATEGORY_01_02-->
     <string name="transparent_text">다시보지않기</string>
 
+    <!--INFROM_02-->
+    <string name="review_further">리뷰 더보기</string>
+    <string name="item_location_title">위치</string>
+    <string name="item_location_find">길찾기</string>
+    <string name="item_location_call">연락하기</string>
+    <string name="item_location_call_tilte">(연락처)</string>
+    <string name="item_inform_title">영업정보</string>
+    <string name="item_menu_title">메뉴</string>
+
 </resources>

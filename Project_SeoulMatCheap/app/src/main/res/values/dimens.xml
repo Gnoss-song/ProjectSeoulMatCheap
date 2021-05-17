@@ -20,11 +20,13 @@
     <dimen name="margin_basic2">24dp</dimen>
     <dimen name="margin_basic3">20dp</dimen>
     <dimen name="margin_basic4">10dp</dimen>
+    <dimen name="margin_basic5">12dp</dimen>
     <dimen name="margin_height">5dp</dimen>
     <dimen name="margin_login">100dp</dimen>
 
     <!--그림자-->
     <dimen name="elevation1">5dp</dimen>
+    <dimen name="elevation2">2dp</dimen>
 
     <!--지도-->
     <dimen name="map_button">30dp</dimen>
@@ -58,5 +60,11 @@
     <dimen name="text_icon">15sp</dimen>
     <dimen name="permission_name">20dp</dimen>
     <dimen name="permission_text">15dp</dimen>
+
+    <!--Inform_02-->
+    <dimen name="inform_image_heigh">250dp</dimen>
+    <dimen name="inform_icon_width">15dp</dimen>
+    <dimen name="inform_review_width">280dp</dimen>
+    <dimen name="inform_review_icon">10dp</dimen>
 
 </resources>

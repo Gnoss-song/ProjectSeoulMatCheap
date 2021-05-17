@@ -18,7 +18,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_01
 
 class InformDetailAdapter (
@@ -55,7 +55,7 @@ class InformDetailAdapter (
             sort.text = itemData.sort
         }
         holder.itemView.setOnClickListener{
-            val target = Intent(Activity(),INFORM_02::class.java)
+            val target = Intent(Activity(), INFORM_02::class.java)
             target.putExtra("marketIV",itemData.marketIV)
             target.putExtra("name",itemData.name)
             target.putExtra("address",itemData.address)

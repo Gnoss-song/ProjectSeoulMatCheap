@@ -23,6 +23,7 @@
 
     <color name="main">#F25D3D</color>
     <color name="divide">#f1f1f1</color>
+    <color name="divide2">#e1e1e1</color>
 
     <!--CATEGORY_01_03-->
     <color name="transparent">#1A000000</color>
@@ -36,4 +37,8 @@
 
     <!--PERMISSION-->
     <color name="dot_edge">#707070</color>
+
+    <!--INFORM02-->
+    <color name="black_gradient">#80000000</color>
+    <color name="icon_small_color">#707070</color>
 </resources>
