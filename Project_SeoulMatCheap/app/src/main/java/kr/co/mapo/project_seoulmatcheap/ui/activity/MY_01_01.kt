@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
+import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
 
 
 class MY_01_01 : AppCompatActivity() {

@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -28,12 +29,6 @@ import java.util.*
  * @created 2021-04-06
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션
  */
-
-const val SEARCH_HISTROY = "search_history_prefs"
-const val SEOULCITYHALL_X = 37.5662952
-const val SEOULCITYHALL_Y = 126.9779451
-const val SEOULCITYHALL_ADDRESS = "중구 세종대로 110 서울특별시청"
-const val SEOUL = "서울특별시"
 
 class SeoulMatCheap : Application() {
 
