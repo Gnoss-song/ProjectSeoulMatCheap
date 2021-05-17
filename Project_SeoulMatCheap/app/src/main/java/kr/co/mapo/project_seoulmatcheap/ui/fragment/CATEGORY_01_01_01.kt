@@ -24,17 +24,19 @@ class CATEGORY_01_01_01 : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             adapter = ListRecyclerViewAdapter(listData())
             }
-        binding.categoryScore.setOnClickListener {
-            val list = listData().apply {
-                sortByDescending { it.score }
+        binding.apply {
+            categoryScore.setOnClickListener {
+                val list = listData().apply {
+                    sortByDescending { it.score }
+                }
+                categoryRV.adapter = ListRecyclerViewAdapter(list)
             }
-            binding.categoryRV.adapter = ListRecyclerViewAdapter(list)
-        }
-        binding.categoryDistance.setOnClickListener {
-            val list = listData().apply {
-                sortBy { it.distance }
+            categoryDistance.setOnClickListener {
+                val list = listData().apply {
+                    sortBy { it.distance }
+                }
+                categoryRV.adapter = ListRecyclerViewAdapter(list)
             }
-            binding.categoryRV.adapter = ListRecyclerViewAdapter(list)
         }
     }
 

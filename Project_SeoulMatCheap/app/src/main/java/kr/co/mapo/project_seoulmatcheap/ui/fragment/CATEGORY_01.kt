@@ -41,7 +41,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
             adapter = GridRecyclerViewAdapter(gridData())
         }
         init()
-
         return binding.root
     }
 

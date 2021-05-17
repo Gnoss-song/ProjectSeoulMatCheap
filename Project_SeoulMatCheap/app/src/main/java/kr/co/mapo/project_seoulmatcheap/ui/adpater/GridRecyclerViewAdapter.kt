@@ -19,7 +19,6 @@ class GridRecyclerViewAdapter(
     inner class GridHolder(rowRoot: View) : RecyclerView.ViewHolder(rowRoot) {
         val gridIV : ImageView = rowRoot.findViewById(R.id.iv_grid_image)
         val gridTV : TextView = rowRoot.findViewById(R.id.tv_grid_title)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int
