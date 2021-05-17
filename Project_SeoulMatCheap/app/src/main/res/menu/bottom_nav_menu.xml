@@ -18,11 +18,6 @@
         android:title="카테고리"
         app:showAsAction="always|withText" />
     <item
-        android:id="@+id/mat"
-        android:icon="@drawable/nav_mat"
-        android:title="BETA"
-        app:showAsAction="always|withText" />
-    <item
         android:id="@+id/my"
         android:icon="@drawable/nav_my"
         android:title="마이페이지"

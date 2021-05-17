@@ -55,11 +55,6 @@ class MainActivity : AppCompatActivity() {
                             .replace(R.id.container, CATEGORY_01(this@MainActivity))
                             .commit()
                     }
-                    R.id.mat -> {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.container, MATCHEAP_01())
-                            .commit()
-                    }
                     R.id.my -> {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.container, MY_01.newInstance(this@MainActivity))
