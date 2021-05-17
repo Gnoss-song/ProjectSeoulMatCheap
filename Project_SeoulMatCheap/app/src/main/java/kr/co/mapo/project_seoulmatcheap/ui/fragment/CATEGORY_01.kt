@@ -20,7 +20,6 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_03
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.GridRecyclerViewAdapter
 
 class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener {
-
     companion object {
         fun newInstance(owner: AppCompatActivity) : Fragment {
             return CATEGORY_01(owner)
@@ -41,32 +40,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
             layoutManager = manager
             adapter = GridRecyclerViewAdapter(gridData())
         }
-
-        binding.button1GS.setOnClickListener(this)
-        binding.button2YC.setOnClickListener(this)
-        binding.button3GR.setOnClickListener(this)
-        binding.button4YDP.setOnClickListener(this)
-        binding.button5GC.setOnClickListener(this)
-        binding.button6DJ.setOnClickListener(this)
-        binding.button7GA.setOnClickListener(this)
-        binding.button8SC.setOnClickListener(this)
-        binding.button9GN.setOnClickListener(this)
-        binding.button10SP.setOnClickListener(this)
-        binding.button11GD.setOnClickListener(this)
-        binding.button12DB.setOnClickListener(this)
-        binding.button13GB.setOnClickListener(this)
-        binding.button14NW.setOnClickListener(this)
-        binding.button15JN.setOnClickListener(this)
-        binding.button16MP.setOnClickListener(this)
-        binding.button17GJ.setOnClickListener(this)
-        binding.button18DDM.setOnClickListener(this)
-        binding.button19SB.setOnClickListener(this)
-        binding.button20JL.setOnClickListener(this)
-        binding.button21SD.setOnClickListener(this)
-        binding.button22YS.setOnClickListener(this)
-        binding.button23J.setOnClickListener(this)
-        binding.button24SDM.setOnClickListener(this)
-        binding.button25EP.setOnClickListener(this)
+        init()
 
         return binding.root
     }
@@ -95,36 +69,68 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         }
     }
 
+    private fun init() {
+        binding.apply {
+            button1GS.setOnClickListener(this@CATEGORY_01)
+            button2YC.setOnClickListener(this@CATEGORY_01)
+            button3GR.setOnClickListener(this@CATEGORY_01)
+            button4YDP.setOnClickListener(this@CATEGORY_01)
+            button5GC.setOnClickListener(this@CATEGORY_01)
+            button6DJ.setOnClickListener(this@CATEGORY_01)
+            button7GA.setOnClickListener(this@CATEGORY_01)
+            button8SC.setOnClickListener(this@CATEGORY_01)
+            button9GN.setOnClickListener(this@CATEGORY_01)
+            button10SP.setOnClickListener(this@CATEGORY_01)
+            button11GD.setOnClickListener(this@CATEGORY_01)
+            button12DB.setOnClickListener(this@CATEGORY_01)
+            button13GB.setOnClickListener(this@CATEGORY_01)
+            button14NW.setOnClickListener(this@CATEGORY_01)
+            button15JN.setOnClickListener(this@CATEGORY_01)
+            button16MP.setOnClickListener(this@CATEGORY_01)
+            button17GJ.setOnClickListener(this@CATEGORY_01)
+            button18DDM.setOnClickListener(this@CATEGORY_01)
+            button19SB.setOnClickListener(this@CATEGORY_01)
+            button20JL.setOnClickListener(this@CATEGORY_01)
+            button21SD.setOnClickListener(this@CATEGORY_01)
+            button22YS.setOnClickListener(this@CATEGORY_01)
+            button23J.setOnClickListener(this@CATEGORY_01)
+            button24SDM.setOnClickListener(this@CATEGORY_01)
+            button25EP.setOnClickListener(this@CATEGORY_01)
+        }
+    }
+
     override fun onClick(v: View?) {
         val intent = Intent(context, CATEGORY_01_01::class.java)
         startActivity(intent)
 
-        when(v?.id) {
-            binding.button1GS.id -> intent
-            binding.button2YC.id -> intent
-            binding.button3GR.id -> intent
-            binding.button4YDP.id -> intent
-            binding.button5GC.id -> intent
-            binding.button6DJ.id -> intent
-            binding.button7GA.id -> intent
-            binding.button8SC.id -> intent
-            binding.button9GN.id -> intent
-            binding.button10SP.id -> intent
-            binding.button11GD.id -> intent
-            binding.button12DB.id -> intent
-            binding.button13GB.id -> intent
-            binding.button14NW.id -> intent
-            binding.button15JN.id -> intent
-            binding.button16MP.id -> intent
-            binding.button17GJ.id -> intent
-            binding.button18DDM.id -> intent
-            binding.button19SB.id -> intent
-            binding.button20JL.id -> intent
-            binding.button21SD.id -> intent
-            binding.button22YS.id -> intent
-            binding.button23J.id -> intent
-            binding.button24SDM.id -> intent
-            binding.button25EP.id -> intent
+        binding.apply {
+            when(v?.id) {
+                button1GS.id -> intent
+                button25EP.id -> intent
+                button3GR.id -> intent
+                button4YDP.id -> intent
+                button5GC.id -> intent
+                button6DJ.id -> intent
+                button7GA.id -> intent
+                button8SC.id -> intent
+                button9GN.id -> intent
+                button10SP.id -> intent
+                button11GD.id -> intent
+                button12DB.id -> intent
+                button13GB.id -> intent
+                button14NW.id -> intent
+                button15JN.id -> intent
+                button16MP.id -> intent
+                button17GJ.id -> intent
+                button18DDM.id -> intent
+                button19SB.id -> intent
+                button20JL.id -> intent
+                button21SD.id -> intent
+                button22YS.id -> intent
+                button23J.id -> intent
+                button24SDM.id -> intent
+                button25EP.id -> intent
+            }
         }
     }
 
@@ -141,5 +147,4 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
 
         return gridData
     }
-
 }
