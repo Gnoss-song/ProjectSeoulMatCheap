@@ -173,6 +173,11 @@ class LOGIN_01 : AppCompatActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("[TEST]", "${UserPrefs.getUserEmail(this)}")
+    }
+
     private fun goNextActivity() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {

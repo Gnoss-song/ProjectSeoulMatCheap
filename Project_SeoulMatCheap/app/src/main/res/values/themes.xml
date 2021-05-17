@@ -35,7 +35,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
-    
+
     <style name="theme_splash" parent="Theme.Project_SeoulMatCheap">
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>

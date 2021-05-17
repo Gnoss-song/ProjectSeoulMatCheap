@@ -12,7 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#b61827"
+        android:background="@color/main"
         android:layout_alignParentTop="true">
 
         <TextView
@@ -20,11 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:text="@string/myfavorite_title"
             android:textColor="@color/white_93"
-            android:drawableStart="@drawable/ic_button"
-
-
             android:textSize="24dp">
 
         </TextView>
@@ -55,6 +51,15 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/space" />
 
+    <FrameLayout
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 
 </RelativeLayout>

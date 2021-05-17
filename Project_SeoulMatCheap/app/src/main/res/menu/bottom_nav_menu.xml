@@ -26,5 +26,6 @@
         android:id="@+id/my"
         android:icon="@drawable/nav_my"
         android:title="마이페이지"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always|withText"
+        />
 </menu>

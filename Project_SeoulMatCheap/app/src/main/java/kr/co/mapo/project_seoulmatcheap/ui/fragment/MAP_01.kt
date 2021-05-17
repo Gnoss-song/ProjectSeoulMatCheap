@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Build
@@ -11,12 +12,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -28,20 +31,18 @@ import com.naver.maps.map.overlay.*
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
-import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.system.*
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 import java.util.*
 import java.util.stream.Collectors
 import kotlin.collections.HashMap
 
-const val ADDRESS = "address"
-private const val MAP_ZOOM = 18.0
-
-class MAP_01(
-    val owner : AppCompatActivity
-    ) : Fragment(), OnMapReadyCallback {
+class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     companion object {
+
         fun newInstance(owner: AppCompatActivity) : Fragment {
             return MAP_01(owner)
         }
@@ -51,14 +52,46 @@ class MAP_01(
     private lateinit var naverMap : NaverMap
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
     private lateinit var list : MutableList<StoreTest>
-    private lateinit var mapMarkers : Vector<Marker>
-    private lateinit var mapCircleOverlay : Vector<CircleOverlay>
-    private lateinit var infoWindows : Vector<InfoWindow>
+    private lateinit var filterDialog : MAP_01_02
 
     //infoWindow
     private lateinit var view: MapItemInfowindowBinding
-    private val storeWindowState = MutableLiveData<Boolean>()
-    private lateinit var clickedInfoWindow : ArrayMap<InfoWindow, StoreTest>
+
+    //오버레이 관리를 위한 저장 Vector
+    private val markersHansik = Vector<Marker>()
+    private val markersJapan = Vector<Marker>()
+    private val markersChina = Vector<Marker>()
+    private val markersFood = Vector<Marker>()
+    private val markersWash = Vector<Marker>()
+    private val markersBeauty = Vector<Marker>()
+    private val markersHotel = Vector<Marker>()
+    private val markersStore = Vector<Marker>()
+    private val circleOverlay = Vector<CircleOverlay>()
+    private val infoWindows = Vector<InfoWindow>()
+
+    //오버레이 속성 전역변수
+    private lateinit var unClickedAdapter : InfoWindow.ViewAdapter
+    private lateinit var clickedAdapter : InfoWindow.ViewAdapter
+
+    val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
+
+    val blackColor = owner.resources.getColor(R.color.black, null)
+    val whiteColor = owner.resources.getColor(R.color.white, null)
+    val clickedColor = ColorStateList.valueOf(owner.resources.getColor(R.color.black, null))
+    val unClickedColor = ColorStateList.valueOf(owner.resources.getColor(R.color.white, null))
+    val seoulColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_seoul, null))
+    val matColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_mat, null))
+    val likeColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_like, null))
+    val circleColor = owner.resources.getColor(R.color.map_circle, null)
+
+    val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
+    val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
+    val icon_japan = OverlayImage.fromResource(R.drawable.icon_japan)
+    val icon_food = OverlayImage.fromResource(R.drawable.icon_food)
+    val icon_beauty = OverlayImage.fromResource(R.drawable.icon_beauty)
+    val icon_wash = OverlayImage.fromResource(R.drawable.icon_wash)
+    val icon_hotel = OverlayImage.fromResource(R.drawable.icon_hotel)
+    val icon_store = OverlayImage.fromResource(R.drawable.icon_store)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,10 +108,7 @@ class MAP_01(
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
-        mapMarkers = Vector()
-        mapCircleOverlay = Vector()
-        infoWindows = Vector()
-        clickedInfoWindow = arrayMapOf()
+        filterDialog = MAP_01_02(this)
         list = Test().addData()
     }
 
@@ -87,6 +117,9 @@ class MAP_01(
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
+        binding.include.storeBottomLayout.setOnClickListener {
+            owner.startActivity(Intent(owner, INFORM_02::class.java))
+        }
     }
 
     //네이버지도 초기 설정
@@ -98,9 +131,9 @@ class MAP_01(
                 with(locationOverlay) {
                     isVisible = true
                     position = LatLng(it.latitude, it.longitude)
-                    icon = OverlayImage.fromResource(R.drawable.map_marker)
-                    iconHeight = 200
-                    iconWidth = 200
+                    icon = map_marker
+                    iconHeight = NOW_ICON_SIZE
+                    iconWidth = NOW_ICON_SIZE
                 }
             }
             SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
@@ -112,33 +145,11 @@ class MAP_01(
             setOnMapClickListener { _, _ ->
                 if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                     storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    storeWindowState.value = false
-                    if(clickedInfoWindow.isNotEmpty()) {
-                        Log.e("[TEST]", "실행되나!")
-                        clickedInfoWindow.forEach { (t, u) ->
-                            t.adapter = createInfoWindowAdapter(u, false)
-                            clickedInfoWindow.remove(t)
-                        }
-                    }
-
                 }
             }
         }
         list.forEach {
-            val marker = createMaker(
-                it.x, it.y,
-                when (it.sort) {
-                    "한식" -> R.drawable.icon_hansik
-                    "중식" -> R.drawable.icon_china
-                    "경양식일식" -> R.drawable.icon_japan
-                    "기타외식" -> R.drawable.icon_food
-                    "미용" -> R.drawable.icon_beauty
-                    "세탁" -> R.drawable.icon_wash
-                    "숙박" -> R.drawable.icon_hotel
-                    else -> R.drawable.icon_store
-                }, it
-            )
-            mapMarkers.add(marker)
+            val marker = createMaker(it)
             createInfoWindow (it, marker)
         }
     }
@@ -149,17 +160,46 @@ class MAP_01(
     }
 
     //마커생성함수
-    private fun createMaker(lat:Double, lng:Double, resource:Int, item: StoreTest) : Marker {
+    private fun createMaker(item: StoreTest) : Marker {
         return Marker().apply {
-            position = LatLng(lat, lng)
+            position = LatLng(item.x, item.y)
             map = naverMap
-            icon = OverlayImage.fromResource(resource)
-            width = 120
-            height = 120
+            width = MARKER_SIZE
+            height = MARKER_SIZE
             isForceShowIcon = true
-            setOnClickListener {
-                setBottomSheetData(item)
-                true
+            when(item.sort) {
+                SORT_HANSIK -> {
+                    icon = icon_hansik
+                    markersHansik.add(this)
+                }
+                SORT_CHINA -> {
+                    icon = icon_china
+                    markersChina.add(this)
+                }
+                SORT_JAPAN -> {
+                    icon = icon_japan
+                    markersJapan.add(this)
+                }
+                SORT_FOOD -> {
+                    icon = icon_food
+                    markersFood.add(this)
+                }
+                SORT_BEAUTY -> {
+                    icon = icon_beauty
+                    markersBeauty.add(this)
+                }
+                SORT_WASH -> {
+                    icon = icon_wash
+                    markersWash.add(this)
+                }
+                SORT_HOTEL -> {
+                    icon = icon_hotel
+                    markersHotel.add(this)
+                }
+                else -> {
+                    icon = icon_store
+                    markersStore.add(this)
+                }
             }
         }
     }
@@ -172,22 +212,12 @@ class MAP_01(
             infoWindows.add(this)
             adapter = createInfoWindowAdapter(item, clicked)
             setOnClickListener {
-                clickedInfoWindow[this] = item
-                setBottomSheetData(item)
-                if(!clicked) {
-                    Log.e("$this", "뭐가 실행됩니까 True")
-                    adapter = createInfoWindowAdapter(item, true)
-                    clicked = true
-                } else {
-                    Log.e("$this", "뭐가 실행됩니까 False")
-                    adapter = createInfoWindowAdapter(item, false)
-                    clicked = false
-                    if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                        storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                        storeWindowState.value = false
-                    }
+                if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 }
-                Log.e("[히히]", "${clickedInfoWindow.keys}")
+                setBottomSheetData(item)
+                adapter = createInfoWindowAdapter(item, clicked)
+                clicked = !clicked
                 true
             }
             open(marker)
@@ -196,16 +226,13 @@ class MAP_01(
 
     //정보창전용 어댑터 생성 함수
     private fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean) : InfoWindow.ViewAdapter {
-        val clickedColor = ColorStateList.valueOf(resources.getColor(R.color.black, null))
-        val unClickedColor = ColorStateList.valueOf(resources.getColor(R.color.white, null))
-        val color = ColorStateList.valueOf(resources.getColor(
-            when(item.code) {
-                0 -> R.color.map_seoul  //(임시)착한업소
-                1 -> R.color.map_mat    //(임시)인증맛칩
-                else -> R.color.map_like   //(임시) 찜
-            }, null))
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
+                val color = when(item.code) {
+                    0 -> seoulColor  //(임시)착한업소
+                    1 -> matColor    //(임시)인증맛칩
+                    else -> likeColor   //(임시) 찜
+                }
                 with(view) {
                     textName.text = item.name
                     if(!clicked) {
@@ -215,7 +242,7 @@ class MAP_01(
                         viewBottom2.imageTintList = unClickedColor
                         textName.apply {
                             typeface = null
-                            setTextColor(resources.getColor(R.color.black, null))
+                            setTextColor(blackColor)
                         }
                     } else {
                         viewContent1.backgroundTintList = clickedColor
@@ -224,7 +251,7 @@ class MAP_01(
                         viewBottom2.imageTintList = clickedColor
                         textName.apply {
                             typeface = Typeface.DEFAULT_BOLD
-                            setTextColor(resources.getColor(R.color.white, null))
+                            setTextColor(whiteColor)
                         }
                     }
                     return view.root
@@ -239,24 +266,21 @@ class MAP_01(
             tag = m
             center = LatLng(lat, lng)
             radius = m
-            color = resources.getColor(R.color.map_circle, null)
+            color = circleColor
             map = naverMap
-            mapCircleOverlay.add(this)
+            circleOverlay.add(this)
         }
     }
 
     //식당정보 바텀시트 데이터 설정함수
     private fun setBottomSheetData(item : StoreTest) {
+        binding.include.item = item
         with(binding.include) {
             Glide.with(owner).load(item.image).into(image)
-            name.text = item.name
-            address.text = item.address
-            sort.text = item.sort
             distance.text = "${item.distance} km"
             score.text = item.score.toString()
         }
         storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        storeWindowState.value = true
     }
 
     fun mapButtonClick(v : View) {
@@ -267,7 +291,7 @@ class MAP_01(
                 startActivity(intent)
             }
             R.id.button_filter -> {
-                MAP_01_02(this).show(owner.supportFragmentManager, FILTER)
+                filterDialog.show(owner.supportFragmentManager, FILTER)
             }
             R.id.button_gps -> {
                 naverMap.apply {
@@ -279,8 +303,8 @@ class MAP_01(
 
     fun filterData(sort: String?, distance: Double?) {
         if(distance != null) {
-            if(mapCircleOverlay.size > 0) {
-                mapCircleOverlay.forEach {
+            if(circleOverlay.size > 0) {
+                circleOverlay.forEach {
                     it.map = null
                 }
             }
@@ -288,15 +312,3 @@ class MAP_01(
         }
     }
 }
-
-data class StoreTest(
-    val code : Int,
-    val image : String,
-    val name : String,
-    val address : String,
-    val sort : String,
-    val distance : Double,
-    val score : Double,
-    val x : Double,
-    val y : Double
-)
