@@ -33,6 +33,7 @@
         android:layout_below="@id/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/recycler2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

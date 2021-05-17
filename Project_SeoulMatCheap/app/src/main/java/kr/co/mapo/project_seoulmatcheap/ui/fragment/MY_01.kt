@@ -156,9 +156,5 @@ class MY_01(
             val intent03 = Intent(activity, INFORM_02_02_01::class.java)
             startActivity(intent03)
         }
-
-
-
-
     }
 }
