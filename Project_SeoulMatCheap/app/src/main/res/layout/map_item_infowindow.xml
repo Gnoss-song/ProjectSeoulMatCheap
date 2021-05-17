@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:background="@drawable/round_button2"
+        android:backgroundTint="@color/map_seoul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,8 +39,8 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center"
-            android:text="긴글씨긴글씨긴글씨긴글씨긴글씨긴글씨"
-            android:textColor="@color/black"
+            android:text="서울시인증"
+            android:textColor="@color/map_seoul"
             android:textSize="@dimen/info_window_text" />
     </LinearLayout>
 
@@ -52,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_content2"
         app:srcCompat="@drawable/down_arrow"
-        app:tint="@color/main" />
+        app:tint="@color/map_seoul" />
 
     <ImageView
         android:id="@+id/view_bottom2"
