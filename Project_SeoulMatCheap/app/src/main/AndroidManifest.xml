@@ -19,11 +19,6 @@
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.activity.INFORM_02">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.PERMISSION_01"
@@ -31,6 +26,11 @@
         <activity
             android:name=".ui.activity.SPLASH_00"
             android:theme="@style/theme_splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.activity.CATEGORY_01_03"
