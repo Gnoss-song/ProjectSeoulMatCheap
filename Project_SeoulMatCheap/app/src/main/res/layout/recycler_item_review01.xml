@@ -30,8 +30,8 @@
                 android:id="@+id/recycler_item_review_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="20dp"
                 android:text="성수칼국수"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +40,8 @@
                 android:id="@+id/recycler_item_review_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="8dp"
                 android:text="2021.03.05"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_title" />
@@ -62,9 +62,12 @@
                 android:id="@+id/recycler_item_review_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                app:cardCornerRadius="5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="15dp"
+
                 app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_rating">
 
@@ -72,17 +75,20 @@
                     android:id="@+id/recycler_item_review_IV"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
+                    android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:srcCompat="@mipmap/ic_launcher" />
 
             </androidx.cardview.widget.CardView>
 
+
             <TextView
                 android:id="@+id/recycler_item_review_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:paddingTop="@dimen/margin_basic"
                 android:text="너무 맛있어요 다음에 또 올것같아요~ 잘먹고 갑니다."

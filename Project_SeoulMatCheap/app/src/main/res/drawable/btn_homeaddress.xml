@@ -6,6 +6,4 @@
         android:width="@dimen/btn_icon"
         android:height="@dimen/btn_icon"
         />
-
-
 </layer-list>
