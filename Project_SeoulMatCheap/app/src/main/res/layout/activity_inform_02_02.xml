@@ -239,24 +239,26 @@
                     android:textColor="#1a1311"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ratingBar"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <RatingBar
+                <com.willy.ratingbar.ScaleRatingBar
                     android:id="@+id/ratingBar"
-                    android:layout_width="240dp"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#c1c1c1"
-                    android:isIndicator="false"
+                    android:layout_marginTop="8dp"
                     android:numStars="5"
-                    android:progressBackgroundTint="#c1c1c1"
-                    android:progressTint="#f36a4c "
-                    android:rating="0"
-                    android:secondaryProgressTint="#c1c1c1"
-                    android:stepSize="0.5"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srb_starHeight="30dp"
+                    app:srb_starWidth="30dp"
+                    app:layout_constraintEnd_toStartOf="@+id/ratingscore"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srb_drawableEmpty="@drawable/ic_starbefore"
+                    app:srb_drawableFilled="@drawable/ic_starafter"
+                    app:srb_isIndicator="false"
+                    app:srb_stepSize="0.5" />
 
                 <TextView
                     android:id="@+id/ratingscore"

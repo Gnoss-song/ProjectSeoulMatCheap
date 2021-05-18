@@ -17,7 +17,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="10dp"
+            app:cardCornerRadius="15dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -86,7 +86,7 @@
             android:id="@+id/star"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            app:srcCompat="@drawable/ic_star"
+            app:srcCompat="@drawable/ic_starafter"
             android:layout_marginEnd="10dp"/>
 
         <TextView

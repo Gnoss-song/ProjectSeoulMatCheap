@@ -70,6 +70,11 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
             buttonWrite.setOnClickListener(this@INFORM_02)
 
         }
+        val button2 = findViewById<Button>(R.id.button2)
+        button2.setOnClickListener {
+            val intent = Intent(this,INFORM_02_01::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
