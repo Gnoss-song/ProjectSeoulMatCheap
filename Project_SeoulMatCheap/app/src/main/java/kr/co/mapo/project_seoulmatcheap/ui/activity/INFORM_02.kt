@@ -5,11 +5,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +15,6 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InfromReviewAdapter
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02_01
 
 private const val PERMISSION_REQUEST_CODE = 100
 
@@ -69,11 +66,6 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
             }
             buttonWrite.setOnClickListener(this@INFORM_02)
 
-        }
-        val button2 = findViewById<Button>(R.id.button2)
-        button2.setOnClickListener {
-            val intent = Intent(this,INFORM_02_01::class.java)
-            startActivity(intent)
         }
     }
 
