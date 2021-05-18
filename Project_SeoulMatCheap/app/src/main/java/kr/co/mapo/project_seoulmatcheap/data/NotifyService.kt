@@ -28,7 +28,7 @@ interface NotifyService {
     ) : Single<NotifyResponse>
 
 
-    @GET("api/notice/{id}")
+    @GET("api/notice/dd ?dasad=dasas")
     fun getTest2(
         @Query("id") id : Int
     ) : Single<NotifyResponse>

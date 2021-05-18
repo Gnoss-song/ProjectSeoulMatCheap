@@ -5,12 +5,14 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.arrayMapOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -29,7 +31,6 @@ import java.util.*
 class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     companion object {
-
         fun newInstance(owner: AppCompatActivity) : Fragment {
             return MAP_01(owner)
         }
@@ -56,9 +57,12 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private val circleOverlay = Vector<CircleOverlay>()
     private val infoWindows = Vector<InfoWindow>()
 
-    //오버레이 속성 전역변수
-    private lateinit var unClickedAdapter : InfoWindow.ViewAdapter
-    private lateinit var clickedAdapter : InfoWindow.ViewAdapter
+    //오버레이 이벤트 상태 저장
+    private val clickedInfowindow = arrayMapOf<InfoWindow, StoreTest>()
+
+    //필터 상태 저장
+    private var filterSort = Vector<String>()
+    private var filterDistance = Vector<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,9 +114,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 }
             }
             setOnMapClickListener { _, _ ->
-                if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                }
+                initiateOveray()
             }
         }
         list.forEach {
@@ -168,6 +170,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                     markersStore.add(this)
                 }
             }
+            setOnClickListener {
+                this.infoWindow?.let { it1 -> onOverlayClick(it1, item) }
+                return@setOnClickListener true
+            }
         }
     }
 
@@ -176,12 +182,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         return InfoWindow().apply {
             tag = false
             infoWindows.add(this)
-            adapter = createInfoWindowAdapter(item, false)
+            adapter = createInfoWindowAdapter(item, tag as Boolean)
             setOnClickListener {
-                if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                } else setBottomSheetData(item)
-                adapter = createInfoWindowAdapter(item, true)
+                Log.e("[$this]", "${clickedInfowindow.size}, $tag")
+                onOverlayClick(this, item)
                 true
             }
             open(marker)
@@ -236,6 +240,33 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         }
     }
 
+    //오버레이 클릭 이벤트 처리 함수
+    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
+        with(infoWindow){
+            if(clickedInfowindow.isNotEmpty() &&
+                clickedInfowindow.keyAt(0) !== this) {
+                val infoWindow = clickedInfowindow.keyAt(0)
+                with(infoWindow) {
+                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false)
+                    tag = false
+                }
+                clickedInfowindow.clear()
+            }
+            if(this?.tag == false) {  //클릭이 안된 상태에서 클릭
+                this.adapter = createInfoWindowAdapter(item, true)
+                setBottomSheetData(item)
+                clickedInfowindow[this] = item
+                tag = true  //다음 이벤트 처리를 위해 다시 tag boolean값을 클릭된 상태로 초기화한다.
+            } else {    //클릭된 상태에서 클릭
+                setBottomSheetData(item)
+                storeWindowBehavior.state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+                this!!.adapter = createInfoWindowAdapter(item, false)
+                clickedInfowindow.clear()
+                tag = false //다음 이벤트 처리를 위해 다시 tag boolean값을 클릭이 안된 상태로 초기화한다.
+            }
+        }
+    }
+
     //식당정보 바텀시트 데이터 설정함수
     private fun setBottomSheetData(item : StoreTest) {
         binding.include.item = item
@@ -265,14 +296,62 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         }
     }
 
-    fun filterData(sort: String?, distance: Double?) {
-        if(distance != null) {
-            if(circleOverlay.size > 0) {
-                circleOverlay.forEach {
-                    it.map = null
-                }
+    //필터 기능 처리함수 - 거리필터
+    fun filterDistance(distance: Double) {
+        if(circleOverlay.size > 0) {
+            circleOverlay.forEach {
+                it.map = null
             }
-            createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance)
         }
+        createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance)
+    }
+
+    //필터 기능 처리함수 - 업종필터
+    fun filterSort(filterSort : Vector<String>) {
+        this.filterSort = filterSort
+        Log.e("[필터 목록-맵]", filterSort.toString())
+        markersHansik.forEach { it.map = null }
+        markersChina.forEach { it.map = null }
+        markersJapan.forEach { it.map = null }
+        markersFood.forEach { it.map = null }
+        markersWash.forEach { it.map = null }
+        markersBeauty.forEach { it.map = null }
+        markersHotel.forEach { it.map = null }
+        markersStore.forEach { it.map = null }
+        if(filterSort.contains(SORT_HANSIK)) markersHansik.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_CHINA)) markersChina.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_JAPAN)) markersJapan.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_FOOD)) markersFood.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_WASH)) markersWash.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_BEAUTY)) markersBeauty.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_HOTEL)) markersHotel.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_STORE)) markersStore.forEach { it.map = naverMap }
+    }
+
+    //필터 기능 처리함수 - 맵 초기화
+    fun filterInitialize() {
+        filterDialog.dismiss()
+        //나중에 카메라 상태 저장해서 설정하기
+        this.onMapReady(naverMap)
+    }
+
+    //오버레이 클릭상태 초기화
+    fun initiateOveray() {
+        if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            if(clickedInfowindow.isNotEmpty()) {
+                val infoWindow = clickedInfowindow.keyAt(0)
+                with(infoWindow) {
+                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false)
+                    tag = false
+                }
+                clickedInfowindow.clear()
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        initiateOveray()
     }
 }

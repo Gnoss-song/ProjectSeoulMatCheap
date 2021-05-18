@@ -1,428 +1,467 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/filterLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="0dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    tools:context=".ui.fragment.MAP_01_02">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="filter"
+            type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01_02" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="365dp"
-        android:background="@drawable/round_edge"
-        android:elevation="@dimen/elevation1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/filterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:context=".ui.fragment.MAP_01_02">
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="@dimen/map_item_width"
-            android:layout_height="@dimen/map_item_height"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_basic4"
-            android:background="@drawable/round_button2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic4"
-            android:text="@string/filter_menu1"
-            android:textColor="@color/main"
-            android:textSize="@dimen/text_filter_title"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_basic2"
-            android:text="@string/filter_menu1_add"
-            android:textColor="@color/main"
-            android:textSize="@dimen/text_size2"
-            app:layout_constraintBottom_toBottomOf="@+id/textView10"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:layout_marginEnd="@dimen/margin_basic2"
-            android:orientation="horizontal"
-            android:weightSum="4"
+            android:background="@drawable/round_edge"
+            android:elevation="@dimen/elevation1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10">
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="@dimen/map_item_width"
+                android:layout_height="@dimen/map_item_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_basic4"
+                android:background="@drawable/round_button2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_basic2"
+                android:layout_marginTop="@dimen/margin_basic4"
+                android:text="@string/filter_menu1"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_filter_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_basic2"
+                android:text="@string/filter_menu1_add"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_size2"
+                app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <LinearLayout
-                android:id="@+id/hansik"
-                android:layout_width="@dimen/icon_width"
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/margin_basic2"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:layout_marginEnd="@dimen/margin_basic2"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10">
 
-                <ToggleButton
-                    android:id="@+id/button_hansik"
+                <LinearLayout
+                    android:id="@+id/hansik"
                     android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_hansik_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_hansik"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category1"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_hansik"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_hansik_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_hansik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/japan"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_japan"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_japan_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_japan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/china"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_china"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_china_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_china"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/food"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_food"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_food_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category4"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/japan"
-                android:layout_width="@dimen/icon_width"
+                android:id="@+id/linearLayout2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/margin_basic2"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:layout_marginEnd="@dimen/margin_basic2"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-                <ToggleButton
-                    android:id="@+id/button_japan"
+                <LinearLayout
+                    android:id="@+id/wash"
                     android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_japan_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_japan"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category2"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_wash"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_wash_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_wash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/beauty"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_beauty"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_beauty_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_beauty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category6"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/hotel"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_hotel"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_hotel_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category7"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/store"
+                    android:layout_width="@dimen/icon_width"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ToggleButton
+                        android:id="@+id/button_store"
+                        android:layout_width="@dimen/icon_width"
+                        android:layout_height="@dimen/icon_height"
+                        android:background="@drawable/icon_store_off"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:scaleType="fitCenter"
+                        android:textOff="@null"
+                        android:textOn="@null" />
+
+                    <TextView
+                        android:id="@+id/text_store"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_height"
+                        android:gravity="center"
+                        android:onClick="@{filter.onClickSortToggle}"
+                        android:paddingStart="@dimen/text_padding2"
+                        android:paddingEnd="@dimen/text_padding2"
+                        android:text="@string/category8"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_icon" />
+                </LinearLayout>
+
+
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/china"
-                android:layout_width="@dimen/icon_width"
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:background="@color/divide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/margin_basic2"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:text="@string/filter_menu2"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_filter_title"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
 
-                <ToggleButton
-                    android:id="@+id/button_china"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_china_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_china"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category3"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/food"
-                android:layout_width="@dimen/icon_width"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="@dimen/filter_distance_right"
+                android:layout_marginEnd="@dimen/logo_height"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_500">
 
-                <ToggleButton
-                    android:id="@+id/button_food"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_food_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
+                <RadioButton
+                    android:id="@+id/button_100"
+                    android:layout_width="@dimen/filter_distance"
+                    android:layout_height="@dimen/filter_distance"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/main"
+                    app:useMaterialThemeColors="true" />
 
-                <TextView
-                    android:id="@+id/text_food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category4"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
+                <RadioButton
+                    android:id="@+id/button_500"
+                    android:layout_width="@dimen/filter_distance"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/main"
+                    app:useMaterialThemeColors="true" />
 
+                <RadioButton
+                    android:id="@+id/button_2000"
+                    android:layout_width="@dimen/filter_distance"
+                    android:layout_height="@dimen/filter_distance"
+                    android:buttonTint="@color/main"
+                    app:useMaterialThemeColors="true" />
+            </RadioGroup>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:layout_marginEnd="@dimen/margin_basic2"
-            android:layout_marginBottom="@dimen/margin_basic"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            app:layout_constraintBottom_toTopOf="@+id/view5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-            <LinearLayout
-                android:id="@+id/wash"
-                android:layout_width="@dimen/icon_width"
+            <TextView
+                android:id="@+id/text_100"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginStart="@dimen/filter_distance_left"
+                android:text="@string/filter_distance1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_500" />
 
-                <ToggleButton
-                    android:id="@+id/button_wash"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_wash_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_wash"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category5"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/beauty"
-                android:layout_width="@dimen/icon_width"
+            <TextView
+                android:id="@+id/text_500"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/margin_basic4"
+                android:text="@string/filter_distance2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_icon"
+                app:layout_constraintEnd_toStartOf="@+id/text_2000"
+                app:layout_constraintStart_toEndOf="@+id/text_100"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                <ToggleButton
-                    android:id="@+id/button_beauty"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_beauty_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_beauty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category6"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/hotel"
-                android:layout_width="@dimen/icon_width"
+            <TextView
+                android:id="@+id/text_2000"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginEnd="@dimen/filter_distance_right"
+                android:text="@string/filter_distance3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_500" />
 
-                <ToggleButton
-                    android:id="@+id/button_hotel"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_hotel_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_hotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category7"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/store"
-                android:layout_width="@dimen/icon_width"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_initiate"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/margin_basic"
+                android:background="@color/main"
+                android:text="@string/filter_initiate"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_menu"
+                android:textStyle="bold"
+                android:onClick="@{filter.onClickSortToggle}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-                <ToggleButton
-                    android:id="@+id/button_store"
-                    android:layout_width="@dimen/icon_width"
-                    android:layout_height="@dimen/icon_height"
-                    android:background="@drawable/icon_store_off"
-                    android:scaleType="fitCenter"
-                    android:textOff="@null"
-                    android:textOn="@null" />
-
-                <TextView
-                    android:id="@+id/text_store"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_height"
-                    android:gravity="center"
-                    android:paddingStart="@dimen/text_padding2"
-                    android:paddingEnd="@dimen/text_padding2"
-                    android:text="@string/category8"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_icon" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_basic2"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:text="@string/filter_menu2"
-            android:textColor="@color/main"
-            android:textSize="@dimen/text_filter_title"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-        <View
-            android:id="@+id/view5"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:background="@color/divide"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/filter_distance_right"
-            android:layout_marginEnd="@dimen/logo_height"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_500">
-
-            <RadioButton
-                android:id="@+id/button_100"
-                android:layout_width="@dimen/filter_distance"
-                android:layout_height="@dimen/filter_distance"
-                android:layout_weight="1"
-                android:buttonTint="@color/main"
-                app:useMaterialThemeColors="true" />
-
-            <RadioButton
-                android:id="@+id/button_500"
-                android:layout_width="@dimen/filter_distance"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:buttonTint="@color/main"
-                app:useMaterialThemeColors="true" />
-
-            <RadioButton
-                android:id="@+id/button_2000"
-                android:layout_width="@dimen/filter_distance"
-                android:layout_height="@dimen/filter_distance"
-                android:buttonTint="@color/main"
-                app:useMaterialThemeColors="true" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/text_100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/filter_distance_left"
-            android:text="@string/filter_distance1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_500" />
-
-        <TextView
-            android:id="@+id/text_500"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_basic4"
-            android:text="@string/filter_distance2"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_icon"
-            app:layout_constraintEnd_toStartOf="@+id/text_2000"
-            app:layout_constraintStart_toEndOf="@+id/text_100"
-            app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-        <TextView
-            android:id="@+id/text_2000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/filter_distance_right"
-            android:text="@string/filter_distance3"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_500" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
