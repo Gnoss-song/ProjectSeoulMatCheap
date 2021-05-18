@@ -18,8 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SeoulMatCheap"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.INFORM_02">
-        </activity>
+        <activity android:name=".ui.activity.INFORM_02_01"></activity>
+        <activity android:name=".ui.activity.INFORM_02"></activity>
         <activity
             android:name=".ui.activity.PERMISSION_01"
             android:theme="@style/theme_splash" />
@@ -37,7 +37,7 @@
             android:theme="@style/Transparent" />
         <activity android:name=".ui.activity.CATEGORY_01_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_02" />
-        <activity android:name=".ui.activity.INFORM_02"></activity>
+        <activity android:name=".ui.activity.INFORM_02" />
         <activity android:name=".ui.activity.MY_01_01" />
         <activity android:name=".ui.activity.MY_01_02" />
         <activity android:name=".ui.activity.MY_01_03" />
@@ -48,10 +48,10 @@
         <activity android:name=".ui.activity.MAP_01_01" />
         <activity
             android:name=".ui.activity.INFORM_02_02_01"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.activity.INFORM_02_02"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.MATCHEAP_01_03_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_03" />
         <activity android:name=".ui.activity.MATCHEAP_01_02_01" />

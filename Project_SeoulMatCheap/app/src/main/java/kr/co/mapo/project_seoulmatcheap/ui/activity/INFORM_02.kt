@@ -30,6 +30,11 @@ class INFORM_02 : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
             adapter = InfromReviewAdapter()
         }
+        val button2 = findViewById<Button>(R.id.button2)
+        button2.setOnClickListener {
+            val intent = Intent(this,INFORM_02_01::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
