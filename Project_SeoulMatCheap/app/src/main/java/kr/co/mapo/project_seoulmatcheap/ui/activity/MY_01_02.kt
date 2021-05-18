@@ -8,7 +8,6 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -18,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0102Binding
@@ -87,7 +87,7 @@ class MY_01_02 : AppCompatActivity() {
         inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
             val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)
-            var rate : RatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
+            var rate : ScaleRatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
             val image : ImageView = itemView.findViewById(R.id.recycler_item_review_IV)
             val review : TextView = itemView.findViewById(R.id.recycler_item_review_content)
             val delete : Button = itemView.findViewById(R.id.btn_delete)
@@ -96,7 +96,7 @@ class MY_01_02 : AppCompatActivity() {
         inner class ImageType2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
             val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)
-            var rate : RatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
+            var rate : ScaleRatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
             val image : ImageView = itemView.findViewById(R.id.recycler_item_review_IV)
             var image2 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV2)
             val review : TextView = itemView.findViewById(R.id.recycler_item_review_content)
@@ -106,7 +106,7 @@ class MY_01_02 : AppCompatActivity() {
         inner class ImageType3ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val title: TextView = itemView.findViewById(R.id.recycler_item_review_title)
             val date : TextView = itemView.findViewById(R.id.recycler_item_review_date)
-            var rate : RatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
+            var rate : ScaleRatingBar = itemView.findViewById(R.id.recycler_item_review_rating)
             val image : ImageView = itemView.findViewById(R.id.recycler_item_review_IV)
             var image2 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV2)
             var image3 : ImageView = itemView.findViewById(R.id.recycler_item_review_IV3)

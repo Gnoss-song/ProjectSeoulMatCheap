@@ -16,17 +16,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.willy.ratingbar.BaseRatingBar
+import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
-import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
 
 class INFORM_02_02_01 : AppCompatActivity() {
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var binding : ActivityInform020201Binding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityInform020201Binding
     private val OPEN_GALLERY = 1
-    private lateinit var ratingscore : TextView
-    private lateinit var ratingBar: RatingBar
+    private lateinit var ratingscore: TextView
+    private lateinit var ratingBar: ScaleRatingBar
     var str: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -50,7 +52,7 @@ class INFORM_02_02_01 : AppCompatActivity() {
 
 
             okButton.setOnClickListener {
-                Toast.makeText(this, "리뷰 쓰기 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "리뷰 수정 성공", Toast.LENGTH_SHORT).show()
 
                 //화면이동 INFORM_02_01로. 가게이름의 정보를 가진채로.
 
@@ -69,11 +71,11 @@ class INFORM_02_02_01 : AppCompatActivity() {
         }
         ratingBar = findViewById(R.id.ratingBar)
         ratingscore = findViewById(R.id.ratingscore)
-        ratingBar.onRatingBarChangeListener =
-            RatingBar.OnRatingBarChangeListener { _, rating, _ ->
-                str = rating.toString()
-                ratingscore.text = str
-            }
+        ratingBar.setOnRatingChangeListener(BaseRatingBar.OnRatingChangeListener(){
+                ScaleRatingBar,rating,_->
+            str = rating.toString()
+            ratingscore.text=str
+        })
     }
 
     fun openGallary(v: View) {
@@ -160,10 +162,5 @@ class INFORM_02_02_01 : AppCompatActivity() {
             }
             return list.size
         }
-
-
     }
-
 }
-
-

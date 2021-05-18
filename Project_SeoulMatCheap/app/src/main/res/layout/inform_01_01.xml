@@ -89,7 +89,7 @@
             android:id="@+id/star"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            app:srcCompat="@drawable/ic_star"
+            app:srcCompat="@drawable/ic_starafter"
             android:layout_marginEnd="10dp"
             />
 

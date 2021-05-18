@@ -37,7 +37,6 @@
             android:theme="@style/Transparent" />
         <activity android:name=".ui.activity.CATEGORY_01_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_02" />
-        <activity android:name=".ui.activity.INFORM_02"></activity>
         <activity android:name=".ui.activity.MY_01_01" />
         <activity android:name=".ui.activity.MY_01_02" />
         <activity android:name=".ui.activity.MY_01_03" />

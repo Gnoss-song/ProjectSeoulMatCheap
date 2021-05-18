@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recycler_item_review_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:id="@+id/recycler_item_review_layout">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
         android:elevation="3dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,32 +27,56 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/recycler_item_review_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2021.03.05"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_cardview" />
-
-            <TextView
                 android:id="@+id/recycler_item_review_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
                 android:text="성수칼국수"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="#1a1311"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/cardView6"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_date" />
+
+            <TextView
+                android:id="@+id/recycler_item_review_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:text="2021.03.05"
+                android:textColor="#707070"
+                android:textSize="11sp"
+                app:layout_constraintStart_toEndOf="@+id/cardView6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.willy.ratingbar.ScaleRatingBar
+                android:id="@+id/recycler_item_review_rating"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="15dp"
+                app:srb_isIndicator="true"
+                android:numStars="5"
+                app:srb_stepSize="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srb_drawableEmpty="@drawable/ic_starbefore"
+                app:srb_drawableFilled="@drawable/ic_starafter"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/recycler_item_review_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="3dp"
-                app:layout_constraintEnd_toEndOf="parent"
+
+                app:cardElevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_rating">
 
                 <ImageView
                     android:id="@+id/recycler_item_review_IV"
@@ -57,32 +85,20 @@
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/poonyeon" />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
             </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/ratingnumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="3.0"
-                android:textSize="44sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_cardview" />
-
             <View
-                android:id="@+id/view11"
+                android:id="@+id/view10"
                 android:layout_width="0dp"
-                android:layout_height="1sp"
-                android:padding="2dp"
-                android:layout_marginTop="8dp"
-                android:background="#707070"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:background="#d2d2d2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingnumber" />
+                app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_cardview" />
 
             <TextView
                 android:id="@+id/recycler_item_review_content"
@@ -90,13 +106,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:paddingTop="@dimen/margin_basic"
+                android:layout_marginTop="5dp"
                 android:text="너무 맛있어요 다음에 또 올것같아요~ 잘먹고 갑니다."
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view11" />
+                app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profileIV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@mipmap/ic_launcher" />
+            </androidx.cardview.widget.CardView>
             <Button
                 android:id="@+id/btn_modify"
                 android:layout_width="55dp"
@@ -119,6 +151,7 @@
                 android:background="@drawable/custom_button_my_02"
                 android:text="@string/delete"
                 android:textSize="11sp"
+
                 app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="@+id/recycler_item_review_content"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_item_review_content" />
