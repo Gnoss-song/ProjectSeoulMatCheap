@@ -42,7 +42,7 @@
 
     <!--아이콘 이름-->
     <string name="category1">한식</string>
-    <string name="category2">일식·경양식</string>
+    <string name="category2">경양식일식</string>
     <string name="category3">중식</string>
     <string name="category4">기타외식</string>
     <string name="category5">세탁</string>
@@ -998,6 +998,7 @@
     <string name="filter_distance1">100m</string>
     <string name="filter_distance2">500m</string>
     <string name="filter_distance3">2km</string>
+    <string name="filter_initiate">설정 초기화</string>
 
     <!--SEARCH -->
     <string name="search_hint">가게명/메뉴명 검색</string>
