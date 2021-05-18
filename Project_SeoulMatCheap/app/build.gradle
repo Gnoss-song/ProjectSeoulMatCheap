@@ -86,4 +86,7 @@ dependencies {
     //구글 FusedLocationProvider
     implementation "com.google.android.gms:play-services-location:18.0.0"
 
+    //MP
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

@@ -42,7 +42,6 @@ class CATEGORY_01_01 : AppCompatActivity() {
                     1 -> supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CATEGORY_01_02).commit()
                 }
             }
-
         })
     }
 
