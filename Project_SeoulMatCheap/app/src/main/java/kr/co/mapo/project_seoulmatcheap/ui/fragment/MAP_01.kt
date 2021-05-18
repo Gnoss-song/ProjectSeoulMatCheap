@@ -176,13 +176,12 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         return InfoWindow().apply {
             tag = false
             infoWindows.add(this)
-            adapter = createInfoWindowAdapter(item, clicked)
+            adapter = createInfoWindowAdapter(item, false)
             setOnClickListener {
                 if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                     storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 } else setBottomSheetData(item)
-                adapter = createInfoWindowAdapter(item, clicked)
-                clicked = !clicked
+                adapter = createInfoWindowAdapter(item, true)
                 true
             }
             open(marker)

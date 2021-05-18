@@ -5,8 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -15,10 +17,11 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InfromReviewAdapter
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02_01
 
 private const val PERMISSION_REQUEST_CODE = 100
 
-class INFORM_02 : AppCompatActivity() {
+class INFORM_02 : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding : ActivityInform02Binding
     private var isChecked = false
@@ -64,6 +67,8 @@ class INFORM_02 : AppCompatActivity() {
             buttonNavi.setOnClickListener {
 
             }
+            buttonWrite.setOnClickListener(this@INFORM_02)
+
         }
     }
 
@@ -105,5 +110,13 @@ class INFORM_02 : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+            R.id.button_write -> {
+                startActivity(Intent(this, INFORM_02_02_01::class.java))
+            }
+        }
     }
 }
