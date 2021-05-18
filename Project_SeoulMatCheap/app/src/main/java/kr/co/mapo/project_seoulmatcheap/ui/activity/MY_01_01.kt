@@ -8,17 +8,14 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
 
 
 class MY_01_01 : AppCompatActivity() {
@@ -52,10 +49,6 @@ class MY_01_01 : AppCompatActivity() {
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(this)
 
-        //구분선
-//        val  dividerItemDecoration =  DividerItemDecoration(binding.recycler.context, LinearLayoutManager(this).orientation)
-//        binding.recycler.addItemDecoration(dividerItemDecoration)
-
         //화면 이동 MY_01_01_01
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this,MY_01_01_01::class.java)
@@ -71,7 +64,6 @@ class MY_01_01 : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     //어댑터
     inner class InformDetailAdapter (
@@ -106,12 +98,12 @@ class MY_01_01 : AppCompatActivity() {
             }
             holder.itemView.setOnClickListener {
                 val target = Intent(owner, INFORM_02::class.java)
-                target.putExtra("marketIV", itemData.marketIV)
-                target.putExtra("name", itemData.name)
-                target.putExtra("address", itemData.address)
-                target.putExtra("distance", itemData.distance)
-                target.putExtra("score", itemData.score)
-                target.putExtra("sort", itemData.sort)
+                    .putExtra("marketIV", itemData.marketIV)
+                    .putExtra("name", itemData.name)
+                    .putExtra("address", itemData.address)
+                    .putExtra("distance", itemData.distance)
+                    .putExtra("score", itemData.score)
+                    .putExtra("sort", itemData.sort)
                 owner.startActivity(target)
             }
         }

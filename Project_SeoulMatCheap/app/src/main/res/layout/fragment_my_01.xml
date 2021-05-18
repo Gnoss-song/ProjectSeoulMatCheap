@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="review"
-            type="kr.co.mapo.project_seoulmatcheap.ui.activity.MY_01_02" />
+            name="my01"
+            type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -208,30 +208,29 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/myleveldata" />
 
-                        <Button
-                            android:id="@+id/test2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="11dp"
-                            android:layout_marginTop="65dp"
-                            android:layout_marginEnd="18dp"
-                            android:text="리뷰수정"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/nickName"
-                            app:layout_constraintTop_toTopOf="parent" />
+<!--                        <Button-->
+<!--                            android:id="@+id/test2"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="11dp"-->
+<!--                            android:layout_marginTop="65dp"-->
+<!--                            android:layout_marginEnd="18dp"-->
+<!--                            android:text="리뷰수정"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@+id/nickName"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
-                        <Button
-                            android:id="@+id/test1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="17dp"
-                            android:layout_marginTop="65dp"
-                            android:layout_marginEnd="13dp"
-                            android:text="리뷰쓰기"
-                            app:layout_constraintEnd_toStartOf="@+id/nickName"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
+<!--                        <Button-->
+<!--                            android:id="@+id/test1"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginStart="17dp"-->
+<!--                            android:layout_marginTop="65dp"-->
+<!--                            android:layout_marginEnd="13dp"-->
+<!--                            android:text="리뷰쓰기"-->
+<!--                            app:layout_constraintEnd_toStartOf="@+id/nickName"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -362,7 +361,6 @@
 
                             android:background="@drawable/custom_button_my_01"
                             android:drawableLeft="@drawable/btn_homeaddress"
-                            android:drawableRight="@drawable/btn_nexticon"
 
                             android:text="앱 버전"
                             android:textAlignment="textStart"
@@ -404,6 +402,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_logout"
                     app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintlayout"

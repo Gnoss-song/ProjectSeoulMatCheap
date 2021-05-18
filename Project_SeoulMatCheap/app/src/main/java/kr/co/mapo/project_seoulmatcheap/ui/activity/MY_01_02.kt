@@ -28,7 +28,6 @@ class MY_01_02 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMy0102Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -164,11 +163,11 @@ class MY_01_02 : AppCompatActivity() {
                     }
                     holder.modify.setOnClickListener {
                         val target= Intent(owner,INFORM_02_02_01::class.java)
-                        target.putExtra("title",obj.title)
-                        target.putExtra("date",obj.date)
-                        target.putExtra("rate",obj.ratingBar)
-                        target.putExtra("image",obj.IV)
-                        target.putExtra("review",obj.review)
+                            .putExtra("title",obj.title)
+                            .putExtra("date",obj.date)
+                            .putExtra("rate",obj.ratingBar)
+                            .putExtra("image",obj.IV)
+                            .putExtra("review",obj.review)
                         owner.startActivity(target)
                     }
                 }
@@ -200,12 +199,12 @@ class MY_01_02 : AppCompatActivity() {
                     }
                     holder.modify.setOnClickListener {
                         val target= Intent(owner,INFORM_02_02_01::class.java)
-                        target.putExtra("title",obj.title)
-                        target.putExtra("date",obj.date)
-                        target.putExtra("rate",obj.ratingBar)
-                        target.putExtra("image",obj.IV)
-                        target.putExtra("image2",obj.IV2)
-                        target.putExtra("review",obj.review)
+                            .putExtra("title",obj.title)
+                            .putExtra("date",obj.date)
+                            .putExtra("rate",obj.ratingBar)
+                            .putExtra("image",obj.IV)
+                            .putExtra("image2",obj.IV2)
+                            .putExtra("review",obj.review)
                         owner.startActivity(target)
                     }
                 }
@@ -238,13 +237,13 @@ class MY_01_02 : AppCompatActivity() {
                     }
                     holder.modify.setOnClickListener {
                         val target= Intent(owner,INFORM_02_02_01::class.java)
-                        target.putExtra("title",obj.title)
-                        target.putExtra("date",obj.date)
-                        target.putExtra("rate",obj.ratingBar)
-                        target.putExtra("image",obj.IV)
-                        target.putExtra("image2",obj.IV2)
-                        target.putExtra("image3",obj.IV3)
-                        target.putExtra("review",obj.review)
+                            .putExtra("title",obj.title)
+                            .putExtra("date",obj.date)
+                            .putExtra("rate",obj.ratingBar)
+                            .putExtra("image",obj.IV)
+                            .putExtra("image2",obj.IV2)
+                            .putExtra("image3",obj.IV3)
+                            .putExtra("review",obj.review)
                         owner.startActivity(target)
                     }
                 }
