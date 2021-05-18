@@ -2,26 +2,16 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Typeface
 import android.location.Location
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.collection.ArrayMap
-import androidx.collection.arrayMapOf
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -33,11 +23,8 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
-import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 import java.util.*
-import java.util.stream.Collectors
-import kotlin.collections.HashMap
 
 class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
@@ -72,26 +59,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     //오버레이 속성 전역변수
     private lateinit var unClickedAdapter : InfoWindow.ViewAdapter
     private lateinit var clickedAdapter : InfoWindow.ViewAdapter
-
-    val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
-
-    val blackColor = owner.resources.getColor(R.color.black, null)
-    val whiteColor = owner.resources.getColor(R.color.white, null)
-    val clickedColor = ColorStateList.valueOf(owner.resources.getColor(R.color.black, null))
-    val unClickedColor = ColorStateList.valueOf(owner.resources.getColor(R.color.white, null))
-    val seoulColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_seoul, null))
-    val matColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_mat, null))
-    val likeColor = ColorStateList.valueOf(owner.resources.getColor(R.color.map_like, null))
-    val circleColor = owner.resources.getColor(R.color.map_circle, null)
-
-    val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
-    val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
-    val icon_japan = OverlayImage.fromResource(R.drawable.icon_japan)
-    val icon_food = OverlayImage.fromResource(R.drawable.icon_food)
-    val icon_beauty = OverlayImage.fromResource(R.drawable.icon_beauty)
-    val icon_wash = OverlayImage.fromResource(R.drawable.icon_wash)
-    val icon_hotel = OverlayImage.fromResource(R.drawable.icon_hotel)
-    val icon_store = OverlayImage.fromResource(R.drawable.icon_store)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -131,7 +98,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 with(locationOverlay) {
                     isVisible = true
                     position = LatLng(it.latitude, it.longitude)
-                    icon = map_marker
+                    icon = MapHelper.map_marker
                     iconHeight = NOW_ICON_SIZE
                     iconWidth = NOW_ICON_SIZE
                 }
@@ -169,35 +136,35 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             isForceShowIcon = true
             when(item.sort) {
                 SORT_HANSIK -> {
-                    icon = icon_hansik
+                    icon = MapHelper.icon_hansik
                     markersHansik.add(this)
                 }
                 SORT_CHINA -> {
-                    icon = icon_china
+                    icon = MapHelper.icon_china
                     markersChina.add(this)
                 }
                 SORT_JAPAN -> {
-                    icon = icon_japan
+                    icon = MapHelper.icon_japan
                     markersJapan.add(this)
                 }
                 SORT_FOOD -> {
-                    icon = icon_food
+                    icon = MapHelper.icon_food
                     markersFood.add(this)
                 }
                 SORT_BEAUTY -> {
-                    icon = icon_beauty
+                    icon = MapHelper.icon_beauty
                     markersBeauty.add(this)
                 }
                 SORT_WASH -> {
-                    icon = icon_wash
+                    icon = MapHelper.icon_wash
                     markersWash.add(this)
                 }
                 SORT_HOTEL -> {
-                    icon = icon_hotel
+                    icon = MapHelper.icon_hotel
                     markersHotel.add(this)
                 }
                 else -> {
-                    icon = icon_store
+                    icon = MapHelper.icon_store
                     markersStore.add(this)
                 }
             }
@@ -206,17 +173,15 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     //정보창 생성함수
     private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
-        var clicked : Boolean = false
         return InfoWindow().apply {
-            tag = item
+            tag = false
             infoWindows.add(this)
-            adapter = createInfoWindowAdapter(item, clicked)
+            adapter = createInfoWindowAdapter(item, false)
             setOnClickListener {
                 if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                     storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 } else setBottomSheetData(item)
-                adapter = createInfoWindowAdapter(item, clicked)
-                clicked = !clicked
+                adapter = createInfoWindowAdapter(item, true)
                 true
             }
             open(marker)
@@ -228,29 +193,29 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
                 val color = when(item.code) {
-                    0 -> seoulColor  //(임시)착한업소
-                    1 -> matColor    //(임시)인증맛칩
-                    else -> likeColor   //(임시) 찜
+                    0 -> MapHelper.seoulColor  //(임시)착한업소
+                    1 -> MapHelper.matColor    //(임시)인증맛칩
+                    else -> MapHelper.likeColor   //(임시) 찜
                 }
                 with(view) {
                     textName.text = item.name
                     if(!clicked) {
                         viewContent1.backgroundTintList = color
-                        viewContent2.backgroundTintList = unClickedColor
+                        viewContent2.backgroundTintList = MapHelper.unClickedColor
                         viewBottom1.imageTintList = color
-                        viewBottom2.imageTintList = unClickedColor
+                        viewBottom2.imageTintList = MapHelper.unClickedColor
                         textName.apply {
                             typeface = null
-                            setTextColor(blackColor)
+                            setTextColor(MapHelper.blackColor)
                         }
                     } else {
-                        viewContent1.backgroundTintList = clickedColor
-                        viewContent2.backgroundTintList = clickedColor
-                        viewBottom1.imageTintList = clickedColor
-                        viewBottom2.imageTintList = clickedColor
+                        viewContent1.backgroundTintList = MapHelper.clickedColor
+                        viewContent2.backgroundTintList = MapHelper.clickedColor
+                        viewBottom1.imageTintList = MapHelper.clickedColor
+                        viewBottom2.imageTintList = MapHelper.clickedColor
                         textName.apply {
                             typeface = Typeface.DEFAULT_BOLD
-                            setTextColor(whiteColor)
+                            setTextColor(MapHelper.whiteColor)
                         }
                     }
                     return view.root
@@ -265,7 +230,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             tag = m
             center = LatLng(lat, lng)
             radius = m
-            color = circleColor
+            color = MapHelper.circleColor
             map = naverMap
             circleOverlay.add(this)
         }

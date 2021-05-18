@@ -3,12 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/like"
-        android:checkable="true"
-        android:icon="@drawable/ic_favorite_off"
-        android:title="찜"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/share"
         android:icon="@drawable/ic_share"
         android:title="공유하기"

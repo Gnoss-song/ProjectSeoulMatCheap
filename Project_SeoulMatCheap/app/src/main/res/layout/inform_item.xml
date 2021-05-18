@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,14 +41,16 @@
                         android:textSize="16sp"
                         android:textStyle="bold"/>
                 </LinearLayout>
-                <RatingBar
+                <androidx.appcompat.widget.AppCompatRatingBar
                     android:id="@+id/informRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
-                    android:rating="3"
-                    android:stepSize="0.5"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"/>
+                    app:srb_stepSize="0.5"
+                    app:srb_isIndicator="true"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    app:srb_drawableEmpty="@drawable/ic_starbefore"
+                    app:srb_drawableFilled="@drawable/ic_starafter"/>/>
             </LinearLayout>
 
             <LinearLayout

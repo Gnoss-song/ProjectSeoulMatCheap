@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.system
 
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
 import com.naver.maps.map.overlay.OverlayImage
 import kr.co.mapo.project_seoulmatcheap.R
 
@@ -11,19 +12,19 @@ import kr.co.mapo.project_seoulmatcheap.R
  * @created 2021-05-14
  * @desc 지도 오버레이 컴포넌트 객체 헬퍼 오브젝트
  */
-/*
+
 object MapHelper {
 
     val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
 
-    val blackColor = Resources.getSystem().getColor(R.color.black, null)
-    val whiteColor = Resources.getSystem().getColor(R.color.white, null)
-    val clickedColor = ColorStateList.valueOf(Resources.getSystem().getColor(R.color.black, null))
-    val unClickedColor = ColorStateList.valueOf(Resources.getSystem().getColor(R.color.white, null))
-    val seoulColor = ColorStateList.valueOf(Resources.getSystem().getColor(R.color.map_seoul, null))
-    val matColor = ColorStateList.valueOf(Resources.getSystem().getColor(R.color.map_mat, null))
-    val likeColor = ColorStateList.valueOf(Resources.getSystem().getColor(R.color.map_like, null))
-    val circleColor = Resources.getSystem().getColor(R.color.map_circle, null)
+    val blackColor = Color.BLACK
+    val whiteColor = Color.WHITE
+    val clickedColor = ColorStateList.valueOf(Color.BLACK)
+    val unClickedColor = ColorStateList.valueOf(Color.WHITE)
+    val seoulColor = ColorStateList.valueOf(Color.parseColor("#0d62d1"))
+    val matColor = ColorStateList.valueOf(Color.parseColor("#ff0000"))
+    val likeColor = ColorStateList.valueOf(Color.parseColor("#FFE600"))
+    val circleColor = Color.parseColor("#1AF25D3D")
 
     val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
     val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
@@ -34,4 +35,4 @@ object MapHelper {
     val icon_hotel = OverlayImage.fromResource(R.drawable.icon_hotel)
     val icon_store = OverlayImage.fromResource(R.drawable.icon_store)
 
-}*/
+}
