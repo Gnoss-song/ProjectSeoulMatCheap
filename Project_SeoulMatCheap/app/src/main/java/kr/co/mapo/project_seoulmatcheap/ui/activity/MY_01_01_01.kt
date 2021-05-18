@@ -137,6 +137,7 @@ class MY_01_01_01 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+
     //어댑터
     inner class My010101Adapter(
         private val itemList: MutableList<Item>,
@@ -178,6 +179,7 @@ class MY_01_01_01 : AppCompatActivity() {
             }
         }
         override fun getItemCount() = itemList.size
+
         //삭제함수
         fun requestRemove(click : Boolean) {
             if(click) {

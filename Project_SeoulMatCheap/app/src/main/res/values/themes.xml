@@ -50,7 +50,11 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="custom_stars" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_star</item>
+        <item name="android:numStars">5</item>
 
+    </style>
 
 
 </resources>

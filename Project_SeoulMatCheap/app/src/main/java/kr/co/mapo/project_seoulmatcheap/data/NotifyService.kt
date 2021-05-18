@@ -27,20 +27,11 @@ interface NotifyService {
     fun getTest(
     ) : Single<NotifyResponse>
 
-    /*
-    @GET("MY01")
-    fun get(
-    프로필사진, 찜가게, 마이가게, 레벨 , 닉네임 , 이메일주소
 
+    @GET("api/notice/{id}")
+    fun getTest2(
+        @Query("id") id : Int
     ) : Single<NotifyResponse>
-
-    @GET("MY0102")
-    fun get(
-
-    )  : Single<NotifyResponse>
-
-
-     */
 
 
     companion object{
