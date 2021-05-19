@@ -1,12 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +12,21 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arrayMapOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.*
+import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
-import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 import java.util.*
+
 
 class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
@@ -99,6 +99,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     //네이버지도 초기 설정
     override fun onMapReady(p0: NaverMap) {
+        val locationSource = FusedLocationSource(this, 100)
         naverMap = p0
         Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
         naverMap.apply {
@@ -113,19 +114,28 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 }
             }
             SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
+            minZoom = MAP_MIN_ZOOM
+            setLocationSource(locationSource)
+            locationTrackingMode = LocationTrackingMode.Face
             addOnCameraChangeListener { reason, _ ->
+                /*
+                REASON_DEVELOPER: 개발자가 API를 호출해 카메라가 움직였음을 나타냅니다. 기본값입니다.
+                REASON_GESTURE: 사용자의 제스처로 인해 카메라가 움직였음을 나타냅니다.
+                REASON_CONTROL: 사용자의 버튼 선택으로 인해 카메라가 움직였음을 나타냅니다.
+                REASON_LOCATION: 위치 트래킹 기능으로 인해 카메라가 움직였음을 나타냅니다.
+                 */
+                Log.e("[REASON]", "$reason")
                 if(reason != CameraUpdate.REASON_DEVELOPER) {
                     SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
                 }
             }
-            minZoom = MAP_MIN_ZOOM
             setOnMapClickListener { _, _ ->
                 initiateOverlay()
             }
-            list.forEach {
-                val marker = createMaker(it)
-                createInfoWindow (it, marker)
-            }
+        }
+        list.forEach {
+            val marker = createMaker(it)
+            createInfoWindow (it, marker)
         }
     }
 
@@ -391,4 +401,5 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         super.onStop()
         initiateOverlay()
     }
+
 }
