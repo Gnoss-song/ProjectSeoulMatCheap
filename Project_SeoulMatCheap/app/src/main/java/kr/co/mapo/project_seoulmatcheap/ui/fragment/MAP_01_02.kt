@@ -24,7 +24,7 @@ class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
     private lateinit var binding : FragmentMap0102Binding
 
     //필터목록저장
-    var filterSort = Vector<String>()
+    var filterSort = mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -222,7 +222,7 @@ class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
 
     override fun onPause() {
         super.onPause()
-        map.initiateOveray()
+        map.initiateOverlay()
     }
 
 }

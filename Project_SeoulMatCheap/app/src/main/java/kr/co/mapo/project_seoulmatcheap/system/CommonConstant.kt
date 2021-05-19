@@ -29,10 +29,11 @@ const val SEOUL = "서울특별시"
 
 //지도
 const val MAP_ZOOM = 18.0
+const val MAP_MIN_ZOOM = 11.0
 const val NOW_ICON_SIZE = 200
 const val MARKER_SIZE = 120
 
-//인텐트 이름
+//인텐트 Extra 이름
 const val ADDRESS = "address"
 
 //파라미터 이름

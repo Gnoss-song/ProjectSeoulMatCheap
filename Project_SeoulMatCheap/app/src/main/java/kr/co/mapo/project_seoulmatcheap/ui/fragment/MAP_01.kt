@@ -1,12 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +12,21 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arrayMapOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.*
+import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
-import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 import java.util.*
+
 
 class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
@@ -47,22 +47,29 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     //오버레이 관리를 위한 저장 Vector
     private val markersHansik = Vector<Marker>()
+    private val infoWindowsHansik = Vector<InfoWindow>()
     private val markersJapan = Vector<Marker>()
+    private val infoWindowsJapan = Vector<InfoWindow>()
     private val markersChina = Vector<Marker>()
+    private val infoWindowsChina = Vector<InfoWindow>()
     private val markersFood = Vector<Marker>()
+    private val infoWindowsFood = Vector<InfoWindow>()
     private val markersWash = Vector<Marker>()
+    private val infoWindowsWash = Vector<InfoWindow>()
     private val markersBeauty = Vector<Marker>()
+    private val infoWindowsBeauty = Vector<InfoWindow>()
     private val markersHotel = Vector<Marker>()
+    private val infoWindowsHotel = Vector<InfoWindow>()
     private val markersStore = Vector<Marker>()
-    private val circleOverlay = Vector<CircleOverlay>()
-    private val infoWindows = Vector<InfoWindow>()
+    private val infoWindowsStore = Vector<InfoWindow>()
+
+    private val circleOverlay = mutableSetOf<CircleOverlay>()
 
     //오버레이 이벤트 상태 저장
     private val clickedInfowindow = arrayMapOf<InfoWindow, StoreTest>()
 
     //필터 상태 저장
-    private var filterSort = Vector<String>()
-    private var filterDistance = Vector<String>()
+    private var filterSort = mutableSetOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +87,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         filterDialog = MAP_01_02(this)
-        list = Test().addData()
+        list = Test().addData100()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,14 +95,13 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
-        binding.include.storeBottomLayout.setOnClickListener {
-            owner.startActivity(Intent(owner, INFORM_02::class.java))
-        }
     }
 
     //네이버지도 초기 설정
     override fun onMapReady(p0: NaverMap) {
+        val locationSource = FusedLocationSource(this, 100)
         naverMap = p0
+        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
         naverMap.apply {
             val locationObserver = Observer<Location> {
                 cameraPosition = setMapCamera(it.latitude, it.longitude)
@@ -108,13 +114,23 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 }
             }
             SeoulMatCheap.getInstance().location.observe(viewLifecycleOwner, locationObserver)
+            minZoom = MAP_MIN_ZOOM
+            setLocationSource(locationSource)
+            locationTrackingMode = LocationTrackingMode.Face
             addOnCameraChangeListener { reason, _ ->
+                /*
+                REASON_DEVELOPER: 개발자가 API를 호출해 카메라가 움직였음을 나타냅니다. 기본값입니다.
+                REASON_GESTURE: 사용자의 제스처로 인해 카메라가 움직였음을 나타냅니다.
+                REASON_CONTROL: 사용자의 버튼 선택으로 인해 카메라가 움직였음을 나타냅니다.
+                REASON_LOCATION: 위치 트래킹 기능으로 인해 카메라가 움직였음을 나타냅니다.
+                 */
+                Log.e("[REASON]", "$reason")
                 if(reason != CameraUpdate.REASON_DEVELOPER) {
                     SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
                 }
             }
             setOnMapClickListener { _, _ ->
-                initiateOveray()
+                initiateOverlay()
             }
         }
         list.forEach {
@@ -123,19 +139,20 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         }
     }
 
-    //지도카메라위치
-    private fun setMapCamera(lat:Double, lng:Double) : CameraPosition {
+    //지도 카메라 설정 함수
+    fun setMapCamera(lat:Double, lng:Double) : CameraPosition {
         return CameraPosition(LatLng(lat, lng), MAP_ZOOM)
     }
 
     //마커생성함수
-    private fun createMaker(item: StoreTest) : Marker {
+    fun createMaker(item: StoreTest) : Marker {
         return Marker().apply {
             position = LatLng(item.x, item.y)
             map = naverMap
             width = MARKER_SIZE
             height = MARKER_SIZE
             isForceShowIcon = true
+            minZoom = MAP_MIN_ZOOM
             when(item.sort) {
                 SORT_HANSIK -> {
                     icon = MapHelper.icon_hansik
@@ -177,12 +194,21 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         }
     }
 
-    //정보창 생성함수
-    private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
+    //인포윈도우 생성함수
+    fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
         return InfoWindow().apply {
             tag = false
-            infoWindows.add(this)
             adapter = createInfoWindowAdapter(item, tag as Boolean)
+            when(item.sort) {
+                SORT_HANSIK -> infoWindowsHansik.add(this)
+                SORT_CHINA -> infoWindowsChina.add(this)
+                SORT_JAPAN -> infoWindowsJapan.add(this)
+                SORT_FOOD -> infoWindowsFood.add(this)
+                SORT_BEAUTY -> infoWindowsBeauty.add(this)
+                SORT_WASH -> infoWindowsWash.add(this)
+                SORT_HOTEL -> infoWindowsHotel.add(this)
+                else -> infoWindowsStore.add(this)
+            }
             setOnClickListener {
                 Log.e("[$this]", "${clickedInfowindow.size}, $tag")
                 onOverlayClick(this, item)
@@ -192,8 +218,8 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         }
     }
 
-    //정보창전용 어댑터 생성 함수
-    private fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean) : InfoWindow.ViewAdapter {
+    //인포윈도우 어댑터 생성 함수
+    fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean) : InfoWindow.ViewAdapter {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
                 val color = when(item.code) {
@@ -229,7 +255,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //서클원 생성함수
-    private fun createCircle(lat:Double, lng:Double, m:Double) : CircleOverlay {
+    fun createCircle(lat:Double, lng:Double, m:Double) : CircleOverlay {
         return CircleOverlay().apply {
             tag = m
             center = LatLng(lat, lng)
@@ -241,7 +267,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //오버레이 클릭 이벤트 처리 함수
-    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
+    fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
         with(infoWindow){
             if(clickedInfowindow.isNotEmpty() &&
                 clickedInfowindow.keyAt(0) !== this) {
@@ -268,7 +294,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //식당정보 바텀시트 데이터 설정함수
-    private fun setBottomSheetData(item : StoreTest) {
+    fun setBottomSheetData(item : StoreTest) {
         binding.include.item = item
         with(binding.include) {
             Glide.with(owner).load(item.image).into(image)
@@ -286,6 +312,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 startActivity(intent)
             }
             R.id.button_filter -> {
+                filterDialog.filterSort = this.filterSort
                 filterDialog.show(owner.supportFragmentManager, FILTER)
             }
             R.id.button_gps -> {
@@ -307,7 +334,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //필터 기능 처리함수 - 업종필터
-    fun filterSort(filterSort : Vector<String>) {
+    fun filterSort(filterSort : MutableSet<String>) {
         this.filterSort = filterSort
         Log.e("[필터 목록-맵]", filterSort.toString())
         markersHansik.forEach { it.map = null }
@@ -318,25 +345,45 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         markersBeauty.forEach { it.map = null }
         markersHotel.forEach { it.map = null }
         markersStore.forEach { it.map = null }
-        if(filterSort.contains(SORT_HANSIK)) markersHansik.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_CHINA)) markersChina.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_JAPAN)) markersJapan.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_FOOD)) markersFood.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_WASH)) markersWash.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_BEAUTY)) markersBeauty.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_HOTEL)) markersHotel.forEach { it.map = naverMap }
-        if(filterSort.contains(SORT_STORE)) markersStore.forEach { it.map = naverMap }
+        if(filterSort.contains(SORT_HANSIK)) reappearMarkers(markersHansik, infoWindowsHansik)
+        if(filterSort.contains(SORT_CHINA)) reappearMarkers(markersChina, infoWindowsChina)
+        if(filterSort.contains(SORT_JAPAN)) reappearMarkers(markersJapan, infoWindowsJapan)
+        if(filterSort.contains(SORT_FOOD)) reappearMarkers(markersFood, infoWindowsFood)
+        if(filterSort.contains(SORT_WASH)) reappearMarkers(markersWash, infoWindowsWash)
+        if(filterSort.contains(SORT_BEAUTY)) reappearMarkers(markersBeauty, infoWindowsBeauty)
+        if(filterSort.contains(SORT_HOTEL)) reappearMarkers(markersHotel, infoWindowsHotel)
+        if(filterSort.contains(SORT_STORE)) reappearMarkers(markersStore, infoWindowsStore)
+    }
+
+    //마커 다시찍을 때
+    fun reappearMarkers(markers : Vector<Marker>, infowindows: Vector<InfoWindow>) {
+        for(i in 0 until markers.size) {
+            markers[i].map = naverMap
+            infowindows[i].open(markers[i])
+        }
     }
 
     //필터 기능 처리함수 - 맵 초기화
     fun filterInitialize() {
         filterDialog.dismiss()
-        //나중에 카메라 상태 저장해서 설정하기
-        this.onMapReady(naverMap)
+        filterSort.clear()
+        if(circleOverlay.isNotEmpty()) {
+            circleOverlay.forEach {
+                it.map = null
+            }
+        }
+        reappearMarkers(markersHansik, infoWindowsHansik)
+        reappearMarkers(markersChina, infoWindowsChina)
+        reappearMarkers(markersJapan, infoWindowsJapan)
+        reappearMarkers(markersFood, infoWindowsFood)
+        reappearMarkers(markersWash, infoWindowsWash)
+        reappearMarkers(markersBeauty, infoWindowsBeauty)
+        reappearMarkers(markersHotel, infoWindowsHotel)
+        reappearMarkers(markersStore, infoWindowsStore)
     }
 
     //오버레이 클릭상태 초기화
-    fun initiateOveray() {
+    fun initiateOverlay() {
         if(storeWindowBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
             storeWindowBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             if(clickedInfowindow.isNotEmpty()) {
@@ -352,6 +399,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
 
     override fun onStop() {
         super.onStop()
-        initiateOveray()
+        initiateOverlay()
     }
+
 }
