@@ -96,26 +96,26 @@
                     app:layout_constraintTop_toBottomOf="@+id/view3" />
 
                 <ImageView
-                    android:id="@+id/backarrowbefore"
+                    android:id="@+id/backarrow"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/my_01_03_title"
-                    app:srcCompat="@drawable/ic_backarrow"
-                    android:visibility="visible"/>
+                    android:src="@drawable/ic_backarrow_"
+                    />
 
 
-                <ImageView
-                    android:id="@+id/backarrowafter"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"
-                    app:srcCompat="@drawable/ic_backarrow"
-                    android:visibility="gone"
-                    android:rotation="90"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/backarrowafter"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"-->
+<!--                    app:srcCompat="@drawable/ic_backarrow"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:rotation="90"/>-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
