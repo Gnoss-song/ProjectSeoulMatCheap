@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="review"
             type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MY_01" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -265,7 +266,7 @@
                             android:id="@+id/btn_favorite"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/write"
+                            android:background="@color/white"
 
 
                             android:drawableRight="@drawable/btn_nexticon"
@@ -292,7 +293,7 @@
                             android:id="@+id/btn_myreview"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/write"
+                            android:background="@color/white"
 
                             android:drawableRight="@drawable/btn_nexticon"
 
@@ -317,7 +318,7 @@
                             android:id="@+id/btn_notice"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/write"
+                            android:background="@color/white"
                             android:drawableRight="@drawable/btn_nexticon"
 
                             android:stateListAnimator="@null"
@@ -342,7 +343,7 @@
                             android:id="@+id/btn_report"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/write"
+                            android:background="@color/white"
                             android:drawableRight="@drawable/btn_nexticon"
 
                             android:stateListAnimator="@null"
@@ -375,7 +376,7 @@
                                 android:layout_weight="1"
 
 
-                                android:background="@drawable/write"
+                                android:background="@color/white"
                                 android:text="앱버전"
                                 android:textAlignment="textStart"
 
