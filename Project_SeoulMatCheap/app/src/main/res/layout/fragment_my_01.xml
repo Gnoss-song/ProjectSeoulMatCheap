@@ -89,21 +89,22 @@
                         <ImageView
                             android:id="@+id/btn_help"
                             android:layout_width="25dp"
-                            android:layout_height="33dp"
-                            android:layout_marginTop="28dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="45dp"
+                            android:layout_marginTop="30dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/ic_helpbtn"
+                            android:src="@drawable/ic_medal"
                             app:layout_constraintBottom_toTopOf="@+id/nickName"
-                            app:layout_constraintStart_toEndOf="@+id/cardview"
+                            app:layout_constraintStart_toStartOf="@+id/cardview"
                             app:layout_constraintTop_toTopOf="@+id/cardview" />
 
                         <TextView
                             android:id="@+id/nickName"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_marginStart="118dp"
+                            android:layout_marginStart="130dp"
                             android:layout_marginTop="10dp"
-                            android:layout_marginEnd="118dp"
+                            android:layout_marginEnd="130dp"
                             android:gravity="center"
                             android:text="@string/nickname"
                             android:textSize="20sp"
@@ -333,6 +334,7 @@
 
                             app:backgroundTint="@null"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

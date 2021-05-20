@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -39,12 +40,17 @@ class MY_01(
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-//        binding = FragmentMy01Binding.inflate(inflater,container,false)
+        binding = FragmentMy01Binding.inflate(inflater,container,false)
+//        val textview : TextView = view.findViewById(R.id.textView8)
+
+
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_01,container,false)
+        binding.review = this
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         // 다이얼로그 //
 
         // 이용약관 //
