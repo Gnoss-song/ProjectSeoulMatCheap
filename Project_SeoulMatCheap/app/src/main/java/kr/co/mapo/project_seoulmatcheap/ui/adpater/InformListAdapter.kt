@@ -2,8 +2,6 @@ package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.content.Context
 import android.content.Intent
-import android.media.Image
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +17,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
  * Created by SANDY on 2021-04-20
  */
 class InformListAdapter(
-    private val list : List<Test>,
+    private val list: ArrayList<Test>,
     private val context: Context ) : RecyclerView.Adapter<InformListAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {

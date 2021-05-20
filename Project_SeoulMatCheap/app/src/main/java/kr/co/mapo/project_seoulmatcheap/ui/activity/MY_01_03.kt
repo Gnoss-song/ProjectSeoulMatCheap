@@ -81,14 +81,14 @@ class MY_01_03 : AppCompatActivity() {
         //백버튼 활성화
     }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                android.R.id.home -> {
-                    onBackPressed()
-                }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
             }
-            return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
+    }
     /*
     //어댑터
     inner class My0103Adapter(

@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMap0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.ADDRESS
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
 data class Test(val image : String, val name : String, val address : String, val kind : String, val distance: Double, val rate : Double)
 
