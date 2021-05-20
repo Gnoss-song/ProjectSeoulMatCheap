@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.naver.maps.map.a.f
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
+import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
 
 /**
@@ -67,11 +68,11 @@ class AutoCompleteAdapter(
             word.text = filteredList[position]
             changeTextColor(constraint)
             itemView.setOnClickListener {
-                val edit = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE).edit()
-                edit.putString("word.text", word.text.toString().trim()).apply()
+                val searchWord = word.text.toString()
+                SearchHistoryPrefs.saveSearchWord(owner, searchWord)
                 owner.supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.container, SEARCH_01_01.newInstance(owner, word.text.toString()))
+                    .replace(R.id.container, SEARCH_01_01.newInstance(owner, searchWord))
                     .commit()
             }
         }

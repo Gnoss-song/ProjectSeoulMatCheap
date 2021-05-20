@@ -10,7 +10,7 @@ import com.nhn.android.naverlogin.OAuthLogin
  * @author SANDY
  * @email nnal0256@naver.com
  * @created 2021-04-28
- * @desc 로그인 세션관리 object
+ * @desc 자동로그인 sharedPrefs 관리 object
  */
 
 object UserPrefs {
