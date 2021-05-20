@@ -260,7 +260,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/custom_button_my_01"
-                            android:drawableLeft="@drawable/btn_homeaddress"
 
 
                             android:drawableRight="@drawable/btn_nexticon"
@@ -282,7 +281,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/custom_button_my_01"
-                            android:drawableLeft="@drawable/btn_homeaddress"
 
                             android:drawableRight="@drawable/btn_nexticon"
                             android:stateListAnimator="@null"
@@ -303,7 +301,6 @@
                             android:layout_height="50dp"
                             android:background="@drawable/custom_button_my_01"
 
-                            android:drawableLeft="@drawable/btn_homeaddress"
                             android:drawableRight="@drawable/btn_nexticon"
 
                             android:stateListAnimator="@null"
@@ -323,8 +320,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/custom_button_my_01"
-                            android:drawableLeft="@drawable/btn_homeaddress"
                             android:drawableRight="@drawable/btn_nexticon"
+
 
                             android:stateListAnimator="@null"
 
@@ -344,7 +341,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/custom_button_my_01"
-                            android:drawableLeft="@drawable/btn_homeaddress"
                             android:drawableRight="@drawable/btn_nexticon"
                             android:stateListAnimator="@null"
 
@@ -364,7 +360,6 @@
                             android:layout_height="50dp"
 
                             android:background="@drawable/custom_button_my_01"
-                            android:drawableLeft="@drawable/btn_homeaddress"
 
 
                             android:text="앱버전"
@@ -382,7 +377,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:text="@{review.versionName}"
-                            android:textSize="30sp"
+                            android:textSize="20sp"
                             android:textColor="@color/black"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/btn_report" />
@@ -410,11 +405,9 @@
                     android:layout_height="20dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginEnd="140dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_withdrawal"
                     app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/btn_logout"
                     app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
