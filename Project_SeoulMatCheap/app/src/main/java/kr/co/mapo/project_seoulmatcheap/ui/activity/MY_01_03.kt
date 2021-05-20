@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,8 @@ class MY_01_03 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.notice_title)
         }
+
+        //화살표 돌리기
 
         NotifyService.invoke()
             .getTest().subscribeOn(Schedulers.io())
@@ -93,11 +96,20 @@ class MY_01_03 : AppCompatActivity() {
     ) : RecyclerView.Adapter<My0103Adapter.ViewHolderClass>() {
         private val selectedItems = SparseBooleanArray()
         private var prePosition = -1
+
+
         inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
             val my0103title: TextView = itemView.findViewById(R.id.my_01_03_title)
             val my0103sort: TextView = itemView.findViewById(R.id.my_01_03_sort)
             val my0103date: TextView = itemView.findViewById(R.id.my_01_03_date)
             val my0103content: TextView = itemView.findViewById(R.id.my_01_03_content)
+            val backarrowbefore:ImageView = itemView.findViewById(R.id.backarrowbefore)
+            val backarrowafter:ImageView = itemView.findViewById(R.id.backarrowafter)
+
+
+
+
+
             fun init() {
                 my0103title.setOnClickListener(this)
                 my0103date.setOnClickListener(this)
@@ -109,9 +121,21 @@ class MY_01_03 : AppCompatActivity() {
                 my0103content.text= item.noticeContent
                 my0103sort.text=item.modifyDate
             }
+            fun arrow(){
+                if(backarrowbefore.visibility==View.VISIBLE){
+                    backarrowbefore.visibility = View.GONE
+                    backarrowafter.visibility = View.VISIBLE
+                }
+                else{
+                    backarrowbefore.visibility = View.VISIBLE
+                    backarrowafter.visibility = View.GONE
+                }
+
+            }
             override fun onClick(v: View) {
                 when (v.id) {
                     R.id.my_01_03_title -> {
+                        arrow()
                         if (selectedItems[layoutPosition]) {
                             selectedItems.delete(layoutPosition)
                         } else {
@@ -124,6 +148,8 @@ class MY_01_03 : AppCompatActivity() {
                     }
                 }
             }
+
+
             //공지사항 접고 펴는곳
             fun changeVisibility(isExpanded: Boolean) {
                 val height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -138,6 +164,7 @@ class MY_01_03 : AppCompatActivity() {
                 }
                 va.start()
             }
+
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
             val view = LayoutInflater.from(parent.context).inflate(

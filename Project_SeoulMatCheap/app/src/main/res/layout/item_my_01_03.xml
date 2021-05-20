@@ -61,15 +61,14 @@
                     android:id="@+id/my_01_03_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/ic_arrow"
                     android:paddingStart="16dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="5dp"
-                    android:layout_marginEnd="30dp"
+                    android:singleLine="true"
                     android:text="03.25 안내"
-                    android:textSize="24dp"
                     android:textColor="#1a1311"
 
+                    android:textSize="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/my_01_03_date" />
@@ -95,6 +94,30 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+                <ImageView
+                    android:id="@+id/backarrowbefore"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"
+                    app:srcCompat="@drawable/ic_backarrow"
+                    android:visibility="visible"/>
+
+
+                <ImageView
+                    android:id="@+id/backarrowafter"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"
+                    app:srcCompat="@drawable/ic_backarrow"
+                    android:visibility="gone"
+                    android:rotation="90"/>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
