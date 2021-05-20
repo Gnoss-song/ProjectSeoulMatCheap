@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -98,6 +99,8 @@ class MY_01_03 : AppCompatActivity() {
             val my0103sort: TextView = itemView.findViewById(R.id.my_01_03_sort)
             val my0103date: TextView = itemView.findViewById(R.id.my_01_03_date)
             val my0103content: TextView = itemView.findViewById(R.id.my_01_03_content)
+            val button_before : ImageView = itemView.findViewById(R.id.button_before)
+            val button_after : ImageView = itemView.findViewById(R.id.button_after)
             fun init() {
                 my0103title.setOnClickListener(this)
                 my0103date.setOnClickListener(this)

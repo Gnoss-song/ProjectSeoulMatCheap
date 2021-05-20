@@ -62,6 +62,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
             val builder = AlertDialog.Builder(context)
             val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
             with(builder) {
+                setCancelable(true)
                 setView(balloonView)
                 show().window?.setBackgroundDrawable(null)
             }

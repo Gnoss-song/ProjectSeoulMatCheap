@@ -24,6 +24,7 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
 import java.util.*
 
@@ -87,7 +88,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         filterDialog = MAP_01_02(this)
-        list = Test().addData100()
+        list = Test().addData900()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +96,9 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
+        binding.include.storeBottomLayout.setOnClickListener {
+            startActivity(Intent(owner, INFORM_02::class.java))
+        }
     }
 
     //네이버지도 초기 설정
@@ -239,10 +243,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                             setTextColor(MapHelper.blackColor)
                         }
                     } else {
-                        viewContent1.backgroundTintList = MapHelper.clickedColor
-                        viewContent2.backgroundTintList = MapHelper.clickedColor
-                        viewBottom1.imageTintList = MapHelper.clickedColor
-                        viewBottom2.imageTintList = MapHelper.clickedColor
+                        viewContent1.backgroundTintList = color
+                        viewContent2.backgroundTintList = color
+                        viewBottom1.imageTintList = color
+                        viewBottom2.imageTintList = color
                         textName.apply {
                             typeface = Typeface.DEFAULT_BOLD
                             setTextColor(MapHelper.whiteColor)

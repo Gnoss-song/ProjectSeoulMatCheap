@@ -17,20 +17,20 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@id/toolbar">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_list"/>
+            android:text="@string/category_list" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_map"/>
+            android:text="@string/category_map" />
 
     </com.google.android.material.tabs.TabLayout>
 
