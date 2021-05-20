@@ -65,7 +65,9 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
 
             }
             buttonWrite.setOnClickListener(this@INFORM_02)
-
+            buttonReview.setOnClickListener {
+                startActivity(Intent(this@INFORM_02, INFORM_02_01::class.java))
+            }
         }
     }
 

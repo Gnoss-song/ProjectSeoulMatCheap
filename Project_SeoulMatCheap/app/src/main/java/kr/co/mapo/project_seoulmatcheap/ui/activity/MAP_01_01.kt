@@ -69,7 +69,7 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     private fun setView(list: ArrayList<Test>) {
-        with(binding.include) {
+        with(binding) {
             recyclerView.apply {
                 layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
                     this@MAP_01_01,
@@ -78,6 +78,7 @@ class MAP_01_01 : AppCompatActivity() {
                 )
                 adapter = kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter(list)
             }
+            /*
             sortDistanceBtn.apply {
                 setOnClickListener {
                     list.sortBy { it.distance }
@@ -91,6 +92,7 @@ class MAP_01_01 : AppCompatActivity() {
                     recyclerView.adapter = InformListAdapter(list)
                 }
             }
+             */
         }
     }
 }

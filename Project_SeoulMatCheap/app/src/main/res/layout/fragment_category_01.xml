@@ -37,11 +37,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="0.5"
-            android:background="@color/transparentcolor"
+            android:background="@drawable/rectangle_all_corner_radius"
             android:orientation="horizontal"
+            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
@@ -49,6 +50,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/icon_medal" />
 
             <TextView
@@ -67,11 +69,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_basic"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="@dimen/margin_basic"
-            android:background="@drawable/rectangle_top_corner_radius"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/midAdress"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rectangle_all_corner_radius"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/gridRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/serviceData">
@@ -80,9 +83,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="@dimen/margin_basic"
+                android:layout_marginTop="@dimen/margin_basic4"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="@dimen/margin_basic"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
                 android:background="@drawable/map_main_seoul">
 
                 <Button
@@ -487,58 +491,53 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/midAdress"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginStart="@dimen/margin_basic"
-            android:layout_marginEnd="@dimen/margin_basic"
-            android:layout_marginBottom="@dimen/margin_basic"
-            android:background="@drawable/rectangle_bottom_corner_radius"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/gridRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
             <LinearLayout
+                android:id="@+id/midAdress"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+                android:layout_height="35dp"
+                android:background="@drawable/rectangle_bottom_corner_radius"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/ic_places" />
+                    <!--                임시-->
+                    <TextView
+                        android:id="@+id/category_locationTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="서울시 마포구 성산1동"
+                        android:textSize="15dp" />
+                    <!--                임시-->
+                </LinearLayout>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/ic_places" />
-                <!--                임시-->
-                <TextView
-                    android:id="@+id/category_locationTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="서울시 마포구 성산1동"
-                    android:textSize="15dp" />
-                <!--                임시-->
+                    android:id="@+id/category_locationIV"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/icon_location" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/category_locationIV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/icon_location" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/gridRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin_basic"
             android:layout_marginEnd="@dimen/margin_basic"
@@ -546,9 +545,8 @@
             android:layout_weight="3"
             android:background="@drawable/rectangle_all_corner_radius"
             android:paddingStart="5dp"
-            android:paddingTop="@dimen/margin_basic"
             android:paddingEnd="5dp"
-            android:paddingBottom="@dimen/margin_basic5"
+            android:paddingBottom="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
