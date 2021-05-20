@@ -21,7 +21,7 @@ allprojects {
         maven { url 'https://naver.jfrog.io/artifactory/maven/'}
         //카카오 SDK 레포지토리
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
-        //커스텀 별
+        //커스텀 별, MP
         maven { url 'https://jitpack.io' }
     }
 }

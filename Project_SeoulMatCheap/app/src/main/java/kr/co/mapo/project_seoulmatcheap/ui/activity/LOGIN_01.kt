@@ -136,6 +136,7 @@ class LOGIN_01 : AppCompatActivity() {
                         UserPrefs.saveUserEmail(this@LOGIN_01, user.kakaoAccount?.email!!, 0)
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01,
                             user.kakaoAccount?.profile?.nickname + getString(R.string.login))
+                        Log.e("[Kakao]", "${user.kakaoAccount.toString()}")
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01, "사용자 정보 요청 성공" +
                                 "\n회원번호: ${user.id}" +
                                 "\n이메일: ${user.kakaoAccount?.email}" +

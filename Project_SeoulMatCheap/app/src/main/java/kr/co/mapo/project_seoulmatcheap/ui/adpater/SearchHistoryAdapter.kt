@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
+import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.SEARCH_01_01
 
 /**
@@ -44,10 +45,7 @@ class SearchHistoryAdapter(
         with(holder) {
             serchword.text = item
             remove_btr.setOnClickListener {
-                owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
-                    .edit()
-                    .remove(item)
-                    .apply()
+                SearchHistoryPrefs.removeSearchWord(owner, item)
                 list.removeAt(position)
                 notifyDataSetChanged()
             }

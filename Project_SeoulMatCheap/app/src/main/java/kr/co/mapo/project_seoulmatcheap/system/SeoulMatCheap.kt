@@ -85,18 +85,13 @@ class SeoulMatCheap : Application() {
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
-                    locationManager.requestLocationUpdates(provider, 100, 1f, LocationListener {
-                        updateLocation(it, context)
-                    })
-                    /*
                     if(location == null) {
-                        locationManager.requestLocationUpdates(provider, 400, 1f, LocationListener {
+                        locationManager.requestLocationUpdates(provider, 400, 1f) {
                             updateLocation(it, context)
-                        })
+                        }
                     } else {
                         updateLocation(location, context)
                     }
-                     */
                 }
         }
     }

@@ -1,13 +1,17 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 class ListRecyclerViewAdapter (
     private val listList:MutableList<ListItem>)
@@ -40,6 +44,10 @@ class ListRecyclerViewAdapter (
             sort.text = listData.sort
             distance.text = listData.distance
             score.text = listData.score
+        }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView?.context, INFORM_02::class.java)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
 }

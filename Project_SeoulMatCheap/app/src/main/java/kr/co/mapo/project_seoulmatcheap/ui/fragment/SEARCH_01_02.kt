@@ -17,6 +17,7 @@ import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap0102Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch0102Binding
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
+import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.AutoCompleteAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.SearchHistoryAdapter
@@ -34,7 +35,6 @@ class SEARCH_01_02 (
     }
 
     private lateinit var binding: FragmentSearch0102Binding
-    private lateinit var preferences : SharedPreferences
     private lateinit var filterAdapter : AutoCompleteAdapter
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
 
@@ -58,8 +58,7 @@ class SEARCH_01_02 (
         owner.setSupportActionBar(binding.toolbar)
         val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
         filterAdapter = AutoCompleteAdapter(test, owner)
-        preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
-        searchHistoryAdapter = SearchHistoryAdapter(preferences.all.values.toMutableList(), owner)
+        searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
         setView()
     }
 
@@ -143,21 +142,16 @@ class SEARCH_01_02 (
         return super.onOptionsItemSelected(item)
     }
 
-    private fun savePreference(word : String) {
-        val edit = preferences.edit()
-        edit.putString(word, word).apply()
-    }
-
-    fun goSearch(word: String) {
-        savePreference(word)
+    private fun goSearch(word: String) {
+        SearchHistoryPrefs.saveSearchWord(owner, word)
         owner.supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, SEARCH_01_01.newInstance(owner, word))
             .commit()
     }
 
-    fun goFail(word: String) {
-        savePreference(word)
+    private fun goFail(word: String) {
+        SearchHistoryPrefs.saveSearchWord(owner, word)
         SeoulMatCheap.getInstance().showToast(owner, "검색 실패")
         binding.searchEditText.setText(word)
         val imm = owner.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

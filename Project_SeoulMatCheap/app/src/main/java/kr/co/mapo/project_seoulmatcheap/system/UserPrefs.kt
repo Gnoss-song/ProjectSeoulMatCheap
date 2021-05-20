@@ -10,7 +10,7 @@ import com.nhn.android.naverlogin.OAuthLogin
  * @author SANDY
  * @email nnal0256@naver.com
  * @created 2021-04-28
- * @desc 로그인 세션관리 object
+ * @desc 자동로그인 sharedPrefs 관리 object
  */
 
 object UserPrefs {
@@ -30,6 +30,11 @@ object UserPrefs {
     fun getUserEmail(context: Context) : String {
         return context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
             .getString(USER_EMAIL, "").toString()
+    }
+
+    fun getUserCode(context: Context) : Int {
+        return context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
+            .getInt(OAUTH_CODE, -1)
     }
 
     fun logout(context: Context) : Boolean {
