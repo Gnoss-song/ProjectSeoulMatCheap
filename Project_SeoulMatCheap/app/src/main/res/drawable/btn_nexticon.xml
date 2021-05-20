@@ -2,9 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/btn_next"
-        android:drawable="@drawable/ic_nexticon"
-        android:width="@dimen/btn_icon"
-        android:height="@dimen/btn_icon"
+        android:drawable="@drawable/ic_backarrow"
+        android:width="@dimen/margin_basic4"
+        android:height="@dimen/margin_basic4"
         />
 
 
