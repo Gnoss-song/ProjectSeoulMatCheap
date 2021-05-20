@@ -78,11 +78,11 @@ class MAP_01_01 : AppCompatActivity() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-                adapter = InformListAdapter(list)
+                adapter = InformListAdapter(list,this@MAP_01_01)
             }
             categoryScore.setOnClickListener {
                 list.sortBy { it.distance }
-                recyclerView.adapter = InformListAdapter(list)
+                recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
                 with(categoryDistance) {
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
@@ -94,7 +94,7 @@ class MAP_01_01 : AppCompatActivity() {
             }
             categoryDistance.setOnClickListener {
                 list.sortBy { it.rate }
-                recyclerView.adapter = InformListAdapter(list)
+                recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
                 with(categoryDistance) {
                     typeface = Typeface.DEFAULT_BOLD
                     setTextColor(resources.getColor(R.color.main, null))

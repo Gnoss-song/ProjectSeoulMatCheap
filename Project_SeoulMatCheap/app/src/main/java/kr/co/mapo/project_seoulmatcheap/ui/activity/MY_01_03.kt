@@ -28,6 +28,7 @@ import kr.co.mapo.project_seoulmatcheap.data.MY0103Item
 import kr.co.mapo.project_seoulmatcheap.data.NotifyService
 import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0103Binding
+import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0103Adapter
 
 class MY_01_03 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0103Binding
@@ -88,6 +89,7 @@ class MY_01_03 : AppCompatActivity() {
             }
             return super.onOptionsItemSelected(item)
         }
+    /*
     //어댑터
     inner class My0103Adapter(
         private val list: List<NotifyResponse.Data>
@@ -105,6 +107,8 @@ class MY_01_03 : AppCompatActivity() {
                 my0103title.setOnClickListener(this)
                 my0103date.setOnClickListener(this)
                 my0103sort.setOnClickListener(this)
+                button_before.setOnClickListener(this)
+                button_after.setOnClickListener(this)
             }
             fun setview(item : NotifyResponse.Data){
                 my0103date.text= item.modifyDate
@@ -115,6 +119,32 @@ class MY_01_03 : AppCompatActivity() {
             override fun onClick(v: View) {
                 when (v.id) {
                     R.id.my_01_03_title -> {
+                        if (selectedItems[layoutPosition]) {
+                            selectedItems.delete(layoutPosition)
+                        } else {
+                            selectedItems.delete(prePosition)
+                            selectedItems.put(layoutPosition, true)
+                        }
+                        if (prePosition != -1) notifyItemChanged(prePosition)
+                        notifyItemChanged(layoutPosition)
+                        prePosition = layoutPosition
+                    }
+                    R.id.button_before -> {
+                        button_before.visibility = View.GONE
+                        button_after.visibility = View.VISIBLE
+                        if (selectedItems[layoutPosition]) {
+                            selectedItems.delete(layoutPosition)
+                        } else {
+                            selectedItems.delete(prePosition)
+                            selectedItems.put(layoutPosition, true)
+                        }
+                        if (prePosition != -1) notifyItemChanged(prePosition)
+                        notifyItemChanged(layoutPosition)
+                        prePosition = layoutPosition
+                    }
+                    R.id.button_after -> {
+                        button_before.visibility = View.VISIBLE
+                        button_after.visibility = View.GONE
                         if (selectedItems[layoutPosition]) {
                             selectedItems.delete(layoutPosition)
                         } else {
@@ -168,4 +198,5 @@ class MY_01_03 : AppCompatActivity() {
         }
 
     }
+     */
 }

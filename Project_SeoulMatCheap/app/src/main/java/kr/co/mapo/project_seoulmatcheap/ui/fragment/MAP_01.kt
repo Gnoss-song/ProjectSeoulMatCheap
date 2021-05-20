@@ -108,7 +108,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
         naverMap.apply {
             val locationObserver = Observer<Location> {
-                cameraPosition = setMapCamera(it.latitude, it.longitude)
+                cameraPosition = setMapCamera(it.latitude, it.longitude, MAP_ZOOM)
                 with(locationOverlay) {
                     isVisible = true
                     position = LatLng(it.latitude, it.longitude)
@@ -138,25 +138,25 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             }
         }
         list.forEach {
-            val marker = createMaker(it)
+            val marker = createMaker(it, naverMap)
             createInfoWindow (it, marker)
         }
     }
 
     //지도 카메라 설정 함수
-    fun setMapCamera(lat:Double, lng:Double) : CameraPosition {
-        return CameraPosition(LatLng(lat, lng), MAP_ZOOM)
+    fun setMapCamera(lat:Double, lng:Double, zoom : Double) : CameraPosition {
+        return CameraPosition(LatLng(lat, lng), zoom)
     }
 
     //마커생성함수
-    fun createMaker(item: StoreTest) : Marker {
+    private fun createMaker(item: StoreTest, naverMap: NaverMap) : Marker {
         return Marker().apply {
             position = LatLng(item.x, item.y)
             map = naverMap
             width = MARKER_SIZE
             height = MARKER_SIZE
             isForceShowIcon = true
-            minZoom = MAP_MIN_ZOOM
+            minZoom = MARKET_MIN_ZOOM
             when(item.sort) {
                 SORT_HANSIK -> {
                     icon = MapHelper.icon_hansik
@@ -199,10 +199,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //인포윈도우 생성함수
-    fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
+    private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
         return InfoWindow().apply {
             tag = false
-            adapter = createInfoWindowAdapter(item, tag as Boolean)
+            adapter = createInfoWindowAdapter(item, tag as Boolean, view)
             when(item.sort) {
                 SORT_HANSIK -> infoWindowsHansik.add(this)
                 SORT_CHINA -> infoWindowsChina.add(this)
@@ -223,7 +223,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //인포윈도우 어댑터 생성 함수
-    fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean) : InfoWindow.ViewAdapter {
+    fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
                 val color = when(item.code) {
@@ -259,7 +259,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //서클원 생성함수
-    fun createCircle(lat:Double, lng:Double, m:Double) : CircleOverlay {
+    fun createCircle(lat:Double, lng:Double, m:Double, naverMap: NaverMap) : CircleOverlay {
         return CircleOverlay().apply {
             tag = m
             center = LatLng(lat, lng)
@@ -271,26 +271,26 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //오버레이 클릭 이벤트 처리 함수
-    fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
+    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
         with(infoWindow){
             if(clickedInfowindow.isNotEmpty() &&
                 clickedInfowindow.keyAt(0) !== this) {
                 val infoWindow = clickedInfowindow.keyAt(0)
                 with(infoWindow) {
-                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false)
+                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false, view)
                     tag = false
                 }
                 clickedInfowindow.clear()
             }
             if(this?.tag == false) {  //클릭이 안된 상태에서 클릭
-                this.adapter = createInfoWindowAdapter(item, true)
+                this.adapter = createInfoWindowAdapter(item, true, view)
                 setBottomSheetData(item)
                 clickedInfowindow[this] = item
                 tag = true  //다음 이벤트 처리를 위해 다시 tag boolean값을 클릭된 상태로 초기화한다.
             } else {    //클릭된 상태에서 클릭
                 setBottomSheetData(item)
                 storeWindowBehavior.state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-                this!!.adapter = createInfoWindowAdapter(item, false)
+                this!!.adapter = createInfoWindowAdapter(item, false, view)
                 clickedInfowindow.clear()
                 tag = false //다음 이벤트 처리를 위해 다시 tag boolean값을 클릭이 안된 상태로 초기화한다.
             }
@@ -321,7 +321,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             }
             R.id.button_gps -> {
                 naverMap.apply {
-                    cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y)
+                    cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, MAP_ZOOM)
                 }
             }
         }
@@ -334,7 +334,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 it.map = null
             }
         }
-        createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance)
+        createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance, naverMap)
     }
 
     //필터 기능 처리함수 - 업종필터
@@ -360,7 +360,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //마커 다시찍을 때
-    fun reappearMarkers(markers : Vector<Marker>, infowindows: Vector<InfoWindow>) {
+    private fun reappearMarkers(markers : Vector<Marker>, infowindows: Vector<InfoWindow>) {
         for(i in 0 until markers.size) {
             markers[i].map = naverMap
             infowindows[i].open(markers[i])
@@ -393,7 +393,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             if(clickedInfowindow.isNotEmpty()) {
                 val infoWindow = clickedInfowindow.keyAt(0)
                 with(infoWindow) {
-                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false)
+                    adapter = createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false, view)
                     tag = false
                 }
                 clickedInfowindow.clear()

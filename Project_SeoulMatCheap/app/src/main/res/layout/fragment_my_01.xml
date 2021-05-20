@@ -377,9 +377,11 @@
 
 
                                 android:background="@color/white"
+                                android:elevation="0dp"
+                                android:stateListAnimator="@null"
+
                                 android:text="앱버전"
                                 android:textAlignment="textStart"
-
                                 android:textColor="@color/black"
                                 android:textSize="16dp"
                                 app:backgroundTint="@null"
