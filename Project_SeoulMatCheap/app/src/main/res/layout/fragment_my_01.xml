@@ -265,7 +265,7 @@
                             android:id="@+id/btn_favorite"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/custom_button_my_01"
+                            android:background="@drawable/write"
 
 
                             android:drawableRight="@drawable/btn_nexticon"
@@ -292,7 +292,7 @@
                             android:id="@+id/btn_myreview"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/custom_button_my_01"
+                            android:background="@drawable/write"
 
                             android:drawableRight="@drawable/btn_nexticon"
 
@@ -310,30 +310,15 @@
                         <View
                             android:id="@+id/view15"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@drawable/custom_button_my_01"
-
-                            android:drawableRight="@drawable/btn_nexticon"
-
-                            android:stateListAnimator="@null"
-
-                            android:text="내 제보 글 관리"
-                            android:textAlignment="textStart"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-
-                            app:backgroundTint="@null"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_myreview" />
+                            android:layout_height="1dp"
+                            android:background="@color/divide" />
 
                         <Button
                             android:id="@+id/btn_notice"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/custom_button_my_01"
+                            android:background="@drawable/write"
                             android:drawableRight="@drawable/btn_nexticon"
-
 
                             android:stateListAnimator="@null"
                             android:text="공지사항"
@@ -357,7 +342,7 @@
                             android:id="@+id/btn_report"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:background="@drawable/custom_button_my_01"
+                            android:background="@drawable/write"
                             android:drawableRight="@drawable/btn_nexticon"
 
                             android:stateListAnimator="@null"
@@ -377,7 +362,10 @@
                             android:layout_height="1dp"
                             android:background="@color/divide" />
 
-                            android:background="@drawable/custom_button_my_01"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
                             <Button
                                 android:id="@+id/btn_version"
@@ -418,20 +406,7 @@
 
                         </FrameLayout>
 
-                            app:backgroundTint="@null"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_report" />
-
-                        <TextView
-                            android:id="@+id/textView8"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:text="@{review.versionName}"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_report" />
+                    </LinearLayout>
 
                     <View
                         android:id="@+id/view18"
@@ -443,29 +418,47 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/btn_logout"
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="140dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/ic_logout"
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="24dp"
                     app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
-                <Button
-                    android:id="@+id/btn_withdrawal"
-                    android:layout_width="60dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_withdrawal"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintlayout"
-                    app:layout_constraintStart_toEndOf="@+id/btn_logout"
-                    app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+                    <TextView
+                        android:id="@+id/btn_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="로그아웃"
+                        android:textColor="#a1a1a1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:gravity="center"
+                        android:text="|"
+                        android:textColor="#a1a1a1"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/btn_withdrawal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="회원탈퇴"
+                        android:textColor="#a1a1a1"
+                        android:textSize="12dp" />
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintlayout"
