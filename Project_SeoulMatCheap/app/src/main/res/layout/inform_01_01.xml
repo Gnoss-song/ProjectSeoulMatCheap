@@ -11,14 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/margin_basic">
+        android:paddingLeft="@dimen/margin_basic5"
+        android:paddingTop="@dimen/margin_basic"
+        android:paddingRight="@dimen/margin_basic"
+        android:paddingBottom="@dimen/margin_basic">
 
         <CheckBox
             android:id="@+id/checkbox_user"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="12dp"
             android:background="@drawable/custom_checkbox"
-            android:layout_marginRight="5dp"
             android:button="@null"
 
             />
@@ -26,7 +29,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp">
 
             <ImageView
@@ -40,8 +43,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -50,19 +53,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
+                android:lineSpacingExtra="1sp"
                 android:text="업소 이름"
-                android:textSize="18sp"
                 android:textColor="#1a1311"
-                android:textStyle="bold"/>
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
+                android:lineSpacingExtra="8sp"
                 android:singleLine="true"
                 android:text="주소"
-                android:textSize="@dimen/marketinfo_text"/>
+                android:textSize="@dimen/marketinfo_text"
+                android:textStyle="normal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,42 +79,41 @@
                     android:id="@+id/sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="종류"
                     android:textSize="@dimen/marketinfo_text"
-                    android:text="종류" />
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:text="0.0 km"
                     android:textSize="@dimen/marketinfo_text"
-                    android:text="0.0 km" />
+                    android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
+
         <ImageView
             android:id="@+id/star"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:srcCompat="@drawable/ic_starafter"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginEnd="10dp"
-            />
+            app:srcCompat="@drawable/ic_starafter" />
 
         <TextView
             android:id="@+id/score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.0"
-            android:textColor="#1a1311"
-            android:textSize="45sp" />
-
+            android:textColor="#000000"
+            android:textSize="35dp" />
     </LinearLayout>
 
     <View
         android:id="@+id/view9"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#C6C6C6"/>
+        android:background="@color/divide" />
 
 </LinearLayout>

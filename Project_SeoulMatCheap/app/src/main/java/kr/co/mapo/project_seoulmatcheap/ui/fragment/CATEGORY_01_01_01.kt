@@ -1,5 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,12 +31,28 @@ class CATEGORY_01_01_01 : Fragment() {
                     sortByDescending { it.score }
                 }
                 categoryRV.adapter = ListRecyclerViewAdapter(list)
+                with(categoryDistance) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
+                }
+                with(categoryScore) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
+                }
             }
             categoryDistance.setOnClickListener {
                 val list = listData().apply {
                     sortBy { it.distance }
                 }
                 categoryRV.adapter = ListRecyclerViewAdapter(list)
+                with(categoryDistance) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
+                }
+                with(categoryScore) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
+                }
             }
         }
     }

@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_basic"
             android:layout_weight="1"
-            android:text="거리순" />
+            android:text="거리순"
+            android:textColor="@color/dot_edge" />
 
     </LinearLayout>
 
