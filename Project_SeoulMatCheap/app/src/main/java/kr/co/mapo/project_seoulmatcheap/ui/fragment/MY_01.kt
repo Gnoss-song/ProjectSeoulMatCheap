@@ -7,6 +7,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
  */
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import kr.co.mapo.project_seoulmatcheap.BuildConfig
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMy01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
@@ -31,11 +34,13 @@ class MY_01(
     }
 
     private lateinit var binding : FragmentMy01Binding
+    val versionName = BuildConfig.VERSION_NAME
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMy01Binding.inflate(inflater,container,false)
+//        binding = FragmentMy01Binding.inflate(inflater,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_my_01,container,false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -148,13 +153,13 @@ class MY_01(
         }
 
         //test
-        binding.test1.setOnClickListener {
-            val intent03 = Intent(activity, INFORM_02_02::class.java)
-            startActivity(intent03)
-        }
-        binding.test2.setOnClickListener {
-            val intent03 = Intent(activity, INFORM_02_02_01::class.java)
-            startActivity(intent03)
-        }
+//        binding.test1.setOnClickListener {
+//            val intent03 = Intent(activity, INFORM_02_02::class.java)
+//            startActivity(intent03)
+//        }
+//        binding.test2.setOnClickListener {
+//            val intent03 = Intent(activity, INFORM_02_02_01::class.java)
+//            startActivity(intent03)
+//        }
     }
 }
