@@ -32,6 +32,11 @@ object UserPrefs {
             .getString(USER_EMAIL, "").toString()
     }
 
+    fun getUserCode(context: Context) : Int {
+        return context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
+            .getInt(OAUTH_CODE, -1)
+    }
+
     fun logout(context: Context) : Boolean {
         val prefs = context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
         val editor = prefs.edit()
