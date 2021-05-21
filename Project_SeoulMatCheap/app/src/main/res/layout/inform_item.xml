@@ -1,103 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:paddingRight="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/divide2"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/informIV"
+                    android:layout_width="41dp"
+                    android:layout_height="41dp"
+                    android:src="@drawable/inform_icon" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/informName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="사용자 닉네임"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.willy.ratingbar.ScaleRatingBar
+                    android:id="@+id/informRatingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="bottom"
+                    android:numStars="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srb_drawableEmpty="@drawable/ic_starbefore"
+                    app:srb_drawableFilled="@drawable/ic_starafter"
+                    app:srb_isIndicator="true"
+                    app:srb_starHeight="18dp"
+                    app:srb_starPadding="2.5dp"
+                    app:srb_starWidth="18dp"
+                    app:srb_stepSize="0.5" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/informDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2021-05-10"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="@dimen/margin_basic"
+            android:gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/informImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/test_image" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/informText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_basic"
+                android:layout_marginEnd="@dimen/margin_basic"
+                android:layout_marginBottom="@dimen/margin_basic"
+                android:text="가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가" />
+
+            <TextView
+                android:id="@+id/informText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/rectangle_top_corner_radius"
-                android:elevation="10dp"
-                android:padding="10dp">
-                <ImageView
-                    android:id="@+id/informIV"
-                    android:layout_width="41dp"
-                    android:layout_height="41dp"
-                    android:src="@drawable/inform_icon"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp">
-                    <TextView
-                        android:id="@+id/informDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="2021-05-10"
-                        android:textSize="11sp"/>
-                    <TextView
-                        android:id="@+id/informName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="사용자 닉네임"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-                <androidx.appcompat.widget.AppCompatRatingBar
-                    android:id="@+id/informRatingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    app:srb_stepSize="0.5"
-                    app:srb_isIndicator="true"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
-                    app:srb_drawableEmpty="@drawable/ic_starbefore"
-                    app:srb_drawableFilled="@drawable/ic_starafter"/>/>
-            </LinearLayout>
+                android:layout_marginStart="@dimen/margin_basic"
+                android:layout_marginEnd="@dimen/margin_basic"
+                android:layout_marginBottom="@dimen/margin_basic"
+                android:text="가가가가가가가가가가\n가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가\n가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가\n가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@drawable/non_round"
-                android:elevation="10dp"
-                android:padding="10dp">
-                <ImageView
-                    android:id="@+id/informImage"
-                    android:layout_width="167dp"
-                    android:layout_height="169dp"
-                    android:src="@drawable/inform_image"/>
-            </LinearLayout>
+                android:visibility="gone">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rectangle_bottom_corner_radius"
-                android:elevation="10dp"
-                android:padding="10dp">
-                    <TextView
-                        android:id="@+id/informText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"/>
-                    <Button
-                        android:id="@+id/informModify"
-                        android:layout_width="42dp"
-                        android:layout_height="20sp"
-                        android:background="@drawable/inform_icon2"
-                        android:layout_marginRight="10dp"/>
-                    <Button
-                        android:id="@+id/informDelete"
-                        android:layout_width="42dp"
-                        android:layout_height="20sp"
-                        android:background="@drawable/inform_icon3"/>
-                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/informModify"
+                    android:layout_width="42dp"
+                    android:layout_height="20sp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/inform_icon2" />
+
+                <Button
+                    android:id="@+id/informDelete"
+                    android:layout_width="42dp"
+                    android:layout_height="20sp"
+                    android:background="@drawable/inform_icon3" />
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
+
+        <View
+            android:id="@+id/view21"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/divide" />
+
+        <View
+            android:id="@+id/view22"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divide2" />
+    </LinearLayout>
+</RelativeLayout>

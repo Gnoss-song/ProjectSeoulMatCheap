@@ -36,9 +36,6 @@ class INFORM_02_02 : AppCompatActivity() {
         binding = ActivityInform0202Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        recyclerView = findViewById(R.id.recyclerView2)
-        recyclerView.layoutManager =
-            LinearLayoutManager(this@INFORM_02_02, LinearLayoutManager.HORIZONTAL, false)
 
         binding.btnComplete.setOnClickListener {
             val mLogoutView =
@@ -129,7 +126,7 @@ class INFORM_02_02 : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-                            binding.scrollView.visibility = View.GONE
+                            //binding.scrollView.visibility = View.GONE
                         }
                     }
                 }

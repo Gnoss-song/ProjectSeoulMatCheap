@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.InformItem
 
@@ -24,7 +25,7 @@ class InformRecyclerViewAdapter(
         val informIV : ImageView = rowRoot.findViewById(R.id.informIV)
         val informDate : TextView = rowRoot.findViewById(R.id.informDate)
         val informName : TextView = rowRoot.findViewById(R.id.informName)
-        val informRatingBar : RatingBar = rowRoot.findViewById(R.id.informRatingBar)
+        val informRatingBar : ScaleRatingBar = rowRoot.findViewById(R.id.informRatingBar)
         val informImage : ImageView = rowRoot.findViewById(R.id.informImage)
         val informText : TextView = rowRoot.findViewById(R.id.informText)
     }

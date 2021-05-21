@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
 
 class INFORM_02_02_01 : AppCompatActivity() {
@@ -67,7 +68,7 @@ class INFORM_02_02_01 : AppCompatActivity() {
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            setTitle(R.string.review_title)
+            title = "리뷰수정"
         }
         ratingBar = findViewById(R.id.ratingBar)
         ratingscore = findViewById(R.id.ratingscore)

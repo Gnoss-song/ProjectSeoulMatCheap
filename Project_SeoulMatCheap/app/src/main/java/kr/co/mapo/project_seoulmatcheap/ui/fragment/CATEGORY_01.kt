@@ -59,12 +59,16 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
             }
         }
         binding.moveTV.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(owner)
             val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
             with(builder) {
-                setCancelable(true)
                 setView(balloonView)
-                show().window?.setBackgroundDrawable(null)
+                show().apply {
+                    window?.setBackgroundDrawable(null)
+                    balloonView.setOnClickListener {
+                        dismiss()
+                    }
+                }
             }
         }
     }

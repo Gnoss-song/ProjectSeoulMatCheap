@@ -495,7 +495,6 @@
                 android:id="@+id/midAdress"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/rectangle_bottom_corner_radius"
                 android:orientation="horizontal"
                 android:padding="3dp">
 

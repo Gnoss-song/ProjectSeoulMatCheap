@@ -8,7 +8,6 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
@@ -16,19 +15,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.MY0103Item
 import kr.co.mapo.project_seoulmatcheap.data.NotifyService
 import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0103Binding
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.My0103Adapter
 
 class MY_01_03 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0103Binding
@@ -89,7 +84,7 @@ class MY_01_03 : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    /*
+
     //어댑터
     inner class My0103Adapter(
         private val list: List<NotifyResponse.Data>
@@ -119,32 +114,6 @@ class MY_01_03 : AppCompatActivity() {
             override fun onClick(v: View) {
                 when (v.id) {
                     R.id.my_01_03_title -> {
-                        if (selectedItems[layoutPosition]) {
-                            selectedItems.delete(layoutPosition)
-                        } else {
-                            selectedItems.delete(prePosition)
-                            selectedItems.put(layoutPosition, true)
-                        }
-                        if (prePosition != -1) notifyItemChanged(prePosition)
-                        notifyItemChanged(layoutPosition)
-                        prePosition = layoutPosition
-                    }
-                    R.id.button_before -> {
-                        button_before.visibility = View.GONE
-                        button_after.visibility = View.VISIBLE
-                        if (selectedItems[layoutPosition]) {
-                            selectedItems.delete(layoutPosition)
-                        } else {
-                            selectedItems.delete(prePosition)
-                            selectedItems.put(layoutPosition, true)
-                        }
-                        if (prePosition != -1) notifyItemChanged(prePosition)
-                        notifyItemChanged(layoutPosition)
-                        prePosition = layoutPosition
-                    }
-                    R.id.button_after -> {
-                        button_before.visibility = View.VISIBLE
-                        button_after.visibility = View.GONE
                         if (selectedItems[layoutPosition]) {
                             selectedItems.delete(layoutPosition)
                         } else {
@@ -198,5 +167,5 @@ class MY_01_03 : AppCompatActivity() {
         }
 
     }
-     */
+
 }
