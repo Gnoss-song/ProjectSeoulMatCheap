@@ -27,6 +27,7 @@ class CATEGORY_01_01 : AppCompatActivity() {
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this!!.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            title = intent.getStringExtra("key")
         }
 
         tab_category.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
