@@ -1,15 +1,11 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.animation.ValueAnimator
-import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.naver.maps.map.e
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ItemMy0103Binding
@@ -53,17 +49,12 @@ class My0103Adapter (private val list: List<NotifyResponse.Data>) : RecyclerView
         //클릭시 공지사항 접고 피는 위치 저장
         fun onClick(v: View) {
             if (selectedItems[layoutPosition]) {    //클릭시 닫힌다 -> 이벤트 동작한 포지션의 아이템뷰가 selectedItems에 추가
-                Log.e("[코드해석]", "1, $prePosition")
                 selectedItems.delete(layoutPosition)
             } else {    //클릭시 펼쳐진다 -> 이벤트 동작한 포지션의 아이템뷰가 selectedItems에 추가
-                Log.e("[코드해석]", "2, $prePosition")
                 selectedItems.delete(prePosition)   //이전 포지션 아이템뷰 삭제
                 selectedItems.put(layoutPosition, true)
             }
-            if (prePosition != -1) {
-                Log.e("[코드해석]", "3, $prePosition")
-                notifyItemChanged(prePosition)
-            }
+            if (prePosition != -1) notifyItemChanged(prePosition)
             notifyItemChanged(layoutPosition)
             prePosition = layoutPosition
         }

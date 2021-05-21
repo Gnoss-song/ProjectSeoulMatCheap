@@ -96,7 +96,7 @@ class SeoulMatCheap : Application() {
         }
     }
 
-    //위도, 경도로부터 주소를 계산하는 함수
+    //위도, 경도로부터 주소를 계산하는 함수 : 인터넷문제
     private fun updateLocation(location: Location, context: Context) {
         this.location.value = location
         this.x = location.latitude
