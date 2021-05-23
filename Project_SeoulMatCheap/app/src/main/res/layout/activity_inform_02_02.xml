@@ -71,6 +71,7 @@
 
 
                 <FrameLayout
+                    android:id="@+id/imageselectlayout"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="8dp"
@@ -152,6 +153,9 @@
                     android:background="@null"
                     android:gravity="top|start"
                     android:hint="내용을 입력해주세요"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
                     android:inputType="textMultiLine"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
