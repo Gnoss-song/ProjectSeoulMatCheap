@@ -23,7 +23,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02_1
 
 private const val PERMISSION_REQUEST_CODE = 100
 
-class INFORM_02 : AppCompatActivity(), View.OnClickListener {
+class INFORM_02 : AppCompatActivity() {
 
     private lateinit var binding : ActivityInform02Binding
     private var isChecked = false
@@ -73,9 +73,11 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
                     }
                 })
             }
-            indicator.apply {
-                setViewPager2(binding.viewPager)
+            indicator.setViewPager2(binding.viewPager)
+            buttonWrite.setOnClickListener {
+                startActivity(Intent(this@INFORM_02, INFORM_02_02::class.java))
             }
+
         }
     }
 
@@ -117,13 +119,5 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
 
     override fun onPause() {
         super.onPause()
-    }
-
-    override fun onClick(v: View?) {
-        when(v?.id) {
-            R.id.button_write -> {
-                startActivity(Intent(this, INFORM_02_02::class.java))
-            }
-        }
     }
 }

@@ -167,6 +167,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -176,78 +177,75 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/divide">
+            android:background="@color/white">
 
-            <LinearLayout
-                android:id="@+id/linearLayout4"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:orientation="vertical"
+                android:paddingBottom="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/reviewRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/stickyLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/divide"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reviewRecyclerView">
 
-                <View
-                    android:id="@+id/view23"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@color/divide2" />
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_basic"
+                    android:layout_weight="1"
+                    app:dotsColor="@color/white"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="12dp"
+                    app:dotsSpacing="4dp"
+                    app:dotsWidthFactor="2.5"
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/main">
+
+                </com.tbuonomo.viewpagerdotsindicator.DotsIndicator>
+
+                <TextView
+                    android:id="@+id/button_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:drawableEnd="@drawable/ic_arrow"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/main"
+                    android:duplicateParentState="false"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="5dp"
+                    android:text="@string/review_further"
+                    android:textColor="@color/main"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/button_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:drawableEnd="@drawable/ic_arrow"
-                android:drawablePadding="10dp"
-                android:drawableTint="@color/main"
-                android:background="?attr/selectableItemBackground"
-                android:duplicateParentState="false"
-                android:includeFontPadding="false"
-                android:padding="5dp"
-                android:text="@string/review_further"
-                android:textColor="@color/main"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/viewPager"
-                app:layout_constraintEnd_toEndOf="@+id/viewPager"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                app:dotsColor="@color/white"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="12dp"
-                app:dotsSpacing="4dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                app:progressMode="false"
-                app:selectedDotColor="@color/main">
-
-            </com.tbuonomo.viewpagerdotsindicator.DotsIndicator>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:background="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/indicator">
+                app:layout_constraintTop_toBottomOf="@+id/stickyLayout">
 
             </androidx.viewpager2.widget.ViewPager2>
 
