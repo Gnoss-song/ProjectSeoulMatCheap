@@ -30,7 +30,6 @@ private const val NICKNAME = "nickname"
 
 interface MatCheapService {
 
-    @Headers("Content-Type: application/json")
     @POST("api/member")
     fun serviceLogin (
         @Body loginBody: LoginBody

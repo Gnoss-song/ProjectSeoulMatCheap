@@ -3,24 +3,18 @@ package kr.co.mapo.project_seoulmatcheap.system
 import android.Manifest
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
 import android.location.*
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
-import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
+import java.lang.Math.*
 import java.util.*
+import kotlin.math.pow
 
 
 /**
@@ -29,6 +23,8 @@ import java.util.*
  * @created 2021-04-06
  * @desc 어플리케이션 클래스 -공통변수, 공통함수, 로케이션
  */
+
+private const val r = 6372.8 * 1000
 
 class SeoulMatCheap : Application() {
 
@@ -115,4 +111,18 @@ class SeoulMatCheap : Application() {
         return address.adminArea === SEOUL
     }
 
+    //현재 위경도에서부터 떨어져 있는 거리 계산
+    fun calculateDistance(lat: Double, lng : Double) : String {
+        val a = 2 * asin(sqrt(sin(toRadians(lat - this.x) / 2).pow(2.0)
+                        + sin(toRadians(lng - this.y) / 2).pow(2.0) * cos(toRadians(this.x)) * cos(toRadians(lat))))
+        Log.e("[거리계산]", "${(r * a) / 1000}")
+        return String.format("%.1fkm", (r * a) / 1000)
+    }
+
+    fun calculateDistanceDou(lat: Double, lng : Double) : Double {
+        val a = 2 * asin(sqrt(sin(toRadians(lat - this.x) / 2).pow(2.0)
+                + sin(toRadians(lng - this.y) / 2).pow(2.0) * cos(toRadians(this.x)) * cos(toRadians(lat))))
+        Log.e("[거리계산]", "${(r * a) / 1000}")
+        return (r * a) / 1000
+    }
 }

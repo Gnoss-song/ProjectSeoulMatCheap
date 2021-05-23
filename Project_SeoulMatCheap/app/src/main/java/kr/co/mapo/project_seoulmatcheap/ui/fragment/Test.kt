@@ -944,7 +944,7 @@ data class StoreTest(
     val image : String,
     val address : String,
     val sort : String,
-    val distance : Double,
+    var distance : Double,
     val score : Double,
     val x : Double,
     val y : Double

@@ -18,7 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.MatCheapService
-import kr.co.mapo.project_seoulmatcheap.data.Member
 import kr.co.mapo.project_seoulmatcheap.data.NaverService
 import kr.co.mapo.project_seoulmatcheap.data.response.NaverLoginResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityLogin01Binding
@@ -27,9 +26,6 @@ import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-
 
 private const val TAG = "[Login]"
 
@@ -65,16 +61,18 @@ class LOGIN_01 : AppCompatActivity() {
     private fun setView() {
         with(binding) {
             loginTest.setOnClickListener {
-                loginService.serviceLogin(Member())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe ( {  //성공
-                        Log.e("[TEST]", it.toString())
-                        UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
-                        goNextActivity()
-                    },{ //실패
-                        Log.e("[TEST]", "서버요청 실패, $it")
-                    } )
+                UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+                goNextActivity()
+//                loginService.serviceLogin()
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe ( {  //성공
+//                        Log.e("[TEST]", it.toString())
+//                        UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+//                        goNextActivity()
+//                    },{ //실패
+//                        Log.e("[TEST]", "서버요청 실패, $it")
+//                    } )
             }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인

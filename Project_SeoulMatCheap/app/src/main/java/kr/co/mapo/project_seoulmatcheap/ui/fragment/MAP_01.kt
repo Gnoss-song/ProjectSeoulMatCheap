@@ -26,6 +26,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.MAP_01_01
+import java.io.Serializable
 import java.util.*
 
 
@@ -41,6 +42,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private lateinit var naverMap : NaverMap
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
     private lateinit var list : MutableList<StoreTest>
+    private lateinit var list2 : MutableList<StoreTest>
     private lateinit var filterDialog : MAP_01_02
 
     //infoWindow
@@ -99,6 +101,12 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         binding.include.storeBottomLayout.setOnClickListener {
             startActivity(Intent(owner, INFORM_02::class.java))
         }
+        list2 = list.apply {
+            forEach{
+                it.distance = SeoulMatCheap.getInstance().calculateDistanceDou(it.x, it.y)
+            }
+        }
+        list2.sortBy { it.distance }
     }
 
     //네이버지도 초기 설정
@@ -302,7 +310,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         binding.include.item = item
         with(binding.include) {
             Glide.with(owner).load(item.image).into(image)
-            distance.text = "${item.distance} km"
+            distance.text = SeoulMatCheap.getInstance().calculateDistance(item.x, item.y)
             score.text = item.score.toString()
         }
         storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -313,6 +321,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             R.id.button_list -> {
                 val intent = Intent(owner, MAP_01_01::class.java)
                 intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
+                intent.putExtra(LIST, list2 as Serializable)
                 startActivity(intent)
             }
             R.id.button_filter -> {

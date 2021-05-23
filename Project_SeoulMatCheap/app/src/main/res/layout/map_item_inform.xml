@@ -75,6 +75,9 @@
                     android:layout_marginBottom="3dp"
                     android:text="@{item.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
                     tools:text="업소 이름" />
 
                 <TextView
@@ -84,6 +87,7 @@
                     android:layout_marginBottom="3dp"
                     android:singleLine="true"
                     android:text="@{item.address}"
+                    android:textSize="12dp"
                     tools:text="주소" />
 
                 <LinearLayout
@@ -96,6 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{item.sort}"
+                        android:textSize="12dp"
                         tools:text="종류" />
 
                     <TextView
@@ -103,15 +108,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:text="0.0 km" />
+                        android:text="0.0 km"
+                        android:textSize="12dp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_starafter" />
 
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.0"
+                android:textColor="@color/black"
                 android:textSize="40sp" />
         </LinearLayout>
 
