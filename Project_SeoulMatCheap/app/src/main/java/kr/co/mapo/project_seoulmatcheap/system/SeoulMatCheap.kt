@@ -94,6 +94,7 @@ class SeoulMatCheap : Application() {
                     }
                 }
         }
+        //인터넷연결 불안정할시 로케이션 종료
     }
 
     //위도, 경도로부터 주소를 계산하는 함수 : 인터넷문제

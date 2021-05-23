@@ -14,12 +14,12 @@ class CATEGORY_01_01 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_01_01)
+        val CATEGORY_01_01_01 = CATEGORY_01_01_01()
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.frameLayout, CATEGORY_01_01_01()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.frameLayout, CATEGORY_01_01_01).commit()
         }
 
         var tab_category = findViewById<TabLayout>(R.id.tab_category)
-        val CATEGORY_01_01_01 = CATEGORY_01_01_01()
         val CATEGORY_01_02 = CATEGORY_01_02(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

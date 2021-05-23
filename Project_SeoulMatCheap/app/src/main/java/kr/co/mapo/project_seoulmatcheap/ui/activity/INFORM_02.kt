@@ -5,16 +5,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformViewPagerAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InfromReviewAdapter
+import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02_1
 
 private const val PERMISSION_REQUEST_CODE = 100
 
@@ -24,10 +29,10 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
     private var isChecked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.e("[테스트]", "테스트")
         super.onCreate(savedInstanceState)
         binding = ActivityInform02Binding.inflate(layoutInflater)
         setContentView(binding.root)
-
         init()
     }
 
@@ -42,30 +47,34 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setView() {
+        val viewPagerAdapter = InformViewPagerAdapter(this@INFORM_02)
         with(binding) {
             reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
                 adapter = InfromReviewAdapter()
             }
-            //좋아요버튼
-//            buttonLike.setOnClickListener {
-//            }
-            //전화걸기
-            buttonCall.setOnClickListener {
-                if (ActivityCompat.checkSelfPermission(this@INFORM_02, Manifest.permission.CALL_PHONE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this@INFORM_02,
-                        arrayOf(Manifest.permission.CALL_PHONE), PERMISSION_REQUEST_CODE)
+            buttonReview.setOnClickListener {
+                if(viewPager.currentItem == 0) {    //리뷰더보기
+                    buttonReview.text = resources.getString(R.string.review_fold)
+                    viewPager.currentItem = 1
                 } else {
-                    startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:1588-3468")))
+                    buttonReview.text = resources.getString(R.string.review_further)
+                    viewPager.currentItem = 0
                 }
             }
-            //길찾기
-            buttonNavi.setOnClickListener {
+            viewPager.apply {
+                adapter = viewPagerAdapter
+                currentItem = 0
+                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        buttonReview.text = if(position == 0) resources.getString(R.string.review_further)
+                                            else resources.getString(R.string.review_fold)
+                    }
+                })
             }
-            buttonWrite.setOnClickListener(this@INFORM_02)
-            buttonReview.setOnClickListener {
-                startActivity(Intent(this@INFORM_02, INFORM_02_01::class.java))
+            indicator.apply {
+                setViewPager2(binding.viewPager)
             }
         }
     }

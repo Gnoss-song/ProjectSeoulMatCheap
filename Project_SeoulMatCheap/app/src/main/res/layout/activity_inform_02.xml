@@ -78,6 +78,16 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageView
+                        android:id="@+id/star2"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                        app:layout_constraintEnd_toStartOf="@+id/textView18"
+                        app:layout_constraintTop_toTopOf="@+id/textView18"
+                        app:srcCompat="@drawable/ic_starafter" />
+
                     <include
                         android:id="@+id/include3"
                         layout="@layout/map_item_infowindow"
@@ -183,30 +193,63 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <Button
-                    android:id="@+id/button_review"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginEnd="@dimen/margin_basic"
-                    android:background="@null"
-                    android:text="@string/review_further"
-                    android:textColor="@color/main"
-                    android:textStyle="bold"
-                    app:icon="@drawable/ic_arrow"
-                    app:iconGravity="end"
-                    app:iconSize="@dimen/inform_review_icon" />
+                <View
+                    android:id="@+id/view23"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/divide2" />
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/button_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_arrow"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/main"
+                android:background="?attr/selectableItemBackground"
+                android:duplicateParentState="false"
+                android:includeFontPadding="false"
+                android:padding="5dp"
+                android:text="@string/review_further"
+                android:textColor="@color/main"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/viewPager"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                app:dotsColor="@color/white"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="12dp"
+                app:dotsSpacing="4dp"
+                app:dotsWidthFactor="2.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:progressMode="false"
+                app:selectedDotColor="@color/main">
+
+            </com.tbuonomo.viewpagerdotsindicator.DotsIndicator>
+
             <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                app:layout_constraintTop_toBottomOf="@+id/indicator">
+
+            </androidx.viewpager2.widget.ViewPager2>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

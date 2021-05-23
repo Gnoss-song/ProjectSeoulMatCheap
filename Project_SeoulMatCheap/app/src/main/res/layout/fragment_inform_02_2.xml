@@ -7,14 +7,21 @@
     tools:context=".ui.fragment.INFORM_02_2">
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/text_reviewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_basic"
         android:layout_marginTop="@dimen/margin_basic"
         android:layout_marginEnd="@dimen/margin_basic"
-        android:text="사용자 리뷰"
+        android:text="사용자 리뷰(5)"
         android:textColor="@color/black"
         android:textSize="@dimen/text_filter_title"
         android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_review"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp" />
+
 </LinearLayout>
