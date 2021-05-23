@@ -40,7 +40,8 @@
                     android:ellipsize="end"
                     android:inputType="textMultiLine"
                     android:maxLines="3"
-                    android:text="정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다" />
+                    android:text="정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다정말 맛있네요~!  다음에 또 먹으로 가겠슴다"
+                    android:textColor="@color/black" />
 
                 <RatingBar
                     android:id="@+id/ratingBar2"

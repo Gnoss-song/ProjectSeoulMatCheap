@@ -43,7 +43,7 @@
                 android:lineSpacingExtra="1sp"
                 android:text="업소 이름"
                 android:textColor="#1a1311"
-                android:textSize="16sp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -54,6 +54,7 @@
                 android:lineSpacingExtra="8sp"
                 android:singleLine="true"
                 android:text="주소"
+                android:textColor="@color/dot_edge"
                 android:textSize="@dimen/marketinfo_text"
                 android:textStyle="normal" />
 
@@ -67,6 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="종류"
+                    android:textColor="@color/dot_edge"
                     android:textSize="@dimen/marketinfo_text"
                     android:textStyle="normal" />
 
@@ -76,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="0.0 km"
+                    android:textColor="@color/dot_edge"
                     android:textSize="@dimen/marketinfo_text"
                     android:textStyle="normal" />
             </LinearLayout>

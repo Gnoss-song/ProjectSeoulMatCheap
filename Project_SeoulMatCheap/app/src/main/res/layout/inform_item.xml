@@ -76,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2021-05-10"
+                android:textColor="@color/dot_edge"
                 android:textSize="11sp" />
 
         </LinearLayout>
@@ -118,7 +119,8 @@
                 android:layout_marginStart="@dimen/margin_basic"
                 android:layout_marginEnd="@dimen/margin_basic"
                 android:layout_marginBottom="@dimen/margin_basic"
-                android:text="가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가" />
+                android:text="가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/informText2"

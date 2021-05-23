@@ -7,6 +7,8 @@ package kr.co.mapo.project_seoulmatcheap.system
  * @desc const val 모음
  */
 
+const val APP_NAME = "서울맛칩"
+
 //업종
 const val SORT_HANSIK = "한식"
 const val SORT_CHINA = "중식"

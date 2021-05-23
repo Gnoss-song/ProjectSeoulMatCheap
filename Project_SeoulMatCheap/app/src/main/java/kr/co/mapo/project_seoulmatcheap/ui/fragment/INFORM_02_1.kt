@@ -1,19 +1,37 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.mapo.project_seoulmatcheap.R
+import androidx.fragment.app.Fragment
+import kr.co.mapo.project_seoulmatcheap.databinding.FragmentInform021Binding
+
 
 class INFORM_02_1 : Fragment() {
+
+    lateinit var binding : FragmentInform021Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inform_02_1, container, false)
+        binding = FragmentInform021Binding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding) {
+            buttonCall.setOnClickListener {
+                val tt = Intent(Intent.ACTION_DIAL, Uri.parse("tel:01077777777"))
+                startActivity(tt)
+            }
+            buttonNavi.setOnClickListener {
+
+            }
+        }
     }
 }

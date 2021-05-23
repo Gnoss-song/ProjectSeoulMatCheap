@@ -14,7 +14,11 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.MatCheapService
+import kr.co.mapo.project_seoulmatcheap.data.Member
 import kr.co.mapo.project_seoulmatcheap.data.NaverService
 import kr.co.mapo.project_seoulmatcheap.data.response.NaverLoginResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityLogin01Binding
@@ -33,6 +37,7 @@ class LOGIN_01 : AppCompatActivity() {
 
     private val binding by lazy { ActivityLogin01Binding.inflate(layoutInflater) }
     private lateinit var mOAuthLoginModule : OAuthLogin
+    private lateinit var loginService : MatCheapService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,15 +58,23 @@ class LOGIN_01 : AppCompatActivity() {
             getString(R.string.OAUTH_CLIENT_SECRET),
             getString(R.string.OAUTH_CLIENT_NAME)
         )
+        loginService = MatCheapService.invoke(this)
         setView()
     }
 
     private fun setView() {
         with(binding) {
             loginTest.setOnClickListener {
-                Toast.makeText(this@LOGIN_01, "로그인 세션 테스트", Toast.LENGTH_SHORT).show()
-                UserPrefs.saveUserEmail(this@LOGIN_01, "이메일 주소 저장", code = -1)
-                goNextActivity()
+                loginService.serviceLogin(Member())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe ( {  //성공
+                        Log.e("[TEST]", it.toString())
+                        UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+                        goNextActivity()
+                    },{ //실패
+                        Log.e("[TEST]", "서버요청 실패, $it")
+                    } )
             }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인

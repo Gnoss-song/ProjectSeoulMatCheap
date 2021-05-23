@@ -11,11 +11,13 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.get
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
+import kr.co.mapo.project_seoulmatcheap.system.APP_NAME
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformViewPagerAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InfromReviewAdapter
@@ -26,10 +28,10 @@ private const val PERMISSION_REQUEST_CODE = 100
 class INFORM_02 : AppCompatActivity() {
 
     private lateinit var binding : ActivityInform02Binding
-    private var isChecked = false
+    private var isLiked = false     //찜표시 저장 Boolean 변수
+    private var isLiked_f = false   //초반 찜 Boolean값 저장
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.e("[테스트]", "테스트")
         super.onCreate(savedInstanceState)
         binding = ActivityInform02Binding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -83,13 +85,24 @@ class INFORM_02 : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_inform_detail, menu)
+        menu?.get(0)?.icon = getDrawable(
+            if(isLiked) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 finish()
+                true
+            }
+            R.id.like -> {
+                if(isLiked) {   //찜이 눌린상태 : 찜 취소하기
+                    item.icon = getDrawable(R.drawable.ic_favorite_off)
+                    isLiked = false
+                } else { //찜이 눌리지 않은 상태 : 찜하기
+                    item.icon = getDrawable(R.drawable.ic_favorite_on)
+                    isLiked = true
+                }
                 true
             }
             R.id.share -> {
@@ -97,11 +110,15 @@ class INFORM_02 : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
                 intent.putExtra(Intent.EXTRA_TEXT, "공유할 내용")
-                startActivity(Intent.createChooser(intent, "System UI에 표시할 문구"))
+                startActivity(Intent.createChooser(intent, APP_NAME))
                 true
             }
             else -> false
         }
+    }
+
+    private fun createShareForm() {
+
     }
 
     override fun onRequestPermissionsResult(
@@ -119,5 +136,8 @@ class INFORM_02 : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        if(isLiked_f != isLiked) {  //찜 상태가 변함 -> 서버에 저장
+            Log.e("[TEST]", "실행")
+        }
     }
 }
