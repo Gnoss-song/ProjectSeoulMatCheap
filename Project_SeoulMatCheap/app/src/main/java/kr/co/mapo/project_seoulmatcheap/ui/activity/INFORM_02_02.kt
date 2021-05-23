@@ -5,25 +5,24 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.View.OnTouchListener
+import android.view.View
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
 
-
 class INFORM_02_02 : AppCompatActivity() {
-
     //    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityInform0202Binding
     private val OPEN_GALLERY = 1
@@ -34,20 +33,13 @@ class INFORM_02_02 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
         super.onCreate(savedInstanceState)
         binding = ActivityInform0202Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-<<<<<<< Updated upstream
-        recyclerView = findViewById(R.id.recyclerView2)
-        recyclerView.layoutManager =
-            LinearLayoutManager(this@INFORM_02_02, LinearLayoutManager.HORIZONTAL, false)
-=======
         // 다중 선택시 리사이클러뷰 코드.
 //        recyclerView = findViewById(R.id.recyclerview2)
 //        recyclerView.layoutManager = LinearLayoutManager(this@INFORM_02_02,LinearLayoutManager.HORIZONTAL,false)
->>>>>>> Stashed changes
 
         binding.btnComplete.setOnClickListener {
             val mLogoutView =
@@ -61,7 +53,7 @@ class INFORM_02_02 : AppCompatActivity() {
 
 
             okButton.setOnClickListener {
-                Toast.makeText(this, "리뷰 쓰기 성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "리뷰 작성 성공", Toast.LENGTH_SHORT).show()
 
                 //화면이동 INFORM_02_01로. 가게이름의 정보를 가진채로.
 
@@ -84,19 +76,12 @@ class INFORM_02_02 : AppCompatActivity() {
             str = rating.toString()
             ratingscore.text = str
         })
+
         binding.imageselectlayout.setOnClickListener {
             openGallery()
         }
 
-//        binding.textView.setOnTouchListener { v, event ->
-//            if (event.action == MotionEvent.ACTION_DOWN) {
-//                binding.nestedScrollView.requestDisallowInterceptTouchEvent(true)
-//            } else {
-//
-//            }
-//            return false
-//        }
-        binding.textView.setOnTouchListener(OnTouchListener { v, event ->
+        binding.textView.setOnTouchListener(View.OnTouchListener { v, event ->
             if (binding.textView.hasFocus()) {
                 v.parent.requestDisallowInterceptTouchEvent(true)
                 when (event.action and MotionEvent.ACTION_MASK) {
@@ -108,37 +93,9 @@ class INFORM_02_02 : AppCompatActivity() {
             }
             false
         })
-
-<<<<<<< Updated upstream
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-            val list = mutableListOf<Uri>().apply {
-                if (requestCode == OPEN_GALLERY) {
-                    if (data?.clipData == null) {
-                        if (data != null) {
-                            this.add(Uri.parse(data.dataString))
-                        }
-                    } else {
-                        for (i in 0 until data.clipData!!.itemCount) {
-                            this.add(data.clipData!!.getItemAt(i).uri)
-                            if (data.clipData!!.itemCount > 3) {
-                                Toast.makeText(
-                                    applicationContext,
-                                    "사진은 최대 3개까지 가능합니다.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            binding.scrollView.visibility = View.GONE
-                        }
-                    }
-                }
-=======
-
-
-
     }
 
-    private fun openGallery() {
+    private fun openGallery(){
         val writePermission =
             ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val readPermission =
@@ -156,12 +113,10 @@ class INFORM_02_02 : AppCompatActivity() {
         } else { // 권한 있음
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "image/*"
->>>>>>> Stashed changes
             }
             startActivityForResult(intent, OPEN_GALLERY)
         }
     }
-
 
     // 다중 선택시.
 //        fun openGallary() {
@@ -203,23 +158,22 @@ class INFORM_02_02 : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == OPEN_GALLERY) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == OPEN_GALLERY){
 
-                var currentImageUrl: Uri? = data?.data
+                var currentImageUrl : Uri? = data?.data
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, currentImageUrl)
+                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,currentImageUrl)
                     binding.imageView18.setImageBitmap(bitmap)
-                } catch (e: Exception) {
+                }catch (e:Exception){
                     e.printStackTrace()
                 }
             }
-        } else {
-            Log.d("ActivityResult", "something wrong")
+        }else{
+            Log.d("ActivityResult","something wrong")
         }
     }
 
-}
     // 다중으로 선택시
 //        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //            super.onActivityResult(requestCode, resultCode, data)
@@ -276,6 +230,6 @@ class INFORM_02_02 : AppCompatActivity() {
 //
 //
 //        }
-//    }
+}
 
 

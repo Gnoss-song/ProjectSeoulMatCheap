@@ -67,7 +67,7 @@ class INFORM_02_02_01 : AppCompatActivity() {
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            setTitle(R.string.review_title)
+            setTitle(R.string.review_title_modify)
         }
         ratingBar = findViewById(R.id.ratingBar)
         ratingscore = findViewById(R.id.ratingscore)

@@ -12,25 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/main"
-<<<<<<< Updated upstream
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:textColor="@color/white_93"
-            android:textSize="@dimen/margin_basic2">
-
-        </TextView>
-
-    </androidx.appcompat.widget.Toolbar>
-=======
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
->>>>>>> Stashed changes
 
     <Button
         android:id="@+id/btn_complete"
@@ -45,7 +29,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -87,13 +70,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout_editor_absoluteX="1dp"
-                    tools:layout_editor_absoluteY="31dp" />
-
                 <FrameLayout
                     android:id="@+id/imageselectlayout"
                     android:layout_width="match_parent"
@@ -112,8 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:scaleType="fitXY"
-                        android:visibility="visible"
-                        app:srcCompat="@drawable/reviewic" />
+                        app:srcCompat="@drawable/solip" />
 
                     <ImageView
                         android:id="@+id/imageView19"
@@ -168,8 +143,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-
-
                 <EditText
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
@@ -180,20 +153,17 @@
                     android:background="@null"
                     android:gravity="top|start"
                     android:hint="내용을 입력해주세요"
-                    android:inputType="textMultiLine"
-
                     android:overScrollMode="always"
                     android:scrollbarStyle="insideInset"
-
-                    android:maxLines="15"
                     android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
                     android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/view6">
 
                     <requestFocus />
                 </EditText>
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
