@@ -36,7 +36,6 @@
         android:background="#00ff0000"
         android:text="완료"
         android:textColor="@color/white"
-<<<<<<< Updated upstream
         android:textSize="@dimen/margin_basic" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +46,6 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
-=======
         android:textSize="@dimen/margin_basic"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +62,6 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
->>>>>>> Stashed changes
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
@@ -96,7 +93,6 @@
 <<<<<<< Updated upstream
                 <View
                     android:id="@+id/view2"
-=======
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview2"
                     android:layout_width="match_parent"
