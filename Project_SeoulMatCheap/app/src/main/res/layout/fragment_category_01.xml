@@ -491,6 +491,12 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:id="@+id/view25"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divide" />
+
             <LinearLayout
                 android:id="@+id/midAdress"
                 android:layout_width="match_parent"

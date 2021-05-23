@@ -52,7 +52,7 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
         view = MapItemInfowindowBinding.inflate(layoutInflater)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
-        list = Test().addData100()
+        list = Test().addData900()
         mapFragment.getMapAsync(this)
     }
 
