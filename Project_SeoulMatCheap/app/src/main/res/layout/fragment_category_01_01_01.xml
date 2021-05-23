@@ -1,181 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.CATEGORY_01_01_01">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <data>
+        <variable
+            name="category"
+            type="kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01_01_01" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.CATEGORY_01_01_01">
 
-        <HorizontalScrollView
-            android:id="@+id/category_scrollview"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <HorizontalScrollView
+                android:id="@+id/category_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/category_ALL"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@color/main"
+                        android:gravity="center"
+                        android:text="@string/category_all"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_KOR"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category1"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_JAP"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category2"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_CHI"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category3"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_ANDF"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category4"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_LAU"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category5"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_BEA"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category6"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_LOD"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category7"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+
+                    <TextView
+                        android:id="@+id/category_ANDS"
+                        android:layout_width="60dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="@dimen/margin_basic4"
+                        android:background="@drawable/button_back"
+                        android:gravity="center"
+                        android:text="@string/category8"
+                        android:textColor="@color/main"
+                        android:textSize="12sp"
+                        android:onClick="@{category::menuClick}"
+                        app:backgroundTint="@null" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/category_sort"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_below="@+id/category_scrollview"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/category_ALL"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@color/main"
-                    android:gravity="center"
-                    android:text="@string/category_all"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
+                    android:id="@+id/category_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_basic"
+                    android:layout_weight="1"
+                    android:text="평점순"
+                    android:textColor="@color/main"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/category_KOR"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category1"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
+                    android:id="@+id/category_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_basic"
+                    android:layout_weight="1"
+                    android:text="거리순"
+                    android:textColor="@color/dot_edge" />
 
-                <TextView
-                    android:id="@+id/category_JAP"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category2"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_CHI"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category3"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_ANDF"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category4"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_LAU"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category5"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_BEA"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category6"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_LOD"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category7"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
-
-                <TextView
-                    android:id="@+id/category_ANDS"
-                    android:layout_width="60dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="@dimen/margin_basic4"
-                    android:background="@drawable/button_back"
-                    android:gravity="center"
-                    android:text="@string/category8"
-                    android:textColor="@color/main"
-                    android:textSize="12sp"
-                    app:backgroundTint="@null" />
             </LinearLayout>
-        </HorizontalScrollView>
 
-        <LinearLayout
-            android:id="@+id/category_sort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/category_scrollview"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/category_score"
+            <View
+                android:id="@+id/view8"
                 android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_below="@id/category_sort"
+                android:layout_marginBottom="@dimen/margin_height"
+                android:background="@color/divide" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categoryRV"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_basic"
-                android:layout_weight="1"
-                android:text="평점순"
-                android:textColor="@color/main"
-                android:textStyle="bold" />
+                android:layout_below="@id/view8" />
 
-            <TextView
-                android:id="@+id/category_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_basic"
-                android:layout_weight="1"
-                android:text="거리순"
-                android:textColor="@color/dot_edge" />
+        </RelativeLayout>
 
-        </LinearLayout>
-
-        <View
-            android:id="@+id/view8"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_below="@id/category_sort"
-            android:layout_marginBottom="@dimen/margin_height"
-            android:background="@color/divide" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categoryRV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view8" />
-
-    </RelativeLayout>
-
-</FrameLayout>
+    </FrameLayout>
+</layout>

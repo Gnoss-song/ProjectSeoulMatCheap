@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
@@ -15,7 +17,8 @@ import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 class CATEGORY_01_01_01 : Fragment() {
     private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentCategory010101Binding.inflate(layoutInflater)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)
+        binding.category = this
         return binding.root
     }
 
@@ -53,6 +56,55 @@ class CATEGORY_01_01_01 : Fragment() {
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
                 }
+            }
+        }
+    }
+
+    fun menuClick(v:View) {
+        val button = v as TextView
+        inintiateButton()
+        with(button) {
+            setBackgroundColor(resources.getColor(R.color.main, null))
+            setTextColor(resources.getColor(R.color.white, null))
+        }
+    }
+    private fun inintiateButton() {
+        with(binding) {
+            categoryALL.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryKOR.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryJAP.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryCHI.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryANDF.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryLAU.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryBEA.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryLOD.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
+            }
+            categoryANDS.apply {
+                setBackgroundResource(R.drawable.button_back)
+                setTextColor(resources.getColor(R.color.main, null))
             }
         }
     }
