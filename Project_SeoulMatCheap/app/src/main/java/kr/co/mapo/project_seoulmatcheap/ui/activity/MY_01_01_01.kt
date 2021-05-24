@@ -151,36 +151,34 @@ class MY_01_01_01 : AppCompatActivity() {
         private var checkboxStatus = SparseBooleanArray()
 
         inner class ViewHolderClass(private val binding : Inform0101Binding) : RecyclerView.ViewHolder(binding.root) {
-            val marketIV: ImageView = itemView.findViewById(R.id.marketIV)
-            val name: TextView = itemView.findViewById(R.id.name)
-            val address: TextView = itemView.findViewById(R.id.address)
-            val distance: TextView = itemView.findViewById(R.id.distance)
-            val score: TextView = itemView.findViewById(R.id.score)
-            val sort: TextView = itemView.findViewById(R.id.sort)
-            fun bind(itemList:Item) = with(binding){
-                checkboxUser.isChecked = checkboxStatus[adapterPosition]
-                checkboxUser.setOnClickListener {
-                    if (!checkboxUser.isChecked)
-                        checkboxStatus.put(adapterPosition, false)
-                    else
-                        checkboxStatus.put(adapterPosition, true)
-                    notifyItemChanged(adapterPosition)
+            fun bind(itemData : Item) {
+                Log.e("[어댑터 포지션]", "$adapterPosition")
+                with(binding){
+                    marketIV.setImageResource(itemData.marketIV)
+                    name.text = itemData.name
+                    address.text = itemData.address
+                    distance.text = itemData.distance
+                    score.text = itemData.score
+                    sort.text = itemData.sort
+                    checkboxUser.apply {
+                        isChecked = checkboxStatus[adapterPosition]    //체크할 때마다 함수 실행되어 추가됨
+                        Log.e("[checkboxStatus]", "$checkboxStatus")
+                        checkboxUser.setOnClickListener {
+                            if (!checkboxUser.isChecked)
+                                checkboxStatus.put(adapterPosition, false)
+                            else
+                                checkboxStatus.put(adapterPosition, true)
+                            notifyItemChanged(adapterPosition)
+                        }
+                    }
                 }
             }
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolderClass
                 = ViewHolderClass(Inform0101Binding.inflate(LayoutInflater.from(parent.context), parent, false))
+
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
-            val itemData = itemList[position]
-            with(holder){
-                marketIV.setImageResource(itemData.marketIV)
-                name.text = itemData.name
-                address.text = itemData.address
-                distance.text = itemData.distance
-                score.text = itemData.score
-                sort.text = itemData.sort
-                bind(itemList[position])
-            }
+            holder.bind(itemList[position])
         }
         override fun getItemCount() = itemList.size
 
