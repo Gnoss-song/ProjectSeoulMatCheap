@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -58,17 +59,22 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                 true
             }
         }
-        binding.moveTV.setOnClickListener {
-            val builder = AlertDialog.Builder(owner)
-            val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
-            with(builder) {
-                setView(balloonView)
-                show().apply {
-                    window?.setBackgroundDrawable(null)
-                    balloonView.setOnClickListener {
-                        dismiss()
+        binding.apply {
+            moveTV.setOnClickListener {
+                val builder = AlertDialog.Builder(owner)
+                val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
+                with(builder) {
+                    setView(balloonView)
+                    show().apply {
+                        window?.setBackgroundDrawable(null)
+                        balloonView.setOnClickListener {
+                            dismiss()
+                        }
                     }
                 }
+            }
+            categoryLocationIV.setOnClickListener {
+                Toast.makeText(context, "현재위치를 가져오는 중입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }

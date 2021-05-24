@@ -40,6 +40,7 @@ class GridRecyclerViewAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView?.context, CATEGORY_01_01::class.java)
+            intent.putExtra("key",holder.gridTV.text.toString().trim())
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
