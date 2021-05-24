@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="kr.co.mapo.project_seoulmatcheap.ui.fragment.StoreTest" />
+            type="kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity" />
 
     </data>
 
@@ -99,7 +99,7 @@
                         android:id="@+id/sort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{item.sort}"
+                        android:text="@{item.category}"
                         android:textSize="12dp"
                         tools:text="종류" />
 

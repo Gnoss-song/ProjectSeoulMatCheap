@@ -2,29 +2,22 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.LoginBody
 import kr.co.mapo.project_seoulmatcheap.data.MatCheapService
 import kr.co.mapo.project_seoulmatcheap.data.NaverService
 import kr.co.mapo.project_seoulmatcheap.data.response.NaverLoginResponse
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityLogin01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,35 +56,10 @@ class LOGIN_01 : AppCompatActivity() {
     private fun setView() {
         with(binding) {
             loginTest.setOnClickListener {
-                /**
-                 * data class LoginBody (
-                var email: String = "", // string
-                var level: Int = 0, // 0
-                var memberId: Int = 0, // 0
-                var memberModifier: String = "", // string
-                var memberWriter: String = "", // string
-                var modifyDate: String = "", // 2021-05-23T12:55:09.396Z
-                var nickname: String = "", // string
-                var point: Int = 0, // 0
-                var profileUrl: String = "", // string
-                var registerDate: String = "" // 2021-05-23T12:55:09.396Z
-                )
-                 * */
-                val jsonObject = JSONObject()
-                jsonObject.put("email", "insoo05")
-                jsonObject.put("level", 5)
-                jsonObject.put("memberModifier", "sun")
-                jsonObject.put("memberWriter", "sun")
-                //jsonObject.put("modifyDate", "2021-05-23T12:55:09.396Z")
-                jsonObject.put("nickname", "sunmi")
-                jsonObject.put("point", 10)
-                jsonObject.put("profileUrl", "profile")
-                //jsonObject.put("registerDate", "2021-05-23T12:55:09.396Z")
-//                UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
-//                goNextActivity()
-
-                Log.e("[TEST;]", jsonObject.toString())
-                loginService.serviceLogin(jsonObject.toString())
+                UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+                goNextActivity()
+                /*
+                loginService.serviceLogin(LoginBody(email = "sunmisunmi"))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe ( {  //성공
@@ -101,6 +69,8 @@ class LOGIN_01 : AppCompatActivity() {
                     },{ //실패
                         Log.e("[TEST]", "서버요청 실패, $it")
                     } )
+
+                 */
 
             }
             kakaoLogin.setOnClickListener {

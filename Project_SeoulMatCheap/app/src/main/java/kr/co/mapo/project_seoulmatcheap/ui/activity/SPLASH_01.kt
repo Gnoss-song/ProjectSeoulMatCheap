@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivitySplash01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 
@@ -115,9 +116,14 @@ class SPLASH_01 : AppCompatActivity() {
     }
 
     private fun goMainActivity() {
-        val intent = Intent(this@SPLASH_01, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        val app = AppDatabase(this)
+        if(app != null) with(app) {
+            this!!.loadStore(this@SPLASH_01)
+            loadMenu(this@SPLASH_01)
+            val intent = Intent(this@SPLASH_01, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onDestroy() {

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch01Binding
 import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
 import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
@@ -44,18 +45,21 @@ open class SEARCH_01(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentSearch01Binding.inflate(inflater, container, false)
+        init()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
     }
 
     private fun init() {
         preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
-        val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
-        filterAdapter = AutoCompleteAdapter(test, owner)
+        AppDatabase(owner)!!.storeDAO().getAutoComplete().observe(
+            viewLifecycleOwner, {
+                filterAdapter = AutoCompleteAdapter(it, owner)
+            }
+        )
         searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
         setView()
     }

@@ -10,6 +10,7 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 
 private const val SPLASH_DELAY = 500L
