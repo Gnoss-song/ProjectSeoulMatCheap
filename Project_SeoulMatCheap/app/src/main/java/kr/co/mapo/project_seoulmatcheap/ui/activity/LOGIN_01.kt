@@ -87,20 +87,20 @@ class LOGIN_01 : AppCompatActivity() {
                 jsonObject.put("point", 10)
                 jsonObject.put("profileUrl", "profile")
                 //jsonObject.put("registerDate", "2021-05-23T12:55:09.396Z")
-//                UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
-//                goNextActivity()
+                UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+                goNextActivity()
 
-                Log.e("[TEST;]", jsonObject.toString())
-                loginService.serviceLogin(jsonObject.toString())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe ( {  //성공
-                        Log.e("[TEST]", it.toString())
-                        UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
-                        goNextActivity()
-                    },{ //실패
-                        Log.e("[TEST]", "서버요청 실패, $it")
-                    } )
+//                Log.e("[TEST;]", jsonObject.toString())
+//                loginService.serviceLogin(jsonObject.toString())
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe ( {  //성공
+//                        Log.e("[TEST]", it.toString())
+//                        UserPrefs.saveUserEmail(this@LOGIN_01, "test", code = -1)
+//                        goNextActivity()
+//                    },{ //실패
+//                        Log.e("[TEST]", "서버요청 실패, $it")
+//                    } )
 
             }
             kakaoLogin.setOnClickListener {
