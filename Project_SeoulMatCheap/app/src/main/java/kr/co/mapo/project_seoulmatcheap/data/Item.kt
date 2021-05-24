@@ -13,5 +13,6 @@ data class Item(val marketIV:Int,
                 var address: String = "",
                 var sort: String ="",
                 var distance : String = "",
-                var score : String = ""
-                )
+                var score : String = "",
+                var checked: Boolean = false
+)
