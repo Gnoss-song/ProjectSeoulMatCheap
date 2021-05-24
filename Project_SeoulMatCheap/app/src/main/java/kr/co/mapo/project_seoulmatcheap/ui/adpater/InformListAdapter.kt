@@ -1,8 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.content.Context
-import android.media.Image
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
 
 /**
  * Created by SANDY on 2021-04-20
  */
 class InformListAdapter(
-    private val list: List<Test>)
-    : RecyclerView.Adapter<InformListAdapter.HolderView>() {
+    private val list: ArrayList<Test>,
+    private val context: Context ) : RecyclerView.Adapter<InformListAdapter.HolderView>() {
 
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -50,5 +50,8 @@ class InformListAdapter(
 
     override fun onBindViewHolder(holder: HolderView, position: Int) {
         holder.setData(list[position])
+        holder.itemView.setOnClickListener {
+            context.startActivity(Intent(context, INFORM_02::class.java))
+        }
     }
 }

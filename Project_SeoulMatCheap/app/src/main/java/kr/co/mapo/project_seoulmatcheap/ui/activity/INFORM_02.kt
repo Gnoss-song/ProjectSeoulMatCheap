@@ -43,13 +43,13 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
 
     private fun setView() {
         with(binding) {
-            recyclerView.apply {
+            reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
                 adapter = InfromReviewAdapter()
             }
             //좋아요버튼
-            buttonLike.setOnClickListener {
-            }
+//            buttonLike.setOnClickListener {
+//            }
             //전화걸기
             buttonCall.setOnClickListener {
                 if (ActivityCompat.checkSelfPermission(this@INFORM_02, Manifest.permission.CALL_PHONE)
@@ -62,10 +62,11 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
             }
             //길찾기
             buttonNavi.setOnClickListener {
-
             }
             buttonWrite.setOnClickListener(this@INFORM_02)
-
+            buttonReview.setOnClickListener {
+                startActivity(Intent(this@INFORM_02, INFORM_02_01::class.java))
+            }
         }
     }
 
@@ -112,7 +113,7 @@ class INFORM_02 : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.button_write -> {
-                startActivity(Intent(this, INFORM_02_02_01::class.java))
+                startActivity(Intent(this, INFORM_02_02::class.java))
             }
         }
     }

@@ -1,128 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="notify"
+            type="kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse.Data" />
+
+        <variable
+            name="holderView"
+            type="kr.co.mapo.project_seoulmatcheap.ui.adpater.My0103Adapter.ViewHolderClass" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_basic"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/my_01_03_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@{notify.modifyDate}"
+                android:textColor="#1a1311"
+                android:textSize="12dp"
+                app:layout_constraintStart_toEndOf="@+id/view7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="2dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/divide2"
+                app:layout_constraintStart_toEndOf="@+id/my_01_03_date"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/my_01_03_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{notify.modifyDate}"
+                android:textColor="#1a1311"
+
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/my_01_03_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{holderView::onClick}"
+                android:singleLine="true"
+                android:text="@{notify.noticeTitle}"
+                android:textColor="#1a1311"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/button_before"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_01_03_date" />
+
+            <ImageView
+                android:id="@+id/button_before"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{holderView::onClick}"
+                app:layout_constraintBottom_toTopOf="@+id/my_01_03_content"
+                app:layout_constraintEnd_toEndOf="@+id/view3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_backarrow" />
+
+            <ImageView
+                android:id="@+id/button_after"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="16dp"
+                android:rotation="90"
+                android:visibility="gone"
+                android:onClick="@{holderView::onClick}"
+                app:layout_constraintBottom_toTopOf="@+id/my_01_03_content"
+                app:layout_constraintEnd_toEndOf="@+id/view3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_backarrow" />
+
+            <View
+                android:id="@+id/view3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/divide2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_01_03_title" />
 
-                <TextView
-                    android:id="@+id/my_01_03_sort"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="안내"
-                    android:textSize="18dp"
-                    android:textColor="#1a1311"
-                    app:layout_constraintStart_toEndOf="@+id/view7"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/my_01_03_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#CCFAFAFA"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="12dp"
+                android:text="@{notify.noticeContent}"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-                <View
-                    android:id="@+id/view7"
-                    android:layout_width="2dp"
-                    android:layout_height="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#1a1311"
-                    app:layout_constraintStart_toEndOf="@+id/my_01_03_date"
-                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/my_01_03_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:text="2021-03-25"
-                    android:textSize="18dp"
-                    android:textColor="#1a1311"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/my_01_03_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:singleLine="true"
-                    android:text="03.25 안내"
-                    android:textColor="#1a1311"
-
-                    android:textSize="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_01_03_date" />
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:background="#CBDEE1DA"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_01_03_title" />
-
-                <TextView
-                    android:id="@+id/my_01_03_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="16dp"
-                    android:text="안녕ㅎ세요 서울맛칩입니다. 많은 "
-                    android:visibility="gone"
-                    android:layout_marginBottom="5dp"
-                    android:paddingBottom="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-                <ImageView
-                    android:id="@+id/backarrow"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"
-                    android:src="@drawable/ic_backarrow_"
-                    />
-
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/backarrowafter"-->
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/my_01_03_title"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/my_01_03_title"-->
-<!--                    app:srcCompat="@drawable/ic_backarrow"-->
-<!--                    android:visibility="gone"-->
-<!--                    android:rotation="90"/>-->
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

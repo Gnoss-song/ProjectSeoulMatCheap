@@ -137,10 +137,6 @@ class MY_01(
             val intent02 = Intent(activity, MY_01_02::class.java)
             startActivity(intent02)
         }
-        binding.btnMyreport.setOnClickListener {
-            val intent = Intent(activity, MATCHEAP_01_02::class.java)
-            startActivity(intent)
-        }
         binding.btnNotice.setOnClickListener {
             val intent03 = Intent(activity, MY_01_03::class.java)
             startActivity(intent03)

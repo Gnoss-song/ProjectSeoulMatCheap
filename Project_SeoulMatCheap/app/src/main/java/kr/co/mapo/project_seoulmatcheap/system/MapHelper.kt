@@ -20,11 +20,10 @@ object MapHelper {
     //color
     val blackColor = Color.BLACK
     val whiteColor = Color.WHITE
-    val clickedColor = ColorStateList.valueOf(Color.BLACK)
     val unClickedColor = ColorStateList.valueOf(Color.WHITE)
     val seoulColor = ColorStateList.valueOf(Color.parseColor("#0d62d1"))
     val matColor = ColorStateList.valueOf(Color.parseColor("#ff0000"))
-    val likeColor = ColorStateList.valueOf(Color.parseColor("#FFE600"))
+    val likeColor = ColorStateList.valueOf(Color.parseColor("#F25D3D"))
     val circleColor = Color.parseColor("#1AF25D3D")
     val mainColor = Color.parseColor("#F25D3D")
 

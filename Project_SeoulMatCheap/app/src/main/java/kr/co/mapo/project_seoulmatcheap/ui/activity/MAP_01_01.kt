@@ -1,10 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMap0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.ADDRESS
@@ -69,26 +69,37 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     private fun setView(list: ArrayList<Test>) {
-        with(binding.include) {
+        with(binding) {
             recyclerView.apply {
-                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+                layoutManager = LinearLayoutManager(
                     this@MAP_01_01,
-                    androidx.recyclerview.widget.LinearLayoutManager.VERTICAL,
+                    LinearLayoutManager.VERTICAL,
                     false
                 )
-                adapter = kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter(list)
+                adapter = InformListAdapter(list,this@MAP_01_01)
             }
-            sortDistanceBtn.apply {
-                setOnClickListener {
-                    list.sortBy { it.distance }
-                    recyclerView.adapter = InformListAdapter(list)
+            categoryScore.setOnClickListener {
+                list.sortBy { it.distance }
+                recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
+                with(categoryDistance) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
+                }
+                with(categoryScore) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
                 }
             }
-            sortScoreBtn.apply {
-                setOnClickListener {
-                    list.sortBy { it.rate }
-                    recyclerView.layoutManager = LinearLayoutManager(this@MAP_01_01, LinearLayoutManager.VERTICAL, true)
-                    recyclerView.adapter = InformListAdapter(list)
+            categoryDistance.setOnClickListener {
+                list.sortBy { it.rate }
+                recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
+                with(categoryDistance) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
+                }
+                with(categoryScore) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
                 }
             }
         }

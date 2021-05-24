@@ -1,8 +1,10 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import com.google.android.material.tabs.TabLayout
@@ -49,6 +51,9 @@ class MainActivity : AppCompatActivity() {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.container, SEARCH_01.newInstance(this@MainActivity))
                             .commit()
+                        //키보드 올리기
+                        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
                     }
                     R.id.main -> {
                         supportFragmentManager.beginTransaction()

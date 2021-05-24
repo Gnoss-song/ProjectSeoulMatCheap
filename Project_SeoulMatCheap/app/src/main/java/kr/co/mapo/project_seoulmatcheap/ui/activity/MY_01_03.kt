@@ -40,8 +40,6 @@ class MY_01_03 : AppCompatActivity() {
             setTitle(R.string.notice_title)
         }
 
-        //화살표 돌리기
-
         NotifyService.invoke()
             .getTest().subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -78,37 +76,34 @@ class MY_01_03 : AppCompatActivity() {
         //백버튼 활성화
     }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                android.R.id.home -> {
-                    onBackPressed()
-                }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
             }
-            return super.onOptionsItemSelected(item)
         }
+        return super.onOptionsItemSelected(item)
+    }
+
     //어댑터
     inner class My0103Adapter(
         private val list: List<NotifyResponse.Data>
     ) : RecyclerView.Adapter<My0103Adapter.ViewHolderClass>() {
         private val selectedItems = SparseBooleanArray()
         private var prePosition = -1
-
-
         inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
             val my0103title: TextView = itemView.findViewById(R.id.my_01_03_title)
             val my0103sort: TextView = itemView.findViewById(R.id.my_01_03_sort)
             val my0103date: TextView = itemView.findViewById(R.id.my_01_03_date)
             val my0103content: TextView = itemView.findViewById(R.id.my_01_03_content)
-            val backarrow: ImageView = itemView.findViewById(R.id.backarrow)
-
-
-
-
-
+            val button_before : ImageView = itemView.findViewById(R.id.button_before)
+            val button_after : ImageView = itemView.findViewById(R.id.button_after)
             fun init() {
                 my0103title.setOnClickListener(this)
                 my0103date.setOnClickListener(this)
                 my0103sort.setOnClickListener(this)
+                button_before.setOnClickListener(this)
+                button_after.setOnClickListener(this)
             }
             fun setview(item : NotifyResponse.Data){
                 my0103date.text= item.modifyDate
@@ -116,18 +111,6 @@ class MY_01_03 : AppCompatActivity() {
                 my0103content.text= item.noticeContent
                 my0103sort.text=item.modifyDate
             }
-//            fun arrow(){
-//                if(backarrowbefore.visibility==View.VISIBLE){
-//                    backarrowbefore.visibility = View.GONE
-//                    backarrowafter.visibility = View.VISIBLE
-//                }
-//                else{
-//                    backarrowbefore.visibility = View.VISIBLE
-//                    backarrowafter.visibility = View.GONE
-//                }
-//
-//            }
-
             override fun onClick(v: View) {
                 when (v.id) {
                     R.id.my_01_03_title -> {
@@ -138,14 +121,11 @@ class MY_01_03 : AppCompatActivity() {
                             selectedItems.put(layoutPosition, true)
                         }
                         if (prePosition != -1) notifyItemChanged(prePosition)
-                        backarrow.isActivated = !backarrow.isActivated
                         notifyItemChanged(layoutPosition)
                         prePosition = layoutPosition
                     }
                 }
             }
-
-
             //공지사항 접고 펴는곳
             fun changeVisibility(isExpanded: Boolean) {
                 val height = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -160,14 +140,11 @@ class MY_01_03 : AppCompatActivity() {
                 }
                 va.start()
             }
-
-
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
             val view = LayoutInflater.from(parent.context).inflate(
                 R.layout.item_my_01_03, parent,false)
             val holder = ViewHolderClass(view)
-
             holder.itemView.setOnClickListener {
             }
             return ViewHolderClass(view)

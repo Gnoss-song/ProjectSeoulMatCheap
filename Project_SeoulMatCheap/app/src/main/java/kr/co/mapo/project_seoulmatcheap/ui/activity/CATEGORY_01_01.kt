@@ -20,13 +20,14 @@ class CATEGORY_01_01 : AppCompatActivity() {
 
         var tab_category = findViewById<TabLayout>(R.id.tab_category)
         val CATEGORY_01_01_01 = CATEGORY_01_01_01()
-        val CATEGORY_01_02 = CATEGORY_01_02()
+        val CATEGORY_01_02 = CATEGORY_01_02(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this!!.setHomeAsUpIndicator(R.drawable.ic_back_icon)
+            title = intent.getStringExtra("key")
         }
 
         tab_category.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

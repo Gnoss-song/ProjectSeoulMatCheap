@@ -1,9 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
-import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import android.opengl.Visibility
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,16 +10,15 @@ import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.skydoves.balloon.balloon
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch0101Binding
-import kr.co.mapo.project_seoulmatcheap.system.SEARCH_HISTROY
 import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.AutoCompleteAdapter
+import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.SearchHistoryAdapter
 
 //검색성공
@@ -39,6 +36,7 @@ class SEARCH_01_01(
     private lateinit var binding : FragmentSearch0101Binding
     private lateinit var filterAdapter : AutoCompleteAdapter
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
+    private val list = ArrayList<Test>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,6 +73,30 @@ class SEARCH_01_01(
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
         }
         with(binding) {
+            categoryScore.setOnClickListener {
+                //list.sortBy { list.score }
+                recyclerView.adapter = InformListAdapter(list, owner)
+                with(categoryDistance) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
+                }
+                with(categoryScore) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
+                }
+            }
+            categoryDistance.setOnClickListener {
+                list.sortBy { it.rate }
+                recyclerView.adapter = InformListAdapter(list, owner)
+                with(categoryDistance) {
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(resources.getColor(R.color.main, null))
+                }
+                with(categoryScore) {
+                    typeface = null
+                    setTextColor(resources.getColor(R.color.dot_edge, null))
+                }
+            }
             autoCompleteRecyclerView.apply {
                 layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
                 adapter = filterAdapter

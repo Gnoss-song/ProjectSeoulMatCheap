@@ -59,11 +59,16 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
             }
         }
         binding.moveTV.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val builder = AlertDialog.Builder(owner)
             val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
             with(builder) {
                 setView(balloonView)
-                show().window?.setBackgroundDrawable(null)
+                show().apply {
+                    window?.setBackgroundDrawable(null)
+                    balloonView.setOnClickListener {
+                        dismiss()
+                    }
+                }
             }
         }
     }
@@ -100,37 +105,37 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
 
     override fun onClick(v: View?) {
         val intent = Intent(context, CATEGORY_01_01::class.java)
-        startActivity(intent)
 
         binding.apply {
             when(v?.id) {
-                button1GS.id -> intent
-                button25EP.id -> intent
-                button3GR.id -> intent
-                button4YDP.id -> intent
-                button5GC.id -> intent
-                button6DJ.id -> intent
-                button7GA.id -> intent
-                button8SC.id -> intent
-                button9GN.id -> intent
-                button10SP.id -> intent
-                button11GD.id -> intent
-                button12DB.id -> intent
-                button13GB.id -> intent
-                button14NW.id -> intent
-                button15JN.id -> intent
-                button16MP.id -> intent
-                button17GJ.id -> intent
-                button18DDM.id -> intent
-                button19SB.id -> intent
-                button20JL.id -> intent
-                button21SD.id -> intent
-                button22YS.id -> intent
-                button23J.id -> intent
-                button24SDM.id -> intent
-                button25EP.id -> intent
+                button1GS.id -> intent.putExtra("key","강서구")
+                button2YC.id -> intent.putExtra("key","양천구")
+                button3GR.id -> intent.putExtra("key","구로구")
+                button4YDP.id -> intent.putExtra("key","영등포구")
+                button5GC.id -> intent.putExtra("key","금천구")
+                button6DJ.id -> intent.putExtra("key","동작구")
+                button7GA.id -> intent.putExtra("key","관악구")
+                button8SC.id -> intent.putExtra("key","서초구")
+                button9GN.id -> intent.putExtra("key","강남구")
+                button10SP.id -> intent.putExtra("key","송파구")
+                button11GD.id -> intent.putExtra("key","강동구")
+                button12DB.id -> intent.putExtra("key","도봉구")
+                button13GB.id -> intent.putExtra("key","강북구")
+                button14NW.id -> intent.putExtra("key","노원구")
+                button15JN.id -> intent.putExtra("key","중랑구")
+                button16MP.id -> intent.putExtra("key","마포구")
+                button17GJ.id -> intent.putExtra("key","광진구")
+                button18DDM.id -> intent.putExtra("key","동대문구")
+                button19SB.id -> intent.putExtra("key","성북구")
+                button20JL.id -> intent.putExtra("key","종로구")
+                button21SD.id -> intent.putExtra("key","성동구")
+                button22YS.id -> intent.putExtra("key","용산구")
+                button23J.id -> intent.putExtra("key","중구")
+                button24SDM.id -> intent.putExtra("key","서대문구")
+                button25EP.id -> intent.putExtra("key","은평구")
             }
         }
+        startActivity(intent)
     }
 
     private fun gridData(): MutableList<GridItem> {

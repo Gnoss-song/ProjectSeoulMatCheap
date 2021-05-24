@@ -29,7 +29,11 @@
             android:inputType="textPersonName"
             android:textColorHint="@color/white"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="5dp" />
+            tools:layout_editor_absoluteY="5dp" >
+            <requestFocus/>
+
+        </kr.co.mapo.project_seoulmatcheap.ui.custom.ClearEditText>
+
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -37,6 +41,7 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:src="@drawable/splash_02"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recyclerView"

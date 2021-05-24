@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/main"
+        android:icon="@drawable/nav_main"
+        android:title="카테고리"
+        app:showAsAction="always|withText" />
+    <item
         android:id="@+id/map"
         android:icon="@drawable/nav_map"
         android:title="지도"
@@ -11,11 +16,6 @@
         android:id="@+id/search"
         android:icon="@drawable/nav_search"
         android:title="검색"
-        app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/main"
-        android:icon="@drawable/nav_main"
-        android:title="카테고리"
         app:showAsAction="always|withText" />
     <item
         android:id="@+id/my"
