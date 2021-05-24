@@ -173,6 +173,7 @@ class MY_01_01_01 : AppCompatActivity() {
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolderClass
                 = ViewHolderClass(Inform0101Binding.inflate(LayoutInflater.from(parent.context), parent, false))
+
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             val itemData = itemList[position]
             with(holder){
