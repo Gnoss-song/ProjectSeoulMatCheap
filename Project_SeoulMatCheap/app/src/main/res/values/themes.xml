@@ -3,7 +3,7 @@
     <style name="Theme.Project_SeoulMatCheap" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/main</item>
-        <item name="colorPrimaryVariant">#B80B14</item>
+        <item name="colorPrimaryVariant">#e14632</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <!-- Secondary brand color. -->

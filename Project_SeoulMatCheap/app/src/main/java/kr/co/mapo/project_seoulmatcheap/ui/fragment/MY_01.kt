@@ -24,9 +24,15 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.activity.*
 
-class MY_01(
-    private val owner : AppCompatActivity
-    ): Fragment() {
+class MY_01 : Fragment {
+
+    private var owner: AppCompatActivity? = null
+
+    constructor() : super()
+
+    constructor(owner: AppCompatActivity) : super() {
+        this.owner = owner
+    }
 
     companion object {
         fun newInstance(owner: AppCompatActivity) : Fragment {
@@ -56,7 +62,7 @@ class MY_01(
         // 이용약관 //
         binding.btnService.setOnClickListener {
             val mDialogView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_service, null)
-            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mDialogView).setTitle(null)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner!!).setView(mDialogView).setTitle(null)
             val mAlertDialog = mBuilder.show().apply {
                 window?.setBackgroundDrawable(null)
             }
@@ -68,7 +74,7 @@ class MY_01(
         // 도움말 //
         binding.btnHelp.setOnClickListener {
             val mHelpView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_help, null)
-            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mHelpView)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner!!).setView(mHelpView)
             val mAlertDialog = mBuilder.show().apply {
                 window?.setBackgroundDrawable(null)
             }
@@ -80,7 +86,7 @@ class MY_01(
         // 로그아웃 //
         binding.btnLogout.setOnClickListener {
             val mLogoutView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_logout, null)
-            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mLogoutView)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner!!).setView(mLogoutView)
             val mAlertDialog = mBuilder.show().apply {
                 window?.setBackgroundDrawable(null)
             }
@@ -89,12 +95,12 @@ class MY_01(
 
             okButton.setOnClickListener {
                 //로그아웃
-                if(UserPrefs.logout(owner)) {
-                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃 되었습니다.")
+                if(UserPrefs.logout(owner!!)) {
+                    SeoulMatCheap.getInstance().showToast(owner!!, "로그아웃 되었습니다.")
                     startActivity(Intent(owner, LOGIN_01::class.java))
-                    owner.finish()
+                    owner!!.finish()
                 } else {
-                    SeoulMatCheap.getInstance().showToast(owner, "로그아웃을 할 수 없습니다.")
+                    SeoulMatCheap.getInstance().showToast(owner!!, "로그아웃을 할 수 없습니다.")
                 }
                 mAlertDialog.dismiss()
             }
@@ -106,7 +112,7 @@ class MY_01(
         // 회원탈퇴 //
         binding.btnWithdrawal.setOnClickListener{
             val mWithdrawalView = LayoutInflater.from(owner).inflate(R.layout.fragment_dialog_my_withdrawal, null)
-            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mWithdrawalView)
+            val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner!!).setView(mWithdrawalView)
             val mAlertDialog = mBuilder.show().apply {
                 window?.setBackgroundDrawable(null)
             }
@@ -114,12 +120,12 @@ class MY_01(
             val cancelButton = mWithdrawalView.findViewById<Button>(R.id.btn_withdrawl_no)
             okButton.setOnClickListener {
                 //탈퇴
-                if(UserPrefs.logout(owner)) {
-                    SeoulMatCheap.getInstance().showToast(owner, "탈퇴 되었습니다.")
+                if(UserPrefs.logout(owner!!)) {
+                    SeoulMatCheap.getInstance().showToast(owner!!, "탈퇴 되었습니다.")
                     startActivity(Intent(owner, LOGIN_01::class.java))
-                    owner.finish()
+                    owner!!.finish()
                 } else {
-                    SeoulMatCheap.getInstance().showToast(owner, "탈퇴 할 수 없습니다.")
+                    SeoulMatCheap.getInstance().showToast(owner!!, "탈퇴 할 수 없습니다.")
                 }
                 mAlertDialog.dismiss()
             }

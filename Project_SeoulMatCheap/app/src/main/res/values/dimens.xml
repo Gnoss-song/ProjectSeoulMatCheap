@@ -17,6 +17,8 @@
     <dimen name="btn_clickiconwidth"> 60dp </dimen>
     <dimen name="btn_clickiconheight"> 20dp </dimen>
 
+    <dimen name="dialog_icon">120dp</dimen>
+
 
 
     <!--여백-->

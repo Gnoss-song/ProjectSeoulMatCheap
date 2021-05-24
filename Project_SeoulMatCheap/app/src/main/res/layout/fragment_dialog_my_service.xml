@@ -1,37 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/white"
+        android:paddingStart="@dimen/margin_basic"
+        android:paddingTop="@dimen/margin_basic"
+        android:paddingBottom="10dp"
+        android:text="서비스정책 및 이용약관"
+        android:textColor="@color/dot_edge"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
 
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/round_button3"
+            android:background="@color/white"
             android:elevation="@dimen/elevation1"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/margin_basic"
-            android:paddingRight="@dimen/margin_basic"
-            android:paddingBottom="@dimen/margin_basic">
+            android:paddingRight="@dimen/margin_basic">
 
 
             <TextView
                 android:id="@+id/popup_main"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:text="@string/popup_mainString"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -42,17 +55,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/popup_ok"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="@dimen/margin_basic4"
-                android:text="확인"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/popup_main" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/popup_ok"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/main"
+        android:text="확인"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

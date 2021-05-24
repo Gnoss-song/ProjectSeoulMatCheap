@@ -5,7 +5,9 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
  * @created 2021-04-20
  * @desc
  */
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -14,6 +16,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +28,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
 
 class MY_01_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy010101Binding
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMy010101Binding.inflate(layoutInflater)
@@ -181,11 +185,13 @@ class MY_01_01_01 : AppCompatActivity() {
         override fun getItemCount() = itemList.size
 
         //삭제함수
+        @RequiresApi(Build.VERSION_CODES.P)
         fun requestRemove(click : Boolean) {
             if(click) {
                 checkboxStatus.forEach { key, value ->
                     if(value) {
                         itemList.removeAt(key)
+                        checkboxStatus.removeAt(key)
                     }
                 }
                 notifyDataSetChanged()

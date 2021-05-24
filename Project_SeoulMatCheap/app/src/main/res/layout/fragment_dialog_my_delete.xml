@@ -7,54 +7,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/delete_layout"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation1"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <ImageView
+            android:id="@+id/imageView21"
+            style="android:attr/borderlessButtonStyle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:elevation="@dimen/elevation1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dialog_4" />
+
+        <TextView
+            android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/round_button"
-            android:elevation="@dimen/elevation1"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="3dp"
+            android:text="삭제"
+            android:textColor="@color/main"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/logoutcontext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/logoutcontext" />
+
+        <TextView
+            android:id="@+id/logoutcontext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:text="하시겠습니까?"
+            android:textAlignment="center"
+            android:textColor="@color/overlay"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal"
-            android:padding="@dimen/margin_basic">
-            <TextView
-                android:id="@+id/deletecontext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:text="@string/delete_contest"
-                android:textAlignment="center"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <Button
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoutcontext">
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_delete_ok"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="@dimen/margin_basic4"
-                android:layout_marginEnd="20dp"
+                android:layout_height="42dp"
+
+
+                android:layout_weight="1"
+                android:background="#e14632"
                 android:text="예"
-                app:layout_constraintEnd_toStartOf="@+id/btn_delete_no"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/deletecontext" />
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/btn_delete_no"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="42dp"
+
+                android:layout_weight="1"
+                android:background="@color/main"
                 android:text="아니오"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_delete_ok"
-                app:layout_constraintTop_toTopOf="@+id/btn_delete_ok" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
