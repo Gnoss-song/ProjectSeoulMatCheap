@@ -66,7 +66,7 @@ interface StoreDAO {
 
     //검색요청
     @Query("SELECT * FROM store_inform WHERE name LIKE :word ")
-    fun searchStore(word : String) : LiveData<List<StoreEntity>>
+    fun searchStore(word : String) : List<StoreEntity>
 
     //식당의 메뉴 목록 출력
     @Query("SELECT * FROM store_menu WHERE id = :id")

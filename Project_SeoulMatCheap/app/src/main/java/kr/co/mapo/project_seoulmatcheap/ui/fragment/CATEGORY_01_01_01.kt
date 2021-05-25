@@ -68,7 +68,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                 }
                 //탭 선택
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    Log.e("[POSITION]", "${tab?.position}")
                     val position = tab?.position
                     if(position != null && position > 0) {
                         AppDatabase(owner)!!.storeDAO().getSortStore(tab.position-1).observe(viewLifecycleOwner, {
