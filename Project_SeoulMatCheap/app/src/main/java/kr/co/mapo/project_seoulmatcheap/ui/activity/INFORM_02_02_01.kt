@@ -16,9 +16,11 @@ import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
 
 class INFORM_02_02_01 : AppCompatActivity() {
@@ -27,6 +29,7 @@ class INFORM_02_02_01 : AppCompatActivity() {
     private val OPEN_GALLERY = 1
     private lateinit var ratingscore: TextView
     private lateinit var ratingBar: ScaleRatingBar
+    private lateinit var review : EditText
     private var str: String? = null
 
 
@@ -36,9 +39,19 @@ class INFORM_02_02_01 : AppCompatActivity() {
         binding = ActivityInform020201Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        // 다중 선택시 리사이클러뷰 코드.
-//        recyclerView = findViewById(R.id.recyclerview2)
-//        recyclerView.layoutManager = LinearLayoutManager(this@INFORM_02_02,LinearLayoutManager.HORIZONTAL,false)
+
+        val reviewData = intent.getSerializableExtra("review") as Model
+
+
+        ratingBar = findViewById(R.id.ratingBar)
+        ratingscore = findViewById(R.id.ratingscore)
+        val image : ImageView
+        image = findViewById(R.id.imageView18)
+        review = findViewById(R.id.textView)
+
+        review.text = reviewData.review
+        image =
+        ratingBar.rating = reviewData.ratingBar
 
         binding.btnComplete.setOnClickListener {
             val mLogoutView =
@@ -69,17 +82,14 @@ class INFORM_02_02_01 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.review_title_modify)
         }
-        ratingBar = findViewById(R.id.ratingBar)
-        ratingscore = findViewById(R.id.ratingscore)
+
         ratingBar.setOnRatingChangeListener(BaseRatingBar.OnRatingChangeListener() { ScaleRatingBar, rating, _ ->
             str = rating.toString()
             ratingscore.text = str
         })
-
         binding.imageselectlayout.setOnClickListener {
             openGallery()
         }
-
         binding.textView.setOnTouchListener(View.OnTouchListener { v, event ->
             if (binding.textView.hasFocus()) {
                 v.parent.requestDisallowInterceptTouchEvent(true)
