@@ -39,7 +39,6 @@ data class StoreEntity (
 //식당 메뉴정보 Entity
 @Entity(tableName = "store_menu")
 data class MenuEntity (
-
     @PrimaryKey(autoGenerate = true)
     val seq : Int?,
     val id : Int?,
@@ -51,7 +50,6 @@ data class MenuEntity (
 //찜목록 정보 Entity
 @Entity(tableName = "store_favorite")
 data class FavoritEntity(
-
     @PrimaryKey(autoGenerate = true)
     val seq : Int?,
     val id	: Int,
@@ -62,5 +60,5 @@ data class FavoritEntity(
     val	photo : String,
     val	lng	: Double,
     val	lat	: Double,
-    var checked: Boolean = false
-):Serializable
+    var checked : Boolean = false
+) : Serializable
