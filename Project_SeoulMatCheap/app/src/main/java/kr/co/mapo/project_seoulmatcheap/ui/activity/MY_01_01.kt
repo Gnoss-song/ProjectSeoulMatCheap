@@ -67,6 +67,7 @@ class MY_01_01 : AppCompatActivity() {
         with(binding) {
             recycler.layoutManager = LinearLayoutManager(this@MY_01_01)
             AppDatabase(this@MY_01_01)!!.storeDAO().getFavorite().observe(this@MY_01_01, {
+                favoritData = it
                 adapter = InformDetailAdapter(favoritData,this@MY_01_01)
                 recycler.adapter = adapter
                 supportActionBar!!.setTitle("찜 목록 (${it.size})")
