@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
@@ -19,27 +21,42 @@ import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 class CATEGORY_01_01_01(private val key : String?,
                         private val owner : AppCompatActivity) : Fragment() {
 
-    private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)
-        binding.category = this
-        return binding.root
+        return inflater.inflate(R.layout.fragment_category_01_01_01, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val categoryRV = view.findViewById<RecyclerView>(R.id.categoryRV)
+        val tabLayout2 = view.findViewById<TabLayout>(R.id.tabLayout2)
+        val categoryScore = view.findViewById<TextView>(R.id.category_score)
+        val categoryDistance = view.findViewById<TextView>(R.id.category_distance)
+
         if(key != null) {
             AppDatabase(requireContext())!!.storeDAO().getGuStore(key).observe(
                 viewLifecycleOwner, {
-                    binding.categoryRV.adapter = ListRecyclerViewAdapter(it, owner)
+                    categoryRV.adapter = ListRecyclerViewAdapter(it, owner)
                 }
             )
         }
-        with(binding.categoryRV) {
+
+        tabLayout2.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
+
+        with(categoryRV) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             //adapter = ListRecyclerViewAdapter(listData())
             }
-        binding.apply {
             categoryScore.setOnClickListener {
                 val list = listData().apply {
                     sortByDescending { it.score }
@@ -69,56 +86,6 @@ class CATEGORY_01_01_01(private val key : String?,
                 }
             }
         }
-    }
-
-    fun menuClick(v:View) {
-        val button = v as TextView
-        inintiateButton()
-        with(button) {
-            setBackgroundColor(resources.getColor(R.color.main, null))
-            setTextColor(resources.getColor(R.color.white, null))
-        }
-    }
-    private fun inintiateButton() {
-        with(binding) {
-            categoryALL.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryKOR.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryJAP.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryCHI.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryANDF.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryLAU.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryBEA.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryLOD.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryANDS.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-        }
-    }
 
     private fun listData(): MutableList<ListItem> {
         val list = mutableListOf<ListItem>()
