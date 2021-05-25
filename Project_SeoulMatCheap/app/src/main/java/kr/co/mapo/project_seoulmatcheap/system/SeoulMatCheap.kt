@@ -111,14 +111,12 @@ class SeoulMatCheap : Application() {
     fun calculateDistance(lat: Double, lng : Double) : String {
         val a = 2 * asin(sqrt(sin(toRadians(lat - this.x) / 2).pow(2.0)
                         + sin(toRadians(lng - this.y) / 2).pow(2.0) * cos(toRadians(this.x)) * cos(toRadians(lat))))
-        Log.e("[거리계산]", "${(r * a) / 1000}")
         return String.format("%.1fkm", (r * a) / 1000)
     }
 
     fun calculateDistanceDou(lat: Double, lng : Double) : Double {
         val a = 2 * asin(sqrt(sin(toRadians(lat - this.x) / 2).pow(2.0)
                 + sin(toRadians(lng - this.y) / 2).pow(2.0) * cos(toRadians(this.x)) * cos(toRadians(lat))))
-        Log.e("[거리계산]", "${(r * a) / 1000}")
         return (r * a) / 1000
     }
 }

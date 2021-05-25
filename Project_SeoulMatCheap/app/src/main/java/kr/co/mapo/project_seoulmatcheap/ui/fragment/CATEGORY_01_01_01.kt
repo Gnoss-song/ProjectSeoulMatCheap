@@ -47,7 +47,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             } else {
                 AppDatabase(owner)!!.storeDAO().getSortStore(position!!).observe(
                     viewLifecycleOwner, {
-                        Log.e("[TEST]", "${it.size}")
                         val list = mutableListOf<StoreEntity>()
                         list.apply {
                             for(i in it) {
@@ -56,8 +55,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                             }
                         }
                         this@CATEGORY_01_01_01.list = list
-                        Log.e("[TEST]", "${list.size}")
-                        Log.e("[설마?]", "${list.size}")
                         adapter = ListRecyclerViewAdapter(list, owner)
                     }
                 )
@@ -66,12 +63,28 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             tabLayout2.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab?) {
                 }
-
                 override fun onTabUnselected(tab: TabLayout.Tab?) {
                 }
-
+                //탭 선택
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                    Log.e("[POSITION]", "${tab?.position}")
+                    val position = tab?.position
+                    if(position != null && position > 0) {
+                        AppDatabase(owner)!!.storeDAO().getSortStore(tab.position-1).observe(viewLifecycleOwner, {
+                            this@CATEGORY_01_01_01.list = it
+                            val list = mutableListOf<StoreEntity>()
+                            if(this@CATEGORY_01_01_01.position > -1) {
+                                list.apply {
+                                    for (i in it) {
+                                        if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0)
+                                            this.add(i)
+                                    }
+                                }
+                                this@CATEGORY_01_01_01.list = list
+                            }
+                            adapter = ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
+                        })
+                    }
                 }
             })
         }
@@ -96,7 +109,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
 //                    sortBy { it.distance }
 //                }
             val sortedList = list.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
-            Log.e("[TEST]", sortedList[0].name)
             categoryRV.adapter =  ListRecyclerViewAdapter(sortedList, owner)
             with(categoryDistance) {
                 typeface = Typeface.DEFAULT_BOLD
@@ -105,7 +117,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             with(categoryScore) {
                 typeface = null
                 setTextColor(resources.getColor(R.color.dot_edge, null))
-                Log.e("[TEST]", list[0].name)
             }
         }
     }
