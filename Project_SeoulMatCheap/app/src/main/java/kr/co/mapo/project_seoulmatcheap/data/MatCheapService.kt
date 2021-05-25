@@ -31,7 +31,7 @@ interface MatCheapService {
     @Headers("Content-Type: application/json")
     @POST("/api/member")
     fun serviceLogin (
-        @Body loginBody: String
+        @Body member: LoginBody
     ) : Single<MemberResponse>
 
     companion object {

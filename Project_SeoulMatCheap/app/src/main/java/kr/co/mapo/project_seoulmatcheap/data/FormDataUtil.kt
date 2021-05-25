@@ -34,4 +34,9 @@ object FormDataUtil {
             surveyBody
         )
     }
+
+    //업종변환함수
+//    fun getSort(sort : Int) : String = when(sort) {
+//        1 ->
+//    }
 }

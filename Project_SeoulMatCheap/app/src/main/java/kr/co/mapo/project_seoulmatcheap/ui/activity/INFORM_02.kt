@@ -2,26 +2,31 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.get
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.MenuEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepositoryImpl
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
 import kr.co.mapo.project_seoulmatcheap.system.APP_NAME
+import kr.co.mapo.project_seoulmatcheap.system.STORE
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformViewPagerAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InfromReviewAdapter
-import kr.co.mapo.project_seoulmatcheap.ui.fragment.INFORM_02_1
 
 private const val PERMISSION_REQUEST_CODE = 100
 
@@ -29,7 +34,10 @@ class INFORM_02 : AppCompatActivity() {
 
     private lateinit var binding : ActivityInform02Binding
     private var isLiked = false     //찜표시 저장 Boolean 변수
-    private var isLiked_f = false   //초반 찜 Boolean값 저장
+    private var likeCount : Int = 5
+    private var likeCount_f : Int = 5   //처음찜수
+    private lateinit var item : StoreEntity
+    private val dao = AppDatabase(this)!!.storeDAO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +48,10 @@ class INFORM_02 : AppCompatActivity() {
 
     private fun init() {
         setSupportActionBar(binding.toolbar)
+        item = intent.getSerializableExtra(STORE) as StoreEntity
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
-            title = "홍콩"
+            //title = item.name
             setHomeAsUpIndicator(R.drawable.ic_back_icon)
         }
         setView()
@@ -50,7 +59,11 @@ class INFORM_02 : AppCompatActivity() {
 
     private fun setView() {
         val viewPagerAdapter = InformViewPagerAdapter(this@INFORM_02)
+        viewPagerAdapter.item = item
         with(binding) {
+            Glide.with(this@INFORM_02).load(item.photo).into(photo)
+            textName.text = item.name
+            textRating.text = item.rating_cnt.toString()
             reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
                 adapter = InfromReviewAdapter()
@@ -85,8 +98,15 @@ class INFORM_02 : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_inform_detail, menu)
-        menu?.get(0)?.icon = getDrawable(
-            if(isLiked) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off)
+        dao.isFavorite(item?.id).observe(this, {
+            if(it.isNotEmpty()) {
+                isLiked = true
+                menu?.get(0)?.icon = getDrawable(R.drawable.ic_favorite_on)
+            } else {
+                isLiked = false
+                menu?.get(0)?.icon = getDrawable(R.drawable.ic_favorite_off)
+            }
+        })
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -97,12 +117,15 @@ class INFORM_02 : AppCompatActivity() {
             }
             R.id.like -> {
                 if(isLiked) {   //찜이 눌린상태 : 찜 취소하기
+                    likeCount --
                     item.icon = getDrawable(R.drawable.ic_favorite_off)
                     isLiked = false
                 } else { //찜이 눌리지 않은 상태 : 찜하기
+                    likeCount ++
                     item.icon = getDrawable(R.drawable.ic_favorite_on)
                     isLiked = true
                 }
+                binding.textLikeCnt.text = likeCount.toString()
                 true
             }
             R.id.share -> {
@@ -115,10 +138,6 @@ class INFORM_02 : AppCompatActivity() {
             }
             else -> false
         }
-    }
-
-    private fun createShareForm() {
-
     }
 
     override fun onRequestPermissionsResult(
@@ -134,10 +153,15 @@ class INFORM_02 : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        if(isLiked_f != isLiked) {  //찜 상태가 변함 -> 서버에 저장
-            Log.e("[TEST]", "실행")
+    override fun onStop() {
+        super.onStop()
+        val repository = StoreRepositoryImpl(dao)
+        if (likeCount > likeCount_f) {   //찜 추가
+            repository.addFavorite(FavoritEntity(null, item.id, item.name, item.address, item.sort, item.photo, item.lng, item.lat))
+            Log.e("[TEST]", "좋아요추가")
+        } else if (likeCount < likeCount_f) {
+            repository.deleteFavorite(item.id)
+            Log.e("[TEST]", "좋아요삭제")
         }
     }
 }
