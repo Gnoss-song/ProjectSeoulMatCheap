@@ -1,6 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.data
 
-import android.widget.RatingBar
+import java.io.Serializable
 
 /**
  * @author Gnoss
@@ -10,13 +10,9 @@ import android.widget.RatingBar
  */
 data class Model(
         val type: Int, val title: String,val date : String, var ratingBar: Float, val IV : Int,val IV2 : Int? ,val IV3 : Int?, val review: String)
+    :Serializable
 {
-
     companion object {
         const val IMAGE_TYPE = 1
-        const val IMAGE_TYPE2 = 2
-        const val IMAGE_TYPE3 = 3
     }
-
-
 }

@@ -3,6 +3,7 @@ package kr.co.mapo.project_seoulmatcheap.data
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
 import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
+import kr.co.mapo.project_seoulmatcheap.data.response.ReviewResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -28,10 +29,9 @@ interface NotifyService {
     ) : Single<NotifyResponse>
 
 
-    @GET("api/notice/dd ?dasad=dasas")
-    fun getTest2(
-        @Query("id") id : Int
-    ) : Single<NotifyResponse>
+    @GET("api/review")
+    fun getReview(
+    ) : Single<ReviewResponse>
 
 
     companion object{
