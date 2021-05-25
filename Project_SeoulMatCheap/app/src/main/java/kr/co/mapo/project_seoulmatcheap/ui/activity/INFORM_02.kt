@@ -51,7 +51,7 @@ class INFORM_02 : AppCompatActivity() {
         item = intent.getSerializableExtra(STORE) as StoreEntity
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
-            title = item.name
+            //title = item.name
             setHomeAsUpIndicator(R.drawable.ic_back_icon)
         }
         setView()
