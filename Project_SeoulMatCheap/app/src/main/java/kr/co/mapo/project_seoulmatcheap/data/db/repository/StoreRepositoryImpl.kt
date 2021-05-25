@@ -22,7 +22,7 @@ class StoreRepositoryImpl(private val dao: StoreDAO) : StoreRepository {
 
     override fun deleteFavorite(id: List<Int>) {
         GlobalScope.launch {
-            for (i in 0 until id.size) {
+            for (i in id.indices) {
                 dao.deleteFavorite(id[i])
                 val store = dao.getStoreDetail(id[i])[0]
                 store.liked = false

@@ -34,8 +34,7 @@ import java.io.Serializable
 
 class MY_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0101Binding
-    private lateinit var itemData: List<StoreEntity>
-    private lateinit var favoritData : MutableList<FavoritEntity>
+    private lateinit var favoritData : List<FavoritEntity>
     private lateinit var adapter: InformDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)  {
@@ -68,7 +67,6 @@ class MY_01_01 : AppCompatActivity() {
         with(binding) {
             recycler.layoutManager = LinearLayoutManager(this@MY_01_01)
             AppDatabase(this@MY_01_01)!!.storeDAO().getFavorite().observe(this@MY_01_01, {
-                favoritData = it.toMutableList()
                 adapter = InformDetailAdapter(favoritData,this@MY_01_01)
                 recycler.adapter = adapter
                 supportActionBar!!.setTitle("찜 목록 (${it.size})")
@@ -86,7 +84,7 @@ class MY_01_01 : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    //백버튼 활성화
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             android.R.id.home -> {
@@ -96,19 +94,9 @@ class MY_01_01 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onPause() {
-        super.onPause()
-        favoritData.clear()
-    }
-    override fun onStop() {
-        super.onStop()
-        adapter.notifyDataSetChanged()
-    }
-
-
     //어댑터
     inner class InformDetailAdapter (
-        private val itemList: MutableList<FavoritEntity>,
+        private val itemList: List<FavoritEntity>,
         private val owner : AppCompatActivity
     ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>() {
 
