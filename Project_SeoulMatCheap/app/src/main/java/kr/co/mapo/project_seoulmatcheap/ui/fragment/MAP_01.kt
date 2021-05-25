@@ -1,6 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
@@ -20,7 +21,12 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.*
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentMap01Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
@@ -41,8 +47,8 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private lateinit var binding : FragmentMap01Binding
     private lateinit var naverMap : NaverMap
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
-    private lateinit var list : MutableList<StoreTest>
-    private lateinit var list2 : MutableList<StoreTest>
+    private lateinit var storeList : List<StoreEntity>
+    private lateinit var list2 : MutableList<StoreEntity>
     private lateinit var filterDialog : MAP_01_02
 
     //infoWindow
@@ -69,7 +75,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private val circleOverlay = mutableSetOf<CircleOverlay>()
 
     //오버레이 이벤트 상태 저장
-    private val clickedInfowindow = arrayMapOf<InfoWindow, StoreTest>()
+    private val clickedInfowindow = arrayMapOf<InfoWindow, StoreEntity>()
 
     //필터 상태 저장
     private var filterSort = mutableSetOf<String>()
@@ -90,7 +96,9 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         filterDialog = MAP_01_02(this)
-        list = Test().addData900()
+        AppDatabase(owner)!!.storeDAO().getAllStore().observe(viewLifecycleOwner, {
+            storeList = it
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,22 +106,19 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
-        binding.include.storeBottomLayout.setOnClickListener {
-            startActivity(Intent(owner, INFORM_02::class.java))
-        }
-        list2 = list.apply {
-            forEach{
-                it.distance = SeoulMatCheap.getInstance().calculateDistanceDou(it.x, it.y)
-            }
-        }
-        list2.sortBy { it.distance }
+//        list2 = list.apply {
+//            forEach{
+//                it.distance = SeoulMatCheap.getInstance().calculateDistanceDou(it.x, it.y)
+//            }
+//        }
+//        list2.sortBy { it.distance }
     }
 
     //네이버지도 초기 설정
     override fun onMapReady(p0: NaverMap) {
         val locationSource = FusedLocationSource(this, 100)
         naverMap = p0
-        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
+        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${storeList.size}")
         naverMap.apply {
             val locationObserver = Observer<Location> {
                 cameraPosition = setMapCamera(it.latitude, it.longitude, MAP_ZOOM)
@@ -145,7 +150,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 initiateOverlay()
             }
         }
-        list.forEach {
+        storeList.forEach {
             val marker = createMaker(it, naverMap)
             createInfoWindow (it, marker)
         }
@@ -157,40 +162,40 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //마커생성함수
-    private fun createMaker(item: StoreTest, naverMap: NaverMap) : Marker {
+    private fun createMaker(item: StoreEntity, naverMap: NaverMap) : Marker {
         return Marker().apply {
-            position = LatLng(item.x, item.y)
+            position = LatLng(item.lat, item.lng)
             map = naverMap
             width = MARKER_SIZE
             height = MARKER_SIZE
             isForceShowIcon = true
             minZoom = MARKET_MIN_ZOOM
             when(item.sort) {
-                SORT_HANSIK -> {
+                0 -> {
                     icon = MapHelper.icon_hansik
                     markersHansik.add(this)
                 }
-                SORT_CHINA -> {
+                1 -> {
                     icon = MapHelper.icon_china
                     markersChina.add(this)
                 }
-                SORT_JAPAN -> {
+                2 -> {
                     icon = MapHelper.icon_japan
                     markersJapan.add(this)
                 }
-                SORT_FOOD -> {
+                3 -> {
                     icon = MapHelper.icon_food
                     markersFood.add(this)
                 }
-                SORT_BEAUTY -> {
+                4 -> {
                     icon = MapHelper.icon_beauty
                     markersBeauty.add(this)
                 }
-                SORT_WASH -> {
+                5 -> {
                     icon = MapHelper.icon_wash
                     markersWash.add(this)
                 }
-                SORT_HOTEL -> {
+                6 -> {
                     icon = MapHelper.icon_hotel
                     markersHotel.add(this)
                 }
@@ -207,18 +212,18 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //인포윈도우 생성함수
-    private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
+    private fun createInfoWindow(item: StoreEntity, marker: Marker) : InfoWindow {
         return InfoWindow().apply {
             tag = false
             adapter = createInfoWindowAdapter(item, tag as Boolean, view)
             when(item.sort) {
-                SORT_HANSIK -> infoWindowsHansik.add(this)
-                SORT_CHINA -> infoWindowsChina.add(this)
-                SORT_JAPAN -> infoWindowsJapan.add(this)
-                SORT_FOOD -> infoWindowsFood.add(this)
-                SORT_BEAUTY -> infoWindowsBeauty.add(this)
-                SORT_WASH -> infoWindowsWash.add(this)
-                SORT_HOTEL -> infoWindowsHotel.add(this)
+                0 -> infoWindowsHansik.add(this)
+                1 -> infoWindowsChina.add(this)
+                2 -> infoWindowsJapan.add(this)
+                3 -> infoWindowsFood.add(this)
+                4 -> infoWindowsBeauty.add(this)
+                5 -> infoWindowsWash.add(this)
+                6 -> infoWindowsHotel.add(this)
                 else -> infoWindowsStore.add(this)
             }
             setOnClickListener {
@@ -231,13 +236,14 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //인포윈도우 어댑터 생성 함수
-    fun createInfoWindowAdapter(item: StoreTest,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
+    fun createInfoWindowAdapter(item: StoreEntity,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
-                val color = when(item.code) {
-                    0 -> MapHelper.seoulColor  //(임시)착한업소
-                    1 -> MapHelper.matColor    //(임시)인증맛칩
-                    else -> MapHelper.likeColor   //(임시) 찜
+                var color : ColorStateList = MapHelper.seoulColor
+                //찜 여부도 고려하는 연산 추가
+                GlobalScope.launch(Dispatchers.IO) {
+                    val favorited = AppDatabase(owner)!!.storeDAO().isFavorite(item.id)
+                    if(favorited.isNotEmpty()) color = MapHelper.likeColor
                 }
                 with(view) {
                     textName.text = item.name
@@ -279,7 +285,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //오버레이 클릭 이벤트 처리 함수
-    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
+    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreEntity) {
         with(infoWindow){
             if(clickedInfowindow.isNotEmpty() &&
                 clickedInfowindow.keyAt(0) !== this) {
@@ -306,12 +312,17 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //식당정보 바텀시트 데이터 설정함수
-    fun setBottomSheetData(item : StoreTest) {
+    fun setBottomSheetData(item : StoreEntity) {
         binding.include.item = item
         with(binding.include) {
-            Glide.with(owner).load(item.image).into(image)
-            distance.text = SeoulMatCheap.getInstance().calculateDistance(item.x, item.y)
-            score.text = item.score.toString()
+            storeBottomLayout.setOnClickListener {
+                val intent = Intent(owner, INFORM_02::class.java)
+                intent.putExtra(STORE, item)
+                startActivity(intent)
+            }
+            Glide.with(owner).load(item.photo).into(image)
+            distance.text = SeoulMatCheap.getInstance().calculateDistance(item.lat, item.lng)
+            score.text = "0.0"
         }
         storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }

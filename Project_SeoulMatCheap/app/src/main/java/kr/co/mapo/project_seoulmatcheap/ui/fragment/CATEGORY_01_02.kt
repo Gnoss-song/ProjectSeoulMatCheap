@@ -20,6 +20,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory0102Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.MapItemInfowindowBinding
 import kr.co.mapo.project_seoulmatcheap.system.*
@@ -35,11 +36,11 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
     private lateinit var view: MapItemInfowindowBinding
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
 
-    private lateinit var list : MutableList<StoreTest>
+    private lateinit var list : MutableList<StoreEntity>
     private lateinit var naverMap : NaverMap
 
     //오버레이 이벤트 상태 저장
-    private val clickedInfowindow = arrayMapOf<InfoWindow, StoreTest>()
+    private val clickedInfowindow = arrayMapOf<InfoWindow, StoreEntity>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCategory0102Binding.inflate(layoutInflater, container, false)
@@ -52,7 +53,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
         view = MapItemInfowindowBinding.inflate(layoutInflater)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
-        list = Test().addData900()
         mapFragment.getMapAsync(this)
     }
 
@@ -88,33 +88,33 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
     }
 
     //마커생성함수
-    private fun createMaker(item: StoreTest, naverMap: NaverMap) : Marker {
+    private fun createMaker(item: StoreEntity, naverMap: NaverMap) : Marker {
         return Marker().apply {
-            position = LatLng(item.x, item.y)
+            position = LatLng(item.lat, item.lng)
             map = naverMap
             width = MARKER_SIZE
             height = MARKER_SIZE
             isForceShowIcon = true
             when(item.sort) {
-                SORT_HANSIK -> {
+                0 -> {
                     icon = MapHelper.icon_hansik
                 }
-                SORT_CHINA -> {
+                1 -> {
                     icon = MapHelper.icon_china
                 }
-                SORT_JAPAN -> {
+                2 -> {
                     icon = MapHelper.icon_japan
                 }
-                SORT_FOOD -> {
+                3 -> {
                     icon = MapHelper.icon_food
                 }
-                SORT_BEAUTY -> {
+                4 -> {
                     icon = MapHelper.icon_beauty
                 }
-                SORT_WASH -> {
+                5 -> {
                     icon = MapHelper.icon_wash
                 }
-                SORT_HOTEL -> {
+                6 -> {
                     icon = MapHelper.icon_hotel
                 }
                 else -> {
@@ -129,7 +129,7 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
     }
 
     //인포윈도우 생성함수
-    private fun createInfoWindow(item: StoreTest, marker: Marker) : InfoWindow {
+    private fun createInfoWindow(item: StoreEntity, marker: Marker) : InfoWindow {
         return InfoWindow().apply {
             tag = false
             adapter = map01.createInfoWindowAdapter(item, tag as Boolean, view)
@@ -143,10 +143,12 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
     }
 
     //오버레이 클릭 이벤트 처리 함수
-    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreTest) {
+    private fun onOverlayClick(infoWindow: InfoWindow, item: StoreEntity) {
         with(infoWindow){
+            Log.e("[TEST1]", "1")
             if(clickedInfowindow.isNotEmpty() &&
                 clickedInfowindow.keyAt(0) !== this) {
+                Log.e("[TEST1]", "2")
                 val infoWindow = clickedInfowindow.keyAt(0)
                 with(infoWindow) {
                     adapter = map01.createInfoWindowAdapter(clickedInfowindow[infoWindow]!!, false, view)
@@ -155,11 +157,13 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
                 clickedInfowindow.clear()
             }
             if(this?.tag == false) {  //클릭이 안된 상태에서 클릭
+                Log.e("[TEST1]", "3")
                 this.adapter = map01.createInfoWindowAdapter(item, true, view)
                 map01.setBottomSheetData(item)
                 clickedInfowindow[this] = item
                 tag = true  //다음 이벤트 처리를 위해 다시 tag boolean값을 클릭된 상태로 초기화한다.
             } else {    //클릭된 상태에서 클릭
+                Log.e("[TEST1]", "4")
                 map01.setBottomSheetData(item)
                 storeWindowBehavior.state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
                 this!!.adapter = map01.createInfoWindowAdapter(item, false, view)

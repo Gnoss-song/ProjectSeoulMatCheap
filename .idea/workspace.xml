@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cdd2d54-3656-4fc7-b36d-fc43fd7d183b" name="Default Changelist" comment="" />
+    <list default="true" id="4cdd2d54-3656-4fc7-b36d-fc43fd7d183b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/activity/LOGIN_01.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/activity/LOGIN_01.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/fragment/CATEGORY_01_02.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/fragment/CATEGORY_01_02.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +28,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>

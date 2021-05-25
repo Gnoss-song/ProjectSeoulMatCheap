@@ -22,6 +22,8 @@ const val SORT_STORE = "기타"
 //SharedPrefs
 const val SEARCH_HISTROY = "search_history_prefs"
 const val USER_PRESFS = "user_prefs"
+const val DOWNLOADSTORE = "download_store"
+const val DOWNLOADMENU = "download_menu"
 
 //서울시청
 const val SEOULCITYHALL_X = 37.5662952
@@ -39,5 +41,6 @@ const val MARKER_SIZE = 120
 //인텐트 Extra 이름
 const val ADDRESS = "address"
 const val LIST = "list"
+const val STORE = "store"
 
 //파라미터 이름
