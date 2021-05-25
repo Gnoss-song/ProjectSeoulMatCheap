@@ -49,9 +49,9 @@ class INFORM_02_02_01 : AppCompatActivity() {
         image = findViewById(R.id.imageView18)
         review = findViewById(R.id.textView)
 
-        review.text = reviewData.review
-        image =
-        ratingBar.rating = reviewData.ratingBar
+
+
+
 
         binding.btnComplete.setOnClickListener {
             val mLogoutView =
