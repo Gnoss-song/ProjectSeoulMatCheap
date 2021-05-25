@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         val seoulMatCheap = SeoulMatCheap.getInstance()
+        seoulMatCheap.getAutoComplete(this, this)
         seoulMatCheap.setLocation(this)
         setView()
     }

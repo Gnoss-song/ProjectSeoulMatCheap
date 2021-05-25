@@ -8,11 +8,13 @@ import android.location.*
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.facebook.stetho.Stetho
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import java.lang.Math.*
 import java.util.*
 import kotlin.math.pow
@@ -44,6 +46,7 @@ class SeoulMatCheap : Application() {
     var y = SEOULCITYHALL_Y     //경도
     val address = MutableLiveData<String>()
     val location = MutableLiveData<Location>()
+    var filterList = listOf<String>()
 
     init {
         this.address.value = SEOULCITYHALL_ADDRESS
@@ -118,5 +121,11 @@ class SeoulMatCheap : Application() {
         val a = 2 * asin(sqrt(sin(toRadians(lat - this.x) / 2).pow(2.0)
                 + sin(toRadians(lng - this.y) / 2).pow(2.0) * cos(toRadians(this.x)) * cos(toRadians(lat))))
         return (r * a) / 1000
+    }
+
+    fun getAutoComplete(context: Context, lifecycleOwner: LifecycleOwner) {
+        AppDatabase(context)!!.storeDAO().getAutoComplete().observe(lifecycleOwner, {
+            filterList = it
+        })
     }
 }
