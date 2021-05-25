@@ -17,14 +17,15 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
+import kr.co.mapo.project_seoulmatcheap.system.KEY
 
 class INFORM_02_02_01 : AppCompatActivity() {
-    //    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityInform020201Binding
     private val OPEN_GALLERY = 1
     private lateinit var ratingscore: TextView
@@ -37,17 +38,23 @@ class INFORM_02_02_01 : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         binding = ActivityInform020201Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_inform_02_02_01)
+        binding.review = this
         setSupportActionBar(binding.toolbar)
 
-        val reviewData = intent.getSerializableExtra("review") as Model
+        val reviewData = intent.getSerializableExtra(KEY) as Model
+
 
 
         ratingBar = findViewById(R.id.ratingBar)
-        ratingscore = findViewById(R.id.ratingscore)
-        val image : ImageView
-        image = findViewById(R.id.imageView18)
-        review = findViewById(R.id.textView)
+        ratingscore= findViewById(R.id.ratingscore)
+
+
+//        binding.textView.text.toString() = reviewData.review
+        binding.ratingBar.rating = reviewData.ratingBar
+        binding.imageView18.setImageResource(reviewData.IV)
+        binding.textView.setText(reviewData.review)
+        binding.ratingscore.text = reviewData.ratingBar.toString()
 
 
 

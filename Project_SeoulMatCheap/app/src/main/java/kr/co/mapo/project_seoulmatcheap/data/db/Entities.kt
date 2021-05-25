@@ -61,5 +61,6 @@ data class FavoritEntity(
     val category : String,
     val	photo : String,
     val	lng	: Double,
-    val	lat	: Double
-)
+    val	lat	: Double,
+    var checked: Boolean = false
+):Serializable

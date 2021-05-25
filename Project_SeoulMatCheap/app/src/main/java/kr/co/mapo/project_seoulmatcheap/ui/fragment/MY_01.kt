@@ -47,7 +47,6 @@ class MY_01 constructor() : Fragment() {
         binding = FragmentMy01Binding.inflate(inflater, container, false)
 //        val textview : TextView = view.findViewById(R.id.textView8)
 
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_01, container, false)
         binding.review = this
         return binding.root

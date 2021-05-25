@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
+import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02_02_01
 import java.io.Serializable
 
@@ -34,7 +35,6 @@ class My0102Adapter(
             notifyDataSetChanged()
         }
     }
-
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.informName)
         val date : TextView = itemView.findViewById(R.id.informDate)
@@ -88,7 +88,7 @@ class My0102Adapter(
                 }
                 holder.modify.setOnClickListener {
                     val target= Intent(owner, INFORM_02_02_01::class.java)
-                    target.putExtra("review",obj)
+                    target.putExtra(KEY,obj)
                     owner.startActivity(target)
                 }
             }
