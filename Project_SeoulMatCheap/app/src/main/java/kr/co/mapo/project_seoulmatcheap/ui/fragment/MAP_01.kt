@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.collection.arrayMapOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -47,8 +48,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private lateinit var binding : FragmentMap01Binding
     private lateinit var naverMap : NaverMap
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
-    private lateinit var storeList : List<StoreEntity>
-    private lateinit var list2 : MutableList<StoreEntity>
     private lateinit var filterDialog : MAP_01_02
     private val dao = AppDatabase(owner)!!.storeDAO()
 
@@ -81,6 +80,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     //필터 상태 저장
     private var filterSort = mutableSetOf<String>()
 
+    //지도 데이터
+    private var storeList = listOf<StoreEntity>()
+    private var favoritList = MutableLiveData<List<Int>>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,15 +94,19 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     private fun init() {
+        dao.getAllStore().observe(viewLifecycleOwner, {
+            storeList = it
+        })
+        dao.getFavoriteIdList().observe(viewLifecycleOwner, {
+            Log.e("[찜]", "$it")
+            favoritList.value = it
+        })
         view = MapItemInfowindowBinding.inflate(layoutInflater)
         binding.fragment = this
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         filterDialog = MAP_01_02(this)
-        dao.getAllStore().observe(viewLifecycleOwner, {
-            storeList = it
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -222,13 +229,17 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 else -> infoWindowsStore.add(this)
             }
             setOnClickListener {
-                Log.e("[$this]", "${clickedInfowindow.size}, $tag")
                 onOverlayClick(this, item)
                 true
             }
-            dao.isFavorite(item.id).observe(viewLifecycleOwner, {
-                Log.e("[TEST]", "${it.size}")
-                adapter = createInfoWindowAdapter(item, tag as Boolean, view)
+            favoritList.observe(viewLifecycleOwner, {
+                if(it.contains(item.id)) {
+                    item.liked = true
+                    adapter = createInfoWindowAdapter(item, tag as Boolean, view)
+                } else {
+                    item.liked = false
+                    adapter = createInfoWindowAdapter(item, tag as Boolean, view)
+                }
             })
             open(marker)
         }
@@ -326,7 +337,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             R.id.button_list -> {
                 val intent = Intent(owner, MAP_01_01::class.java)
                 intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
-                intent.putExtra(LIST, list2 as Serializable)
+                intent.putExtra(LIST, storeList as Serializable)
                 startActivity(intent)
             }
             R.id.button_filter -> {

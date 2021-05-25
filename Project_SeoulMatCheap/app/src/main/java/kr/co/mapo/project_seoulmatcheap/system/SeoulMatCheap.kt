@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.*
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -73,7 +75,6 @@ class SeoulMatCheap : Application() {
         val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
         val provider = locationManager.getBestProvider(Criteria(), true)
-        Log.e("[GPS0]", "$provider")
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -95,7 +96,6 @@ class SeoulMatCheap : Application() {
                     }
                 }
         }
-        //인터넷연결 불안정할시 로케이션 종료
     }
 
     //위도, 경도로부터 주소를 계산하는 함수 : 인터넷문제
@@ -103,11 +103,17 @@ class SeoulMatCheap : Application() {
         this.location.value = location
         this.x = location.latitude
         this.y = location.longitude
-        this.address.value = Geocoder(context, Locale.getDefault())
-            .getFromLocation(x, y, 1)[0]
-            .getAddressLine(0)
-            .substring(11)
-        Log.e("[GSP]", "$x, $y, ${address.value}")
+        //인터넷연결 불안정할시 Geocoder X
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        if(capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+            || capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true) {
+            this.address.value = Geocoder(context, Locale.getDefault())
+                .getFromLocation(x, y, 1)[0]
+                .getAddressLine(0)
+                .substring(11)
+            Log.e("[GSP]", "$x, $y, ${address.value}")
+        }
     }
 
     //현재 위경도에서부터 떨어져 있는 거리 계산

@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
@@ -60,6 +61,7 @@ class SEARCH_01_01(
     private fun init() {
         owner.setSupportActionBar(binding.toolbar)
         filterAdapter = AutoCompleteAdapter(SeoulMatCheap.getInstance().filterList, owner)
+        Log.e("[AUTOCOMPLETE]", SeoulMatCheap.getInstance().filterList.size.toString())
         searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
     }
 

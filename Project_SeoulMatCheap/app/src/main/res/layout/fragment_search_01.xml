@@ -28,9 +28,11 @@
             android:imeOptions="actionSearch"
             android:inputType="textPersonName"
             android:textColorHint="@color/white"
+            android:textCursorDrawable="@color/white"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="5dp" >
-            <requestFocus/>
+            tools:layout_editor_absoluteY="5dp">
+
+            <requestFocus />
 
         </kr.co.mapo.project_seoulmatcheap.ui.custom.ClearEditText>
 

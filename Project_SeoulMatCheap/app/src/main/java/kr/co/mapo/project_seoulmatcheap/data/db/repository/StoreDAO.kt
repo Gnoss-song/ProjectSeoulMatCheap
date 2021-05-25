@@ -80,7 +80,8 @@ interface StoreDAO {
     @Query("SELECT * FROM store_favorite")
     fun getFavorite() : LiveData<List<FavoritEntity>>
 
-    @Query("SELECT * FROM store_favorite")
-    suspend fun getFavorites() : List<FavoritEntity>
+    @Query("SELECT id FROM store_favorite")
+    fun getFavoriteIdList() : LiveData<List<Int>>
+
 
 }

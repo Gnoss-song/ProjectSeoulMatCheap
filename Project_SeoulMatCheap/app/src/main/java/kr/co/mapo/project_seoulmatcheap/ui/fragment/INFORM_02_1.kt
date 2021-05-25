@@ -30,7 +30,6 @@ class INFORM_02_1(
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_inform_02_1, container, false)
-        Log.e("[ITEM]", item.toString())
         binding.item = item
         return binding.root
     }

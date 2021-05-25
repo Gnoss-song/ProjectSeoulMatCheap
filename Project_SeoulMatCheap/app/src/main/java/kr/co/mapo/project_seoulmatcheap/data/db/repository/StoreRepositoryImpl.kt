@@ -34,10 +34,8 @@ class StoreRepositoryImpl(private val dao: StoreDAO) : StoreRepository {
     }
 
     override fun deleteFavorite2(id: List<FavoritEntity>) {
-        Log.e("[리스트]", "$id")
         GlobalScope.launch {
             for (i in id.indices) {
-                Log.e("[테스트]", "2")
                 dao.deleteFavorite(id[i].id)
                 val store = dao.getStoreDetail(id[i].id)[0]
                 store.liked = false
