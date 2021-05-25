@@ -11,6 +11,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
@@ -22,9 +24,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
     var position : Int = -1
     private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)
-        binding.category = this
-        return binding.root
+        return inflater.inflate(R.layout.fragment_category_01_01_01, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,56 +75,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                 }
             }
         }
-    }
-
-    fun menuClick(v:View) {
-        val button = v as TextView
-        inintiateButton()
-        with(button) {
-            setBackgroundColor(resources.getColor(R.color.main, null))
-            setTextColor(resources.getColor(R.color.white, null))
-        }
-    }
-    private fun inintiateButton() {
-        with(binding) {
-            categoryALL.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryKOR.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryJAP.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryCHI.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryANDF.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryLAU.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryBEA.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryLOD.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-            categoryANDS.apply {
-                setBackgroundResource(R.drawable.button_back)
-                setTextColor(resources.getColor(R.color.main, null))
-            }
-        }
-    }
 
     private fun listData(): MutableList<ListItem> {
         val list = mutableListOf<ListItem>()
