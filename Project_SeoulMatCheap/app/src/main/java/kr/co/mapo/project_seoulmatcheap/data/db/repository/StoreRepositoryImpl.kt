@@ -20,13 +20,15 @@ class StoreRepositoryImpl(private val dao: StoreDAO) : StoreRepository {
         }
     }
 
-    override fun deleteFavorite(id: Int) {
+    override fun deleteFavorite(id: List<Int>) {
         GlobalScope.launch {
-            dao.deleteFavorite(id)
-            val store = dao.getStoreDetail(id)[0]
-            store.liked = false
-            Log.e("[결과]", "$store")
-            dao.insertStore(store)
+            for (i in id.indices) {
+                dao.deleteFavorite(id[i])
+                val store = dao.getStoreDetail(id[i])[0]
+                store.liked = false
+                Log.e("[결과]", "$store")
+                dao.insertStore(store)
+            }
         }
     }
 }

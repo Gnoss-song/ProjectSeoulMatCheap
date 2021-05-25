@@ -14,6 +14,6 @@ import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 interface StoreRepository {
 
     fun addFavorite(favoritEntity: FavoritEntity)
-    fun deleteFavorite(id : Int)
+    fun deleteFavorite(id : List<Int>)
 
 }

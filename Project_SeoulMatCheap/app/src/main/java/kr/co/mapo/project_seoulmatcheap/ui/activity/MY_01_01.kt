@@ -12,18 +12,30 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
+import kr.co.mapo.project_seoulmatcheap.system.STORE
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
+import java.io.Serializable
 
 
 class MY_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0101Binding
-    private lateinit var itemData: MutableList<Item>
+    private lateinit var favoritData : List<FavoritEntity>
+    private lateinit var adapter: InformDetailAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
@@ -33,6 +45,7 @@ class MY_01_01 : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         //데이터 테스트
+        /*
         val itemData = mutableListOf<Item>()
         with(itemData){
             add(Item(R.drawable.solip, "솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km", "4.8"))
@@ -41,6 +54,7 @@ class MY_01_01 : AppCompatActivity() {
             add(Item(R.drawable.western, "웨스턴후라이드라이스", "서울특별시 마포구 홍익로 26 (동교동)", "일식", "0.5km", "4.5"))
             add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
         }
+         */
         //백버튼
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
@@ -48,9 +62,18 @@ class MY_01_01 : AppCompatActivity() {
             setTitle(R.string.myfavorite_title)
         }
         //리사이클러뷰 어댑터 연결
-        val adapter = InformDetailAdapter(itemData,this)
-        binding.recycler.adapter = adapter
-        binding.recycler.layoutManager = LinearLayoutManager(this)
+        /*val adapter = InformDetailAdapter(itemData,this)*/
+
+        with(binding) {
+            recycler.layoutManager = LinearLayoutManager(this@MY_01_01)
+            AppDatabase(this@MY_01_01)!!.storeDAO().getFavorite().observe(this@MY_01_01, {
+                favoritData = it
+                adapter = InformDetailAdapter(favoritData,this@MY_01_01)
+                recycler.adapter = adapter
+                supportActionBar!!.setTitle("찜 목록 (${it.size})")
+            })
+        }
+        binding.recycler.layoutManager = LinearLayoutManager(this@MY_01_01)
 
         //구분선
 //        val  dividerItemDecoration =  DividerItemDecoration(binding.recycler.context, LinearLayoutManager(this).orientation)
@@ -62,20 +85,19 @@ class MY_01_01 : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    //백버튼 활성화
+    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-
     //어댑터
     inner class InformDetailAdapter (
-        private val itemList: MutableList<Item>,
+        private val itemList: List<FavoritEntity>,
         private val owner : AppCompatActivity
     ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>() {
 
@@ -97,22 +119,37 @@ class MY_01_01 : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             val itemData = itemList[position]
             with(holder) {
-                marketIV.setImageResource(itemData.marketIV)
+                Glide.with(owner).load(itemData.photo).into(marketIV)
                 name.text = itemData.name
                 address.text = itemData.address
-                distance.text = itemData.distance
-                score.text = itemData.score
-                sort.text = itemData.sort
+                distance.text = SeoulMatCheap.getInstance().calculateDistance(itemData.lat, itemData.lng)
+                score.text = "0.0"
+                sort.text = itemData.category
             }
             holder.itemView.setOnClickListener {
-                val target = Intent(owner, INFORM_02::class.java)
-                target.putExtra("marketIV", itemData.marketIV)
-                target.putExtra("name", itemData.name)
-                target.putExtra("address", itemData.address)
-                target.putExtra("distance", itemData.distance)
-                target.putExtra("score", itemData.score)
-                target.putExtra("sort", itemData.sort)
-                owner.startActivity(target)
+                GlobalScope.launch(Dispatchers.IO) {
+                    val item = AppDatabase(this@MY_01_01)!!.storeDAO().getStoreDetail(itemData.id)
+                    val target = Intent(owner, INFORM_02::class.java)
+                    target.putExtra(STORE, item[0])
+
+//                target.putExtra("marketIV", itemData.marketIV)
+//                target.putExtra("name", itemData.name)
+//                target.putExtra("address", itemData.address)
+//                target.putExtra("distance", itemData.distance)
+//                target.putExtra("score", itemData.score)
+//                target.putExtra("sort", itemData.sort)
+                    owner.startActivity(target)
+                }
+//                val target = Intent(owner, INFORM_02::class.java)
+//                target.putExtra(STORE, item[0])
+//
+////                target.putExtra("marketIV", itemData.marketIV)
+////                target.putExtra("name", itemData.name)
+////                target.putExtra("address", itemData.address)
+////                target.putExtra("distance", itemData.distance)
+////                target.putExtra("score", itemData.score)
+////                target.putExtra("sort", itemData.sort)
+//                owner.startActivity(target)
             }
         }
         override fun getItemCount() = itemList.size
