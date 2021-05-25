@@ -58,6 +58,7 @@ data class FavoritEntity(
     val	name : String,
     val	address	: String,
     val sort : Int,
+    val category : String,
     val	photo : String,
     val	lng	: Double,
     val	lat	: Double

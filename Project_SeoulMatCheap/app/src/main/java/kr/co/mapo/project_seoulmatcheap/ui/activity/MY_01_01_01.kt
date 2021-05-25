@@ -135,7 +135,7 @@ class MY_01_01_01 : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)

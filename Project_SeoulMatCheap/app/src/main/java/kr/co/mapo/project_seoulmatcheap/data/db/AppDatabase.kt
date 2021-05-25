@@ -36,6 +36,7 @@ abstract class AppDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(context.applicationContext,
                         AppDatabase::class.java, "matcheap.db")
                         .fallbackToDestructiveMigration()   //데이터베이스를 한번 생성후 중간에 테이블 변화가 있을 때 과거의 데이터베이스를 무시하고 새로 생성
+                        .allowMainThreadQueries()
                         .build()
                 }
             }
