@@ -41,6 +41,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             if (position == -1) {
                 AppDatabase(owner)!!.storeDAO().getGuStore(key!!).observe(
                     viewLifecycleOwner, {
+                        list = it
                         adapter = ListRecyclerViewAdapter(it, owner)
                     }
                 )
@@ -90,11 +91,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
         }
 
         categoryScore.setOnClickListener {
-//                val list = listData().apply {
-//                    sortByDescending { it.score }
-//                }
-            //categoryRV.adapter = ListRecyclerViewAdapter(list, owner)
-            categoryRV.adapter =  ListRecyclerViewAdapter(list, owner)
+            categoryRV.adapter =  ListRecyclerViewAdapter(this.list, owner)
             with(categoryDistance) {
                 typeface = null
                 setTextColor(resources.getColor(R.color.dot_edge, null))
@@ -105,9 +102,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             }
         }
         categoryDistance.setOnClickListener {
-//                val list = listData().apply {
-//                    sortBy { it.distance }
-//                }
             val sortedList = list.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
             categoryRV.adapter =  ListRecyclerViewAdapter(sortedList, owner)
             with(categoryDistance) {
