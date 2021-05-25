@@ -40,7 +40,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         val manager = GridLayoutManager(context,4)
         with(binding.gridRecyclerView) {
             layoutManager = manager
-            adapter = GridRecyclerViewAdapter(gridData())
+            adapter = GridRecyclerViewAdapter(gridData(), owner)
         }
         init()
         return binding.root
@@ -147,11 +147,11 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
     private fun gridData(): MutableList<GridItem> {
         val gridData = mutableListOf<GridItem>()
         gridData.add(GridItem(R.drawable.icon_hansik, getString(R.string.category1)))
-        gridData.add(GridItem(R.drawable.icon_japan,getString(R.string.category2)))
         gridData.add(GridItem(R.drawable.icon_china,getString(R.string.category3)))
+        gridData.add(GridItem(R.drawable.icon_japan,getString(R.string.category2)))
         gridData.add(GridItem(R.drawable.icon_food,getString(R.string.category4)))
-        gridData.add(GridItem(R.drawable.icon_wash,getString(R.string.category5)))
         gridData.add(GridItem(R.drawable.icon_beauty,getString(R.string.category6)))
+        gridData.add(GridItem(R.drawable.icon_wash,getString(R.string.category5)))
         gridData.add(GridItem(R.drawable.icon_hotel,getString(R.string.category7)))
         gridData.add(GridItem(R.drawable.icon_store,getString(R.string.category8)))
 

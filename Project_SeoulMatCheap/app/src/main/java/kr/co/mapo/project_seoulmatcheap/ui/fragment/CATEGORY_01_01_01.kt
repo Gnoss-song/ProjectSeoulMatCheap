@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,9 +17,9 @@ import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory010101Binding
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
-class CATEGORY_01_01_01(private val key : String?,
-                        private val owner : AppCompatActivity) : Fragment() {
-
+class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
+    var key : String? = null
+    var position : Int = -1
     private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)
@@ -28,17 +29,22 @@ class CATEGORY_01_01_01(private val key : String?,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(key != null) {
-            AppDatabase(requireContext())!!.storeDAO().getGuStore(key).observe(
-                viewLifecycleOwner, {
-                    binding.categoryRV.adapter = ListRecyclerViewAdapter(it, owner)
-                }
-            )
-        }
         with(binding.categoryRV) {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-            //adapter = ListRecyclerViewAdapter(listData())
+            layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL,false)
+            if(position == -1) {
+                AppDatabase(owner)!!.storeDAO().getGuStore(key!!).observe(
+                    viewLifecycleOwner, {
+                        adapter = ListRecyclerViewAdapter(it, owner)
+                    }
+                )
+            } else {
+                AppDatabase(owner)!!.storeDAO().getSortStore(position!!).observe(
+                    viewLifecycleOwner, {
+                        adapter = ListRecyclerViewAdapter(it, owner)
+                    }
+                )
             }
+        }
         binding.apply {
             categoryScore.setOnClickListener {
                 val list = listData().apply {

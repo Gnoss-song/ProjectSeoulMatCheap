@@ -54,7 +54,7 @@ interface StoreDAO {
 
     //업종에 따라 식당목록 출력
     @Query("SELECT * FROM store_inform WHERE sort = :sort")
-    fun getSortStore(sort: String) : LiveData<List<StoreEntity>>
+    fun getSortStore(sort: Int) : LiveData<List<StoreEntity>>
 
     //업소 상세정보 요청
     @Query("SELECT * FROM store_inform WHERE id = :id")
