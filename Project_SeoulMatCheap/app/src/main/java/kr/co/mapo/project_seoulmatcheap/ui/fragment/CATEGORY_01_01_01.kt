@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory010101Binding
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
-class CATEGORY_01_01_01(private val key : String?) : Fragment() {
+class CATEGORY_01_01_01(private val key : String?,
+                        private val owner : AppCompatActivity) : Fragment() {
+
     private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)
@@ -24,16 +28,23 @@ class CATEGORY_01_01_01(private val key : String?) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(key != null) {
+            AppDatabase(requireContext())!!.storeDAO().getGuStore(key).observe(
+                viewLifecycleOwner, {
+                    binding.categoryRV.adapter = ListRecyclerViewAdapter(it, owner)
+                }
+            )
+        }
         with(binding.categoryRV) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-            adapter = ListRecyclerViewAdapter(listData())
+            //adapter = ListRecyclerViewAdapter(listData())
             }
         binding.apply {
             categoryScore.setOnClickListener {
                 val list = listData().apply {
                     sortByDescending { it.score }
                 }
-                categoryRV.adapter = ListRecyclerViewAdapter(list)
+                //categoryRV.adapter = ListRecyclerViewAdapter(list, owner)
                 with(categoryDistance) {
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
@@ -47,7 +58,7 @@ class CATEGORY_01_01_01(private val key : String?) : Fragment() {
                 val list = listData().apply {
                     sortBy { it.distance }
                 }
-                categoryRV.adapter = ListRecyclerViewAdapter(list)
+                //categoryRV.adapter = ListRecyclerViewAdapter(list)
                 with(categoryDistance) {
                     typeface = Typeface.DEFAULT_BOLD
                     setTextColor(resources.getColor(R.color.main, null))
