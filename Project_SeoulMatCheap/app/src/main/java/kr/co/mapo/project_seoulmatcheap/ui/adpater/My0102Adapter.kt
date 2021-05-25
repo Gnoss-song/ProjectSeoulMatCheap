@@ -88,7 +88,7 @@ class My0102Adapter(
                 }
                 holder.modify.setOnClickListener {
                     val target= Intent(owner, INFORM_02_02_01::class.java)
-                    target.putExtra(KEY,obj)
+                    target.putExtra(KEY,obj as Serializable)
                     owner.startActivity(target)
                 }
             }

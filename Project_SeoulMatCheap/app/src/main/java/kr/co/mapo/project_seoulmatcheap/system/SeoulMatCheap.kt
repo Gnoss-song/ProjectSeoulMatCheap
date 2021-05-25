@@ -84,12 +84,10 @@ class SeoulMatCheap : Application() {
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
                     if(location == null) {
-                        Log.e("[TEST]", "얘1")
                         locationManager.requestLocationUpdates(provider, 400, 1f) {
                             updateLocation(it, context)
                         }
                     } else {
-                        Log.e("[TEST]", "얘2")
                         updateLocation(location, context)
                     }
                 }
@@ -107,12 +105,6 @@ class SeoulMatCheap : Application() {
             .getAddressLine(0)
             .substring(11)
         Log.e("[GSP]", "$x, $y, ${address.value}")
-    }
-
-    //서울시인지 여부 판단하는 함수
-    fun adminArea(lat: Double, lng: Double, context: Context) : Boolean {
-        val address = Geocoder(context, Locale.getDefault()).getFromLocation(lat, lng, 1)[0]
-        return address.adminArea === SEOUL
     }
 
     //현재 위경도에서부터 떨어져 있는 거리 계산

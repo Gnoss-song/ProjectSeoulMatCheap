@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 class ListRecyclerViewAdapter (
-    private val listList:List<StoreEntity>,
+    private val listList: List<StoreEntity>,
     private val owner : AppCompatActivity) : RecyclerView.Adapter<ListRecyclerViewAdapter.ListHolder>(){
 
     inner class ListHolder(rowRoot: View) : RecyclerView.ViewHolder(rowRoot) {
@@ -49,11 +50,11 @@ class ListRecyclerViewAdapter (
             sort.text = listData.category
             distance.text = SeoulMatCheap.getInstance().calculateDistance(listData.lat, listData.lng)
             score.text = "0.0"
-        }
-        holder.itemView.setOnClickListener {
-            val intent = Intent(owner, INFORM_02::class.java)
-            intent.putExtra(STORE, listData)
-            owner.startActivity(intent)
+            itemView.setOnClickListener {
+                val intent = Intent(owner, INFORM_02::class.java)
+                intent.putExtra(STORE, listData)
+                owner.startActivity(intent)
+            }
         }
     }
 }

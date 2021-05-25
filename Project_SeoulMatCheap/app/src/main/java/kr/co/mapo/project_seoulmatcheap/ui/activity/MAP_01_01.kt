@@ -92,12 +92,13 @@ class MAP_01_01 : AppCompatActivity() {
             }
             categoryDistance.setOnClickListener {
                 list.sortBy { it.rate }
-                recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
-                with(categoryDistance) {
-                    typeface = Typeface.DEFAULT_BOLD
-                    setTextColor(resources.getColor(R.color.main, null))
+                    recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
+                    with(categoryDistance) {
+                        typeface = Typeface.DEFAULT_BOLD
+                        setTextColor(resources.getColor(R.color.main, null))
                 }
                 with(categoryScore) {
+                    list.sortByDescending { it.rate }
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
                 }
