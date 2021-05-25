@@ -25,7 +25,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/photo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/inform_image_heigh"
                     android:foreground="@drawable/image_gradi"
@@ -49,7 +49,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView7">
+                    app:layout_constraintTop_toTopOf="@+id/photo">
 
                     <TextView
                         android:id="@+id/text_name"

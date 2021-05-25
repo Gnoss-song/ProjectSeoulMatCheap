@@ -14,7 +14,7 @@ import kr.co.mapo.project_seoulmatcheap.data.ListItem
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory010101Binding
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
-class CATEGORY_01_01_01 : Fragment() {
+class CATEGORY_01_01_01(private val key : String?) : Fragment() {
     private lateinit var binding : FragmentCategory010101Binding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_category_01_01_01, container, false)

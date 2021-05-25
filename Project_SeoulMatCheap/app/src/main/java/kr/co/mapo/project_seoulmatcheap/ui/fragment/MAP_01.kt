@@ -50,6 +50,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private lateinit var storeList : List<StoreEntity>
     private lateinit var list2 : MutableList<StoreEntity>
     private lateinit var filterDialog : MAP_01_02
+    private val dao = AppDatabase(owner)!!.storeDAO()
 
     //infoWindow
     private lateinit var view: MapItemInfowindowBinding
@@ -96,7 +97,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         filterDialog = MAP_01_02(this)
-        AppDatabase(owner)!!.storeDAO().getAllStore().observe(viewLifecycleOwner, {
+        dao.getAllStore().observe(viewLifecycleOwner, {
             storeList = it
         })
     }
@@ -106,12 +107,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
-//        list2 = list.apply {
-//            forEach{
-//                it.distance = SeoulMatCheap.getInstance().calculateDistanceDou(it.x, it.y)
-//            }
-//        }
-//        list2.sortBy { it.distance }
     }
 
     //네이버지도 초기 설정
@@ -231,6 +226,10 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 onOverlayClick(this, item)
                 true
             }
+            dao.isFavorite(item.id).observe(viewLifecycleOwner, {
+                Log.e("[TEST]", "${item.id}")
+                adapter = createInfoWindowAdapter(item, tag as Boolean, view)
+            })
             open(marker)
         }
     }
@@ -239,12 +238,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     fun createInfoWindowAdapter(item: StoreEntity,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
-                var color : ColorStateList = MapHelper.seoulColor
-                //찜 여부도 고려하는 연산 추가
-                GlobalScope.launch(Dispatchers.IO) {
-                    val favorited = AppDatabase(owner)!!.storeDAO().isFavorite(item.id)
-                    if(favorited.isNotEmpty()) color = MapHelper.likeColor
-                }
+                var color : ColorStateList = if(item.liked) MapHelper.likeColor else MapHelper.seoulColor
                 with(view) {
                     textName.text = item.name
                     if(!clicked) {

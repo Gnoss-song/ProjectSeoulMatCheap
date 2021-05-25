@@ -1,6 +1,7 @@
 package kr.co.mapo.project_seoulmatcheap.data.db
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
@@ -30,7 +31,8 @@ data class StoreEntity (
     val	rating_cnt : Int,
     val	photo : String,
     val	lng	: Double,
-    val	lat	: Double
+    val	lat	: Double,
+    var liked : Boolean
 
 ) : Serializable
 

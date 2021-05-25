@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayout
@@ -14,7 +15,7 @@ class CATEGORY_01_01 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_01_01)
-        val CATEGORY_01_01_01 = CATEGORY_01_01_01()
+        val CATEGORY_01_01_01 = CATEGORY_01_01_01(intent.getStringExtra("key"))
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.frameLayout, CATEGORY_01_01_01).commit()
         }
@@ -40,7 +41,10 @@ class CATEGORY_01_01 : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab!!.position) {
                     0 -> supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CATEGORY_01_01_01).commit()
-                    1 -> supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CATEGORY_01_02).commit()
+                    1 -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, CATEGORY_01_02).commit()
+                    }
                 }
             }
         })

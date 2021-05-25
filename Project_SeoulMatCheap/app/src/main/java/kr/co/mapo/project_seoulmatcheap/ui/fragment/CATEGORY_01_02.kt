@@ -36,7 +36,7 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
     private lateinit var view: MapItemInfowindowBinding
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
 
-    private lateinit var list : MutableList<StoreEntity>
+    private lateinit var list : List<StoreEntity>
     private lateinit var naverMap : NaverMap
 
     //오버레이 이벤트 상태 저장
@@ -65,7 +65,7 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
 
     override fun onMapReady(p0: NaverMap) {
         naverMap = p0
-        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
+//        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${list.size}")
         naverMap.apply {
             cameraPosition = map01.setMapCamera(GANGNAM_LAT, GANGNAM_LNG, 16.0)
             minZoom = MAP_MIN_ZOOM
@@ -80,11 +80,11 @@ class CATEGORY_01_02(val owner : AppCompatActivity): Fragment(), OnMapReadyCallb
                 initiateOverlay()
             }
         }
-        list.forEach {
-            val marker = createMaker(it, naverMap)
-            createInfoWindow (it, marker)
-        }
-        map01.createCircle(GANGNAM_LAT, GANGNAM_LNG, 3000.0, naverMap)
+//        list.forEach {
+//            val marker = createMaker(it, naverMap)
+//            createInfoWindow (it, marker)
+//        }
+        //map01.createCircle(GANGNAM_LAT, GANGNAM_LNG, 3000.0, naverMap)
     }
 
     //마커생성함수

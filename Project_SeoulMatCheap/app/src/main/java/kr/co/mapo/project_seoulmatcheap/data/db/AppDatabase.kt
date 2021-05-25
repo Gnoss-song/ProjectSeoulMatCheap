@@ -65,7 +65,8 @@ abstract class AppDatabase : RoomDatabase() {
                     token[11].toInt(),
                     token[12],
                     token[13].toDouble(),
-                    token[14].toDouble()
+                    token[14].toDouble(),
+                    false
                 )
                 CoroutineScope(Dispatchers.IO).launch {
                     storeDAO().insertStore(input)

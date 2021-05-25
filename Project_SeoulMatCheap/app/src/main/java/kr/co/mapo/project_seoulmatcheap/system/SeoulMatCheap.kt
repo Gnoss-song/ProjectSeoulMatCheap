@@ -84,10 +84,12 @@ class SeoulMatCheap : Application() {
             fusedLocationClient.lastLocation
                 .addOnSuccessListener { location : Location? ->
                     if(location == null) {
+                        Log.e("[TEST]", "얘1")
                         locationManager.requestLocationUpdates(provider, 400, 1f) {
                             updateLocation(it, context)
                         }
                     } else {
+                        Log.e("[TEST]", "얘2")
                         updateLocation(location, context)
                     }
                 }

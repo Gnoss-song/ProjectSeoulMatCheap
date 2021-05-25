@@ -1,171 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context=".ui.fragment.INFORM_02_1">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_basic"
-        android:layout_marginTop="@dimen/margin_basic"
-        android:layout_marginEnd="@dimen/margin_basic"
-        android:text="@string/item_location_title"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_filter_title"
-        android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_basic"
-            android:layout_marginTop="@dimen/margin_basic"
-            android:layout_marginEnd="@dimen/margin_basic"
-            android:background="@drawable/button_outline"
-            android:orientation="horizontal">
-
-            <fragment
-                android:id="@+id/map3"
-                android:name="com.naver.maps.map.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="1dp"
-                app:navermap_mapType="Basic"
-                app:navermap_rotateGesturesEnabled="false"
-                app:navermap_symbolScale="0.8"
-                app:navermap_tiltGesturesEnabled="false" />
-        </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView32"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/margin_basic"
-        android:text="서울 마포구 마포대로4길 46"
-        android:textAlignment="viewEnd"
-        android:textStyle="bold" />
+    <data>
+        <variable
+            name="item"
+            type="kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="2dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".ui.fragment.INFORM_02_1">
 
         <TextView
-            android:id="@+id/textView34"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView31"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_height"
-            android:layout_weight="1"
-            android:text="@string/item_location_call_tilte"
-            android:textAlignment="textEnd"
-            android:textColor="@color/main"
-            android:textSize="12sp"
+            android:layout_marginStart="@dimen/margin_basic"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
+            android:text="@string/item_location_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_filter_title"
             android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_basic"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:layout_marginEnd="@dimen/margin_basic"
+                android:background="@drawable/button_outline"
+                android:orientation="horizontal">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.naver.maps.map.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="1dp"
+                    app:navermap_mapType="Basic"
+                    app:navermap_zoom="8"
+                    app:navermap_rotateGesturesEnabled="false"
+                    app:navermap_symbolScale="0.8"
+                    app:navermap_tiltGesturesEnabled="false" />
+            </LinearLayout>
+
         <TextView
-            android:id="@+id/textView33"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/margin_basic"
-            android:text="02-717-2044"
+            android:text="@{item.address}"
             android:textAlignment="viewEnd"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_basic4"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/margin_basic4">
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_navi"
+            <TextView
+                android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_basic"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/margin_height"
                 android:layout_weight="1"
-                android:stateListAnimator="@null"
-                android:text="@string/item_location_find"
-                android:textStyle="bold"
-                app:icon="@drawable/ic_places"
-                app:iconGravity="textStart"
-                app:iconSize="25dp"
-                app:strokeColor="@color/main" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_call"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="@dimen/margin_basic"
-                android:layout_weight="1"
-                android:shadowColor="@color/white"
-                android:text="@string/item_location_call"
+                android:text="@string/item_location_call_tilte"
+                android:textAlignment="textEnd"
                 android:textColor="@color/main"
-                android:textStyle="bold"
-                app:icon="@drawable/ic_phone"
-                app:iconGravity="textStart"
-                app:iconSize="25dp"
-                app:strokeColor="@color/main" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_basic"
+                android:text="@{item.tel}"
+                android:textAlignment="viewEnd"
+                android:textSize="12sp" />
         </LinearLayout>
 
-    <View
-        android:id="@+id/view8"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="@color/divide" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_basic4"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/margin_basic4">
 
-    <TextView
-            android:id="@+id/textView22"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_navi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_basic"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:stateListAnimator="@null"
+                    android:text="@string/item_location_find"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_places"
+                    app:iconGravity="textStart"
+                    app:iconSize="25dp"
+                    app:strokeColor="@color/main" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_call"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="@dimen/margin_basic"
+                    android:layout_weight="1"
+                    android:shadowColor="@color/white"
+                    android:text="@string/item_location_call"
+                    android:textColor="@color/main"
+                    android:textStyle="bold"
+                    app:icon="@drawable/ic_phone"
+                    app:iconGravity="textStart"
+                    app:iconSize="25dp"
+                    app:strokeColor="@color/main" />
+            </LinearLayout>
+
+        <View
+            android:id="@+id/view8"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/margin_basic"
-            android:paddingTop="@dimen/margin_basic"
-            android:text="@string/item_inform_title"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_filter_title"
-            android:textStyle="bold" />
+            android:layout_height="16dp"
+            android:background="@color/divide" />
 
         <TextView
-            android:id="@+id/textView23"
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_basic"
+                android:paddingTop="@dimen/margin_basic"
+                android:text="@string/item_inform_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_filter_title"
+                android:textStyle="bold" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_basic"
-            android:text="영업시간 : 평일 12:00 - 15:00, 17:30 - 22:30|주말 11:00 - 17:00, 17:30 - 00:00\r\n휴무일 : 없음 or 일, 월\r\n배달 : 가능 or 불가능(근처 등등)\r\n예약 : 가능 or 불가능\r\n카드 : 가능 or 불가능\r\n주차 : 가능 or 불가능 or 협소\r\n홈페이지 주소 : http://jungsik.kr/\r\n전자우편주소 : ~@~.~~\r\n기타 : 모던 한식 파인 다이닝을 개척한 장본인이라 평가받는 임정식 셰프는 자신의 이름을 내건 정식당 서울과 정식당 뉴욕을 통해 새롭고 창의적인 한식을 세계에 알리고 있다." />
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    <View
-        android:id="@+id/view9"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:background="@color/divide" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView26"
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영업시간" />
+
+                <TextView
+                    android:id="@+id/text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="영업시간"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_closed2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="휴무일" />
+
+                <TextView
+                    android:id="@+id/text_closed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="휴무일"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/margin_basic"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:text="예약 : "
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_basic"
+                    android:text="@{item.reserve}"
+                    android:textSize="12dp"
+                    tools:text="가능" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:layout_weight="0"
+                    android:text="주차 : "
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="@{item.parking}"
+                    android:textSize="12dp"
+                    tools:text="가능" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@color/divide" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_basic"
+                android:paddingTop="@dimen/margin_basic"
+                android:text="@string/item_menu_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_filter_title"
+                android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/margin_basic"
-            android:paddingTop="@dimen/margin_basic"
-            android:text="@string/item_menu_title"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_filter_title"
-            android:textStyle="bold" />
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/margin_basic"
+            android:paddingBottom="70dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="@dimen/margin_basic" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

@@ -55,13 +55,12 @@ interface StoreDAO {
     //업종에 따라 식당목록 출력
     @Query("SELECT * FROM store_inform WHERE sort = :sort")
     fun getSortStore(sort: String) : LiveData<List<StoreEntity>>
-//
-//    /*
-//    //업소 상세정보 요청
-//    @Query("SELECT * FROM store_inform WHERE id = :id")
-//    fun getStoreDetail(id: Int) : StoreEntity
-//     */
-//
+
+
+    //업소 상세정보 요청
+    @Query("SELECT * FROM store_inform WHERE id = :id")
+    fun getStoreDetail(id: Int) : List<StoreEntity>
+
     //자동완성목록요청
     @Query("SELECT name FROM store_inform")
     fun getAutoComplete() : LiveData<List<String>>
@@ -76,7 +75,7 @@ interface StoreDAO {
 
     //찜여부 판단 요청
     @Query("SELECT id FROM store_favorite WHERE id = :id")
-    suspend fun isFavorite(id: Int) : List<Int>
+    fun isFavorite(id: Int) : LiveData<List<Int>>
 
     //찜목록 요청
     @Query("SELECT * FROM store_favorite")
