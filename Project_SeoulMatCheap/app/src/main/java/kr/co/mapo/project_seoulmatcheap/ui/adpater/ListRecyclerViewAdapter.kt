@@ -7,15 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.ListItem
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
+import kr.co.mapo.project_seoulmatcheap.system.STORE
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 
 class ListRecyclerViewAdapter (
-    private val listList:MutableList<ListItem>)
-    : RecyclerView.Adapter<ListRecyclerViewAdapter.ListHolder>(){
+    private val listList:List<StoreEntity>,
+    private val owner : AppCompatActivity) : RecyclerView.Adapter<ListRecyclerViewAdapter.ListHolder>(){
 
     inner class ListHolder(rowRoot: View) : RecyclerView.ViewHolder(rowRoot) {
         val image : ImageView = rowRoot.findViewById(R.id.marketIV)
@@ -38,16 +43,17 @@ class ListRecyclerViewAdapter (
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
         val listData = listList[position]
         with(holder) {
-            image.setImageResource(listData.linearIV)
+            Glide.with(owner).load(listData.photo).into(image)
             name.text = listData.name
             address.text = listData.address
-            sort.text = listData.sort
-            distance.text = listData.distance
-            score.text = listData.score
+            sort.text = listData.category
+            distance.text = SeoulMatCheap.getInstance().calculateDistance(listData.lat, listData.lng)
+            score.text = "0.0"
         }
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView?.context, INFORM_02::class.java)
-            ContextCompat.startActivity(holder.itemView.context, intent, null)
+            val intent = Intent(owner, INFORM_02::class.java)
+            intent.putExtra(STORE, listData)
+            owner.startActivity(intent)
         }
     }
 }

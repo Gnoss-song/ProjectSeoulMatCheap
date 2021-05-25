@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.GridItem
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory01Binding
+import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_01
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_03
@@ -113,31 +114,31 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         val intent = Intent(context, CATEGORY_01_01::class.java)
         binding.apply {
             when(v?.id) {
-                button1GS.id -> intent.putExtra("key","강서구")
-                button2YC.id -> intent.putExtra("key","양천구")
-                button3GR.id -> intent.putExtra("key","구로구")
-                button4YDP.id -> intent.putExtra("key","영등포구")
-                button5GC.id -> intent.putExtra("key","금천구")
-                button6DJ.id -> intent.putExtra("key","동작구")
-                button7GA.id -> intent.putExtra("key","관악구")
-                button8SC.id -> intent.putExtra("key","서초구")
-                button9GN.id -> intent.putExtra("key","강남구")
-                button10SP.id -> intent.putExtra("key","송파구")
-                button11GD.id -> intent.putExtra("key","강동구")
-                button12DB.id -> intent.putExtra("key","도봉구")
-                button13GB.id -> intent.putExtra("key","강북구")
-                button14NW.id -> intent.putExtra("key","노원구")
-                button15JN.id -> intent.putExtra("key","중랑구")
-                button16MP.id -> intent.putExtra("key","마포구")
-                button17GJ.id -> intent.putExtra("key","광진구")
-                button18DDM.id -> intent.putExtra("key","동대문구")
-                button19SB.id -> intent.putExtra("key","성북구")
-                button20JL.id -> intent.putExtra("key","종로구")
-                button21SD.id -> intent.putExtra("key","성동구")
-                button22YS.id -> intent.putExtra("key","용산구")
-                button23J.id -> intent.putExtra("key","중구")
-                button24SDM.id -> intent.putExtra("key","서대문구")
-                button25EP.id -> intent.putExtra("key","은평구")
+                button1GS.id -> intent.putExtra(KEY,"강서구")
+                button2YC.id -> intent.putExtra(KEY,"양천구")
+                button3GR.id -> intent.putExtra(KEY,"구로구")
+                button4YDP.id -> intent.putExtra(KEY,"영등포구")
+                button5GC.id -> intent.putExtra(KEY,"금천구")
+                button6DJ.id -> intent.putExtra(KEY,"동작구")
+                button7GA.id -> intent.putExtra(KEY,"관악구")
+                button8SC.id -> intent.putExtra(KEY,"서초구")
+                button9GN.id -> intent.putExtra(KEY,"강남구")
+                button10SP.id -> intent.putExtra(KEY,"송파구")
+                button11GD.id -> intent.putExtra(KEY,"강동구")
+                button12DB.id -> intent.putExtra(KEY,"도봉구")
+                button13GB.id -> intent.putExtra(KEY,"강북구")
+                button14NW.id -> intent.putExtra(KEY,"노원구")
+                button15JN.id -> intent.putExtra(KEY,"중랑구")
+                button16MP.id -> intent.putExtra(KEY,"마포구")
+                button17GJ.id -> intent.putExtra(KEY,"광진구")
+                button18DDM.id -> intent.putExtra(KEY,"동대문구")
+                button19SB.id -> intent.putExtra(KEY,"성북구")
+                button20JL.id -> intent.putExtra(KEY,"종로구")
+                button21SD.id -> intent.putExtra(KEY,"성동구")
+                button22YS.id -> intent.putExtra(KEY,"용산구")
+                button23J.id -> intent.putExtra(KEY,"중구")
+                button24SDM.id -> intent.putExtra(KEY,"서대문구")
+                button25EP.id -> intent.putExtra(KEY,"은평구")
             }
         }
         startActivity(intent)

@@ -227,7 +227,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 true
             }
             dao.isFavorite(item.id).observe(viewLifecycleOwner, {
-                Log.e("[TEST]", "${item.id}")
+                Log.e("[TEST]", "${it.size}")
                 adapter = createInfoWindowAdapter(item, tag as Boolean, view)
             })
             open(marker)

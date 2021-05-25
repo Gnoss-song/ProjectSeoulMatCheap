@@ -7,7 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityCategory0101Binding
+import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01_01_01
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01_02
 
@@ -15,7 +17,9 @@ class CATEGORY_01_01 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_01_01)
-        val CATEGORY_01_01_01 = CATEGORY_01_01_01(intent.getStringExtra("key"))
+        //val gu = intent.getStringExtra("key")
+
+        val CATEGORY_01_01_01 = CATEGORY_01_01_01(intent.getStringExtra(KEY), this)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.frameLayout, CATEGORY_01_01_01).commit()
         }
@@ -51,8 +55,7 @@ class CATEGORY_01_01 : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home)
-            finish()
+        if(item.itemId == android.R.id.home) finish()
         return super.onOptionsItemSelected(item)
     }
 }
