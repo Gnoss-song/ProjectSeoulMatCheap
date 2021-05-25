@@ -34,6 +34,7 @@ class My0102Adapter(
             notifyDataSetChanged()
         }
     }
+
     inner class ImageTypeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.informName)
         val date : TextView = itemView.findViewById(R.id.informDate)
@@ -43,6 +44,7 @@ class My0102Adapter(
         val delete : TextView = itemView.findViewById(R.id.btn_delete)
         val modify : TextView = itemView.findViewById(R.id.btn_modify)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View?
         return when (viewType) {
