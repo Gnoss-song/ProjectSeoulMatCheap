@@ -95,7 +95,6 @@ class MY_01_01 : AppCompatActivity() {
             val score: TextView = itemView.findViewById(R.id.score)
             val sort: TextView = itemView.findViewById(R.id.sort)
         }
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
             val view = LayoutInflater.from(parent.context).inflate(
                 R.layout.inform_01, parent, false

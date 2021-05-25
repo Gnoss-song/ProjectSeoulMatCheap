@@ -15,5 +15,6 @@ interface StoreRepository {
 
     fun addFavorite(favoritEntity: FavoritEntity)
     fun deleteFavorite(id : List<Int>)
+    fun deleteFavorite2(id : List<FavoritEntity>)
 
 }

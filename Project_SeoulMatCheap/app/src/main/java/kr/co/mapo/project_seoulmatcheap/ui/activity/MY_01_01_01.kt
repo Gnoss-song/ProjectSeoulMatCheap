@@ -25,11 +25,14 @@ import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.data.Model
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepositoryImpl
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy010101Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepository as StoreRepository
 
 class MY_01_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy010101Binding
@@ -45,6 +48,7 @@ class MY_01_01_01 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.myfavorite_title_modify)
         }
+
 
         val itemData = intent.getSerializableExtra(KEY) as List<FavoritEntity>
 
@@ -89,6 +93,7 @@ class MY_01_01_01 : AppCompatActivity() {
         private val owner : AppCompatActivity
     ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
         //체크박스 상태 저장
+        private val dao = AppDatabase(owner)!!.storeDAO()
         private var checkboxStatus = SparseBooleanArray()
 
 
@@ -135,16 +140,19 @@ class MY_01_01_01 : AppCompatActivity() {
         //삭제함수
         @RequiresApi(Build.VERSION_CODES.P)
         fun requestRemove(click : Boolean) {
+
             if (click) {
                 var i = 0
+                val check = StoreRepositoryImpl(dao)
+                val deleteList = itemList.toList()
                 while (itemList.size != 0 && i < itemList.size) {
                     if (itemList[i].checked) {
                         itemList.removeAt(i)
                         notifyDataSetChanged()
-
                     } else
                         i++
                 }
+                check.deleteFavorite2(deleteList)
             }
             checkboxStatus.clear()
             }
