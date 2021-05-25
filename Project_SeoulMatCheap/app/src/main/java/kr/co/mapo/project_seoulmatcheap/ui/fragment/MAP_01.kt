@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.location.Location
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -335,6 +336,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     fun mapButtonClick(v : View) {
         when(v.id) {
             R.id.button_list -> {
+                Log.e("[TEST]", "왜꺼지징?")
                 val intent = Intent(owner, MAP_01_01::class.java)
                 intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
                 intent.putExtra(LIST, storeList as Serializable)

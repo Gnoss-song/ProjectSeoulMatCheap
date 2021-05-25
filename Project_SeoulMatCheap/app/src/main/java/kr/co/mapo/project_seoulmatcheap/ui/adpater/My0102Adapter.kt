@@ -12,9 +12,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.willy.ratingbar.ScaleRatingBar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Model
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.system.KEY
+import kr.co.mapo.project_seoulmatcheap.system.STORE
+import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02_02_01
 import java.io.Serializable
 
@@ -91,6 +97,14 @@ class My0102Adapter(
                     target.putExtra(KEY,obj as Serializable)
                     owner.startActivity(target)
                 }
+            }
+        }
+        holder.itemView.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                val list = AppDatabase(owner)!!.storeDAO().getStoreDetailName(obj.title)
+                val intent = Intent(owner, INFORM_02::class.java)
+                intent.putExtra(STORE, list[0])
+                owner.startActivity(intent)
             }
         }
     }

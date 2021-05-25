@@ -38,8 +38,8 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     private fun init() {
-        storelist = intent.getSerializableExtra(LIST) as List<StoreEntity>
-        sortedlist = storelist.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
+//        storelist = intent.getSerializableExtra(LIST) as List<StoreEntity>
+//        sortedlist = storelist.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
         setView()
     }
 
@@ -51,10 +51,10 @@ class MAP_01_01 : AppCompatActivity() {
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-                //adapter = ListRecyclerViewAdapter(list,this@MAP_01_01)
+                adapter = ListRecyclerViewAdapter(storelist,this@MAP_01_01)
             }
             categoryScore.setOnClickListener {
-              //  recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
+                recyclerView.adapter = ListRecyclerViewAdapter(storelist, this@MAP_01_01)
                 with(categoryDistance) {
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
@@ -65,7 +65,7 @@ class MAP_01_01 : AppCompatActivity() {
                 }
             }
             categoryDistance.setOnClickListener {
-                // recyclerView.adapter = InformListAdapter(list, this@MAP_01_01)
+                recyclerView.adapter = ListRecyclerViewAdapter(sortedlist, this@MAP_01_01)
                 with(categoryDistance) {
                     typeface = Typeface.DEFAULT_BOLD
                     setTextColor(resources.getColor(R.color.main, null))

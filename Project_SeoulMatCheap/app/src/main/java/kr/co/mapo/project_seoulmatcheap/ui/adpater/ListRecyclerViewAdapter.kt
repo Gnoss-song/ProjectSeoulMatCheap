@@ -38,13 +38,17 @@ class ListRecyclerViewAdapter (
     }
 
     override fun getItemCount(): Int {
-        return listList.size
+        val size = listList.size
+        return if(size>50) 50 else size
     }
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {
         val listData = listList[position]
         with(holder) {
-            Glide.with(owner).load(listData.photo).into(image)
+            Glide.with(owner).load(listData.photo)
+                .placeholder(R.drawable.inform_image)
+                .error(R.drawable.inform_image)
+                .into(image)
             name.text = listData.name
             address.text = listData.address
             sort.text = listData.category

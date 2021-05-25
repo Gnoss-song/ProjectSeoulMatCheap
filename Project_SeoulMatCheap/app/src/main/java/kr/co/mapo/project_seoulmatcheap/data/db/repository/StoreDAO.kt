@@ -60,6 +60,10 @@ interface StoreDAO {
     @Query("SELECT * FROM store_inform WHERE id = :id")
     fun getStoreDetail(id: Int) : List<StoreEntity>
 
+    //업소 상세정보 요청
+    @Query("SELECT * FROM store_inform WHERE name = :name")
+    fun getStoreDetailName(name: String) : List<StoreEntity>
+
     //자동완성목록요청
     @Query("SELECT name FROM store_inform")
     fun getAutoComplete() : LiveData<List<String>>
