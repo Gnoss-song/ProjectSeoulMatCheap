@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 /**
  * @author SANDY
@@ -31,7 +32,7 @@ data class StoreEntity (
     val	lng	: Double,
     val	lat	: Double
 
-)
+) : Serializable
 
 //식당 메뉴정보 Entity
 @Entity(tableName = "store_menu")

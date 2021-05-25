@@ -105,7 +105,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
 
     override fun onClick(v: View?) {
         val intent = Intent(context, CATEGORY_01_01::class.java)
-
         binding.apply {
             when(v?.id) {
                 button1GS.id -> intent.putExtra("key","강서구")

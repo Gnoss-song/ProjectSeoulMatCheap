@@ -39,14 +39,12 @@ abstract class AppDatabase : RoomDatabase() {
                         .build()
                 }
             }
-            Log.e("[DATABASE]", "$instance")
             return instance
         }
     }
     fun loadStore(context: Context) {   //식당정보 추가하기
         val prefs = context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
-        Log.e("ㅎㅎ", "${prefs.getBoolean(DOWNLOADSTORE, true)}")
-        if(!prefs.getBoolean(DOWNLOADSTORE, true)) {
+        if(!prefs.getBoolean(DOWNLOADMENU, false)) {
             val assetManager = context.resources.assets
             val inputStream = assetManager.open("store.txt")
             inputStream.bufferedReader().readLines().forEach {
@@ -69,36 +67,36 @@ abstract class AppDatabase : RoomDatabase() {
                     token[13].toDouble(),
                     token[14].toDouble()
                 )
-                CoroutineScope(Dispatchers.Main).launch {
+                CoroutineScope(Dispatchers.IO).launch {
                     storeDAO().insertStore(input)
                 }
             }
             prefs.edit().putBoolean(DOWNLOADSTORE, true).apply()
         }
-        CoroutineScope(Dispatchers.Main).launch {
-            val output = storeDAO().getAllStore()
-            Log.e("[STORE]", "${output.value?.size}")
+        CoroutineScope(Dispatchers.IO).launch {
+            val output = storeDAO().getTotalStore()
+            Log.e("[STORE]", "${output.size}")
         }
     }
     fun loadMenu(context: Context) {    //메뉴정보 추가하기
         val prefs = context.getSharedPreferences(USER_PRESFS, Application.MODE_PRIVATE)
-        val assetManager= context.resources.assets
-        val inputStream= assetManager.open("menu.txt")
-        Log.e("ㅎㅎ", "${prefs.getBoolean(DOWNLOADMENU, true)}")
-        if(!prefs.getBoolean(DOWNLOADMENU, true)) {
+        if(!prefs.getBoolean(DOWNLOADMENU, false)) {
+            val assetManager= context.resources.assets
+            val inputStream= assetManager.open("menu.txt")
+            Log.e("ㅎㅎ", "${prefs.getBoolean(DOWNLOADMENU, true)}")
             inputStream.bufferedReader().readLines().forEach {
                 val token = it.split("\t")
                 Log.e("[FILE]", "$token")
                 val input = MenuEntity(null, token[0].toInt(), token[1], token[2], token[3].toInt())
-                CoroutineScope(Dispatchers.Main).launch {
+                CoroutineScope(Dispatchers.IO).launch {
                     storeDAO().insertMenu(input)
                 }
             }
             prefs.edit().putBoolean(DOWNLOADMENU, true).apply()
         }
-        CoroutineScope(Dispatchers.Main).launch {
-            val output = storeDAO().getAllMenu()
-            Log.e("[MENU]", "${output.value?.size}")
+        CoroutineScope(Dispatchers.IO).launch {
+            val output = storeDAO().getTotalMenu()
+            Log.e("[MENU]", "${output.size}")
         }
     }
 }

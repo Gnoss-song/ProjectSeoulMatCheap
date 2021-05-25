@@ -41,5 +41,6 @@ const val MARKER_SIZE = 120
 //인텐트 Extra 이름
 const val ADDRESS = "address"
 const val LIST = "list"
+const val STORE = "store"
 
 //파라미터 이름

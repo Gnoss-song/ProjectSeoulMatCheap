@@ -40,9 +40,13 @@ interface StoreDAO {
     //모든 식당목록 출력
     @Query("SELECT * FROM store_inform")
     fun getAllStore() : LiveData<List<StoreEntity>>
+    @Query("SELECT * FROM store_inform")
+    fun getTotalStore() : List<StoreEntity>
     //모든 메뉴 출력
     @Query("SELECT * FROM store_menu")
     fun getAllMenu() : LiveData<List<MenuEntity>>
+    @Query("SELECT * FROM store_menu")
+    fun getTotalMenu() : List<MenuEntity>
 
     //구 이름에 따라 식당목록 출력
     @Query("SELECT * FROM store_inform WHERE gu = :gu")

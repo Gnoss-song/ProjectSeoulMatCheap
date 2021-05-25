@@ -106,9 +106,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         SeoulMatCheap.getInstance().address.observe(viewLifecycleOwner, Observer {
             binding.toolbar.title = it
         })
-        binding.include.storeBottomLayout.setOnClickListener {
-            startActivity(Intent(owner, INFORM_02::class.java))
-        }
 //        list2 = list.apply {
 //            forEach{
 //                it.distance = SeoulMatCheap.getInstance().calculateDistanceDou(it.x, it.y)
@@ -318,6 +315,11 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     fun setBottomSheetData(item : StoreEntity) {
         binding.include.item = item
         with(binding.include) {
+            storeBottomLayout.setOnClickListener {
+                val intent = Intent(owner, INFORM_02::class.java)
+                intent.putExtra(STORE, item)
+                startActivity(intent)
+            }
             Glide.with(owner).load(item.photo).into(image)
             distance.text = SeoulMatCheap.getInstance().calculateDistance(item.lat, item.lng)
             score.text = "0.0"
