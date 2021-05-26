@@ -12,31 +12,35 @@ import androidx.fragment.app.Fragment
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.SearchHistoryPrefs
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-import kr.co.mapo.project_seoulmatcheap.ui.activity.Test
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.AutoCompleteAdapter
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformListAdapter
+import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.SearchHistoryAdapter
 
 //검색성공
 class SEARCH_01_01(
     private val owner : AppCompatActivity,
-    private val word : String
+    private val word : String,
+    private val list : List<StoreEntity>
     ) : Fragment() {
 
     companion object {
-        fun newInstance(owner: AppCompatActivity, word: String) : Fragment {
-            return SEARCH_01_01(owner, word)
+        fun newInstance(owner: AppCompatActivity, word: String, list: List<StoreEntity>) : Fragment {
+            return SEARCH_01_01(owner, word, list)
         }
     }
 
     private lateinit var binding : FragmentSearch0101Binding
     private lateinit var filterAdapter : AutoCompleteAdapter
     private lateinit var searchHistoryAdapter: SearchHistoryAdapter
-    private val list = ArrayList<Test>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +49,20 @@ class SEARCH_01_01(
         binding = FragmentSearch0101Binding.inflate(inflater, container, false)
         binding.searchEditText.setText(word)
         setHasOptionsMenu(true)
+        init()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        setView()
     }
 
     private fun init() {
         owner.setSupportActionBar(binding.toolbar)
-        val test = arrayListOf("자동", "자동완성", "자동완성테스트", "자동완성테스트1", "자동완성테스트2", "자동완성테스트3", "완성", "테스트")
-        filterAdapter = AutoCompleteAdapter(test, owner)
+        filterAdapter = AutoCompleteAdapter(SeoulMatCheap.getInstance().filterList, owner)
+        Log.e("[AUTOCOMPLETE]", SeoulMatCheap.getInstance().filterList.size.toString())
         searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
-        setView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,9 +77,12 @@ class SEARCH_01_01(
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
         }
         with(binding) {
+            recyclerView.apply {
+                layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
+                adapter = ListRecyclerViewAdapter(list, owner)
+            }
             categoryScore.setOnClickListener {
-                //list.sortBy { list.score }
-                recyclerView.adapter = InformListAdapter(list, owner)
+                recyclerView.adapter = ListRecyclerViewAdapter(list, owner)
                 with(categoryDistance) {
                     typeface = null
                     setTextColor(resources.getColor(R.color.dot_edge, null))
@@ -86,8 +93,8 @@ class SEARCH_01_01(
                 }
             }
             categoryDistance.setOnClickListener {
-                list.sortBy { it.rate }
-                recyclerView.adapter = InformListAdapter(list, owner)
+                val sortedList = list.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
+                recyclerView.adapter = ListRecyclerViewAdapter(sortedList, owner)
                 with(categoryDistance) {
                     typeface = Typeface.DEFAULT_BOLD
                     setTextColor(resources.getColor(R.color.main, null))
@@ -118,7 +125,6 @@ class SEARCH_01_01(
                             if(!s.isNullOrEmpty()) {
                                 filterAdapter.filter.filter(s)
                                 visibility = View.VISIBLE
-                                Log.e("[자동완성 어댑터]", "${filterAdapter.itemCount}")
                             } else {
                                 visibility = View.GONE
                             }
@@ -134,12 +140,17 @@ class SEARCH_01_01(
                 }
                 //엔터키 이벤트
                 setOnEditorActionListener { v, actionId, event ->
+                    //키보드 내리기
+                    val inputManager = owner.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+                    binding.searchEditText.clearFocus()
+                    val word = searchEditText.text.toString().trim()
                     if(searchEditText.text?.isNotEmpty() == true) {
-                        SeoulMatCheap.getInstance().showToast(owner, "검색요청")
+                        SeoulMatCheap.getInstance().showToast(owner, "${word}(을)를 검색합니다.")
                         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                            goFail(searchEditText.text.toString().trim())
+                            goSearch(word)
                         } else { //그냥 엔터 쳤을 때
-                            goFail(searchEditText.text.toString().trim())
+                            goSearch(word)
                         }
                     } else SeoulMatCheap.getInstance().showToast(owner, "검색어를 입력해주세요")
                     return@setOnEditorActionListener false
@@ -157,8 +168,9 @@ class SEARCH_01_01(
                     .commit()
             }
             R.id.search -> {
-                SeoulMatCheap.getInstance().showToast(owner, "검색 버튼 누름")
-                if (binding.searchEditText.text?.isNotEmpty() == true) goSearch(binding.searchEditText.text.toString().trim())
+                val word = binding.searchEditText.text.toString().trim()
+                SeoulMatCheap.getInstance().showToast(owner, "${word}를 검색합니다.")
+                if (binding.searchEditText.text?.isNotEmpty() == true) goSearch(word)
                 else SeoulMatCheap.getInstance().showToast(owner, "검색어를 입력해주세요")
             }
         }
@@ -167,18 +179,21 @@ class SEARCH_01_01(
 
     private fun goSearch(word: String) {
         SearchHistoryPrefs.saveSearchWord(owner, word)
-        owner.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, SEARCH_01_01.newInstance(owner, word))
-            .commit()
-    }
-
-    private fun goFail(word: String) {
-        SearchHistoryPrefs.saveSearchWord(owner, word)
-        owner.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
-            .commit()
+        GlobalScope.launch(Dispatchers.IO) {
+            val list = AppDatabase(owner)!!.storeDAO().searchStore("%$word%")
+            if(list.isNotEmpty()) { //검색성공
+                //검색성공 -> 리사이클러뷰 리스트 업데이트
+                launch(Dispatchers.Main) {
+                    binding.recyclerView.adapter = ListRecyclerViewAdapter(list, owner)
+                }
+            } else {    //검색실패
+                owner.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
+                    .commit()
+                SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")
+            }
+        }
     }
 
 }

@@ -21,10 +21,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.Item
+import kr.co.mapo.project_seoulmatcheap.data.Model
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepositoryImpl
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy010101Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
+import kr.co.mapo.project_seoulmatcheap.system.KEY
+import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepository as StoreRepository
 
 class MY_01_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy010101Binding
@@ -40,77 +48,16 @@ class MY_01_01_01 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.myfavorite_title_modify)
         }
-        //데이터 테스트
-        val itemData = mutableListOf<Item>()
-        with(itemData){
-            add(Item(R.drawable.solip, "솔잎식당", "서울특별시 마포구 마포대로4길 46 (도화동)", "한식", "1.1km", "0.1"))
-            add(Item(R.drawable.poonyeon, "풍년갈비", "서울특별시 마포구 동교로 264 (연남동", "한식", "1.4km", "0.2"))
-            add(Item(R.drawable.wellbeing, "웰빙뚝배기", "서울특별시 마포구 동교로12길 21 (서교동)", "한식", "2.2km", "0.3"))
-            add(Item(R.drawable.western, "웨스턴후라이드라이스", "서울특별시 마포구 홍익로 26 (동교동)", "일식", "0.5km", "0.4"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "0.5"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "0.6"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "0.7"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "0.8"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "0.9"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.1"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.2"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.3"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.4"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.5"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.6"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.7"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.8"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "1.9"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "2.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-            add(Item(R.drawable.halbum, "할범탕수육", "서울특별시 양천구 목동중앙북로 15 (목동)", "분식", "4.4km", "5.0"))
-        }
+
+
+        val itemData = intent.getSerializableExtra(KEY) as List<FavoritEntity>
+
         //리사이클러뷰 어댑터 연결
-        val adapter = My010101Adapter(itemData,this)
+        val adapter = My010101Adapter(itemData.toMutableList(),this)
         binding.recycler4.adapter = adapter
         binding.recycler4.layoutManager = LinearLayoutManager(this)
+
+
         //버튼 클릭
         binding.btnDelete.setOnClickListener{
             val mDeleteView =LayoutInflater.from(this).inflate(R.layout.fragment_dialog_my_delete, null)
@@ -142,10 +89,11 @@ class MY_01_01_01 : AppCompatActivity() {
     }
     //어댑터
     inner class My010101Adapter(
-        private val itemList : MutableList<Item>,
+        private val itemList : MutableList<FavoritEntity>,
         private val owner : AppCompatActivity
     ) : RecyclerView.Adapter<My010101Adapter.ViewHolderClass>(){
         //체크박스 상태 저장
+        private val dao = AppDatabase(owner)!!.storeDAO()
         private var checkboxStatus = SparseBooleanArray()
 
 
@@ -158,7 +106,7 @@ class MY_01_01_01 : AppCompatActivity() {
             val score: TextView = itemView.findViewById(R.id.score)
             val sort: TextView = itemView.findViewById(R.id.sort)
 
-            fun bind(itemList:Item) = with(binding){
+            fun bind(itemList:FavoritEntity) = with(binding){
                 Log.e("TEST1","${checkboxStatus}")
                 checkboxUser.isChecked = checkboxStatus[adapterPosition]
                 checkboxUser.setOnClickListener {
@@ -177,12 +125,12 @@ class MY_01_01_01 : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             val itemData = itemList[position]
             with(holder){
-                marketIV.setImageResource(itemData.marketIV)
+                Glide.with(owner).load(itemData.photo).into(marketIV)
                 name.text = itemData.name
                 address.text = itemData.address
-                distance.text = itemData.distance
-                score.text = itemData.score
-                sort.text = itemData.sort
+                distance.text = SeoulMatCheap.getInstance().calculateDistance(itemData.lat,itemData.lng)
+                score.text = "0.0"
+                sort.text = itemData.category
 
                 bind(itemList[position])
             }
@@ -192,8 +140,11 @@ class MY_01_01_01 : AppCompatActivity() {
         //삭제함수
         @RequiresApi(Build.VERSION_CODES.P)
         fun requestRemove(click : Boolean) {
+
             if (click) {
                 var i = 0
+                val check = StoreRepositoryImpl(dao)
+                val deleteList = itemList.toList()
                 while (itemList.size != 0 && i < itemList.size) {
                     if (itemList[i].checked) {
                         itemList.removeAt(i)
@@ -201,6 +152,7 @@ class MY_01_01_01 : AppCompatActivity() {
                     } else
                         i++
                 }
+                check.deleteFavorite2(deleteList)
             }
             checkboxStatus.clear()
             }

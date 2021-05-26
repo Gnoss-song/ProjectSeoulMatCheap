@@ -27,6 +27,7 @@
             android:hint="@string/search_hint"
             android:imeOptions="actionSearch"
             android:inputType="textPersonName"
+            android:textCursorDrawable="@color/white"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="5dp" />
 

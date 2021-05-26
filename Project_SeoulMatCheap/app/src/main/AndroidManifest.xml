@@ -54,7 +54,8 @@
         <activity android:name=".ui.activity.MATCHEAP_01_03_01" />
         <activity android:name=".ui.activity.MATCHEAP_01_03" />
         <activity android:name=".ui.activity.MATCHEAP_01_02_01" />
-        <activity android:name=".ui.activity.LOGIN_01" />
+        <activity android:name=".ui.activity.LOGIN_01"
+            android:theme="@style/theme_splash"/>
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"

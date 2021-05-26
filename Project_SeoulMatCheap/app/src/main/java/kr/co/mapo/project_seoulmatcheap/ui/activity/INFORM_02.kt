@@ -48,7 +48,29 @@ class INFORM_02 : AppCompatActivity() {
 
     private fun init() {
         setSupportActionBar(binding.toolbar)
-        item = intent.getSerializableExtra(STORE) as StoreEntity
+        val store = intent.getSerializableExtra(STORE) as StoreEntity
+        if(store != null) {
+            item = intent.getSerializableExtra(STORE) as StoreEntity
+        } else {
+            item = StoreEntity(
+                8799,
+                "황금돼지갈비",
+                "중랑구",
+                "서울특별시 중랑구 면목로 404 (면목동)",
+                0,
+                "한식",
+                "02-2207-3722",
+                "10:00~22:00",
+                "일요일",
+                "가능",
+                "가능",
+                2,
+                "http://tearstop.seoul.go.kr/mulga/photo/20131209140203.jpg",
+                127.0878543,
+                37.58800634,
+                false
+            )
+        }
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             title = null

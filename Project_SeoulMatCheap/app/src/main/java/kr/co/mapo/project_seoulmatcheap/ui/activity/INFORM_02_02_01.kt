@@ -16,17 +16,21 @@ import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
+import kr.co.mapo.project_seoulmatcheap.system.KEY
 
 class INFORM_02_02_01 : AppCompatActivity() {
-    //    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: ActivityInform020201Binding
     private val OPEN_GALLERY = 1
     private lateinit var ratingscore: TextView
     private lateinit var ratingBar: ScaleRatingBar
+    private lateinit var review : EditText
     private var str: String? = null
 
 
@@ -34,11 +38,27 @@ class INFORM_02_02_01 : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         binding = ActivityInform020201Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_inform_02_02_01)
+        binding.review = this
         setSupportActionBar(binding.toolbar)
-        // 다중 선택시 리사이클러뷰 코드.
-//        recyclerView = findViewById(R.id.recyclerview2)
-//        recyclerView.layoutManager = LinearLayoutManager(this@INFORM_02_02,LinearLayoutManager.HORIZONTAL,false)
+
+        val reviewData = intent.getSerializableExtra(KEY) as Model
+
+
+
+        ratingBar = findViewById(R.id.ratingBar)
+        ratingscore= findViewById(R.id.ratingscore)
+
+
+//        binding.textView.text.toString() = reviewData.review
+        binding.ratingBar.rating = reviewData.ratingBar
+        binding.imageView18.setImageResource(reviewData.IV)
+        binding.textView.setText(reviewData.review)
+        binding.ratingscore.text = reviewData.ratingBar.toString()
+
+
+
+
 
         binding.btnComplete.setOnClickListener {
             val mLogoutView =
@@ -69,17 +89,14 @@ class INFORM_02_02_01 : AppCompatActivity() {
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
             setTitle(R.string.review_title_modify)
         }
-        ratingBar = findViewById(R.id.ratingBar)
-        ratingscore = findViewById(R.id.ratingscore)
+
         ratingBar.setOnRatingChangeListener(BaseRatingBar.OnRatingChangeListener() { ScaleRatingBar, rating, _ ->
             str = rating.toString()
             ratingscore.text = str
         })
-
         binding.imageselectlayout.setOnClickListener {
             openGallery()
         }
-
         binding.textView.setOnTouchListener(View.OnTouchListener { v, event ->
             if (binding.textView.hasFocus()) {
                 v.parent.requestDisallowInterceptTouchEvent(true)

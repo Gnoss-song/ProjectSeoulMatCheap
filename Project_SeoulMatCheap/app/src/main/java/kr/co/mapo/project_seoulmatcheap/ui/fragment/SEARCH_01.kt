@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.FragmentSearch01Binding
@@ -51,17 +54,13 @@ open class SEARCH_01(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setView()
     }
 
     private fun init() {
         preferences = owner.getSharedPreferences(SEARCH_HISTROY, Application.MODE_PRIVATE)
-        AppDatabase(owner)!!.storeDAO().getAutoComplete().observe(
-            viewLifecycleOwner, {
-                filterAdapter = AutoCompleteAdapter(it, owner)
-            }
-        )
+        filterAdapter = AutoCompleteAdapter(SeoulMatCheap.getInstance().filterList, owner)
         searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
-        setView()
     }
 
     private fun setView() {
@@ -92,7 +91,6 @@ open class SEARCH_01(
                         if(!s.isNullOrEmpty()) {
                             filterAdapter.filter.filter(s)
                             binding.recyclerView.adapter = filterAdapter
-                            Log.e("[자동완성 어댑터]", "${filterAdapter.itemCount}")
                         } else {
                             binding.recyclerView.adapter = searchHistoryAdapter
                         }
@@ -103,12 +101,17 @@ open class SEARCH_01(
                 })
                 //엔터키 이벤트
                 setOnEditorActionListener { v, actionId, event ->
-                    if(searchEditText.text?.isNotEmpty() == true) {
-                        SeoulMatCheap.getInstance().showToast(owner, "검색요청")
+                    val word = searchEditText.text.toString().trim()
+                    //키보드 내리기
+                    val inputManager = owner.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
+                    binding.searchEditText.clearFocus()
+                    if(word.isNotEmpty()) {
+                        SeoulMatCheap.getInstance().showToast(owner, "${word}(을)를 검색합니다.")
                         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                            goFail(searchEditText.text.toString().trim())
+                            goSearch(word)
                         } else { //그냥 엔터 쳤을 때
-                            goFail(searchEditText.text.toString().trim())
+                            goSearch(word)
                         }
                     } else SeoulMatCheap.getInstance().showToast(owner, "검색어를 입력해주세요")
                     return@setOnEditorActionListener false
@@ -124,18 +127,22 @@ open class SEARCH_01(
 
     private fun goSearch(word: String) {
         SearchHistoryPrefs.saveSearchWord(owner, word)
-        owner.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, SEARCH_01_01.newInstance(owner, word))
-            .commit()
-    }
-
-    private fun goFail(word: String) {
-        SearchHistoryPrefs.saveSearchWord(owner, word)
-        owner.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
-            .commit()
+        GlobalScope.launch(Dispatchers.IO) {
+            val list = AppDatabase(owner)!!.storeDAO().searchStore("%$word%")
+            if(list.isNotEmpty()) { //검색성공
+                //검색성공
+                owner.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SEARCH_01_01.newInstance(owner, word, list))
+                    .commit()
+            } else {    //검색실패
+                owner.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
+                    .commit()
+                SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")
+            }
+        }
     }
 
 }

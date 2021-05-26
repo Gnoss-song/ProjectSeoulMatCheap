@@ -54,11 +54,15 @@ interface StoreDAO {
 
     //업종에 따라 식당목록 출력
     @Query("SELECT * FROM store_inform WHERE sort = :sort")
-    fun getSortStore(sort: String) : LiveData<List<StoreEntity>>
+    fun getSortStore(sort: Int) : LiveData<List<StoreEntity>>
 
     //업소 상세정보 요청
     @Query("SELECT * FROM store_inform WHERE id = :id")
     fun getStoreDetail(id: Int) : List<StoreEntity>
+
+    //업소 상세정보 요청
+    @Query("SELECT * FROM store_inform WHERE name = :name")
+    fun getStoreDetailName(name: String) : List<StoreEntity>
 
     //자동완성목록요청
     @Query("SELECT name FROM store_inform")
@@ -66,7 +70,7 @@ interface StoreDAO {
 
     //검색요청
     @Query("SELECT * FROM store_inform WHERE name LIKE :word ")
-    fun searchStore(word : String) : LiveData<List<StoreEntity>>
+    fun searchStore(word : String) : List<StoreEntity>
 
     //식당의 메뉴 목록 출력
     @Query("SELECT * FROM store_menu WHERE id = :id")
@@ -80,7 +84,8 @@ interface StoreDAO {
     @Query("SELECT * FROM store_favorite")
     fun getFavorite() : LiveData<List<FavoritEntity>>
 
-    @Query("SELECT * FROM store_favorite")
-    suspend fun getFavorites() : List<FavoritEntity>
+    @Query("SELECT id FROM store_favorite")
+    fun getFavoriteIdList() : LiveData<List<Int>>
+
 
 }
