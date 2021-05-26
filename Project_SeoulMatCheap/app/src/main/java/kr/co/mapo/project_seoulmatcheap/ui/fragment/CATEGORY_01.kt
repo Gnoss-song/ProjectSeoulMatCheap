@@ -60,6 +60,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                 okButton.setOnClickListener {
                     mAlertDialog.dismiss()
                 }
+                //태수얌 정신차려.....
                 true
             }
         }
