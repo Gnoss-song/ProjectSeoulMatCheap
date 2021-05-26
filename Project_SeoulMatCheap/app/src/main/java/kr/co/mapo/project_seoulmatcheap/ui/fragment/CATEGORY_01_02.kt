@@ -82,7 +82,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
             favoritList.value = it
         })
         list = SeoulMatCheap.getInstance().storeList
-        Log.e("[카테고리 지도]", "${list.size}")
         view = MapItemInfowindowBinding.inflate(layoutInflater)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
@@ -109,8 +108,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
         naverMap = p0
         val x = MapHelper.getLat(key)
         val y = MapHelper.getLng(key)
-        Log.e("[확인]", "$key")
-        Log.e("[확인]", "$x . $y")
         naverMap.apply {
             cameraPosition = setMapCamera(x, y, 14.0)
             minZoom = MAP_MIN_ZOOM
@@ -140,7 +137,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
     //마커생성함수
     private fun createMaker(item: StoreEntity, naverMap: NaverMap) : Marker {
         return Marker().apply {
-            Log.e("[TEST]", "$item")
             position = LatLng(item.lat, item.lng)
             map = naverMap
             width = MARKER_SIZE
@@ -335,7 +331,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
     //필터 기능 처리함수 - 업종필터
     fun filterSort(filterSort : MutableSet<String>) {
         this.filterSort = filterSort
-        Log.e("[필터 목록-맵]", filterSort.toString())
         markersHansik.forEach { it.map = null }
         markersChina.forEach { it.map = null }
         markersJapan.forEach { it.map = null }

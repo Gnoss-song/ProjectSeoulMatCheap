@@ -1,19 +1,15 @@
 package kr.co.mapo.project_seoulmatcheap.ui.adpater
 
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.ListItem
 import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.system.STORE
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap

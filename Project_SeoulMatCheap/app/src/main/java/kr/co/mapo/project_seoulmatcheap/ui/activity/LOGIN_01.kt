@@ -75,7 +75,6 @@ class LOGIN_01 : AppCompatActivity() {
             }
             kakaoLogin.setOnClickListener {
                 //카카오 로그인
-                // 로그인 공통 callback 구성
                 val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                     if (error != null) {
                         Log.e(TAG, "로그인 실패", error)
@@ -92,10 +91,6 @@ class LOGIN_01 : AppCompatActivity() {
                 }
             }
             naverLogin.setOnClickListener {
-                /**
-                 * OAuthLoginHandler를 startOAuthLoginActivity() 메서드 호출 시 파라미터로 전달하거나 OAuthLoginButton
-                객체에 등록하면 인증이 종료되는 것을 확인할 수 있습니다.
-                 */
                 val mOAuthLoginHandler = object : OAuthLoginHandler(){
                     override fun run(p0: Boolean) {
                         if(p0) { //로그인 성공
@@ -118,24 +113,18 @@ class LOGIN_01 : AppCompatActivity() {
         }
         // 사용자 정보 요청
         UserApiClient.instance.me { user, error ->
-            if (error != null) Log.e(TAG, "사용자 정보 요청 실패", error)
-            else if (user != null) {
+            if (user != null) {
                 Log.e(TAG, "${user.kakaoAccount?.profile?.nickname}")
                 //이메일주소가 null일때
                 if(user.kakaoAccount?.email == null) {
                     // 사용자 정보 요청 (추가 동의)
                     UserApiClient.instance.me { user, error ->
-                        if (error != null) Log.e(TAG, "사용자 정보 요청 실패", error)
-                        else if (user != null) {
-                            Log.e(TAG, "사용자 정보 요청하기", error)
+                        if (user != null) {
                             var scopes= mutableListOf<String>()
                             if (user.kakaoAccount?.emailNeedsAgreement == true) scopes.add("account_email")
                             if (scopes.count() > 0) {
-                                Log.e(TAG, "사용자에게 추가 동의를 받아야 합니다.")
                                 UserApiClient.instance.loginWithNewScopes(this, scopes) { token, error ->
-                                    Log.e(TAG, "흠")
-                                    if (error != null) Log.e(TAG, "사용자 추가 동의 실패", error)
-                                    else Log.e(TAG, "allowed scopes: ${token!!.scopes}")
+                                    if(error == null) Log.e(TAG, "allowed scopes: ${token!!.scopes}")
                                 }
                             }
                         }
@@ -146,16 +135,7 @@ class LOGIN_01 : AppCompatActivity() {
                         UserPrefs.saveUserEmail(this@LOGIN_01, user.kakaoAccount?.email!!, 0)
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01,
                             user.kakaoAccount?.profile?.nickname + getString(R.string.login))
-//                        Log.e("[Kakao]", "${user.kakaoAccount.toString()}")
-//                        SeoulMatCheap.getInstance().showToast(this@LOGIN_01, "사용자 정보 요청 성공" +
-//                                "\n회원번호: ${user.id}" +
-//                                "\n이메일: ${user.kakaoAccount?.email}" +
-//                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-//                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-//                        Log.e(TAG, "로그인 성공2 ${user.kakaoAccount?.profile?.nickname}")
                         goNextActivity()
-                    } else {
-                        Log.e(TAG, "로그인 실패2")
                     }
                 }
             }
@@ -165,7 +145,6 @@ class LOGIN_01 : AppCompatActivity() {
     private fun naverSucessCallback() {
         val accessToken: String = mOAuthLoginModule.getAccessToken(this@LOGIN_01)
         val naverLoginService = NaverService.invoke(this).getNaverEmail("Bearer "+accessToken)
-        Log.e(TAG, "Bearer "+accessToken)
         naverLoginService.enqueue(object : Callback<NaverLoginResponse> {
             override fun onResponse(
                 call: Call<NaverLoginResponse>,
@@ -174,7 +153,6 @@ class LOGIN_01 : AppCompatActivity() {
                 //서버에 회원 정보 전달
                 if(response.isSuccessful) {
                     val result = response.body()!!.response
-                    Log.e(TAG, "${result.email}\n${result.nickname}\n${result.profileImage}")
                     UserPrefs.saveUserEmail(this@LOGIN_01, result.email, 1)
                     goNextActivity()
                 }
@@ -182,11 +160,6 @@ class LOGIN_01 : AppCompatActivity() {
             override fun onFailure(call: Call<NaverLoginResponse>, t: Throwable) {
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.e("[TEST]", "${UserPrefs.getUserEmail(this)}")
     }
 
     private fun goNextActivity() {
