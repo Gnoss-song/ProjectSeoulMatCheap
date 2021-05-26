@@ -5,8 +5,6 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
 import kr.co.mapo.project_seoulmatcheap.data.response.MemberResponse
-import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
-import kr.co.mapo.project_seoulmatcheap.data.response.ReviewResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -35,14 +33,6 @@ interface MatCheapService {
     fun serviceLogin (
         @Body member: LoginBody
     ) : Single<MemberResponse>
-
-    @GET("api/notice")
-    fun getNotice(
-    ) : Single<NotifyResponse>
-
-    @GET("api/review")
-    fun getReview(
-    ) : Single<ReviewResponse>
 
     companion object {
         private var _matcheapService : MatCheapService? = null

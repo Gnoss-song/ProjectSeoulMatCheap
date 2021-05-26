@@ -58,6 +58,7 @@ class MY_01_02 : AppCompatActivity() {
         val  dividerItemDecoration =
             DividerItemDecoration(binding.recycler3.context, LinearLayoutManager(this).orientation)
         binding.recycler3.addItemDecoration(dividerItemDecoration)
+
         val adpater = My0102Adapter(list ,this)
         binding.recycler3.layoutManager = LinearLayoutManager(this)
         binding.recycler3.adapter = adpater

@@ -3,11 +3,11 @@ package kr.co.mapo.project_seoulmatcheap.ui.fragment
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -18,6 +18,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory01Binding
 import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_01
+import kr.co.mapo.project_seoulmatcheap.ui.activity.CATEGORY_01_03
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.GridRecyclerViewAdapter
 
 class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener {
@@ -50,21 +51,37 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         binding.toolbarMain.apply {
             inflateMenu(R.menu.category_toolbar)
             setOnMenuItemClickListener {
-                val mHelpView =
-                    LayoutInflater.from(owner).inflate(R.layout.balloon_view, null)
-                val mBuilder = androidx.appcompat.app.AlertDialog.Builder(owner).setView(mHelpView)
-                val mAlertDialog = mBuilder.show().apply {
-                    window?.setBackgroundDrawable(null)
-                }
-                val okButton = mHelpView.findViewById<Button>(R.id.btn_ok)
-                okButton.setOnClickListener {
-                    mAlertDialog.dismiss()
+                val builder = AlertDialog.Builder(owner)
+                val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
+                with(builder) {
+                    setView(balloonView)
+                    show().apply {
+                        window?.setBackgroundDrawable(null)
+                        balloonView.setOnClickListener {
+                            dismiss()
+                        }
+                    }
                 }
                 true
             }
         }
         binding.categoryLocationIV.setOnClickListener {
             Toast.makeText(context, "현재위치를 가져오는 중입니다.", Toast.LENGTH_SHORT).show()
+
+//        binding.apply {
+//            moveTV.setOnClickListener {
+//                val builder = AlertDialog.Builder(owner)
+//                val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
+//                with(builder) {
+//                    setView(balloonView)
+//                    show().apply {
+//                        window?.setBackgroundDrawable(null)
+//                        balloonView.setOnClickListener {
+//                            dismiss()
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

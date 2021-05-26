@@ -28,6 +28,7 @@ class CATEGORY_01_02_01(val map: CATEGORY_01_02) : BottomSheetDialogFragment(), 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.filterBottomSheetTheme)
+        Log.e("[필터 목록-필터뷰]", filterSort.toString())
     }
 
     override fun onCreateView(

@@ -2,100 +2,65 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/modifycontent"
+    android:id="@+id/logoutcontent"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/complete_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/white"
-        android:elevation="@dimen/elevation1"
-        android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView21"
-            style="android:attr/borderlessButtonStyle"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:elevation="@dimen/elevation1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dialog_3" />
-
-        <TextView
-            android:id="@+id/textView11"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="3dp"
-            android:text="작성"
-            android:textColor="@color/main"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/logoutcontext"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/logoutcontext" />
-
-        <TextView
-            android:id="@+id/logoutcontext"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="45dp"
-            android:gravity="center"
-            android:text="하시겠습니까?"
-            android:textAlignment="center"
-            android:textColor="@color/overlay"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView21" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="14dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/round_button"
+            android:elevation="@dimen/elevation1"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logoutcontext">
+            android:padding="@dimen/margin_basic">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <TextView
+                android:id="@+id/completecontext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/complete_contest"
+                android:textAlignment="center"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
                 android:id="@+id/btn_complete_ok"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="match_parent"
 
 
-                android:layout_weight="1"
-                android:background="#e14632"
+                android:layout_marginTop="@dimen/margin_basic4"
+                android:layout_marginEnd="20dp"
                 android:text="예"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                app:layout_constraintEnd_toStartOf="@+id/btn_complete_no"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/completecontext" />
 
             <Button
                 android:id="@+id/btn_complete_no"
                 android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_height="match_parent"
 
-                android:layout_weight="1"
-                android:background="@color/main"
                 android:text="아니오"
-                android:textColor="@color/white"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_complete_ok"
+                app:layout_constraintTop_toTopOf="@+id/btn_complete_ok" />
 
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

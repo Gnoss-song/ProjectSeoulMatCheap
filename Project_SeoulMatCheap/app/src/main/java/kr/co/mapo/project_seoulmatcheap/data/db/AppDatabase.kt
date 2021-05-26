@@ -50,6 +50,7 @@ abstract class AppDatabase : RoomDatabase() {
             val inputStream = assetManager.open("store.txt")
             inputStream.bufferedReader().readLines().forEach {
                 val token = it.split("\t")
+                Log.e("[FILE]", "$token")
                 val input = StoreEntity(
                     token[0].toInt(),
                     token[1],
@@ -77,6 +78,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
         CoroutineScope(Dispatchers.IO).launch {
             val output = storeDAO().getTotalStore()
+            Log.e("[STORE]", "${output.size}")
         }
     }
     fun loadMenu(context: Context) {    //메뉴정보 추가하기
@@ -87,6 +89,7 @@ abstract class AppDatabase : RoomDatabase() {
             Log.e("ㅎㅎ", "${prefs.getBoolean(DOWNLOADMENU, true)}")
             inputStream.bufferedReader().readLines().forEach {
                 val token = it.split("\t")
+                Log.e("[FILE]", "$token")
                 val input = MenuEntity(null, token[0].toInt(), token[1], token[2], token[3].toInt())
                 CoroutineScope(Dispatchers.IO).launch {
                     storeDAO().insertMenu(input)
@@ -96,6 +99,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
         CoroutineScope(Dispatchers.IO).launch {
             val output = storeDAO().getTotalMenu()
+            Log.e("[MENU]", "${output.size}")
         }
     }
 }

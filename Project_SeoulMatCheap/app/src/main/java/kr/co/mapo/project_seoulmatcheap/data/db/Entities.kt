@@ -61,6 +61,5 @@ data class FavoritEntity(
     val	photo : String,
     val	lng	: Double,
     val	lat	: Double,
-    val score : Double,
     var checked : Boolean = false
 ) : Serializable
