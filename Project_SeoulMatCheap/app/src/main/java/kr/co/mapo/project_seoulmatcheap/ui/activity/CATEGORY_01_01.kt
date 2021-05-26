@@ -24,15 +24,17 @@ class CATEGORY_01_01 : AppCompatActivity() {
         position = intent.getIntExtra(POSITION, -1)
         val category010101 = CATEGORY_01_01_01(this)
 
+        val key = intent.getStringExtra(KEY)
+
         if(position > -1) category010101.position = position
-        else category010101.key = intent.getStringExtra(KEY)
+        else category010101.key = key
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.frameLayout, category010101).commit()
         }
 
         tab_category = findViewById(R.id.tab_category)
-        val CATEGORY_01_02 = CATEGORY_01_02(this)
+        val CATEGORY_01_02 = CATEGORY_01_02(this, key)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)

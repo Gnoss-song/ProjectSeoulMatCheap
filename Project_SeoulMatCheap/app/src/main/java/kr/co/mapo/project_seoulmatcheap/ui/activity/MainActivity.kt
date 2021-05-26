@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         val seoulMatCheap = SeoulMatCheap.getInstance()
+        AppDatabase(this)!!.storeDAO().getAllStore().observe(this, {
+            seoulMatCheap.storeList = it
+            Log.e("[메인액티비티]", "${seoulMatCheap.storeList.size}")
+        })
         seoulMatCheap.getAutoComplete(this, this)
         seoulMatCheap.setLocation(this)
         setView()
