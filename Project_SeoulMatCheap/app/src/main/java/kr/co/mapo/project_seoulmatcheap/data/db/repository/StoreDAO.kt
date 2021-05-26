@@ -38,7 +38,7 @@ interface StoreDAO {
 
     //SELECT -------------------
     //모든 식당목록 출력
-    @Query("SELECT * FROM store_inform")
+    @Query("SELECT * FROM store_inform ORDER BY score")
     fun getAllStore() : LiveData<List<StoreEntity>>
     @Query("SELECT * FROM store_inform")
     fun getTotalStore() : List<StoreEntity>

@@ -146,13 +146,13 @@ class LOGIN_01 : AppCompatActivity() {
                         UserPrefs.saveUserEmail(this@LOGIN_01, user.kakaoAccount?.email!!, 0)
                         SeoulMatCheap.getInstance().showToast(this@LOGIN_01,
                             user.kakaoAccount?.profile?.nickname + getString(R.string.login))
-                        Log.e("[Kakao]", "${user.kakaoAccount.toString()}")
-                        SeoulMatCheap.getInstance().showToast(this@LOGIN_01, "사용자 정보 요청 성공" +
-                                "\n회원번호: ${user.id}" +
-                                "\n이메일: ${user.kakaoAccount?.email}" +
-                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
-                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
-                        Log.e(TAG, "로그인 성공2 ${user.kakaoAccount?.profile?.nickname}")
+//                        Log.e("[Kakao]", "${user.kakaoAccount.toString()}")
+//                        SeoulMatCheap.getInstance().showToast(this@LOGIN_01, "사용자 정보 요청 성공" +
+//                                "\n회원번호: ${user.id}" +
+//                                "\n이메일: ${user.kakaoAccount?.email}" +
+//                                "\n닉네임: ${user.kakaoAccount?.profile?.nickname}" +
+//                                "\n프로필사진: ${user.kakaoAccount?.profile?.thumbnailImageUrl}")
+//                        Log.e(TAG, "로그인 성공2 ${user.kakaoAccount?.profile?.nickname}")
                         goNextActivity()
                     } else {
                         Log.e(TAG, "로그인 실패2")

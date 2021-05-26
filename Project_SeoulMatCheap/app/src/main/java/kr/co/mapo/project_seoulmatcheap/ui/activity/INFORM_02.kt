@@ -71,10 +71,11 @@ class INFORM_02 : AppCompatActivity() {
                 "일요일",
                 "가능",
                 "가능",
-                2,
+                5,
                 "http://tearstop.seoul.go.kr/mulga/photo/20131209140203.jpg",
                 127.0878543,
                 37.58800634,
+                3.5,
                 false
             )
         }
@@ -93,6 +94,7 @@ class INFORM_02 : AppCompatActivity() {
             Glide.with(this@INFORM_02).load(item.photo).into(photo)
             textName.text = item.name
             textRating.text = item.rating_cnt.toString()
+            textScore.text = item.score.toString()
             reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
                 adapter = InfromReviewAdapter(reviewlist, this@INFORM_02)

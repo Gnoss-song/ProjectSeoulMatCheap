@@ -28,10 +28,11 @@ data class StoreEntity (
     val	closed : String,
     val reserve	: String,
     val	parking	: String,
-    val	rating_cnt : Int,
+    val rating_cnt : Int,
     val	photo : String,
     val	lng	: Double,
     val	lat	: Double,
+    val score : Double,
     var liked : Boolean
 
 ) : Serializable

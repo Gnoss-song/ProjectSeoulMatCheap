@@ -52,7 +52,7 @@ class ListRecyclerViewAdapter (
             address.text = listData.address
             sort.text = listData.category
             distance.text = SeoulMatCheap.getInstance().calculateDistance(listData.lat, listData.lng)
-            score.text = "0.0"
+            score.text = "${listData.score}"
             itemView.setOnClickListener {
                 val intent = Intent(owner, INFORM_02::class.java)
                 intent.putExtra(STORE, listData)

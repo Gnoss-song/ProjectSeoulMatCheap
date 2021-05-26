@@ -328,7 +328,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             }
             Glide.with(owner).load(item.photo).into(image)
             distance.text = SeoulMatCheap.getInstance().calculateDistance(item.lat, item.lng)
-            score.text = "0.0"
+            score.text = item.score.toString()
         }
         storeWindowBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
