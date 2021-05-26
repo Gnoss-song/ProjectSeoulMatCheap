@@ -39,6 +39,7 @@ class INFORM_02 : AppCompatActivity() {
     private var likeCount_f : Int = 5   //처음찜수
     private lateinit var item : StoreEntity
     private val dao = AppDatabase(this)!!.storeDAO()
+    private lateinit var reviewlist: List<Review>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,12 @@ class INFORM_02 : AppCompatActivity() {
     }
     private fun init() {
         setSupportActionBar(binding.toolbar)
+        val list = arrayListOf<Review>().apply {
+            add(Review(R.drawable.photo, "처음 먹어보는데 정말 맛있네요. 재방문 의사 있습니다~", 4.5f))
+            add(Review(R.drawable.photo2, "음식이 참 맛있습니다. 다만 제 취향과 안맞아서 또 방문하지는 않을것같네요", 3.5f))
+            add(Review(R.drawable.photo3, "맛있네요. 사장님도 친절하시고 잘 먹고 갑니다.", 4.0f))
+        }
+        reviewlist = list.toList()
         if(intent.getSerializableExtra(STORE) != null) {
             val store = intent.getSerializableExtra(STORE) as StoreEntity
             item = intent.getSerializableExtra(STORE) as StoreEntity
@@ -87,8 +94,8 @@ class INFORM_02 : AppCompatActivity() {
             textName.text = item.name
             textRating.text = item.rating_cnt.toString()
             reviewRecyclerView.apply {
-//                layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
-//                adapter = InfromReviewAdapter()
+                layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
+                adapter = InfromReviewAdapter(reviewlist, this@INFORM_02)
             }
             buttonReview.setOnClickListener {
                 if(viewPager.currentItem == 0) {    //리뷰더보기
@@ -185,4 +192,11 @@ class INFORM_02 : AppCompatActivity() {
             Log.e("[TEST]", "좋아요삭제")
         }
     }
+
 }
+
+data class Review (
+    val photo : Int,
+    val content : String,
+    val rating : Float
+)

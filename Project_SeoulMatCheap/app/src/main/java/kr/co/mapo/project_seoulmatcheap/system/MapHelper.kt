@@ -29,6 +29,7 @@ object MapHelper {
 
     //Map
     val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
+    val map_gps_marker = OverlayImage.fromResource(R.drawable.map_gps)
     val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
     val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
     val icon_japan = OverlayImage.fromResource(R.drawable.icon_japan)
