@@ -30,7 +30,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoryRV = view.findViewById<RecyclerView>(R.id.categoryRV)
+        categoryRV = view.findViewById(R.id.categoryRV)
         tabLayout2 = view.findViewById(R.id.tabLayout2)
         val categoryScore = view.findViewById<TextView>(R.id.category_score)
         val categoryDistance = view.findViewById<TextView>(R.id.category_distance)

@@ -32,44 +32,21 @@ import kr.co.mapo.project_seoulmatcheap.system.*
 import kr.co.mapo.project_seoulmatcheap.ui.activity.INFORM_02
 import java.util.*
 
-class CATEGORY_01_02(val owner : AppCompatActivity,
-    val key : String?): Fragment(), OnMapReadyCallback {
+class CATEGORY_01_02(
+    val owner : AppCompatActivity,
+    val key : String?,
+    var position : Int = -1) : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding : FragmentCategory0102Binding
     private lateinit var view: MapItemInfowindowBinding
     private lateinit var storeWindowBehavior : BottomSheetBehavior<LinearLayout>
-    private lateinit var filterDialog : CATEGORY_01_02_01
 
     private lateinit var list : List<StoreEntity>
     private lateinit var naverMap : NaverMap
 
-    //오버레이 관리를 위한 저장 Vector
-    private val markersHansik = Vector<Marker>()
-    private val infoWindowsHansik = Vector<InfoWindow>()
-    private val markersJapan = Vector<Marker>()
-    private val infoWindowsJapan = Vector<InfoWindow>()
-    private val markersChina = Vector<Marker>()
-    private val infoWindowsChina = Vector<InfoWindow>()
-    private val markersFood = Vector<Marker>()
-    private val infoWindowsFood = Vector<InfoWindow>()
-    private val markersWash = Vector<Marker>()
-    private val infoWindowsWash = Vector<InfoWindow>()
-    private val markersBeauty = Vector<Marker>()
-    private val infoWindowsBeauty = Vector<InfoWindow>()
-    private val markersHotel = Vector<Marker>()
-    private val infoWindowsHotel = Vector<InfoWindow>()
-    private val markersStore = Vector<Marker>()
-    private val infoWindowsStore = Vector<InfoWindow>()
-
-    private val circleOverlay = mutableSetOf<CircleOverlay>()
-
-    //필터 상태 저장
-    private var filterSort = mutableSetOf<String>()
-
     //오버레이 이벤트 상태 저장
     private val clickedInfowindow = arrayMapOf<InfoWindow, StoreEntity>()
     private var favoritList = MutableLiveData<List<Int>>()
-    private var sortedList = listOf<StoreEntity>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCategory0102Binding.inflate(layoutInflater, container, false)
@@ -81,21 +58,15 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
         AppDatabase(owner)!!.storeDAO().getFavoriteIdList().observe(viewLifecycleOwner, {
             favoritList.value = it
         })
-        list = SeoulMatCheap.getInstance().storeList
         view = MapItemInfowindowBinding.inflate(layoutInflater)
         storeWindowBehavior = BottomSheetBehavior.from(binding.include.storeBottomLayout)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment
         mapFragment.getMapAsync(this)
-        filterDialog = CATEGORY_01_02_01(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            buttonFilter2.setOnClickListener {
-                filterDialog.filterSort = filterSort
-                filterDialog.show(owner.supportFragmentManager, FILTER)
-            }
             buttonGps2.setOnClickListener {
                 naverMap.apply {
                     cameraPosition = setMapCamera(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, MAP_ZOOM)
@@ -110,7 +81,7 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
         val y = MapHelper.getLng(key)
         naverMap.apply {
             cameraPosition = setMapCamera(x, y, 14.0)
-            minZoom = MAP_MIN_ZOOM
+            minZoom = 11.0
             with(locationOverlay) {
                 isVisible = true
                 position = LatLng(x, y)
@@ -122,11 +93,31 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
                 initiateOverlay()
             }
         }
-        list.forEach {
-            val marker = createMaker(it, naverMap)
-            createInfoWindow (it, marker)
+        if(position > -1) {     //카테고리 검색
+            AppDatabase(owner)!!.storeDAO().getSortStore(position).observe(viewLifecycleOwner, {
+                list = mutableListOf<StoreEntity>().apply {
+                    it.forEach { it->
+                        if (SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) <= 3.0) {
+                            this.add(it)
+                        }
+                    }
+                }
+                list.forEach { it ->
+                    val marker = createMaker(it, naverMap)
+                    createInfoWindow (it, marker)
+                }
+                createCircle(x, y, 3000.0, naverMap)
+            })
+        } else {
+            AppDatabase(owner)!!.storeDAO().getGuStore(key!!).observe(viewLifecycleOwner, {
+                list = it
+                list.forEach { it ->
+                    val marker = createMaker(it, naverMap)
+                    createInfoWindow (it, marker)
+                }
+            })
+            createCircle(x, y, 5000.0, naverMap)
         }
-        createCircle(x, y, 5000.0, naverMap)
     }
 
     //지도 카메라 설정 함수
@@ -137,45 +128,21 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
     //마커생성함수
     private fun createMaker(item: StoreEntity, naverMap: NaverMap) : Marker {
         return Marker().apply {
+            Log.e("[TEST]", "${item.sort}, ${item.category}")
             position = LatLng(item.lat, item.lng)
             map = naverMap
             width = MARKER_SIZE
             height = MARKER_SIZE
             isForceShowIcon = true
-            minZoom = MARKET_MIN_ZOOM
             when(item.sort) {
-                0 -> {
-                    icon = MapHelper.icon_hansik
-                    markersHansik.add(this)
-                }
-                1 -> {
-                    icon = MapHelper.icon_china
-                    markersChina.add(this)
-                }
-                2 -> {
-                    icon = MapHelper.icon_japan
-                    markersJapan.add(this)
-                }
-                3 -> {
-                    icon = MapHelper.icon_food
-                    markersFood.add(this)
-                }
-                4 -> {
-                    icon = MapHelper.icon_beauty
-                    markersBeauty.add(this)
-                }
-                5 -> {
-                    icon = MapHelper.icon_wash
-                    markersWash.add(this)
-                }
-                6 -> {
-                    icon = MapHelper.icon_hotel
-                    markersHotel.add(this)
-                }
-                else -> {
-                    icon = MapHelper.icon_store
-                    markersStore.add(this)
-                }
+                0 -> icon = MapHelper.icon_hansik
+                1 -> icon = MapHelper.icon_china
+                2 -> icon = MapHelper.icon_japan
+                3 -> icon = MapHelper.icon_food
+                4 -> icon = MapHelper.icon_beauty
+                5 -> icon = MapHelper.icon_wash
+                6 -> icon = MapHelper.icon_hotel
+                else -> icon = MapHelper.icon_store
             }
             setOnClickListener {
                 this.infoWindow?.let { it1 -> onOverlayClick(it1, item) }
@@ -189,16 +156,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
         return InfoWindow().apply {
             tag = false
             adapter = createInfoWindowAdapter(item, tag as Boolean, view)
-            when(item.sort) {
-                0 -> infoWindowsHansik.add(this)
-                1 -> infoWindowsChina.add(this)
-                2 -> infoWindowsJapan.add(this)
-                3 -> infoWindowsFood.add(this)
-                4 -> infoWindowsBeauty.add(this)
-                5 -> infoWindowsWash.add(this)
-                6 -> infoWindowsHotel.add(this)
-                else -> infoWindowsStore.add(this)
-            }
             setOnClickListener {
                 onOverlayClick(this, item)
                 true
@@ -283,7 +240,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
             radius = m
             color = MapHelper.circleColor
             map = naverMap
-            circleOverlay.add(this)
         }
     }
 
@@ -316,64 +272,6 @@ class CATEGORY_01_02(val owner : AppCompatActivity,
                 clickedInfowindow.clear()
             }
         }
-    }
-
-    //필터 기능 처리함수 - 거리필터
-    fun filterDistance(distance: Double) {
-        if(circleOverlay.size > 0) {
-            circleOverlay.forEach {
-                it.map = null
-            }
-        }
-        createCircle(SeoulMatCheap.getInstance().x, SeoulMatCheap.getInstance().y, distance, naverMap)
-    }
-
-    //필터 기능 처리함수 - 업종필터
-    fun filterSort(filterSort : MutableSet<String>) {
-        this.filterSort = filterSort
-        markersHansik.forEach { it.map = null }
-        markersChina.forEach { it.map = null }
-        markersJapan.forEach { it.map = null }
-        markersFood.forEach { it.map = null }
-        markersWash.forEach { it.map = null }
-        markersBeauty.forEach { it.map = null }
-        markersHotel.forEach { it.map = null }
-        markersStore.forEach { it.map = null }
-        if(filterSort.contains(SORT_HANSIK)) reappearMarkers(markersHansik, infoWindowsHansik)
-        if(filterSort.contains(SORT_CHINA)) reappearMarkers(markersChina, infoWindowsChina)
-        if(filterSort.contains(SORT_JAPAN)) reappearMarkers(markersJapan, infoWindowsJapan)
-        if(filterSort.contains(SORT_FOOD)) reappearMarkers(markersFood, infoWindowsFood)
-        if(filterSort.contains(SORT_WASH)) reappearMarkers(markersWash, infoWindowsWash)
-        if(filterSort.contains(SORT_BEAUTY)) reappearMarkers(markersBeauty, infoWindowsBeauty)
-        if(filterSort.contains(SORT_HOTEL)) reappearMarkers(markersHotel, infoWindowsHotel)
-        if(filterSort.contains(SORT_STORE)) reappearMarkers(markersStore, infoWindowsStore)
-    }
-
-    //마커 다시찍을 때
-    private fun reappearMarkers(markers : Vector<Marker>, infowindows: Vector<InfoWindow>) {
-        for(i in 0 until markers.size) {
-            markers[i].map = naverMap
-            infowindows[i].open(markers[i])
-        }
-    }
-
-    //필터 기능 처리함수 - 맵 초기화
-    fun filterInitialize() {
-        filterDialog.dismiss()
-        filterSort.clear()
-        if(circleOverlay.isNotEmpty()) {
-            circleOverlay.forEach {
-                it.map = null
-            }
-        }
-        reappearMarkers(markersHansik, infoWindowsHansik)
-        reappearMarkers(markersChina, infoWindowsChina)
-        reappearMarkers(markersJapan, infoWindowsJapan)
-        reappearMarkers(markersFood, infoWindowsFood)
-        reappearMarkers(markersWash, infoWindowsWash)
-        reappearMarkers(markersBeauty, infoWindowsBeauty)
-        reappearMarkers(markersHotel, infoWindowsHotel)
-        reappearMarkers(markersStore, infoWindowsStore)
     }
 
 }

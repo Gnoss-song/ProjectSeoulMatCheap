@@ -18,21 +18,6 @@
         app:navermap_mapType="Basic" />
 
     <ImageButton
-        android:id="@+id/button_filter2"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/round_button2"
-        android:elevation="@dimen/elevation1"
-        android:onClick="@{fragment.mapButtonClick}"
-        android:padding="@dimen/margin_basic4"
-        android:scaleType="fitCenter"
-        android:src="@drawable/map_filter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/map" />
-
-    <ImageButton
         android:id="@+id/button_gps2"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
@@ -46,7 +31,7 @@
         android:src="@drawable/map_gps"
         android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_filter2" />
+        app:layout_constraintTop_toTopOf="@+id/map" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

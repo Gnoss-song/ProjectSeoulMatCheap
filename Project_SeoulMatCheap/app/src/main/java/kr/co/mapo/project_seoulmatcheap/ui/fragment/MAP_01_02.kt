@@ -171,22 +171,22 @@ class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
                 R.id.button_store -> optionSort(v, R.drawable.icon_store, textStore, R.drawable.icon_store_off)
                 R.id.button_initiate -> map.filterInitialize()
                 //텍스트뷰
-                R.id.text_hansik -> optionSort(buttonHansik, R.drawable.icon_hansik, v, R.drawable.icon_hansik_off)
-                R.id.text_china -> optionSort(buttonChina, R.drawable.icon_china, v, R.drawable.icon_china_off)
-                R.id.text_japan -> optionSort(buttonJapan, R.drawable.icon_japan, v, R.drawable.icon_japan_off)
-                R.id.text_food -> optionSort(buttonFood, R.drawable.icon_food, v, R.drawable.icon_food_off)
-                R.id.text_wash -> optionSort(buttonWash, R.drawable.icon_wash, v, R.drawable.icon_wash_off)
-                R.id.text_beauty -> optionSort(buttonBeauty, R.drawable.icon_beauty, v, R.drawable.icon_beauty_off)
-                R.id.text_hotel -> optionSort(buttonHotel, R.drawable.icon_hotel, v, R.drawable.icon_hotel_off)
-                R.id.text_store -> optionSort(buttonStore, R.drawable.icon_store, v, R.drawable.icon_store_off)
+                R.id.text_hansik -> optionSortT(buttonHansik, R.drawable.icon_hansik, v, R.drawable.icon_hansik_off)
+                R.id.text_china -> optionSortT(buttonChina, R.drawable.icon_china, v, R.drawable.icon_china_off)
+                R.id.text_japan -> optionSortT(buttonJapan, R.drawable.icon_japan, v, R.drawable.icon_japan_off)
+                R.id.text_food -> optionSortT(buttonFood, R.drawable.icon_food, v, R.drawable.icon_food_off)
+                R.id.text_wash -> optionSortT(buttonWash, R.drawable.icon_wash, v, R.drawable.icon_wash_off)
+                R.id.text_beauty -> optionSortT(buttonBeauty, R.drawable.icon_beauty, v, R.drawable.icon_beauty_off)
+                R.id.text_hotel -> optionSortT(buttonHotel, R.drawable.icon_hotel, v, R.drawable.icon_hotel_off)
+                R.id.text_store -> optionSortT(buttonStore, R.drawable.icon_store, v, R.drawable.icon_store_off)
             }
         }
     }
 
     private fun optionSort(v1: View, on_image: Int, v2 : View, off_image: Int) {
         val button = v1 as ToggleButton
-        val testView = v2 as TextView
-        val sort = testView.text.toString().trim()
+        val textView = v2 as TextView
+        val sort = textView.text.toString().trim()
         if(button.isChecked) {  //체크되어있을 때
             button.background = requireContext().resources.getDrawable(on_image, null)
             with(v2) {
@@ -197,6 +197,36 @@ class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
             filterSort.add(sort)
         } else {
             button.background = requireContext().resources.getDrawable(off_image, null)
+            with(v2) {
+                background = null
+                setTextColor(MapHelper.blackColor)
+                typeface = null
+            }
+            filterSort.remove(sort)
+        }
+        map.filterSort(filterSort)
+    }
+
+    private fun optionSortT(v1: View, on_image: Int, v2 : View, off_image: Int) {
+        val button = v1 as ToggleButton
+        val textView = v2 as TextView
+        val sort = textView.text.toString().trim()
+        if(!button.isChecked) {  //체크 안되어있을 때
+            with(button) {
+                background = requireContext().resources.getDrawable(on_image, null)
+                isChecked = true
+            }
+            with(v2) {
+                setBackgroundColor(MapHelper.circleColor)
+                setTextColor(MapHelper.mainColor)
+                typeface = Typeface.DEFAULT_BOLD
+            }
+            filterSort.add(sort)
+        } else {
+            with(button) {
+                background = requireContext().resources.getDrawable(off_image, null)
+                isChecked = false
+            }
             with(v2) {
                 background = null
                 setTextColor(MapHelper.blackColor)

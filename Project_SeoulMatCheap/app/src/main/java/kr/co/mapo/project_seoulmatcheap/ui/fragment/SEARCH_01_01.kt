@@ -167,6 +167,11 @@ class SEARCH_01_01(
                     .commit()
             }
             R.id.search -> {
+                //키보드 내리기
+                //키보드 내리기
+                val inputManager = owner.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputManager.hideSoftInputFromWindow(owner.currentFocus?.windowToken, 0)
+                binding.searchEditText.clearFocus()
                 val word = binding.searchEditText.text.toString().trim()
                 SeoulMatCheap.getInstance().showToast(owner, "${word}를 검색합니다.")
                 if (binding.searchEditText.text?.isNotEmpty() == true) goSearch(word)
@@ -190,7 +195,9 @@ class SEARCH_01_01(
                     .beginTransaction()
                     .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
                     .commit()
-                SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")
+                launch(Dispatchers.Main) {
+                    SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")
+                }
             }
         }
     }

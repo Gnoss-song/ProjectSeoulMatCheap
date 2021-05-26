@@ -26,15 +26,20 @@ class CATEGORY_01_01 : AppCompatActivity() {
 
         val key = intent.getStringExtra(KEY)
 
-        if(position > -1) category010101.position = position
-        else category010101.key = key
+        if(position > -1) {
+            category010101.position = position
+        } else {
+            category010101.key = key
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().add(R.id.frameLayout, category010101).commit()
         }
 
         tab_category = findViewById(R.id.tab_category)
-        val CATEGORY_01_02 = CATEGORY_01_02(this, key)
+        val CATEGORY_01_02 = CATEGORY_01_02(this, key, position)
+        Log.e("[0101]", "$position")
+        Log.e("[0101]", "$key")
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
