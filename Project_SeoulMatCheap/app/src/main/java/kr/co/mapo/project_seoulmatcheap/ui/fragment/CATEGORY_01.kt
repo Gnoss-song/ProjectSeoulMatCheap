@@ -62,6 +62,7 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                         }
                     }
                 }
+                //태수얌 정신차려.....
                 true
             }
         }
