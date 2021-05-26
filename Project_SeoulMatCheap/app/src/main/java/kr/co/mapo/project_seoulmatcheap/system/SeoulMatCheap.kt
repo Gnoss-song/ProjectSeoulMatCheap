@@ -89,17 +89,19 @@ class SeoulMatCheap : Application() {
                 return
             } else {
                 val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-                with(fusedLocationClient) {
-                    lastLocation.addOnSuccessListener { location: Location? ->
-                            if (location == null) {
-                                locationManager.requestLocationUpdates(provider, 400, 1f) {
-                                    updateLocation(it, context)
-                                }
-                            } else {
-                                updateLocation(location, context)
+                fusedLocationClient.lastLocation
+                    .addOnSuccessListener { location: Location? ->
+                        if (location == null) {
+                            locationManager.requestLocationUpdates(provider, 400, 1f) {
+                                updateLocation(it, context)
+                            }
+                        } else {
+                            updateLocation(location, context)
+                            locationManager.requestLocationUpdates(provider, 400, 1f) {
+                                updateLocation(it, context)
                             }
                         }
-                }
+                    }
             }
         } catch (e : Exception) {
             showToast(context, "GPS의 상태나 네트워크의 상태를 확인해주세요")
