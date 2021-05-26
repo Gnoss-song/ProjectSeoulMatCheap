@@ -88,7 +88,7 @@ class INFORM_02 : AppCompatActivity() {
             textRating.text = item.rating_cnt.toString()
             reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
-                adapter = InfromReviewAdapter()
+                //adapter = InfromReviewAdapter()
             }
             buttonReview.setOnClickListener {
                 if(viewPager.currentItem == 0) {    //리뷰더보기

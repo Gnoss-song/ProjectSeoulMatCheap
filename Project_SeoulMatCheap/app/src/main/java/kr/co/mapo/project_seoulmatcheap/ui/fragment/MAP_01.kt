@@ -96,11 +96,8 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     private fun init() {
-        dao.getAllStore().observe(viewLifecycleOwner, {
-            storeList = it
-            sortedList = it.sortedBy { it -> SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
-            SeoulMatCheap.getInstance().storeList = storeList
-        })
+        storeList = SeoulMatCheap.getInstance().storeList
+        sortedList = storeList.sortedBy { it -> SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
         dao.getFavoriteIdList().observe(viewLifecycleOwner, {
             Log.e("[찜]", "$it")
             favoritList.value = it
@@ -163,7 +160,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //지도 카메라 설정 함수
-    fun setMapCamera(lat:Double, lng:Double, zoom : Double) : CameraPosition {
+    private fun setMapCamera(lat:Double, lng:Double, zoom : Double) : CameraPosition {
         return CameraPosition(LatLng(lat, lng), zoom)
     }
 
@@ -250,7 +247,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //인포윈도우 어댑터 생성 함수
-    fun createInfoWindowAdapter(item: StoreEntity,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
+    private fun createInfoWindowAdapter(item: StoreEntity,  clicked : Boolean, view:MapItemInfowindowBinding) : InfoWindow.ViewAdapter {
         return object : InfoWindow.ViewAdapter() {
             override fun getView(p0: InfoWindow): View {
                 var color : ColorStateList = if(item.liked) MapHelper.likeColor else MapHelper.seoulColor
@@ -282,7 +279,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //서클원 생성함수
-    fun createCircle(lat:Double, lng:Double, m:Double, naverMap: NaverMap) : CircleOverlay {
+    private fun createCircle(lat:Double, lng:Double, m:Double, naverMap: NaverMap) : CircleOverlay {
         return CircleOverlay().apply {
             tag = m
             center = LatLng(lat, lng)
@@ -321,7 +318,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     }
 
     //식당정보 바텀시트 데이터 설정함수
-    fun setBottomSheetData(item : StoreEntity) {
+    private fun setBottomSheetData(item : StoreEntity) {
         binding.include.item = item
         with(binding.include) {
             storeBottomLayout.setOnClickListener {
@@ -339,14 +336,8 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     fun mapButtonClick(v : View) {
         when(v.id) {
             R.id.button_list -> {
-                Log.e("[TEST]", "왜꺼지징?")
                 val intent = Intent(owner, MAP_01_01::class.java)
-//                val list = storeList.subList(0, 50)
-//                val sort = sortedList.subList(0, 50)
-//                Log.e("[인텐트]", "${list.size}, ${sort.size}")
                 intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
-//                intent.putExtra(LIST, list as Serializable)
-//                intent.putExtra(SORTEDLIST, sort as Serializable)
                 startActivity(intent)
             }
             R.id.button_filter -> {
