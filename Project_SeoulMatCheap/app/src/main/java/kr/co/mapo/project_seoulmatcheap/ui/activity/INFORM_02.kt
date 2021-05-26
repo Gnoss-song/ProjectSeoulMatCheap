@@ -2,6 +2,7 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.Manifest
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -45,7 +46,6 @@ class INFORM_02 : AppCompatActivity() {
         setContentView(binding.root)
         init()
     }
-
     private fun init() {
         setSupportActionBar(binding.toolbar)
         if(intent.getSerializableExtra(STORE) != null) {
@@ -87,8 +87,8 @@ class INFORM_02 : AppCompatActivity() {
             textName.text = item.name
             textRating.text = item.rating_cnt.toString()
             reviewRecyclerView.apply {
-                layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
-                adapter = InfromReviewAdapter()
+//                layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
+//                adapter = InfromReviewAdapter()
             }
             buttonReview.setOnClickListener {
                 if(viewPager.currentItem == 0) {    //리뷰더보기
@@ -131,8 +131,8 @@ class INFORM_02 : AppCompatActivity() {
         })
         return super.onCreateOptionsMenu(menu)
     }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onOptionsItemSelected(item2: MenuItem): Boolean {
+        return when (item2.itemId) {
             android.R.id.home -> {
                 finish()
                 true
@@ -140,11 +140,11 @@ class INFORM_02 : AppCompatActivity() {
             R.id.like -> {
                 if(isLiked) {   //찜이 눌린상태 : 찜 취소하기
                     likeCount --
-                    item.icon = getDrawable(R.drawable.ic_favorite_off)
+                    item2.icon = getDrawable(R.drawable.ic_favorite_off)
                     isLiked = false
                 } else { //찜이 눌리지 않은 상태 : 찜하기
                     likeCount ++
-                    item.icon = getDrawable(R.drawable.ic_favorite_on)
+                    item2.icon = getDrawable(R.drawable.ic_favorite_on)
                     isLiked = true
                 }
                 binding.textLikeCnt.text = likeCount.toString()
@@ -154,14 +154,13 @@ class INFORM_02 : AppCompatActivity() {
                 //다른 앱으로 간단한 데이터 보내기
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_TEXT, "공유할 내용")
+                intent.putExtra(Intent.EXTRA_TEXT, "https://search.naver.com/search.naver?where=nexearch&query=${item.name}")
                 startActivity(Intent.createChooser(intent, APP_NAME))
                 true
             }
             else -> false
         }
     }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

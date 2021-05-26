@@ -1,5 +1,6 @@
 package kr.co.mapo.project_seoulmatcheap.ui.fragment
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -23,6 +24,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentInform021Binding
 class INFORM_02_1(
     private val item : StoreEntity) : Fragment()  {
 
+    private lateinit var owner: AppCompatActivity
     lateinit var binding : FragmentInform021Binding
 
     override fun onCreateView(
@@ -50,13 +52,18 @@ class INFORM_02_1(
                         adapter = MenuAdapter(it)
                     })
             }
-            /*
-            buttonCall.setOnClickListener {
-                val tt = Intent(Intent.ACTION_DIAL, Uri.parse(item.tel))
-                startActivity(tt)
-            }*/
-            buttonNavi.setOnClickListener {
 
+            buttonCall.setOnClickListener {
+
+                val tt = Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+item!!.tel))
+                startActivity(tt)
+            }
+            buttonNavi.setOnClickListener {
+                val nv = Intent(Intent.ACTION_VIEW, Uri.parse("navermaps://?menu=location&pinType=place&lat=${item!!.lat}&lng=${item!!.lng}&title=${item!!.name}")).apply {
+                    `package` = "com.nhn.android.nmap"
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(nv)
             }
         }
     }
