@@ -121,7 +121,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     override fun onMapReady(p0: NaverMap) {
         val locationSource = FusedLocationSource(this, 100)
         naverMap = p0
-        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${storeList.size}")
+//        Log.e("[데이터 로딩 테스트]", "리스트 사이즈 : ${storeList.size}")
         naverMap.apply {
             val locationObserver = Observer<Location> {
                 cameraPosition = setMapCamera(it.latitude, it.longitude, MAP_ZOOM)
