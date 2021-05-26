@@ -38,8 +38,7 @@ class ListRecyclerViewAdapter (
     }
 
     override fun getItemCount(): Int {
-        val size = listList.size
-        return if(size>50) 50 else size
+        return listList.size
     }
 
     override fun onBindViewHolder(holder: ListHolder, position: Int) {

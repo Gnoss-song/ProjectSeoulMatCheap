@@ -12,7 +12,7 @@ import kr.co.mapo.project_seoulmatcheap.R
  * @created 2021-05-16
  * @desc
  */
-class InfromReviewAdapter : RecyclerView.Adapter<InfromReviewAdapter.HolderView>() {
+class InfromReviewAdapter(val list : List<Review>) : RecyclerView.Adapter<InfromReviewAdapter.HolderView>() {
     inner class HolderView(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
@@ -24,5 +24,13 @@ class InfromReviewAdapter : RecyclerView.Adapter<InfromReviewAdapter.HolderView>
     override fun onBindViewHolder(holder: HolderView, position: Int) {
     }
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int {
+        return if(list.size>4) 3 else list.size
+    }
 }
+
+data class Review (
+    val photo : String,
+    val content : String,
+    val rating : Double
+)

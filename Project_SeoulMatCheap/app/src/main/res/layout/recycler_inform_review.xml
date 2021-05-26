@@ -19,7 +19,7 @@
                 app:cardCornerRadius="10dp">
 
                 <ImageView
-                    android:id="@+id/imageView12"
+                    android:id="@+id/photo"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
                     android:scaleType="centerCrop"
@@ -34,7 +34,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -44,7 +44,7 @@
                     android:textColor="@color/black" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar2"
+                    android:id="@+id/ratingBar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
