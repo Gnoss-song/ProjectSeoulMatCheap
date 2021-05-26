@@ -51,6 +51,7 @@ class MY_01_01_01 : AppCompatActivity() {
         }
 
         val itemData = intent.getSerializableExtra(KEY) as List<FavoritEntity>
+        supportActionBar!!.setTitle("찜 목록 (${itemData.size})")
 
         //리사이클러뷰 어댑터 연결
 

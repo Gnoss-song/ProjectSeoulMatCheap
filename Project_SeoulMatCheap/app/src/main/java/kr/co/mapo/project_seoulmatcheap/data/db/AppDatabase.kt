@@ -67,6 +67,7 @@ abstract class AppDatabase : RoomDatabase() {
                     token[12],
                     token[13].toDouble(),
                     token[14].toDouble(),
+                    token[15].toDouble(),
                     false
                 )
                 CoroutineScope(Dispatchers.IO).launch {

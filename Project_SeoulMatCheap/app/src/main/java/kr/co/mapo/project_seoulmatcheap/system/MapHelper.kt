@@ -29,6 +29,7 @@ object MapHelper {
 
     //Map
     val map_marker = OverlayImage.fromResource(R.drawable.map_marker)
+    val map_gps_marker = OverlayImage.fromResource(R.drawable.map_gps)
     val icon_hansik = OverlayImage.fromResource(R.drawable.icon_hansik)
     val icon_china = OverlayImage.fromResource(R.drawable.icon_china)
     val icon_japan = OverlayImage.fromResource(R.drawable.icon_japan)
@@ -52,7 +53,7 @@ object MapHelper {
         "송파구" ->	37.5144161
         "중랑구" ->	37.6060713
         "구로구" ->	37.4954745
-        "마포구" ->	37.6485276
+        "마포구" ->	37.5615911
         "강북구" ->	37.6482758
         "강남구" ->	37.4969117
         "양천구" ->	37.516955
@@ -81,7 +82,7 @@ object MapHelper {
         "송파구" ->	127.0360279
         "중랑구" ->	127.0916155
         "구로구" ->	126.8854504
-        "마포구" ->	126.8763234
+        "마포구" ->	126.8736236
         "강북구" ->	126.9813874
         "강남구" ->	127.03292
         "양천구" ->	126.8643757
