@@ -99,7 +99,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
         storeList = SeoulMatCheap.getInstance().storeList
         sortedList = storeList.sortedBy { it -> SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
         dao.getFavoriteIdList().observe(viewLifecycleOwner, {
-            Log.e("[찜]", "$it")
             favoritList.value = it
         })
         view = MapItemInfowindowBinding.inflate(layoutInflater)
@@ -144,7 +143,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
                 REASON_CONTROL: 사용자의 버튼 선택으로 인해 카메라가 움직였음을 나타냅니다.
                 REASON_LOCATION: 위치 트래킹 기능으로 인해 카메라가 움직였음을 나타냅니다.
                  */
-                Log.e("[REASON]", "$reason")
                 if(reason != CameraUpdate.REASON_DEVELOPER) {
                     SeoulMatCheap.getInstance().location.removeObserver(locationObserver)
                 }
@@ -365,7 +363,6 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     //필터 기능 처리함수 - 업종필터
     fun filterSort(filterSort : MutableSet<String>) {
         this.filterSort = filterSort
-        Log.e("[필터 목록-맵]", filterSort.toString())
         markersHansik.forEach { it.map = null }
         markersChina.forEach { it.map = null }
         markersJapan.forEach { it.map = null }

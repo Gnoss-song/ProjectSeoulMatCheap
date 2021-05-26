@@ -29,7 +29,6 @@ class MAP_01_02(val map: MAP_01) : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.filterBottomSheetTheme)
-        Log.e("[필터 목록-필터뷰]", filterSort.toString())
     }
 
     override fun onCreateView(

@@ -187,11 +187,9 @@ class INFORM_02 : AppCompatActivity() {
         super.onStop()
         val repository = StoreRepositoryImpl(dao)
         if (likeCount > likeCount_f) {   //찜 추가
-            repository.addFavorite(FavoritEntity(null, item.id, item.name, item.address, item.sort, item.category, item.photo, item.lng, item.lat))
-            Log.e("[TEST]", "좋아요추가")
+            repository.addFavorite(FavoritEntity(null, item.id, item.name, item.address, item.sort, item.category, item.photo, item.lng, item.lat, item.score))
         } else if (likeCount < likeCount_f) {
             repository.deleteFavorite(listOf(item.id))
-            Log.e("[TEST]", "좋아요삭제")
         }
     }
 

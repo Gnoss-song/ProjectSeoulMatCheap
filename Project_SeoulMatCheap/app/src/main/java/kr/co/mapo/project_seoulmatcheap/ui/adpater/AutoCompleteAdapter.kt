@@ -48,9 +48,16 @@ class AutoCompleteAdapter(
         fun changeTextColor(constraint : String) {
             val start = word.text.indexOf(constraint)
             val end = if (constraint.isNotEmpty()) start + constraint.length else 0
-            (word.text as Spannable).apply {
-                setSpan(ForegroundColorSpan(owner.getColor(R.color.main)), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
-                setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+            if(start >= 0 && end >=0) {
+                (word.text as Spannable).apply {
+                    setSpan(
+                        ForegroundColorSpan(owner.getColor(R.color.main)),
+                        start,
+                        end,
+                        Spanned.SPAN_EXCLUSIVE_INCLUSIVE
+                    )
+                    setSpan(StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_INCLUSIVE)
+                }
             }
         }
     }

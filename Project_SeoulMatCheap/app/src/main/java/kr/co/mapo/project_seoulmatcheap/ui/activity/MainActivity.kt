@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val seoulMatCheap = SeoulMatCheap.getInstance()
         AppDatabase(this)!!.storeDAO().getAllStore().observe(this, {
             seoulMatCheap.storeList = it
-            Log.e("[메인액티비티]", "${seoulMatCheap.storeList.size}")
         })
         seoulMatCheap.getAutoComplete(this, this)
         seoulMatCheap.setLocation(this)

@@ -18,13 +18,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.forEach
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.Item
-import kr.co.mapo.project_seoulmatcheap.data.Model
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
 import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepositoryImpl
@@ -32,7 +29,6 @@ import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy010101Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.Inform0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepository as StoreRepository
 
 class MY_01_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy010101Binding
@@ -43,15 +39,14 @@ class MY_01_01_01 : AppCompatActivity() {
         binding = ActivityMy010101Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        val itemData = intent.getSerializableExtra(KEY) as List<FavoritEntity>
         //백버튼
         with(supportActionBar) {
             this!!.setDisplayHomeAsUpEnabled(true)
             this.setHomeAsUpIndicator(R.drawable.ic_back_icon)
-            setTitle(R.string.myfavorite_title_modify)
+            title ="찜 목록 (${itemData.size})"
         }
-
-        val itemData = intent.getSerializableExtra(KEY) as List<FavoritEntity>
-        supportActionBar!!.setTitle("찜 목록 (${itemData.size})")
 
         //리사이클러뷰 어댑터 연결
 
@@ -110,8 +105,7 @@ class MY_01_01_01 : AppCompatActivity() {
             val score: TextView = itemView.findViewById(R.id.score)
             val sort: TextView = itemView.findViewById(R.id.sort)
 
-            fun bind(itemList: FavoritEntity) = with(binding) {
-                Log.e("TEST1", "${checkboxStatus}")
+            fun bind(itemList:FavoritEntity) = with(binding){
                 checkboxUser.isChecked = checkboxStatus[adapterPosition]
                 checkboxUser.setOnClickListener {
                     if (!checkboxUser.isChecked)
@@ -139,9 +133,8 @@ class MY_01_01_01 : AppCompatActivity() {
                 Glide.with(owner).load(itemData.photo).into(marketIV)
                 name.text = itemData.name
                 address.text = itemData.address
-                distance.text =
-                    SeoulMatCheap.getInstance().calculateDistance(itemData.lat, itemData.lng)
-                score.text = "0.0"
+                distance.text = SeoulMatCheap.getInstance().calculateDistance(itemData.lat,itemData.lng)
+                score.text = "${itemData.score}"
                 sort.text = itemData.category
 
                 bind(itemList[position])
