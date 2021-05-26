@@ -8,12 +8,10 @@ package kr.co.mapo.project_seoulmatcheap.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -21,15 +19,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.Item
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
-import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMy0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.STORE
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
-import kr.co.mapo.project_seoulmatcheap.ui.adpater.InformDetailAdapter
 import java.io.Serializable
 
 
@@ -108,7 +103,7 @@ class MY_01_01 : AppCompatActivity() {
                 name.text = itemData.name
                 address.text = itemData.address
                 distance.text = SeoulMatCheap.getInstance().calculateDistance(itemData.lat, itemData.lng)
-                score.text = "0.0"
+                score.text = "${itemData.score}"
                 sort.text = itemData.category
             }
             holder.itemView.setOnClickListener {

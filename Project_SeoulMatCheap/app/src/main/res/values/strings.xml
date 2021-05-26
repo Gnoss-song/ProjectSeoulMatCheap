@@ -56,10 +56,10 @@
     -->
     <string name="help_content">Lv1~10  : 동메달\nLv11~20 : 은메달\nLv21~30 : 금메달</string>
     <string name="help_content2">
-         -리뷰 글 작성시 3pt\n\n
-         -사진이 포함된 리뷰 글 작성시 5pt\n\n\
-         -맛칩 제보글 작성시 5pt\n\n
-         -제보한 맛칩 인증완료시 20pt</string>
+        리뷰 글 작성시 3pt\n
+        사진이 포함된 리뷰 글 작성시 5pt\n
+        맛칩 제보글 작성시 5pt\n
+        제보한 맛칩 인증완료시 20pt</string>
     <string name="service_manual">copyright 2021.mapo3.All right reserved\n서비스 정책 및 이용약관</string>
     <string name="email">silmxmail@naver.com</string>
     <string name="report">건의사항보내기</string>

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
+import com.facebook.stetho.Stetho
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
 import kr.co.mapo.project_seoulmatcheap.R
@@ -53,9 +54,7 @@ class SeoulMatCheap : Application() {
 
     init {
         this.address.value = SEOULCITYHALL_ADDRESS
-
     }
-
 
     /* onCreate()
      * Activity, Service, Receiver가 생성되기전 어플리케이션이 시작중일때
@@ -65,7 +64,7 @@ class SeoulMatCheap : Application() {
         super.onCreate()
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
-
+        Stetho.initializeWithDefaults(this)
     }
 
     //토스트메세지 출력

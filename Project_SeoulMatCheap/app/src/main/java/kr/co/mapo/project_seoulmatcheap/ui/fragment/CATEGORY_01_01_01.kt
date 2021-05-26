@@ -9,16 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
-import com.kakao.sdk.common.util.SdkLogLevel
 import kr.co.mapo.project_seoulmatcheap.R
-import kr.co.mapo.project_seoulmatcheap.data.ListItem
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
-import kr.co.mapo.project_seoulmatcheap.databinding.FragmentCategory010101Binding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
@@ -64,7 +60,6 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             }
             tabLayout2.apply {
                 if (position > -1) {
-                    Log.e("[POSTION]", "$position")
                     this.getTabAt(position+1)?.select()
                 }
             }

@@ -61,7 +61,6 @@ class SEARCH_01_01(
     private fun init() {
         owner.setSupportActionBar(binding.toolbar)
         filterAdapter = AutoCompleteAdapter(SeoulMatCheap.getInstance().filterList, owner)
-        Log.e("[AUTOCOMPLETE]", SeoulMatCheap.getInstance().filterList.size.toString())
         searchHistoryAdapter = SearchHistoryAdapter(SearchHistoryPrefs.getSearchHistory(owner), owner)
     }
 

@@ -40,7 +40,6 @@ class MAP_01_01 : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.e("[TEST]", "3")
         if(item.itemId == android.R.id.home)
             finish()
         return super.onOptionsItemSelected(item)
@@ -53,14 +52,11 @@ class MAP_01_01 : AppCompatActivity() {
     private fun setView() {
         with(binding) {
             recyclerView.apply {
-                Log.e("[리스트1]", storelist.size.toString())
-                Log.e("[리스트2]", sortedlist.size.toString())
                 layoutManager = LinearLayoutManager(
                     this@MAP_01_01,
                     LinearLayoutManager.VERTICAL,
                     false
                 )
-                //adapter = ListRecyclerViewAdapter(storelist.subList(0,50),this@MAP_01_01)
             }
             categoryScore.setOnClickListener {
                 recyclerView.adapter = ListRecyclerViewAdapter(storelist.subList(0,50), this@MAP_01_01)
