@@ -15,6 +15,7 @@ import androidx.lifecycle.MutableLiveData
 import com.facebook.stetho.Stetho
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
+import com.naver.maps.map.e
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
@@ -74,29 +75,34 @@ class SeoulMatCheap : Application() {
 
     //GPS로부터 위치정보를 얻어오는 함수
     fun setLocation(context: Context) {
-        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
-        val provider = locationManager.getBestProvider(Criteria(), true)
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (provider == null) {
-            showToast(context, context.getString(R.string.gps_notice))
-            return
-        } else {
-            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location : Location? ->
-                    if(location == null) {
-                        locationManager.requestLocationUpdates(provider, 400, 1f) {
-                            updateLocation(it, context)
+        try {
+            val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            // LocationManager.GPS_PROVIDER 또는 LocationManager.NETWORK_PROVIDER 를 얻어온다.
+            val provider = locationManager.getBestProvider(Criteria(), true)
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(context, "위치정보를 사용할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            if (provider == null) {
+                showToast(context, context.getString(R.string.gps_notice))
+                return
+            } else {
+                val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+                with(fusedLocationClient) {
+                    lastLocation.addOnSuccessListener { location: Location? ->
+                            if (location == null) {
+                                locationManager.requestLocationUpdates(provider, 400, 1f) {
+                                    updateLocation(it, context)
+                                }
+                            } else {
+                                updateLocation(location, context)
+                            }
                         }
-                    } else {
-                        updateLocation(location, context)
-                    }
                 }
+            }
+        } catch (e : Exception) {
+            showToast(context, "GPS의 상태나 네트워크의 상태를 확인해주세요")
         }
     }
 
