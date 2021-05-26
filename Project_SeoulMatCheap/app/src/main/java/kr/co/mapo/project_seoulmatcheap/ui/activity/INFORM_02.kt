@@ -48,8 +48,8 @@ class INFORM_02 : AppCompatActivity() {
 
     private fun init() {
         setSupportActionBar(binding.toolbar)
-        val store = intent.getSerializableExtra(STORE) as StoreEntity
-        if(store != null) {
+        if(intent.getSerializableExtra(STORE) != null) {
+            val store = intent.getSerializableExtra(STORE) as StoreEntity
             item = intent.getSerializableExtra(STORE) as StoreEntity
         } else {
             item = StoreEntity(

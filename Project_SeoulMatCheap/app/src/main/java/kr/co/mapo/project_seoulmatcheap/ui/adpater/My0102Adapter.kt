@@ -103,7 +103,9 @@ class My0102Adapter(
             GlobalScope.launch(Dispatchers.IO) {
                 val list = AppDatabase(owner)!!.storeDAO().getStoreDetailName(obj.title)
                 val intent = Intent(owner, INFORM_02::class.java)
-                intent.putExtra(STORE, list[0])
+                if(list.isNotEmpty()) {
+                    intent.putExtra(STORE, list[0])
+                }
                 owner.startActivity(intent)
             }
         }
