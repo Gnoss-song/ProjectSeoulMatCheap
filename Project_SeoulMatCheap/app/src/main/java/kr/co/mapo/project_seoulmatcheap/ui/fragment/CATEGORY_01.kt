@@ -51,17 +51,6 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
         binding.toolbarMain.apply {
             inflateMenu(R.menu.category_toolbar)
             setOnMenuItemClickListener {
-                when(it.itemId) {
-                    R.id.toolbar_help -> {
-                        val intent_tran = Intent(context, CATEGORY_01_03::class.java)
-                        startActivity(intent_tran)
-                    }
-                }
-                true
-            }
-        }
-        binding.apply {
-            moveTV.setOnClickListener {
                 val builder = AlertDialog.Builder(owner)
                 val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
                 with(builder) {
@@ -73,10 +62,26 @@ class CATEGORY_01(val owner:AppCompatActivity) : Fragment(),View.OnClickListener
                         }
                     }
                 }
+                true
             }
-            categoryLocationIV.setOnClickListener {
-                Toast.makeText(context, "현재위치를 가져오는 중입니다.", Toast.LENGTH_SHORT).show()
-            }
+        }
+        binding.categoryLocationIV.setOnClickListener {
+            Toast.makeText(context, "현재위치를 가져오는 중입니다.", Toast.LENGTH_SHORT).show()
+
+//        binding.apply {
+//            moveTV.setOnClickListener {
+//                val builder = AlertDialog.Builder(owner)
+//                val balloonView = layoutInflater.inflate(R.layout.balloon_view, null)
+//                with(builder) {
+//                    setView(balloonView)
+//                    show().apply {
+//                        window?.setBackgroundDrawable(null)
+//                        balloonView.setOnClickListener {
+//                            dismiss()
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 
