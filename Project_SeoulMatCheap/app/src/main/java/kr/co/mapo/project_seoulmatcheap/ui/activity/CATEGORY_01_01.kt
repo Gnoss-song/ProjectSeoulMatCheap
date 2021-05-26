@@ -16,6 +16,7 @@ import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01_02
 
 class CATEGORY_01_01 : AppCompatActivity() {
     var position = -1
+    private lateinit var tab_category : TabLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_01_01)
@@ -30,7 +31,7 @@ class CATEGORY_01_01 : AppCompatActivity() {
             supportFragmentManager.beginTransaction().add(R.id.frameLayout, category010101).commit()
         }
 
-        var tab_category = findViewById<TabLayout>(R.id.tab_category)
+        tab_category = findViewById(R.id.tab_category)
         val CATEGORY_01_02 = CATEGORY_01_02(this)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)

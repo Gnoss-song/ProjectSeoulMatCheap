@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
 import java.lang.Math.*
 import java.util.*
 import kotlin.math.pow
@@ -49,6 +50,7 @@ class SeoulMatCheap : Application() {
     val address = MutableLiveData<String>()
     val location = MutableLiveData<Location>()
     var filterList = listOf<String>()
+    var storeList = listOf<StoreEntity>()
 
     init {
         this.address.value = SEOULCITYHALL_ADDRESS

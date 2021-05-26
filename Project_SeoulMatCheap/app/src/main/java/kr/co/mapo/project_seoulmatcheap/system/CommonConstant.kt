@@ -44,5 +44,6 @@ const val LIST = "list"
 const val STORE = "store"
 const val KEY = "key"
 const val POSITION = "position"
+const val SORTEDLIST = "list"
 
 //파라미터 이름

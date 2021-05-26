@@ -84,6 +84,7 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     //지도 데이터
     private var storeList = listOf<StoreEntity>()
     private var favoritList = MutableLiveData<List<Int>>()
+    private var sortedList = listOf<StoreEntity>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,6 +98,8 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
     private fun init() {
         dao.getAllStore().observe(viewLifecycleOwner, {
             storeList = it
+            sortedList = it.sortedBy { it -> SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
+            SeoulMatCheap.getInstance().storeList = storeList
         })
         dao.getFavoriteIdList().observe(viewLifecycleOwner, {
             Log.e("[찜]", "$it")
@@ -338,8 +341,12 @@ class MAP_01(val owner : AppCompatActivity) : Fragment(), OnMapReadyCallback {
             R.id.button_list -> {
                 Log.e("[TEST]", "왜꺼지징?")
                 val intent = Intent(owner, MAP_01_01::class.java)
+//                val list = storeList.subList(0, 50)
+//                val sort = sortedList.subList(0, 50)
+//                Log.e("[인텐트]", "${list.size}, ${sort.size}")
                 intent.putExtra(ADDRESS, SeoulMatCheap.getInstance().address.value)
-                intent.putExtra(LIST, storeList as Serializable)
+//                intent.putExtra(LIST, list as Serializable)
+//                intent.putExtra(SORTEDLIST, sort as Serializable)
                 startActivity(intent)
             }
             R.id.button_filter -> {

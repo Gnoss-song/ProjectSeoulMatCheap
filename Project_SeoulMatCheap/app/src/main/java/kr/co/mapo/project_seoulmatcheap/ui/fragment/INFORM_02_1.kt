@@ -21,7 +21,7 @@ import kr.co.mapo.project_seoulmatcheap.databinding.FragmentInform021Binding
 
 
 class INFORM_02_1(
-    private val item : StoreEntity) : Fragment() {
+    private val item : StoreEntity) : Fragment()  {
 
     lateinit var binding : FragmentInform021Binding
 
@@ -31,7 +31,12 @@ class INFORM_02_1(
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_inform_02_1, container, false)
         binding.item = item
+        init()
         return binding.root
+    }
+
+    private fun init() {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
