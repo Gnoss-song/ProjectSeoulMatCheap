@@ -45,9 +45,7 @@
                     android:layout_margin="1dp"
                     app:navermap_mapType="Basic"
                     app:navermap_zoom="8"
-                    app:navermap_rotateGesturesEnabled="false"
-                    app:navermap_symbolScale="0.8"
-                    app:navermap_tiltGesturesEnabled="false" />
+                    app:navermap_symbolScale="0.8" />
             </LinearLayout>
 
         <TextView
