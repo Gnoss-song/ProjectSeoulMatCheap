@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayout
 import kr.co.mapo.project_seoulmatcheap.R
 import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
+import kr.co.mapo.project_seoulmatcheap.databinding.ActivityCategory0101Binding
 import kr.co.mapo.project_seoulmatcheap.system.KEY
 import kr.co.mapo.project_seoulmatcheap.system.POSITION
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.CATEGORY_01_01_01
@@ -59,7 +60,8 @@ class CATEGORY_01_01 : AppCompatActivity() {
                 when(tab!!.position) {
                     0 -> supportFragmentManager.beginTransaction().replace(R.id.frameLayout, category010101).commit()
                     1 -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, CATEGORY_01_02).commit()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.frameLayout, CATEGORY_01_02).commit()
                     }
                 }
             }
