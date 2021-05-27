@@ -19,21 +19,22 @@ import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.ui.adpater.ListRecyclerViewAdapter
 
 class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
+    private lateinit var categoryRV : RecyclerView
+    private lateinit var tabLayout2 : TabLayout
     var key : String? = null
     var position : Int = -1
     var list = listOf<StoreEntity>()
-    private lateinit var categoryRV : RecyclerView
-    private lateinit var tabLayout2 : TabLayout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_category_01_01_01, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoryRV = view.findViewById(R.id.categoryRV)
-        tabLayout2 = view.findViewById(R.id.tabLayout2)
         val categoryScore = view.findViewById<TextView>(R.id.category_score)
         val categoryDistance = view.findViewById<TextView>(R.id.category_distance)
+        categoryRV = view.findViewById(R.id.categoryRV)
+        tabLayout2 = view.findViewById(R.id.tabLayout2)
+
         with(categoryRV) {
             layoutManager = LinearLayoutManager(owner, LinearLayoutManager.VERTICAL, false)
             if (position == -1) {
@@ -62,67 +63,61 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                 if (position > -1) {
                     this.getTabAt(position+1)?.select()
                 }
-            }
-            tabLayout2.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                }
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                }
                 //탭 선택
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val tabPosition = tab?.position
-                    if (position == -1) {
-                        categoryRV.adapter = if (tabPosition != null && tabPosition > 0) {
-                            val sortedList = arrayListOf<StoreEntity>().apply {
-                                list.forEach {
-                                    if(it.sort == tabPosition-1) this.add(it)
+                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                    override fun onTabSelected(tab: TabLayout.Tab?) {
+                    }
+                    override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    }
+                    override fun onTabReselected(tab: TabLayout.Tab?) {
+                        val tabPosition = tab?.position
+                        if (position == -1) {
+                            categoryRV.adapter = if (tabPosition != null && tabPosition > 0) {
+                                val sortedList = arrayListOf<StoreEntity>().apply {
+                                    list.forEach {
+                                        if (it.sort == tabPosition - 1) this.add(it)
+                                    }
                                 }
+                                ListRecyclerViewAdapter(sortedList, owner)
+                            } else {
+                                ListRecyclerViewAdapter(list, owner)
                             }
-                            ListRecyclerViewAdapter(sortedList, owner)
                         } else {
-                            ListRecyclerViewAdapter(list, owner)
-                        }
-                    } else {
-                        if (tabPosition != null && tabPosition > 0) {
-                            AppDatabase(owner)!!.storeDAO().getSortStore(tab.position - 1)
-                                .observe(viewLifecycleOwner, {
-                                    this@CATEGORY_01_01_01.list = it
-                                    val list = mutableListOf<StoreEntity>()
-                                    if (this@CATEGORY_01_01_01.position > -1) {
+                            if (tabPosition != null && tabPosition > 0) {
+                                AppDatabase(owner)!!.storeDAO().getSortStore(tab.position - 1).observe(viewLifecycleOwner, {
+                                        this@CATEGORY_01_01_01.list = it
+                                        val list = mutableListOf<StoreEntity>()
+                                        if (this@CATEGORY_01_01_01.position > -1) {
+                                            list.apply {
+                                                for (i in it) {
+                                                    if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0
+                                                    )
+                                                        this.add(i)
+                                                }
+                                            }
+                                            this@CATEGORY_01_01_01.list = list
+                                        }
+                                        categoryRV.adapter = ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
+                                    })
+                            } else if (tabPosition == 0) {
+                                AppDatabase(owner)!!.storeDAO().getAllStore().observe(viewLifecycleOwner, {
+                                        this@CATEGORY_01_01_01.list = it
+                                        val list = mutableListOf<StoreEntity>()
                                         list.apply {
                                             for (i in it) {
-                                                if (SeoulMatCheap.getInstance()
-                                                        .calculateDistanceDou(i.lat, i.lng) <= 3.0
+                                                if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0
                                                 )
                                                     this.add(i)
                                             }
                                         }
                                         this@CATEGORY_01_01_01.list = list
-                                    }
-                                    categoryRV.adapter =
-                                        ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
-                                })
-                        } else if (tabPosition == 0) {
-                            AppDatabase(owner)!!.storeDAO().getAllStore()
-                                .observe(viewLifecycleOwner, {
-                                    this@CATEGORY_01_01_01.list = it
-                                    val list = mutableListOf<StoreEntity>()
-                                    list.apply {
-                                        for (i in it) {
-                                            if (SeoulMatCheap.getInstance()
-                                                    .calculateDistanceDou(i.lat, i.lng) <= 3.0
-                                            )
-                                                this.add(i)
-                                        }
-                                    }
-                                    this@CATEGORY_01_01_01.list = list
-                                    categoryRV.adapter =
-                                        ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
-                                })
+                                        categoryRV.adapter = ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
+                                    })
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
 
         categoryScore.setOnClickListener {
@@ -138,6 +133,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                 setTextColor(resources.getColor(R.color.main, null))
             }
         }
+
         categoryDistance.setOnClickListener {
             val sortedList = list.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
             list = sortedList
@@ -152,5 +148,4 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
             }
         }
     }
-
 }
