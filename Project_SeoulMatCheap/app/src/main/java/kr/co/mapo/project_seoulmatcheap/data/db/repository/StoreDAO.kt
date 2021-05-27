@@ -38,7 +38,7 @@ interface StoreDAO {
 
     //SELECT -------------------
     //모든 식당목록 출력
-    @Query("SELECT * FROM store_inform ORDER BY score")
+    @Query("SELECT * FROM store_inform ORDER BY score ASC")
     fun getAllStore() : LiveData<List<StoreEntity>>
     @Query("SELECT * FROM store_inform")
     fun getTotalStore() : List<StoreEntity>
@@ -49,11 +49,11 @@ interface StoreDAO {
     fun getTotalMenu() : List<MenuEntity>
 
     //구 이름에 따라 식당목록 출력
-    @Query("SELECT * FROM store_inform WHERE gu = :gu")
+    @Query("SELECT * FROM store_inform WHERE gu = :gu ORDER BY score DESC")
     fun getGuStore(gu: String) : LiveData<List<StoreEntity>>
 
     //업종에 따라 식당목록 출력
-    @Query("SELECT * FROM store_inform WHERE sort = :sort")
+    @Query("SELECT * FROM store_inform WHERE sort = :sort ORDER BY score DESC")
     fun getSortStore(sort: Int) : LiveData<List<StoreEntity>>
 
     //업소 상세정보 요청

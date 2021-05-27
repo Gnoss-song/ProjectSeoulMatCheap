@@ -24,6 +24,9 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
     var key : String? = null
     var position : Int = -1
     var list = listOf<StoreEntity>()
+    var list_f = listOf<StoreEntity>()  //처음 리스트
+    private lateinit var categoryRV : RecyclerView
+    private lateinit var tabLayout2 : TabLayout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_category_01_01_01, container, false)
     }
@@ -41,13 +44,14 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                 AppDatabase(owner)!!.storeDAO().getGuStore(key!!).observe(
                     viewLifecycleOwner, {
                         list = it
+                        list_f = it
                         adapter = ListRecyclerViewAdapter(it, owner)
                     }
                 )
             } else {
                 AppDatabase(owner)!!.storeDAO().getSortStore(position!!).observe(
                     viewLifecycleOwner, {
-                        val list = mutableListOf<StoreEntity>()
+                        val list = arrayListOf<StoreEntity>()
                         list.apply {
                             for(i in it) {
                                 if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0)
@@ -55,6 +59,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                             }
                         }
                         this@CATEGORY_01_01_01.list = list
+                        list_f = it
                         adapter = ListRecyclerViewAdapter(list, owner)
                     }
                 )
@@ -64,45 +69,40 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                     this.getTabAt(position+1)?.select()
                 }
                 //탭 선택
-                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                    override fun onTabSelected(tab: TabLayout.Tab?) {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val tabPosition = tab?.position
+                    with(categoryDistance) {
+                        typeface = null
+                        setTextColor(resources.getColor(R.color.dot_edge, null))
                     }
-                    override fun onTabUnselected(tab: TabLayout.Tab?) {
+                    with(categoryScore) {
+                        typeface = Typeface.DEFAULT_BOLD
+                        setTextColor(resources.getColor(R.color.main, null))
                     }
-                    override fun onTabReselected(tab: TabLayout.Tab?) {
-                        val tabPosition = tab?.position
-                        if (position == -1) {
-                            categoryRV.adapter = if (tabPosition != null && tabPosition > 0) {
-                                val sortedList = arrayListOf<StoreEntity>().apply {
-                                    list.forEach {
-                                        if (it.sort == tabPosition - 1) this.add(it)
-                                    }
+                    if (position == -1) {   //구 선택
+                        if (tabPosition != null && tabPosition > 0) {
+                            list = list_f
+                            val sortedList = arrayListOf<StoreEntity>().apply {
+                                list.forEach {
+                                    if (it.sort == tabPosition - 1) this.add(it)
                                 }
                                 ListRecyclerViewAdapter(sortedList, owner)
                             } else {
                                 ListRecyclerViewAdapter(list, owner)
                             }
+                            list = sortedList
+                            categoryRV.adapter = ListRecyclerViewAdapter(sortedList, owner)//
                         } else {
-                            if (tabPosition != null && tabPosition > 0) {
-                                AppDatabase(owner)!!.storeDAO().getSortStore(tab.position - 1).observe(viewLifecycleOwner, {
-                                        this@CATEGORY_01_01_01.list = it
-                                        val list = mutableListOf<StoreEntity>()
-                                        if (this@CATEGORY_01_01_01.position > -1) {
-                                            list.apply {
-                                                for (i in it) {
-                                                    if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0
-                                                    )
-                                                        this.add(i)
-                                                }
-                                            }
-                                            this@CATEGORY_01_01_01.list = list
-                                        }
-                                        categoryRV.adapter = ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
-                                    })
-                            } else if (tabPosition == 0) {
-                                AppDatabase(owner)!!.storeDAO().getAllStore().observe(viewLifecycleOwner, {
-                                        this@CATEGORY_01_01_01.list = it
-                                        val list = mutableListOf<StoreEntity>()
+                            categoryRV.adapter = ListRecyclerViewAdapter(list_f, owner)
+                            list = list_f
+                        }
+                    } else {    //한식선택
+                        if (tabPosition != null && tabPosition > 0) {
+                            AppDatabase(owner)!!.storeDAO().getSortStore(tab.position - 1)
+                                .observe(viewLifecycleOwner, {
+                                    this@CATEGORY_01_01_01.list = it
+                                    val list = mutableListOf<StoreEntity>()
+                                    if (this@CATEGORY_01_01_01.position > -1) {
                                         list.apply {
                                             for (i in it) {
                                                 if (SeoulMatCheap.getInstance().calculateDistanceDou(i.lat, i.lng) <= 3.0
@@ -122,8 +122,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
 
         categoryScore.setOnClickListener {
             val sortedList = list.sortedByDescending { it.score }
-            list = sortedList
-            categoryRV.adapter =  ListRecyclerViewAdapter(this.list, owner)
+            categoryRV.adapter =  ListRecyclerViewAdapter(sortedList, owner)
             with(categoryDistance) {
                 typeface = null
                 setTextColor(resources.getColor(R.color.dot_edge, null))
