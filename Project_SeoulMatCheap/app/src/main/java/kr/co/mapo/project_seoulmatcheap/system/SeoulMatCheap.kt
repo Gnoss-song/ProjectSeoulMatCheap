@@ -16,7 +16,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import com.facebook.stetho.Stetho
 import com.google.android.gms.location.LocationServices
 import com.kakao.sdk.common.KakaoSdk
 import com.naver.maps.map.e
