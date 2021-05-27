@@ -1,12 +1,16 @@
 package kr.co.mapo.project_seoulmatcheap.system
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.location.*
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -65,7 +69,25 @@ class SeoulMatCheap : Application() {
         super.onCreate()
         //Kakao SDK 초기화
         KakaoSdk.init(this, getString(R.string.KAKAO_NATIVE_APP_KEY))
-        Stetho.initializeWithDefaults(this)
+        setAllActivitySettings()
+    }
+
+    /**
+     * 모든 액티비티를 수직화면으로 세팅
+     */
+    private fun setAllActivitySettings() {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            @SuppressLint("SourceLockedOrientationActivity")
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            }
+            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) {}
+            override fun onActivityPaused(activity: Activity) {}
+            override fun onActivityStopped(activity: Activity) {}
+            override fun onActivitySaveInstanceState(activity: Activity, bundle: Bundle) {}
+            override fun onActivityDestroyed(activity: Activity) {}
+        })
     }
 
     //토스트메세지 출력
