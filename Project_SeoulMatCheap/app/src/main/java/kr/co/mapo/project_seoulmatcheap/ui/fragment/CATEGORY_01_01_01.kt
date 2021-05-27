@@ -132,7 +132,8 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
                                     this@CATEGORY_01_01_01.list = list
                                     categoryRV.adapter =
                                         ListRecyclerViewAdapter(this@CATEGORY_01_01_01.list, owner)
-                                })
+                                }
+                            )
                         }
                     }
                 }
