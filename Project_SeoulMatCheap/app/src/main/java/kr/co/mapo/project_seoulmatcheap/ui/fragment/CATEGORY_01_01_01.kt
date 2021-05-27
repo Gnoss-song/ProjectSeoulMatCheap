@@ -126,6 +126,8 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
         }
 
         categoryScore.setOnClickListener {
+            val sortedList = list.sortedByDescending { it.score }
+            list = sortedList
             categoryRV.adapter =  ListRecyclerViewAdapter(this.list, owner)
             with(categoryDistance) {
                 typeface = null
@@ -138,6 +140,7 @@ class CATEGORY_01_01_01(private val owner : AppCompatActivity) : Fragment() {
         }
         categoryDistance.setOnClickListener {
             val sortedList = list.sortedBy { SeoulMatCheap.getInstance().calculateDistanceDou(it.lat, it.lng) }
+            list = sortedList
             categoryRV.adapter =  ListRecyclerViewAdapter(sortedList, owner)
             with(categoryDistance) {
                 typeface = Typeface.DEFAULT_BOLD
