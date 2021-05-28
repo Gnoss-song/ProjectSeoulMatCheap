@@ -93,7 +93,6 @@ class INFORM_02 : AppCompatActivity() {
         with(binding) {
             Glide.with(this@INFORM_02).load(item.photo).into(photo)
             textName.text = item.name
-            textRating.text = item.rating_cnt.toString()
             textScore.text = item.score.toString()
             reviewRecyclerView.apply {
                 layoutManager = LinearLayoutManager(this@INFORM_02, LinearLayoutManager.HORIZONTAL, false)
