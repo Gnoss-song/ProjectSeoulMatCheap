@@ -18,3 +18,12 @@ data class LoginBody (
     var point: Int = 0, // 0
     var profileUrl: String = "" // string
     )
+
+data class ReviewBody (
+    var memberId : Int = 28,
+    var storeId : Int = 18,
+    val reviewContent : String,
+    var rating : Float,
+    var reviewWriter : String = "test 입력자",
+    var reviewModifier : String = "test 수정자"
+)

@@ -8,7 +8,9 @@ import kr.co.mapo.project_seoulmatcheap.data.response.MemberResponse
 import kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse
 import kr.co.mapo.project_seoulmatcheap.data.response.ReviewResponse
 import okhttp3.Interceptor
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,9 +42,14 @@ interface MatCheapService {
     fun getNotice(
     ) : Single<NotifyResponse>
 
-    @GET("api/review")
-    fun getReview(
+    @Multipart
+    @POST("api/review")
+    fun writeReview(
+        @Part input : MultipartBody.Part,
+        @Part files : MultipartBody.Part
     ) : Single<ReviewResponse>
+
+
 
     companion object {
         private var _matcheapService : MatCheapService? = null
