@@ -1,8 +1,11 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
 
 import android.content.Context
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -14,6 +17,8 @@ import kr.co.mapo.project_seoulmatcheap.databinding.ActivityMainBinding
 import kr.co.mapo.project_seoulmatcheap.system.SeoulMatCheap
 import kr.co.mapo.project_seoulmatcheap.system.UserPrefs
 import kr.co.mapo.project_seoulmatcheap.ui.fragment.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity() {
 
