@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="@{notify.modifyDate}"
+                android:text="공지사항"
                 android:textColor="#1a1311"
                 android:textSize="12dp"
                 app:layout_constraintStart_toEndOf="@+id/view7"
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@{notify.modifyDate}"
+                android:text="@{notify.modifyDate.substring(0,10)}"
                 android:textColor="#1a1311"
 
                 android:textSize="12dp"
