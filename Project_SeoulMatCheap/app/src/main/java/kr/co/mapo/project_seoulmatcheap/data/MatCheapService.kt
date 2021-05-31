@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit
  * @desc 서울맛칩 서버 API 요청 레트로핏
  */
 
-private const val TARGET_ADDRESS = "http://52.78.206.155:8081/"
+private const val TARGET_ADDRESS = " "
 private const val MEMBER_CATEGORY_CODE = "member_category_code"
 private const val EMAIL = "email"
 private const val PROFILE_URL = "profile_url"
