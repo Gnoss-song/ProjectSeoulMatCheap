@@ -18,9 +18,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.willy.ratingbar.BaseRatingBar
 import com.willy.ratingbar.ScaleRatingBar
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kr.co.mapo.project_seoulmatcheap.R
+import kr.co.mapo.project_seoulmatcheap.data.MatCheapService
+import kr.co.mapo.project_seoulmatcheap.data.ReviewBody
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform020201Binding
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform0202Binding
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONObject
+import retrofit2.http.Multipart
+import java.io.File
 
 class INFORM_02_02 : AppCompatActivity() {
 
@@ -29,6 +39,7 @@ class INFORM_02_02 : AppCompatActivity() {
     private lateinit var ratingscore: TextView
     private lateinit var ratingBar: ScaleRatingBar
     private var str: String? = null
+    private var currentImageURI : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -49,10 +60,29 @@ class INFORM_02_02 : AppCompatActivity() {
 
 
             okButton.setOnClickListener {
-                Toast.makeText(this, "리뷰 작성 성공", Toast.LENGTH_SHORT).show()
-
+                val file = File(currentImageURI)
+                val input_json = JSONObject()
+                input_json.put("memberId", 28)
+                input_json.put("storeId", 9220)
+                input_json.put("reviewContent", "되었으면 좋겟다아아")
+                input_json.put("reviewWriter", "test 입력자")
+                input_json.put("reviewModifier", "test 수정자")
                 //화면이동 INFORM_02_01로. 가게이름의 정보를 가진채로.
-
+                val input_body = RequestBody.create(MediaType.parse("text/plain"), input_json.toString())
+                val files_body = RequestBody.create(MediaType.parse("image/*"), file)
+                val files =
+                    MultipartBody.Part.createFormData("files", file.name, files_body)
+                val input = MultipartBody.Part.createFormData("input", input_json.toString())
+                MatCheapService.invoke(this).writeReview(
+                    input, files
+                ).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        Toast.makeText(this, "리뷰 작성 성공", Toast.LENGTH_SHORT).show()
+                        Log.e("[결과]", "성공")
+                    },{
+                        Log.e("[결과]", "실패")
+                    })
                 mAlertDialog.dismiss()
             }
             cancelButton.setOnClickListener {
@@ -68,10 +98,10 @@ class INFORM_02_02 : AppCompatActivity() {
         }
         ratingBar = findViewById(R.id.ratingBar)
         ratingscore = findViewById(R.id.ratingscore)
-        ratingBar.setOnRatingChangeListener(BaseRatingBar.OnRatingChangeListener() { ScaleRatingBar, rating, _ ->
+        ratingBar.setOnRatingChangeListener { ScaleRatingBar, rating, _ ->
             str = rating.toString()
             ratingscore.text = str
-        })
+        }
 
         binding.imageselectlayout.setOnClickListener {
             openGallery()
@@ -128,11 +158,9 @@ class INFORM_02_02 : AppCompatActivity() {
 
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == OPEN_GALLERY){
-
-                var currentImageUrl : Uri? = data?.data
+                currentImageURI = data?.data.toString()
                 try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver,currentImageUrl)
-                    binding.imageView18.setImageBitmap(bitmap)
+                    binding.imageView18.setImageURI(data?.data)
                 }catch (e:Exception){
                     e.printStackTrace()
                 }

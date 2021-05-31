@@ -140,8 +140,7 @@ open class SEARCH_01(
                     .beginTransaction()
                     .replace(R.id.container, SEARCH_01_02.newInstance(owner, word))
                     .commit()
-                launch(Dispatchers.Main) {SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")}
-
+                launch(Dispatchers.Main) {SeoulMatCheap.getInstance().showToast(owner, "검색결과가 없습니다.")  }
             }
         }
     }

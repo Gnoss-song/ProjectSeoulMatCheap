@@ -21,6 +21,7 @@ import kr.co.mapo.project_seoulmatcheap.data.db.AppDatabase
 import kr.co.mapo.project_seoulmatcheap.data.db.FavoritEntity
 import kr.co.mapo.project_seoulmatcheap.data.db.MenuEntity
 import kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity
+import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreDAO
 import kr.co.mapo.project_seoulmatcheap.data.db.repository.StoreRepositoryImpl
 import kr.co.mapo.project_seoulmatcheap.databinding.ActivityInform02Binding
 import kr.co.mapo.project_seoulmatcheap.system.APP_NAME
@@ -38,11 +39,12 @@ class INFORM_02 : AppCompatActivity() {
     private var likeCount : Int = 5
     private var likeCount_f : Int = 5   //처음찜수
     private lateinit var item : StoreEntity
-    private val dao = AppDatabase(this)!!.storeDAO()
+    private lateinit var dao : StoreDAO
     private lateinit var reviewlist: List<Review>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dao = AppDatabase(this)!!.storeDAO()
         binding = ActivityInform02Binding.inflate(layoutInflater)
         setContentView(binding.root)
         init()

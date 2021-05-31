@@ -135,16 +135,22 @@ class SeoulMatCheap : Application() {
         this.x = location.latitude
         this.y = location.longitude
         //인터넷연결 불안정할시 Geocoder X
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-        if(capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
-            || capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true) {
-            this.address.value = Geocoder(context, Locale.getDefault())
-                .getFromLocation(x, y, 1)[0]
-                .getAddressLine(0)
-                .substring(11)
-            Log.e("[GSP]", "$x, $y, ${address.value}")
-        }
+       try {
+           val connectivityManager =
+               context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+           val capabilities =
+               connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+           if (capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
+               || capabilities?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true
+           ) {
+               this.address.value = Geocoder(context, Locale.getDefault())
+                   .getFromLocation(x, y, 1)[0]
+                   .getAddressLine(0)
+                   .substring(11)
+           }
+       } catch (e : Exception) {
+           showToast(context, "네트워크나 GPS 상태가 불안정합니다.")
+       }
     }
 
     //현재 위경도에서부터 떨어져 있는 거리 계산
