@@ -1,35 +1,35 @@
 # ReadMe
 
-# GooroomeeLite- Android
+# SeoulMatcheap - Android
 
-개발 기간 : 2021년 6월 1일 ~ 2021년 7월 30일
+개발 기간 : 20121년 3월 8일 ~ 2021년 5월 30일
 
 ---
 
 ## **[ About ]**
 
-**캠 스터디 구루미의 혼공버전을 지원하는 서비스**
+**서울시의 착한 가격 업소들을 소개하는 서비스**
 
-기존의 캠 스터디인 구루미에서 캠 없이 혼자 공부하는것을 기록할수 있는 혼공족을 위한 
-스터디메이트 앱 입니다.
+서울시와 행정안정부에서 선정한 착한 가격업소라는 곳이 있습니다. 서울시민들을 위해 물가상승에도 불구하고 예전 가격을 그대로 유지하는 업소들을 어플로 찾기 쉽게 만들었습니다.
 
 정보 제공 방식은 다음과 같습니다.
 
-- 타이머를 이용한 공부 기록
-- 서비스를 이용한 미디어 플레이어 기능
-- 프로필 수정, 플레이스토어 연결 기능
-- 공유, 카메라, 스티커 기능
-- 그래프를 이용한 공부 데이터 정리 기능
+- 서울시의 지도를 형상화한 지역별 찾기
+- 검색 자동 완성 기능
+- 네이버지도를 연동한 길찾기
+- 전화, 공유 기능
+- 리뷰 기능
 
 ---
 
 ## **[ Preview ]**
 
-GooroomeeLite PDF 예정
+[SeoulMatcheap PDF file](https://github.com/Gnoss-song/MatCheap/blob/master/SeoulMatcheap.pdf)
+
+
+![3](https://user-images.githubusercontent.com/79887378/120128992-231eb100-c1fe-11eb-81cd-644fc8d04a38.png)
 
 ---
-
-대략적인 PDF 이미지 프리뷰
 
 ## **[ Develop Environment ]**
 
@@ -41,8 +41,9 @@ GooroomeeLite PDF 예정
 ## **[ Library ]**
 
 1. Server
-- Firebasedatabase
-- Firebasestorage
+- [SpringBoot](https://spring.io/projects/spring-boot)
+- [Retrofit2](https://square.github.io/retrofit/)
+- [rxjava2](https://github.com/ReactiveX/RxJava)
 
  2.   Layout
 
@@ -51,83 +52,51 @@ GooroomeeLite PDF 예정
 - [gridlayout](https://mvnrepository.com/artifact/androidx.gridlayout/gridlayout/1.0.0-rc01)
 - ConstraintLayout
 - RelativeLayout
-- [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?hl=ko)
 
- 3. Function
+---
 
-- [TedPermission](https://github.com/ParkSangGwon/TedPermission)
-- [ColorPicker](https://github.com/Dhaval2404/ColorPicker)
-- [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart)
+## **[API]**
+
+- 서울시 착한가격업소 공공 API
 
 ---
 
 ## **[ Role ]**
 
-- Devleopment leading
-
-- FirebaseData Management
-
 - Mypage
 
-- Login
-
-- MediaPlayer
+- Review
 
 ---
-### **[ Feature Implementation ]**
+## **[ Feature Implementation ]**
 
-- 회원가입,비밀번호찾기
+- 리뷰 구현
 
-    — 로그인
-
-      — 이메일
+      — RecyclerView를 이용한 리뷰 리스트
     
-        — 구글로그인, 이메일 로그인
+      — 앨범에서 다중사진을 가져와 조건에 따른 화면 표시(Multi RecyclerView)
+    
+      — 수정, 삭제 기능
 
-        — 아이디 중복검사, 아이디 조건식 , 닉네임 설정, 목표 시간 설정
+- 화면 이동
 
-      — 비밀번호
+      — Intent,Bundle,Fragmentmanager를 이용한 화면 이동
 
-        — 정규식, 비밀번호 조건, 비밀번호 찾기
+- Intent
 
-- 스플래시, 온보딩 구현
+      — 특정 메일양식을 특정 이메일로 보내는 건의 메뉴 구현
 
-      — ViewPager2를 이용한 온보딩 구현
+      — SNS를 이용한 공유하기 기능 구현
+    
+      — 특정 전화번호로 다이얼 연결
 
-      — 스플래시에 JobScheduler 구현
-      
-      — indicator 
-      
+- RatingBar 구현
 
-- SeekBar, ProgressBar 구현
-- Firebasedatabase와 연동하여 데이터 관리
+- SpringBoot에서 데이터를 가져와 공지사항 작성
 
-      — 공부시간 기록, 초기화, 다른 페이지들과 데이터 연동
-
-      — MVVM패턴으로 livedata와 databinding을 이용하여 오늘 공부한 시간 실시간 연산
-
-- 화이트 노이즈 구현
-
-      — 미디어플레이어 서비스를 이용하여 백그라운드에서 음악재생,반복
-
-      — 싱글톤을 이용하여 한개의 서비스가 유지되도록 설정
-
-- 프로필 구현
-
-      — 프로필이 지정되어있을때와 아닐때를 체크하여 기본 이미지 설정
-
-      — 구글 로그인과 일반 이메일 로그인을 구분
-
-      — 앨범을 통한 사진 세팅, 파이어베이스와 통신
-      
-- 뽀모도로 타이머 구현
-
-      — SharedPreference를 이용하여 일반 타이머와 뽀모도로 타이머의 모드 설정
-
-      — 
-
-- 플레이스토어 연결
 - 앱 버전 체크
+
+
 - 로그아웃, 탈퇴 기능 구현
 
 ---
@@ -138,8 +107,12 @@ GooroomeeLite PDF 예정
 
 - Figma
 
-- Slack
+- Zeplin
+
+- Jandi
 
 - Github
 
 - Notion
+
+- Postman
