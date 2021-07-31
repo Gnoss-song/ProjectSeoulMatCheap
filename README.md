@@ -24,7 +24,7 @@
 
 ## **[ Preview ]**
 
-[SeoulMatcheap PDF file](https://github.com/Gnoss-song/MatCheap/blob/master/SeoulMatcheap.pdf)
+[SeoulMatcheap PDF file](https://github.com/Gnoss-song/ProjectSeoulMatCheap/blob/develop/SeoulMatcheap.pdf)
 
 
 ![3](https://user-images.githubusercontent.com/79887378/120128992-231eb100-c1fe-11eb-81cd-644fc8d04a38.png)
