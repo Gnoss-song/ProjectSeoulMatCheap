@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fragment"
             type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01" />
@@ -39,10 +39,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            app:navermap_tiltGesturesEnabled="false"
-            app:navermap_rotateGesturesEnabled="false"
             app:navermap_mapType="Basic"
-            app:navermap_symbolScale="0.8"/>
+            app:navermap_rotateGesturesEnabled="false"
+            app:navermap_symbolScale="0.8"
+            app:navermap_tiltGesturesEnabled="false" />
 
         <ImageButton
             android:id="@+id/button_list"

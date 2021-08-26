@@ -68,26 +68,26 @@
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_starafter"/>
+                    app:srcCompat="@drawable/ic_starafter" />
 
                 <TextView
                     android:id="@+id/score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
                     android:text="0.0"
                     android:textColor="#000000"
-                    android:textSize="@dimen/marketinfo_text"
-                    android:layout_marginStart="5dp"/>
+                    android:textSize="@dimen/marketinfo_text" />
 
                 <TextView
                     android:id="@+id/sort"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:text="종류"
                     android:textColor="@color/dot_edge"
                     android:textSize="@dimen/marketinfo_text"
-                    android:textStyle="normal"
-                    android:layout_marginStart="16dp"/>
+                    android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -102,20 +102,20 @@
             </LinearLayout>
         </LinearLayout>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/star"-->
-<!--            android:layout_width="15dp"-->
-<!--            android:layout_height="15dp"-->
-<!--            android:layout_marginEnd="10dp"-->
-<!--            app:srcCompat="@drawable/ic_starafter" />-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/star"-->
+        <!--            android:layout_width="15dp"-->
+        <!--            android:layout_height="15dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            app:srcCompat="@drawable/ic_starafter" />-->
 
-<!--        <TextView-->
-<!--            android:id="@+id/score"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="0.0"-->
-<!--            android:textColor="#000000"-->
-<!--            android:textSize="35dp" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/score"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="0.0"-->
+        <!--            android:textColor="#000000"-->
+        <!--            android:textSize="35dp" />-->
     </LinearLayout>
 
     <View

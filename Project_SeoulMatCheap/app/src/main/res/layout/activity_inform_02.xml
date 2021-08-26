@@ -92,29 +92,29 @@
                             android:id="@+id/star2"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
+                            android:layout_gravity="center"
                             app:srcCompat="@drawable/ic_starafter"
                             tools:layout_editor_absoluteX="155dp"
-                            tools:layout_editor_absoluteY="72dp"
-                            android:layout_gravity="center"/>
+                            tools:layout_editor_absoluteY="72dp" />
 
                         <TextView
                             android:id="@+id/text_score"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="3dp"
                             android:text="4.3"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold"
                             tools:layout_editor_absoluteX="284dp"
-                            tools:layout_editor_absoluteY="45dp"
-                            android:layout_marginStart="3dp"/>
+                            tools:layout_editor_absoluteY="45dp" />
 
                         <ImageView
                             android:id="@+id/imageView13"
                             android:layout_width="@dimen/inform_icon_width"
                             android:layout_height="match_parent"
-                            app:srcCompat="@drawable/ic_review"
-                            android:layout_marginStart="16dp"/>
+                            android:layout_marginStart="16dp"
+                            app:srcCompat="@drawable/ic_review" />
 
                         <TextView
                             android:id="@+id/text_review_cnt"

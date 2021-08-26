@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_main.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_my_01_01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_my_01_01_01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_my_01_02.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_my_01_03.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_permission01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_splash_00.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/activity_splash_01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/balloon_view.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_category_01_02.xml" value="0.36633663366336633" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_inform_complete.xml" value="0.8139130434782609" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_my_delete.xml" value="0.8139130434782609" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_my_logout.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_my_modify.xml" value="0.8139130434782609" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_my_service.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_dialog_my_withdrawal.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_inform_02_2.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/fragment_my_01.xml" value="0.36633663366336633" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/inform_01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/inform_01_01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/inform_item.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/item_layout_grid.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/item_my_01_03.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/map_item_inform.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/map_item_infowindow.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/recycler_inform_review.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/recycler_item_autocomplete.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/recycler_item_menu.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/recycler_item_review01.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/layout/recycler_item_searchhistory.xml" value="0.21195652173913043" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36614583333333334" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/menu/category_toolbar.xml" value="0.36614583333333334" />
+        <entry key="..\:/Github.com/ProjectSeoulMatCheap/Project_SeoulMatCheap/app/src/main/res/menu/menu_inform_detail.xml" value="0.36614583333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="15" project-jdk-type="JavaSDK" />
+</project>

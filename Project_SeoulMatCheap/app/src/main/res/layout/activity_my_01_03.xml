@@ -11,8 +11,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/main">
 
         <TextView
             android:id="@+id/title2"
@@ -30,13 +30,13 @@
         android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/toolbar"/>
+        android:layout_below="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/recycler2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/space"/>
+        android:layout_below="@+id/space"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </RelativeLayout>
 

@@ -100,25 +100,25 @@
                         android:layout_width="8dp"
                         android:layout_height="8dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_starafter"/>
+                        app:srcCompat="@drawable/ic_starafter" />
 
                     <TextView
                         android:id="@+id/score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:text="0.0"
                         android:textColor="#000000"
-                        android:textSize="@dimen/marketinfo_text"
-                        android:layout_marginStart="5dp"/>
+                        android:textSize="@dimen/marketinfo_text" />
 
                     <TextView
                         android:id="@+id/sort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:text="@{item.category}"
                         android:textSize="12dp"
-                        tools:text="종류"
-                        android:layout_marginStart="16dp"/>
+                        tools:text="종류" />
 
                     <TextView
                         android:id="@+id/distance"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="kr.co.mapo.project_seoulmatcheap.data.db.StoreEntity" />
@@ -28,25 +29,25 @@
             android:textSize="@dimen/text_filter_title"
             android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin_basic"
-                android:layout_marginTop="@dimen/margin_basic"
-                android:layout_marginEnd="@dimen/margin_basic"
-                android:background="@drawable/button_outline"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/margin_basic"
+            android:layout_marginTop="@dimen/margin_basic"
+            android:layout_marginEnd="@dimen/margin_basic"
+            android:background="@drawable/button_outline"
+            android:orientation="horizontal">
 
-                <fragment
-                    android:id="@+id/map"
-                    android:name="com.naver.maps.map.MapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_margin="1dp"
-                    app:navermap_mapType="Basic"
-                    app:navermap_zoom="8"
-                    app:navermap_symbolScale="0.8" />
-            </LinearLayout>
+            <fragment
+                android:id="@+id/map"
+                android:name="com.naver.maps.map.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="1dp"
+                app:navermap_mapType="Basic"
+                app:navermap_symbolScale="0.8"
+                app:navermap_zoom="8" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView32"
@@ -86,45 +87,45 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/margin_basic4"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/margin_basic4">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_basic4"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/margin_basic4">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_navi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_basic"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:stateListAnimator="@null"
-                    android:text="@string/item_location_find"
-                    android:textStyle="bold"
-                    app:icon="@drawable/ic_places"
-                    app:iconGravity="textStart"
-                    app:iconSize="25dp"
-                    app:strokeColor="@color/main" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_navi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_basic"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:stateListAnimator="@null"
+                android:text="@string/item_location_find"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_places"
+                app:iconGravity="textStart"
+                app:iconSize="25dp"
+                app:strokeColor="@color/main" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_call"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="@dimen/margin_basic"
-                    android:layout_weight="1"
-                    android:shadowColor="@color/white"
-                    android:text="@string/item_location_call"
-                    android:textColor="@color/main"
-                    android:textStyle="bold"
-                    app:icon="@drawable/ic_phone"
-                    app:iconGravity="textStart"
-                    app:iconSize="25dp"
-                    app:strokeColor="@color/main" />
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_call"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="@dimen/margin_basic"
+                android:layout_weight="1"
+                android:shadowColor="@color/white"
+                android:text="@string/item_location_call"
+                android:textColor="@color/main"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_phone"
+                app:iconGravity="textStart"
+                app:iconSize="25dp"
+                app:strokeColor="@color/main" />
+        </LinearLayout>
 
         <View
             android:id="@+id/view8"
@@ -133,15 +134,15 @@
             android:background="@color/divide" />
 
         <TextView
-                android:id="@+id/textView22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/margin_basic"
-                android:paddingTop="@dimen/margin_basic"
-                android:text="@string/item_inform_title"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_filter_title"
-                android:textStyle="bold" />
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_basic"
+            android:paddingTop="@dimen/margin_basic"
+            android:text="@string/item_inform_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_filter_title"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -243,16 +244,16 @@
             android:layout_height="16dp"
             android:background="@color/divide" />
 
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/margin_basic"
-                android:paddingTop="@dimen/margin_basic"
-                android:text="@string/item_menu_title"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_filter_title"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_basic"
+            android:paddingTop="@dimen/margin_basic"
+            android:text="@string/item_menu_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_filter_title"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_menu"

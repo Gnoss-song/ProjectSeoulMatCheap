@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="notify"
             type="kr.co.mapo.project_seoulmatcheap.data.response.NotifyResponse.Data" />
@@ -90,9 +90,9 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:layout_marginEnd="16dp"
+                android:onClick="@{holderView::onClick}"
                 android:rotation="90"
                 android:visibility="gone"
-                android:onClick="@{holderView::onClick}"
                 app:layout_constraintBottom_toTopOf="@+id/my_01_03_content"
                 app:layout_constraintEnd_toEndOf="@+id/view3"
                 app:layout_constraintTop_toTopOf="parent"

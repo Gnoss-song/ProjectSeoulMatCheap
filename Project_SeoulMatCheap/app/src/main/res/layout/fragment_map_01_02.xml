@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="filter"
             type="kr.co.mapo.project_seoulmatcheap.ui.fragment.MAP_01_02" />
@@ -452,11 +452,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_basic"
                 android:background="@color/main"
+                android:onClick="@{filter::onClickSortToggle}"
                 android:text="@string/filter_initiate"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_menu"
                 android:textStyle="bold"
-                android:onClick="@{filter::onClickSortToggle}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

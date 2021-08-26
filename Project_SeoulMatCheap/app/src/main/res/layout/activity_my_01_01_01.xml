@@ -10,8 +10,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/main">
 
         <TextView
             android:id="@+id/title2"
@@ -24,6 +24,7 @@
         </TextView>
 
     </androidx.appcompat.widget.Toolbar>
+
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="70dp"
@@ -33,8 +34,8 @@
         android:layout_marginBottom="2dp"
         android:background="#00ff0000"
         android:text="삭제"
-        android:textSize="16dp"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
     <Space
         android:id="@+id/space"
