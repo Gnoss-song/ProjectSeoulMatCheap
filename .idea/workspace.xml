@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cdd2d54-3656-4fc7-b36d-fc43fd7d183b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/activity/LOGIN_01.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/activity/LOGIN_01.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/fragment/CATEGORY_01_02.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Project_SeoulMatCheap/app/src/main/java/kr/co/mapo/project_seoulmatcheap/ui/fragment/CATEGORY_01_02.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mapo_3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mapo_3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +41,17 @@
       <updated>1618721747874</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1619671722790">
