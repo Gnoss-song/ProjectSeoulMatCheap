@@ -27,35 +27,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="726495e2-8ba9-48a2-b267-911d079e191d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_category_01_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_category_01_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02_02.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02_02.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02_02_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_inform_02_02_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_01_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_01_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_02.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_02.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_03.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_my_01_03.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_category_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_category_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_category_01_01_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_category_01_01_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_inform_complete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_inform_complete.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_delete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_delete.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_help.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_help.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_modify.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_dialog_my_modify.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_inform_02_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_inform_02_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_map_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_map_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_map_01_02.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_map_01_02.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/inform_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/inform_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/inform_01_01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/inform_01_01.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_my_01_03.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_my_01_03.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/map_item_inform.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/map_item_inform.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/recycler_inform_review.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/recycler_inform_review.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/recycler_item_autocomplete.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/recycler_item_autocomplete.xml" afterDir="false" />
-    </list>
+    <list default="true" id="726495e2-8ba9-48a2-b267-911d079e191d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,7 +65,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="ignore.preview.features.used" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../30projects/chapter03" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunManager">
@@ -178,11 +151,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1627957190659">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1627957190659" />
   </component>
 </project>
