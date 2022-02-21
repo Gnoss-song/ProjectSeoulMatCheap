@@ -1,4 +1,5 @@
 package kr.co.mapo.project_seoulmatcheap.ui.activity
+
 /**
  * @author Gnoss
  * @email silmxmail@naver.com
@@ -30,10 +31,10 @@ import java.io.Serializable
 
 class MY_01_01 : AppCompatActivity() {
     private lateinit var binding: ActivityMy0101Binding
-    private lateinit var favoritData : List<FavoritEntity>
+    private lateinit var favoritData: List<FavoritEntity>
     private lateinit var adapter: InformDetailAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?)  {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMy0101Binding.inflate(layoutInflater)
@@ -51,7 +52,7 @@ class MY_01_01 : AppCompatActivity() {
             recycler.layoutManager = LinearLayoutManager(this@MY_01_01)
             AppDatabase(this@MY_01_01)!!.storeDAO().getFavorite().observe(this@MY_01_01, {
                 favoritData = it
-                adapter = InformDetailAdapter(favoritData,this@MY_01_01)
+                adapter = InformDetailAdapter(favoritData, this@MY_01_01)
                 recycler.adapter = adapter
                 supportActionBar!!.setTitle("찜 목록 (${it.size})")
             })
@@ -61,14 +62,14 @@ class MY_01_01 : AppCompatActivity() {
 
         //화면 이동 MY_01_01_01
         binding.btnEdit.setOnClickListener {
-            val intent = Intent(this,MY_01_01_01::class.java)
-            intent.putExtra(KEY,favoritData as Serializable)
+            val intent = Intent(this, MY_01_01_01::class.java)
+            intent.putExtra(KEY, favoritData as Serializable)
             startActivity(intent)
         }
     }
-    
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> {
                 finish()
             }
@@ -77,9 +78,9 @@ class MY_01_01 : AppCompatActivity() {
     }
 
     //어댑터
-    inner class InformDetailAdapter (
+    inner class InformDetailAdapter(
         private val itemList: List<FavoritEntity>,
-        private val owner : AppCompatActivity
+        private val owner: AppCompatActivity
     ) : RecyclerView.Adapter<InformDetailAdapter.ViewHolderClass>() {
 
         inner class ViewHolderClass(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -90,19 +91,22 @@ class MY_01_01 : AppCompatActivity() {
             val score: TextView = itemView.findViewById(R.id.score)
             val sort: TextView = itemView.findViewById(R.id.sort)
         }
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
             val view = LayoutInflater.from(parent.context).inflate(
                 R.layout.inform_01, parent, false
             )
             return ViewHolderClass(view)
         }
+
         override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
             val itemData = itemList[position]
             with(holder) {
                 Glide.with(owner).load(itemData.photo).into(marketIV)
                 name.text = itemData.name
                 address.text = itemData.address
-                distance.text = SeoulMatCheap.getInstance().calculateDistance(itemData.lat, itemData.lng)
+                distance.text =
+                    SeoulMatCheap.getInstance().calculateDistance(itemData.lat, itemData.lng)
                 score.text = "${itemData.score}"
                 sort.text = itemData.category
             }
@@ -116,6 +120,7 @@ class MY_01_01 : AppCompatActivity() {
                 }
             }
         }
+
         override fun getItemCount() = itemList.size
     }
 }
